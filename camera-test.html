@@ -10,8 +10,14 @@
   <h3 id="title"></h3>
 	<p><video id="video" autoplay="autoplay" playsInline></video></p>
   <p>
-    <button onclick='start({video:true, audio: false, facingMode: "environment"}, "Default")'>Default</button>
-    <button onclick='start({video:true, audio: false, facingMode: "environment", focusMode: "continuous"}, "Continuous Focus")'>Continuous Focus</button>
+    <button onclick='start({}, "Default")'>Default</button>
+    <button onclick='start({focusMode: { ideal: "continuous" }}, "Continuous Focus")'>Continuous Focus</button>
+    <br/>
+    <button onclick='start({focusMode: { ideal: "continuous" }, zoom: {ideal: 0.1}}, "Zoom 0.1")'>Zoom 0.1</button>    
+    <button onclick='start({focusMode: { ideal: "continuous" }, zoom: {ideal: 0.5}}, "Zoom 0.5")'>Zoom 0.5</button>    
+    <button onclick='start({focusMode: { ideal: "continuous" }, zoom: {ideal: 1.0}}, "Zoom 1.0")'>Zoom 1.0</button>    
+    <button onclick='start({focusMode: { ideal: "continuous" }, zoom: {ideal: 2.0}}, "Zoom 2.0")'>Zoom 2.0</button>    
+    <button onclick='start({focusMode: { ideal: "continuous" }, zoom: {ideal: 3.0}}, "Zoom 3.0")'>Zoom 3.0</button>        
   </p>
 	<p><div id="preLog"></div></p>  
 <script>
@@ -19,6 +25,11 @@
 var video = document.getElementById('video');
 var videoStream = null;
 var preLog = document.getElementById('preLog');
+
+function clearLog()
+{
+	if (preLog) preLog.innerHTML = "";
+}
 
 function log(text)
 {
@@ -61,21 +72,23 @@ function gotStream(stream)
 	stream.onended = noStream;
 	video.srcObject = stream;
 }
-
+   
 function start(constraints, variant)
 {
+    var finalConstraints = { ...{video:true, audio: false, frameRate: { ideal: 25, min: 10 }, facingMode: {ideal: "environment"}}, ...constraints }
     stop();
+    clearLog();
     if (variant){
       document.getElementById("title").innerHTML=variant;
     }
-		log('Get user media with constraints:' + JSON.stringify(constraints));
+		log('Get user media with constraints:' + JSON.stringify(finalConstraints));
 		if (navigator.getUserMedia) {
-    	navigator.getUserMedia(constraints, gotStream, noStream);
+    	navigator.getUserMedia(finalConstraints, gotStream, noStream);
     }
 }
 
 //{video:true, audio: false, facingMode: "environment", focusMode: "continuous"}
-start({video:true, audio: false, facingMode: "environment"}, "Default");
+start({}, "Default");
 </script>
 </body>
 </html>
