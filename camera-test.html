@@ -1,0 +1,81 @@
+<html>
+<head><title>Camera Test</title></head>
+<body>
+<style>
+  #video {
+    width:300px;
+    height:300px;
+  }
+</style>
+  <h3 id="title"></h3>
+	<p><video id="video" autoplay="autoplay" playsInline></video></p>
+  <p>
+    <button onclick='start({video:true, audio: false, facingMode: "environment"}, "Default")'>Default</button>
+    <button onclick='start({video:true, audio: false, facingMode: "environment", focusMode: "continuous"}, "Continuous Focus")'>Continuous Focus</button>
+  </p>
+	<p><div id="preLog"></div></p>  
+<script>
+"use strict";
+var video = document.getElementById('video');
+var videoStream = null;
+var preLog = document.getElementById('preLog');
+
+function log(text)
+{
+	if (preLog) preLog.innerHTML += ('<br/>' + text);
+	else alert(text);
+}
+
+function noStream()
+{
+	log('Access to camera was denied!');
+}
+
+function stop()
+{
+	if (videoStream)
+	{
+		if (videoStream.stop) {
+      videoStream.stop();
+    }
+		videoStream.onended = null;
+		videoStream = null;
+	}
+	if (video)
+	{
+		video.onerror = null;
+		video.pause();
+		video.src = "";
+	}
+}
+
+function gotStream(stream)
+{
+	videoStream = stream;
+	log('Got stream.');
+	video.onerror = function ()
+	{
+		log('video.onerror');
+		if (video) stop();
+	};
+	stream.onended = noStream;
+	video.srcObject = stream;
+}
+
+function start(constraints, variant)
+{
+    stop();
+    if (variant){
+      document.getElementById("title").innerHTML=variant;
+    }
+		log('Get user media with constraints:' + JSON.stringify(constraints));
+		if (navigator.getUserMedia) {
+    	navigator.getUserMedia(constraints, gotStream, noStream);
+    }
+}
+
+//{video:true, audio: false, facingMode: "environment", focusMode: "continuous"}
+start({video:true, audio: false, facingMode: "environment"}, "Default");
+</script>
+</body>
+</html>
