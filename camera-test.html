@@ -4,8 +4,13 @@
 <body>
 <style>
   #video {
-    width:300px;
-    height:300px;
+    width:500px;
+    height:500px;
+  }
+  
+  button {
+    padding: 5px;
+    margin: 5px;
   }
 </style>
   <h3 id="title"></h3>
@@ -102,7 +107,7 @@ function start(constraints, variant)
     if (variant){
       document.getElementById("title").innerHTML=variant;
     }
-		log('Get user media with constraints:' + JSON.stringify(finalConstraints));
+		log('Get user media with constraints:' + JSON.stringify(finalConstraints).replaceAll(/,/g, ", "));
 		if (navigator.getUserMedia) {
     	navigator.getUserMedia(finalConstraints, gotStream, noStream);
     }
