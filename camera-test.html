@@ -4,13 +4,13 @@
 <body>
 <style>
   #video {
-    width:500px;
-    height:500px;
+    width:400px;
+    height:400px;
   }
   
   button {
-    padding: 5px;
-    margin: 5px;
+    padding: 2px;
+    margin: 2px;
   }
 </style>
   <h3 id="title"></h3>
@@ -26,12 +26,12 @@
     <button onclick='start({video: { focusMode: "continuous", zoom: 2.0}}, "Zoom 2.0")'>Zoom 2.0</button>    
     <button onclick='start({video: { focusMode: "continuous", zoom: 3.0}}, "Zoom 3.0")'>Zoom 3.0</button>    
     <br/>
-    <button onclick='start({video: { focusMode: "continuous", focusDistance: 0.1}}, "Focus 0.1")'>Focus 0.1</button>    
-    <button onclick='start({video: { focusMode: "continuous", focusDistance: 0.2}}, "Focus 0.2")'>Focus 0.2</button>        
-    <button onclick='start({video: { focusMode: "continuous", focusDistance: 0.5}}, "Focus 0.2")'>Focus 0.5</button>            
-    <button onclick='start({video: { focusMode: "continuous", focusDistance: 1.0}}, "Focus 1.0")'>Focus 1.0</button>            
-    <button onclick='start({video: { focusMode: "continuous", focusDistance: 2.0}}, "Focus 2.0")'>Focus 2.0</button>
-    <button onclick='start({video: { focusMode: "continuous", focusDistance: 10.0}}, "Focus 10.0")'>Focus 10.0</button>            
+    <button onclick='start({video: { focusDistance: 0.1}}, "Focus 0.1")'>Focus 0.1</button>    
+    <button onclick='start({video: { focusDistance: 0.2}}, "Focus 0.2")'>Focus 0.2</button>        
+    <button onclick='start({video: { focusDistance: 0.5}}, "Focus 0.2")'>Focus 0.5</button>            
+    <button onclick='start({video: { focusDistance: 1.0}}, "Focus 1.0")'>Focus 1.0</button>            
+    <button onclick='start({video: { focusDistance: 2.0}}, "Focus 2.0")'>Focus 2.0</button>
+    <button onclick='start({video: { focusDistance: 10.0}}, "Focus 10.0")'>Focus 10.0</button>            
   </p>
 	<p><div id="preLog"></div></p>  
 <script>
