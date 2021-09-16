@@ -12,13 +12,21 @@
 	<p><video id="video" autoplay="autoplay" playsInline></video></p>
   <p>
     <button onclick='start({}, "Default")'>Default</button>
-    <button onclick='start({focusMode: { ideal: "continuous" }}, "Continuous Focus")'>Continuous Focus</button>
+    <button onclick='start({video: { focusMode: "continuous" }}, "Continuous Focus")'>Continuous Focus</button>
     <br/>
-    <button onclick='start({facingMode: "environment", focusMode: { ideal: "continuous" }, zoom: {ideal: 0.1}}, "Zoom 0.1")'>Zoom 0.1</button>    
-    <button onclick='start({focusMode: { ideal: "continuous" }, zoom: {ideal: 0.5}}, "Zoom 0.5")'>Zoom 0.5</button>    
-    <button onclick='start({focusMode: { ideal: "continuous" }, zoom: {ideal: 1.0}}, "Zoom 1.0")'>Zoom 1.0</button>    
-    <button onclick='start({focusMode: { ideal: "continuous" }, zoom: {ideal: 2.0}}, "Zoom 2.0")'>Zoom 2.0</button>    
-    <button onclick='start({focusMode: { ideal: "continuous" }, zoom: {ideal: 3.0}}, "Zoom 3.0")'>Zoom 3.0</button>        
+    <button onclick='start({video: { focusMode: "continuous", zoom: 0.1}}, "Zoom 0.1")'>Zoom 0.1</button>    
+    <button onclick='start({video: { focusMode: "continuous", zoom: 0.5}}, "Zoom 0.2")'>Zoom 0.2</button>        
+    <button onclick='start({video: { focusMode: "continuous", zoom: 0.5}}, "Zoom 0.5")'>Zoom 0.5</button>    
+    <button onclick='start({video: { focusMode: "continuous", zoom: 1.0}}, "Zoom 1.0")'>Zoom 1.0</button>    
+    <button onclick='start({video: { focusMode: "continuous", zoom: 2.0}}, "Zoom 2.0")'>Zoom 2.0</button>    
+    <button onclick='start({video: { focusMode: "continuous", zoom: 3.0}}, "Zoom 3.0")'>Zoom 3.0</button>    
+    <br/>
+    <button onclick='start({video: { focusMode: "continuous", focusDistance: 0.1}}, "Focus 0.1")'>Focus 0.1</button>    
+    <button onclick='start({video: { focusMode: "continuous", focusDistance: 0.2}}, "Focus 0.2")'>Focus 0.2</button>        
+    <button onclick='start({video: { focusMode: "continuous", focusDistance: 0.5}}, "Focus 0.2")'>Focus 0.5</button>            
+    <button onclick='start({video: { focusMode: "continuous", focusDistance: 1.0}}, "Focus 1.0")'>Focus 1.0</button>            
+    <button onclick='start({video: { focusMode: "continuous", focusDistance: 2.0}}, "Focus 2.0")'>Focus 2.0</button>
+    <button onclick='start({video: { focusMode: "continuous", focusDistance: 10.0}}, "Focus 10.0")'>Focus 10.0</button>            
   </p>
 	<p><div id="preLog"></div></p>  
 <script>
@@ -26,6 +34,18 @@
 var video = document.getElementById('video');
 var videoStream = null;
 var preLog = document.getElementById('preLog');
+
+// Merge a `source` object to a `target` recursively
+function merge(target, source) {
+  // Iterate through `source` properties and if an `Object` set property to merge of `target` and `source` properties
+  for (const key of Object.keys(source)) {
+    if (source[key] instanceof Object) Object.assign(source[key], merge(target[key], source[key]))
+  }
+
+  // Join `target` and modified `source`
+  Object.assign(target || {}, source)
+  return target
+}
 
 function clearLog()
 {
@@ -76,7 +96,7 @@ function gotStream(stream)
    
 function start(constraints, variant)
 {
-    var finalConstraints = { ...{video:true, audio: false, frameRate: { ideal: 25, min: 10 }, facingMode: {ideal: "environment"}}, ...constraints }
+    var finalConstraints = merge({video:{facingMode: "environment", frameRate: { ideal: 25, min: 10 }}, audio: false }, constraints);
     stop();
     clearLog();
     if (variant){
