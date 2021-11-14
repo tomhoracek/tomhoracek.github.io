@@ -4590,54 +4590,55 @@ APP_BASE_URI:(C=o&&o.Environment&&o.Environment.preferredMainUri||"default",_[C]
 s.a.Common.Calls.call(e,t,{data:n,done:o,fail:i},r)}))},i=function(){return y.forceReloadOnExpiredSession({waitForAuthentication:!0})},a=function(){
 return k.info("Sleeping ".concat(2500," during call ").concat(e," ").concat(t)),new Promise((function(e){return setTimeout(e,2500)}))},c=function(n){
 return k.warn("Next session refresh during call to ".concat(e," ").concat(t," failed, performing the call anyway. Cause: "),n),o()},u=function(n){
-if(!e||"get"!==e.toLowerCase())return console.error("First call to ".concat(e," ").concat(t," failed, but this is not a get method, so not retrying. Cause: "),n),Promise.reject(n)
-;var r=n.status||n.response&&n.response.status||0
-;return n.constructor&&n.constructor.name&&"ApplicationError"===n.constructor.name&&401!=r&&403!=r?(k.error("First call to ".concat(e," ").concat(t," failed, but this is an ApplicationError with status ").concat(r,", so not retrying. Cause: "),n),
+if(!(r&&r.hasOwnProperty("callRetryActive")?!!r.callRetryActive:!(!e||"get"!==e.toLowerCase())))return console.error("First call to ".concat(e," ").concat(t," failed, but call retry is not active for this call, so retry will not be performed. Cause: "),n),
+Promise.reject(n);var s=n.status||n.response&&n.response.status||0
+;return n.constructor&&n.constructor.name&&"ApplicationError"===n.constructor.name&&401!=s&&403!=s?(k.error("First call to ".concat(e," ").concat(t," failed, but this is an ApplicationError with status ").concat(s,", so retry will not be performed. Cause: "),n),
 Promise.reject(n)):(k.warn("First call to ".concat(e," ").concat(t," failed, retrying after a while. Cause: "),n),Promise.resolve().then(a).then(i).then(o,c))}
 ;return Promise.resolve().then(i).then(o,(function(n){return k.warn("First session refresh during call to ".concat(e," ").concat(t," failed, retrying. Cause: "),n),
 Promise.resolve().then(a).then(i).then(o,c).catch(u)})).catch(u)},portalLoadConfiguration:function(e){var t=S.getCommandUri("portal/loadConfiguration");return S.call("get",t,e)},
 userAccountGetOrCreate:function(e){var t=S.getCommandUri("userAccount/getOrCreate");return S.call("post",t,e.data||e)},userAccountUpdate:function(e){var t=S.getCommandUri("userAccount/update")
 ;return S.call("post",t,e)},userAccountGetCustomersAndCards:function(e){var t=S.getCommandUri("userAccount/getCustomersAndCards");return S.call("get",t,e)},placeListWithinPolygon:function(e){
-var t=S.getCommandUri("chargingPlace/listWithinPolygon");return S.call("post",t,e)},placeGetStation:function(e){var t=S.getCommandUri("chargingPlace/getStation");return S.call("get",t,e)},
-placeList:function(e){var t=S.getCommandUri("chargingPlace/list");return S.call("post",t,e)},placeListNearest:function(e){var t=S.getCommandUri("chargingPlace/listNearestStations")
-;return S.call("post",t,e)},createStation:function(e){var t=S.getCommandUri("chargingPlace/createStation");return S.call("post",t,e)},transactionCreateAndOpen:function(e){
-var t=S.getCommandUri("transaction/createAndOpen");return S.call("post",t,e)},transactionCancelReservation:function(e){var t=S.getCommandUri("transaction/cancelReservation");return S.call("post",t,e)
-},transactionList:function(e){var t=S.getCommandUri("transaction/list");return S.call("get",t,e)},transactionGetInvoice:function(e){var t=S.getCommandUri("transaction/getInvoice")
-;return"".concat(t,"?id=").concat(e.id,"&email=").concat(e.email,"&lang=").concat(e.lang)},transactionGet:function(e){var t=S.getCommandUri("transaction/get");return S.call("get",t,e)},
-transactionStart:function(e){var t=S.getCommandUri("transaction/start");return S.call("post",t,e)},transactionStartByCard:function(e){var t=S.getCommandUri("transaction/startByCard")
-;return S.call("post",t,e)},transactionStop:function(e){var t=S.getCommandUri("transaction/stop");return S.call("post",t,e)},sendEmail:function(e){var t=S.getCommandUri("portal/sendEmail")
-;return S.call("post",t,e)},getChargingPlans:function(e){var t=S.getCommandUri("portal/getChargingPlans");return S.call("get",t,e)},getImageUrl:function(e){var t
-;return t=e.imageId?"?id=".concat(e.imageId):"?stationCode=".concat(e.stationCode),S.getCommandUri("portal/getImage")+t+"&providerId="+e.providerId+"&version="+o.Common.Tools.generateUUID()},
-getBinaryData:function(e){return S.getCommandUri("uu-app-binarystore/getBinaryData",e)},getCommandUri:function(e,t){var n=S.APP_BASE_URI+e.replace(/^\/+/,""),r=o.Environment
-;if(r.tid||r.awid||r.vendor||r.app||t){var i=v.Uri.UriBuilder.parse(n);(r.tid||r.awid)&&(r.gatewayUri&&i.setGateway(r.gatewayUri),r.tid&&i.setTid(r.tid),r.awid&&i.setAwid(r.awid)),
-(r.vendor||r.app)&&(r.vendor&&i.setVendor(r.vendor),r.app&&i.setApp(r.app),r.subApp&&i.setSubApp(r.subApp)),t&&i.setParameters(t),n=i.toUri().toString()}return n}},w=S,M={TAG:"UuChargeUpPortal.",
-CSS:"uuchargeupportal-",states:{loading:"loading",ready:"ready",error:"error",initial:"initial",notReady:"not_ready",valid:"VALID",info:"INFO"},icons:{mdiArrowLeft:"mdi-arrow-left",cart:"mdi-cart",
-magnify:"mdi-magnify",flash:"mdi-flash",flashOff:"mdi-flash-off",check:"mdi-check",filter:"mdi-filter",edit:"mdi-pencil",delete:"mdi-delete",add:"mdi-plus",close:"mdi-close",
-chevronUp:"mdi-chevron-up",right:"mdi-arrow-right",left:"mdi-arrow-left",googleCircles:"mdi-google-circles-extended",chevronRight:"mdi-chevron-right",chevronLeft:"mdi-chevron-left",
-editLogin:"mdi-account-key-outline",terminateAccount:"mdi-account-remove-outline",closeCircleOutline:"mdi-close-circle-outline"},bgStyle:{transparent:"transparent",outline:"outline"},useCases:{
-map:"map",userAccount:"userAccount",passwordChange:"passwordChange",tradeTerms:"tradeTerms",about:"about",importStation:"importStation",provider:"provider",administration:"administration",
-apiChargeflow:"api/chargeflow"},vuc:{transactions:"transactions",settings:"settings",cards:"cards"},transaction:{state:{created:"Created",startCharging:"StartCharging",charging:"Charging",
-stopCharging:"StopCharging",ended:"Ended",error:"Error",stateError:"state-error",stateCharged:"state-charged",authorized:"Authorized"},transactionsInProcess:{
-transactionsInProcessTwo:"transactionsInProcessTwo",transactionsInProcessFive:"transactionsInProcessFive"},info:{success:"success",cancelled:"cancelled",error:"error"}},images:{altText:{
-chargeUpLogo:"ChargeUp Logo"}},sizes:{l:"l",xl:"xl",xs:"xs",s:"s",m:"m"},languages:["cs","en","de","sk","uk","sv"],defaultStationStateColors:{active:"#5EBD54",inActive:"#929292",info:"#cecece",
-selected:"#0af0f0"},stationStates:{info:"INFO"},regex:{email:"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
-phone:"^((\\+|00)\\d{3}\\s?)?(\\d{3}\\s?){2}\\d{3}$",firstName:"^[a-zA-Zá-žÁ-Ž \\.]{2,50}$",surname:"^[a-zA-Zá-žÁ-Ž \\.]{2,100}$",companyName:"^.{1,250}$",crn:"^.{1,12}$",tin:"^.{1,12}$",
-street:"^.{1,100}$",city:"^.{1,100}$",postalCode:"^.{1,6}$"},profiles:{productAuthorities:"ProductAuthorities",productSupport:"ProductSupport"},ids:{chargingPoints:"chargingPoints",
-chargingControl:"chargingControl",stationDetail:"stationDetail",chargingPlanLogin:"chargingPlanLogin"},colors:{danger:"danger",success:"success",default:"default",redRich:"red-rich",red:"red",
-warning:"warning"},suffixes:{feedback:"Feedback"},paymentStates:{paid:"PAID",canceled:"CANCELED",authorized:"AUTHORIZED",created:"CREATED"},terminationMethod:{
-paymentReservationTimeout:"PAYMENT_RESERVATION_TIMEOUT",paymentReservationCancelled:"PAYMENT_RESERVATION_CANCELLED",chargingReservationCancelled:"CHARGING_RESERVATION_CANCELLED",
-chargingReservationTimeout:"CHARGING_RESERVATION_TIMEOUT",cancelledByUser:"CANCELLED_BY_USER",cancelledByStation:"CANCELLED_BY_STATION",chargedUpAsPlanned:"CHARGED_UP_AS_PLANNED",
-dueToTimeLimit:"DUE_TO_TIME_LIMIT",dueToPriceLimit:"DUE_TO_PRICE_LIMIT",dueToEnergyLimit:"DUE_TO_ENERGY_LIMIT",creationFailed:"CREATION_FAILED",optimalRecharge:"OPTIMAL_RECHARGE",
-openingTimes:"OPENING_TIMES",notStartedByStation:"NOT_STARTED_BY_STATION",cancelledByOperator:"CANCELLED_BY_OPERATOR",cpoTimeout:"CPO_TIMEOUT",rejectedByStation:"REJECTED_BY_STATION",
-noTariff:"NO_TARIFF",concurentTx:"CONCURENT_TX",usedByAnotherUser:"USED_BY_ANOTHER_USER",pointUnavailable:"POINT_UNAVAILABLE",pointError:"POINT_ERROR",cpoReservationRejected:"CPO_RESERVATION_REJECTED"
-},messages:{notApplicable:"N/A"},formNames:{email:"email"},geolocation:{errorCodes:{1:"PERMISSION_DENIED",2:"POSITION_UNAVAILABLE",3:"TIMEOUT"}},defaultZoom:8,defaultCenter:{lat:49.66361,lng:15.63651
-},countries:new Set(["SK"]),StationDetail:{reloadInterval:1e4},pricingPolicy:{type:{priceForChargingTimeAndEnergy:"priceForChargingTimeAndEnergy",freeCharging:"freeCharging",
-priceUndefined:"priceUndefined"}},Map:{vuc:{STATION_SEARCH:"STATION_SEARCH",PLACE_LIST:"PLACE_LIST",STATION_DETAIL:"STATION_DETAIL",TRANSACTION_DETAIL:"TRANSACTION_DETAIL",HOW_IT_WORKS:"HOW_IT_WORKS"
-},reloadInterval:1e4,transactionMapZoom:17,placeMapZoom:17,currentPositionMapZoom:16,mobileMapDisplay:{NONE:"NONE",TINY:"TINY",FULL:"FULL",FNAV:"FNAV"}},about:{colorSchema:{primary:"primary"}},
-UserAccount:{vuc:{SETTINGS:"settings",TRANSACTIONS:"transactions",CARDS:"cards"}},smallDevices:new Set(["xs","s","m"]),localStorageKeys:{language:"UU.ChargeUp.Language",
-cookieBar:"UU.ChargeUp.Cookies",plannedOutage:"UU.ChargeUp.PlannedOutage",wrapperVersionConfirmDate:"UU.ChargeUp.WrapperVersionConfirmDate"},urls:{cookies:"https://unicorn.com/cz/cookies",
-helpDeskUrl:"https://www.plus4u.net/helpdesk",identityManagement:"https://uuidentity.plus4u.net/uu-identitymanagement-maing01/a9b105aff2744771be4daa8361954677/"},helpDesk:"+4U Helpdesk",buttonTypes:{
-primary:"primary",secondary:"secondary"},powerUnits:{kWh:"kWh"},paymentTypes:{plus4u:"UU_PAYMENT_GATEWAY",postPaidContract:"POST_PAID_CONTRACT"},commandNames:{transactionStart:"transactionStart",
+var t=S.getCommandUri("chargingPlace/listWithinPolygon");return S.call("post",t,e,{callRetryActive:!0})},placeGetStation:function(e){var t=S.getCommandUri("chargingPlace/getStation")
+;return S.call("get",t,e)},placeList:function(e){var t=S.getCommandUri("chargingPlace/list");return S.call("post",t,e,{callRetryActive:!0})},placeListNearest:function(e){
+var t=S.getCommandUri("chargingPlace/listNearestStations");return S.call("post",t,e,{callRetryActive:!0})},createStation:function(e){var t=S.getCommandUri("chargingPlace/createStation")
+;return S.call("post",t,e)},transactionCreateAndOpen:function(e){var t=S.getCommandUri("transaction/createAndOpen");return S.call("post",t,e)},transactionCancelReservation:function(e){
+var t=S.getCommandUri("transaction/cancelReservation");return S.call("post",t,e)},transactionList:function(e){var t=S.getCommandUri("transaction/list");return S.call("get",t,e)},
+transactionGetInvoice:function(e){var t=S.getCommandUri("transaction/getInvoice");return"".concat(t,"?id=").concat(e.id,"&email=").concat(e.email,"&lang=").concat(e.lang)},transactionGet:function(e){
+var t=S.getCommandUri("transaction/get");return S.call("get",t,e)},transactionStart:function(e){var t=S.getCommandUri("transaction/start");return S.call("post",t,e)},
+transactionStartByCard:function(e){var t=S.getCommandUri("transaction/startByCard");return S.call("post",t,e)},transactionStop:function(e){var t=S.getCommandUri("transaction/stop")
+;return S.call("post",t,e)},sendEmail:function(e){var t=S.getCommandUri("portal/sendEmail");return S.call("post",t,e)},getChargingPlans:function(e){var t=S.getCommandUri("portal/getChargingPlans")
+;return S.call("get",t,e)},getImageUrl:function(e){var t;return t=e.imageId?"?id=".concat(e.imageId):"?stationCode=".concat(e.stationCode),
+S.getCommandUri("portal/getImage")+t+"&providerId="+e.providerId+"&version="+o.Common.Tools.generateUUID()},getBinaryData:function(e){return S.getCommandUri("uu-app-binarystore/getBinaryData",e)},
+getCommandUri:function(e,t){var n=S.APP_BASE_URI+e.replace(/^\/+/,""),r=o.Environment;if(r.tid||r.awid||r.vendor||r.app||t){var i=v.Uri.UriBuilder.parse(n)
+;(r.tid||r.awid)&&(r.gatewayUri&&i.setGateway(r.gatewayUri),r.tid&&i.setTid(r.tid),r.awid&&i.setAwid(r.awid)),(r.vendor||r.app)&&(r.vendor&&i.setVendor(r.vendor),r.app&&i.setApp(r.app),
+r.subApp&&i.setSubApp(r.subApp)),t&&i.setParameters(t),n=i.toUri().toString()}return n}},w=S,M={TAG:"UuChargeUpPortal.",CSS:"uuchargeupportal-",states:{loading:"loading",ready:"ready",error:"error",
+initial:"initial",notReady:"not_ready",valid:"VALID",info:"INFO"},icons:{mdiArrowLeft:"mdi-arrow-left",cart:"mdi-cart",magnify:"mdi-magnify",flash:"mdi-flash",flashOff:"mdi-flash-off",
+check:"mdi-check",filter:"mdi-filter",edit:"mdi-pencil",delete:"mdi-delete",add:"mdi-plus",close:"mdi-close",chevronUp:"mdi-chevron-up",right:"mdi-arrow-right",left:"mdi-arrow-left",
+googleCircles:"mdi-google-circles-extended",chevronRight:"mdi-chevron-right",chevronLeft:"mdi-chevron-left",editLogin:"mdi-account-key-outline",terminateAccount:"mdi-account-remove-outline",
+closeCircleOutline:"mdi-close-circle-outline"},bgStyle:{transparent:"transparent",outline:"outline"},useCases:{map:"map",userAccount:"userAccount",passwordChange:"passwordChange",
+tradeTerms:"tradeTerms",about:"about",importStation:"importStation",provider:"provider",administration:"administration",apiChargeflow:"api/chargeflow"},vuc:{transactions:"transactions",
+settings:"settings",cards:"cards"},transaction:{state:{created:"Created",startCharging:"StartCharging",charging:"Charging",stopCharging:"StopCharging",ended:"Ended",error:"Error",
+stateError:"state-error",stateCharged:"state-charged",authorized:"Authorized"},transactionsInProcess:{transactionsInProcessTwo:"transactionsInProcessTwo",
+transactionsInProcessFive:"transactionsInProcessFive"},info:{success:"success",cancelled:"cancelled",error:"error"}},images:{altText:{chargeUpLogo:"ChargeUp Logo"}},sizes:{l:"l",xl:"xl",xs:"xs",s:"s",
+m:"m"},languages:["cs","en","de","sk","uk","sv"],defaultStationStateColors:{active:"#5EBD54",inActive:"#929292",info:"#cecece",selected:"#0af0f0"},stationStates:{info:"INFO"},regex:{
+email:"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",phone:"^((\\+|00)\\d{3}\\s?)?(\\d{3}\\s?){2}\\d{3}$",
+firstName:"^[a-zA-Zá-žÁ-Ž \\.]{2,50}$",surname:"^[a-zA-Zá-žÁ-Ž \\.]{2,100}$",companyName:"^.{1,250}$",crn:"^.{1,12}$",tin:"^.{1,12}$",street:"^.{1,100}$",city:"^.{1,100}$",postalCode:"^.{1,6}$"},
+profiles:{productAuthorities:"ProductAuthorities",productSupport:"ProductSupport"},ids:{chargingPoints:"chargingPoints",chargingControl:"chargingControl",stationDetail:"stationDetail",
+chargingPlanLogin:"chargingPlanLogin"},colors:{danger:"danger",success:"success",default:"default",redRich:"red-rich",red:"red",warning:"warning"},suffixes:{feedback:"Feedback"},paymentStates:{
+paid:"PAID",canceled:"CANCELED",authorized:"AUTHORIZED",created:"CREATED"},terminationMethod:{paymentReservationTimeout:"PAYMENT_RESERVATION_TIMEOUT",
+paymentReservationCancelled:"PAYMENT_RESERVATION_CANCELLED",chargingReservationCancelled:"CHARGING_RESERVATION_CANCELLED",chargingReservationTimeout:"CHARGING_RESERVATION_TIMEOUT",
+cancelledByUser:"CANCELLED_BY_USER",cancelledByStation:"CANCELLED_BY_STATION",chargedUpAsPlanned:"CHARGED_UP_AS_PLANNED",dueToTimeLimit:"DUE_TO_TIME_LIMIT",dueToPriceLimit:"DUE_TO_PRICE_LIMIT",
+dueToEnergyLimit:"DUE_TO_ENERGY_LIMIT",creationFailed:"CREATION_FAILED",optimalRecharge:"OPTIMAL_RECHARGE",openingTimes:"OPENING_TIMES",notStartedByStation:"NOT_STARTED_BY_STATION",
+cancelledByOperator:"CANCELLED_BY_OPERATOR",cpoTimeout:"CPO_TIMEOUT",rejectedByStation:"REJECTED_BY_STATION",noTariff:"NO_TARIFF",concurentTx:"CONCURENT_TX",usedByAnotherUser:"USED_BY_ANOTHER_USER",
+pointUnavailable:"POINT_UNAVAILABLE",pointError:"POINT_ERROR",cpoReservationRejected:"CPO_RESERVATION_REJECTED"},messages:{notApplicable:"N/A"},formNames:{email:"email"},geolocation:{errorCodes:{
+1:"PERMISSION_DENIED",2:"POSITION_UNAVAILABLE",3:"TIMEOUT"}},defaultZoom:8,defaultCenter:{lat:49.66361,lng:15.63651},countries:new Set(["SK"]),StationDetail:{reloadInterval:1e4},pricingPolicy:{type:{
+priceForChargingTimeAndEnergy:"priceForChargingTimeAndEnergy",freeCharging:"freeCharging",priceUndefined:"priceUndefined"}},Map:{vuc:{STATION_SEARCH:"STATION_SEARCH",PLACE_LIST:"PLACE_LIST",
+STATION_DETAIL:"STATION_DETAIL",TRANSACTION_DETAIL:"TRANSACTION_DETAIL",HOW_IT_WORKS:"HOW_IT_WORKS"},reloadInterval:1e4,transactionMapZoom:17,placeMapZoom:17,currentPositionMapZoom:16,
+mobileMapDisplay:{NONE:"NONE",TINY:"TINY",FULL:"FULL",FNAV:"FNAV"}},about:{colorSchema:{primary:"primary"}},UserAccount:{vuc:{SETTINGS:"settings",TRANSACTIONS:"transactions",CARDS:"cards"}},
+smallDevices:new Set(["xs","s","m"]),localStorageKeys:{language:"UU.ChargeUp.Language",cookieBar:"UU.ChargeUp.Cookies",plannedOutage:"UU.ChargeUp.PlannedOutage",
+wrapperVersionConfirmDate:"UU.ChargeUp.WrapperVersionConfirmDate"},urls:{cookies:"https://unicorn.com/cz/cookies",helpDeskUrl:"https://www.plus4u.net/helpdesk",
+identityManagement:"https://uuidentity.plus4u.net/uu-identitymanagement-maing01/a9b105aff2744771be4daa8361954677/"},helpDesk:"+4U Helpdesk",buttonTypes:{primary:"primary",secondary:"secondary"},
+powerUnits:{kWh:"kWh"},paymentTypes:{plus4u:"UU_PAYMENT_GATEWAY",postPaidContract:"POST_PAID_CONTRACT"},commandNames:{transactionStart:"transactionStart",
 transactionStartByCard:"transactionStartByCard"}};function P(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){
 return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function E(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{}
 ;t%2?P(Object(n),!0).forEach((function(t){L(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):P(Object(n)).forEach((function(t){
