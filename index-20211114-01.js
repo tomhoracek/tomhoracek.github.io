@@ -4596,7 +4596,7 @@ Promise.reject(n);var s=n.status||n.response&&n.response.status||0
 Promise.reject(n)):(k.warn("First call to ".concat(e," ").concat(t," failed, retrying after a while. Cause: "),n),Promise.resolve().then(a).then(i).then(o,c))}
 ;return Promise.resolve().then(i).then(o,(function(n){return k.warn("First session refresh during call to ".concat(e," ").concat(t," failed, retrying. Cause: "),n),
 Promise.resolve().then(a).then(i).then(o,c).catch(u)})).catch(u)},portalLoadConfiguration:function(e){var t=S.getCommandUri("portal/loadConfiguration");return S.call("get",t,e)},
-userAccountGetOrCreate:function(e){var t=S.getCommandUri("userAccount/getOrCreate",{callRetryActive:!0});return S.call("post",t,e.data||e)},userAccountUpdate:function(e){
+userAccountGetOrCreate:function(e){var t=S.getCommandUri("userAccount/getOrCreate");return S.call("post",t,e.data||e,{callRetryActive:!0})},userAccountUpdate:function(e){
 var t=S.getCommandUri("userAccount/update");return S.call("post",t,e)},userAccountGetCustomersAndCards:function(e){var t=S.getCommandUri("userAccount/getCustomersAndCards");return S.call("get",t,e)},
 placeListWithinPolygon:function(e){var t=S.getCommandUri("chargingPlace/listWithinPolygon");return S.call("post",t,e,{callRetryActive:!0})},placeGetStation:function(e){
 var t=S.getCommandUri("chargingPlace/getStation");return S.call("get",t,e)},placeList:function(e){var t=S.getCommandUri("chargingPlace/list");return S.call("post",t,e,{callRetryActive:!0})},
