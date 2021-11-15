@@ -4596,15 +4596,15 @@ Promise.reject(n);var s=n.status||n.response&&n.response.status||0
 Promise.reject(n)):(k.warn("First call to ".concat(e," ").concat(t," failed, retrying after a while. Cause: "),n),Promise.resolve().then(a).then(i).then(o,c))}
 ;return Promise.resolve().then(i).then(o,(function(n){return k.warn("First session refresh during call to ".concat(e," ").concat(t," failed, retrying. Cause: "),n),
 Promise.resolve().then(a).then(i).then(o,c).catch(u)})).catch(u)},portalLoadConfiguration:function(e){var t=S.getCommandUri("portal/loadConfiguration");return S.call("get",t,e)},
-userAccountGetOrCreate:function(e){var t=S.getCommandUri("userAccount/getOrCreate");return S.call("post",t,e.data||e)},userAccountUpdate:function(e){var t=S.getCommandUri("userAccount/update")
-;return S.call("post",t,e)},userAccountGetCustomersAndCards:function(e){var t=S.getCommandUri("userAccount/getCustomersAndCards");return S.call("get",t,e)},placeListWithinPolygon:function(e){
-var t=S.getCommandUri("chargingPlace/listWithinPolygon");return S.call("post",t,e,{callRetryActive:!0})},placeGetStation:function(e){var t=S.getCommandUri("chargingPlace/getStation")
-;return S.call("get",t,e)},placeList:function(e){var t=S.getCommandUri("chargingPlace/list");return S.call("post",t,e,{callRetryActive:!0})},placeListNearest:function(e){
-var t=S.getCommandUri("chargingPlace/listNearestStations");return S.call("post",t,e,{callRetryActive:!0})},createStation:function(e){var t=S.getCommandUri("chargingPlace/createStation")
-;return S.call("post",t,e)},transactionCreateAndOpen:function(e){var t=S.getCommandUri("transaction/createAndOpen");return S.call("post",t,e)},transactionCancelReservation:function(e){
-var t=S.getCommandUri("transaction/cancelReservation");return S.call("post",t,e)},transactionList:function(e){var t=S.getCommandUri("transaction/list");return S.call("get",t,e)},
-transactionGetInvoice:function(e){var t=S.getCommandUri("transaction/getInvoice");return"".concat(t,"?id=").concat(e.id,"&email=").concat(e.email,"&lang=").concat(e.lang)},transactionGet:function(e){
-var t=S.getCommandUri("transaction/get");return S.call("get",t,e)},transactionStart:function(e){var t=S.getCommandUri("transaction/start");return S.call("post",t,e)},
+userAccountGetOrCreate:function(e){var t=S.getCommandUri("userAccount/getOrCreate",{callRetryActive:!0});return S.call("post",t,e.data||e)},userAccountUpdate:function(e){
+var t=S.getCommandUri("userAccount/update");return S.call("post",t,e)},userAccountGetCustomersAndCards:function(e){var t=S.getCommandUri("userAccount/getCustomersAndCards");return S.call("get",t,e)},
+placeListWithinPolygon:function(e){var t=S.getCommandUri("chargingPlace/listWithinPolygon");return S.call("post",t,e,{callRetryActive:!0})},placeGetStation:function(e){
+var t=S.getCommandUri("chargingPlace/getStation");return S.call("get",t,e)},placeList:function(e){var t=S.getCommandUri("chargingPlace/list");return S.call("post",t,e,{callRetryActive:!0})},
+placeListNearest:function(e){var t=S.getCommandUri("chargingPlace/listNearestStations");return S.call("post",t,e,{callRetryActive:!0})},createStation:function(e){
+var t=S.getCommandUri("chargingPlace/createStation");return S.call("post",t,e)},transactionCreateAndOpen:function(e){var t=S.getCommandUri("transaction/createAndOpen");return S.call("post",t,e)},
+transactionCancelReservation:function(e){var t=S.getCommandUri("transaction/cancelReservation");return S.call("post",t,e)},transactionList:function(e){var t=S.getCommandUri("transaction/list")
+;return S.call("get",t,e)},transactionGetInvoice:function(e){var t=S.getCommandUri("transaction/getInvoice");return"".concat(t,"?id=").concat(e.id,"&email=").concat(e.email,"&lang=").concat(e.lang)},
+transactionGet:function(e){var t=S.getCommandUri("transaction/get");return S.call("get",t,e)},transactionStart:function(e){var t=S.getCommandUri("transaction/start");return S.call("post",t,e)},
 transactionStartByCard:function(e){var t=S.getCommandUri("transaction/startByCard");return S.call("post",t,e)},transactionStop:function(e){var t=S.getCommandUri("transaction/stop")
 ;return S.call("post",t,e)},sendEmail:function(e){var t=S.getCommandUri("portal/sendEmail");return S.call("post",t,e)},getChargingPlans:function(e){var t=S.getCommandUri("portal/getChargingPlans")
 ;return S.call("get",t,e)},getImageUrl:function(e){var t;return t=e.imageId?"?id=".concat(e.imageId):"?stationCode=".concat(e.stationCode),
