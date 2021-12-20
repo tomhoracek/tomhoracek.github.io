@@ -8903,16 +8903,23 @@ var r=o.Common.Url.parse(window.location.href),i=function(e){for(var t=1;t<argum
 })):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):qw(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
 }))}return e}({},r.parameters);null!=i&&i.invitationId&&(n=null==i?void 0:i.invitationId,delete i.invitationId,r.set({parameters:i}),window.history.pushState({},window.document.title,r.toString()))}
 return n},_getUserAccount:function(e,t){var n=this;if(e&&"0-0"!==e.uuIdentity){var r={uuIdentity:e.uuIdentity,firstName:ie.getFirstName(e.name),surname:ie.getSurname(e.name),email:e.email
-},i=this._getInvitationId()
-;return i&&(r.invitationId=i),this._loadUserAccountDtoInCache&&this._loadUserAccountDtoInCache.uuIdentity===r.uuIdentity&&this._loadUserAccountDtoInCache.firstName===r.firstName&&this._loadUserAccountDtoInCache.surname===r.surname&&this._loadUserAccountDtoInCache.email===r.email&&this._loadUserAccountDtoInCache.invitationId===r.invitationId?(Xw.warn("New and a cached version of dtoIn for load-user-account is the same, using cached version to bypass reload: ".concat(JSON.stringify(this._loadUserAccountDtoInCache))),
-r=this._loadUserAccountDtoInCache):(Xw.warn("New and a cached version of dtoIn for load-user-account differ (cached version: ".concat(JSON.stringify(this._loadUserAccountDtoInCache),", new version: ").concat(JSON.stringify(r),"), using new version to load data")),
-this._loadUserAccountDtoInCache=r),o.Common.Element.create(o.Common.Loader,{onLoad:P.userAccountGetOrCreate,data:r},(function(r){var i=r.isLoading,a=r.isError,s=r.data
-;return i?n._getCustomLoader("load-user-account-with-identity"):a?o.Common.Element.create(Nw,{errorData:s}):o.Common.Element.create(JS,{awidConfig:t,userAccount:s,identity:e})}))}
-return Xw.warn("Clearing a cached version of dtoIn for load-user-account"),this._loadUserAccountDtoInCache=null,o.Common.Element.create(Zw,{loading:this._getCustomLoader("load-user-account-anonymous")
-},o.Common.Element.create(JS,{awidConfig:t}))},_getChild:function(e){var t=this;return o.Common.Element.create(o.Common.Loader,{onLoad:P.portalLoadConfiguration,data:{}},(function(n){
-var r=n.isLoading,i=n.isError,a=n.data;return r?t._getCustomLoader("load-portal-configuration"):i?"uu-app-workspace/runtimeMode/ucNotAvailableAwidRuntimeMode"===a.code?(Rw(a),t._setGlobalCss(),
-o.Common.Element.create(Dw,{identity:e})):o.Common.Element.create(Nw,{errorData:a}):(t._disableTelemetry(a),Rw(a),t._setGlobalCss(),t._getUserAccount(e,a))}))},render:function(){var e=this
-;return o.Common.Element.create(o.Common.Session,Jw({session:c.Session.currentSession},this.getMainPropsToPass()),o.Common.Element.create(o.Common.Identity,null,(function(t){var n=t.identity
+},i=this._getInvitationId();i&&(r.invitationId=i);var a=this._loadUserAccountCache&&this._loadUserAccountCache.identity&&this._loadUserAccountCache.identity.uuIdentity,s=e&&e.uuIdentity
+;return a===s?Xw.warn("uuIdentity for load-user-account is the same: ".concat(a)):(Xw.warn("Actual and a cached version of uuIdentity for load-user-account differ (cached version: ".concat(a,", actual version: ").concat(s,"), invalidating the cache to block the UI during loading")),
+this._loadUserAccountCache=null),o.Common.Element.create(o.Common.Loader,{onLoad:P.userAccountGetOrCreate,data:r},(function(r){var i=r.isLoading,a=r.isError,s=r.data
+;return i?n._loadUserAccountCache?(Xw.warn("Rendering cached data during loading for load-user-account"),o.Common.Element.create(JS,{awidConfig:n._loadUserAccountCache.awidConfig,
+userAccount:n._loadUserAccountCache.data,identity:n._loadUserAccountCache.identity
+})):n._getCustomLoader("load-user-account-with-identity"):a?(Xw.warn("Clearing a cached version of data for load-user-account on error"),n._loadUserAccountCache=null,o.Common.Element.create(Nw,{
+errorData:s})):(n._loadUserAccountCache={identity:e,data:s,awidConfig:t},o.Common.Element.create(JS,{awidConfig:t,userAccount:s,identity:e}))}))}
+return Xw.warn("Clearing a cached version of data for load-user-account on anonymous access"),this._loadUserAccountCache=null,o.Common.Element.create(Zw,{
+loading:this._getCustomLoader("load-user-account-anonymous")},o.Common.Element.create(JS,{awidConfig:t}))},_getChild:function(e){
+var t=this,n=this._loadPortalConfigurationCache&&this._loadPortalConfigurationCache.identity&&this._loadPortalConfigurationCache.identity.uuIdentity,r=e&&e.uuIdentity
+;return n===r?Xw.warn("uuIdentity for load-portal-configuration is the same: ".concat(n)):(Xw.warn("Actual and a cached version of uuIdentity for load-portal-configuration differ (cached version: ".concat(n,", actual version: ").concat(r,"), invalidating the cache to block the UI during loading")),
+this._loadPortalConfigurationCache=null),o.Common.Element.create(o.Common.Loader,{onLoad:P.portalLoadConfiguration,data:{}},(function(n){var r=n.isLoading,i=n.isError,a=n.data
+;return r?t._loadPortalConfigurationCache?(Xw.warn("Rendering cached data during loading for load-portal-configuration"),
+t._getUserAccount(t._loadPortalConfigurationCache.identity,t._loadPortalConfigurationCache.data)):t._getCustomLoader("load-portal-configuration"):i?(Xw.warn("Clearing a cached version of data for load-portal-configuration on error"),
+t._loadPortalConfigurationCache=null,"uu-app-workspace/runtimeMode/ucNotAvailableAwidRuntimeMode"===a.code?(Rw(a),t._setGlobalCss(),o.Common.Element.create(Dw,{identity:e
+})):o.Common.Element.create(Nw,{errorData:a})):(t._loadPortalConfigurationCache={identity:e,data:a},t._disableTelemetry(a),Rw(a),t._setGlobalCss(),t._getUserAccount(e,a))}))},render:function(){
+var e=this;return o.Common.Element.create(o.Common.Session,Jw({session:c.Session.currentSession},this.getMainPropsToPass()),o.Common.Element.create(o.Common.Identity,null,(function(t){var n=t.identity
 ;return void 0===n?e._getCustomLoader("load-identity"):e._getChild(n)})))}}),eM=(n(588),{confirm:"OK",changePermanently:"Spara språk",
 confirmChangePermanently:"Vill du spara språkinställningar? Det ändrar standardspråket i alla Plus4U-program.",confirmChangePermanentlyHeader:"Spara språkinställningar",refuse:"Avbryt"})
 ;if(i.a.Environment.appVersion="1.48.0-DEV",!navigator.userAgent.match(/iPhone|iPad|iPod/)){var tM=document.createElement("link");tM.rel="manifest",tM.href="assets/manifest.json",
