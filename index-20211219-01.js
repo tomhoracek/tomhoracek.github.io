@@ -7752,11 +7752,13 @@ for(var e in this.originalConsoleMethods)this.originalConsoleMethods.hasOwnPrope
 this.telemetryEnabled=!1,console.info("Telemetry disabled"),o.Environment.showProductionWarning=!1,a.Environment.telemetry=!1}}},{key:"error",value:function(e,t){if(this.telemetryEnabled){
 var n=this._prepareTelemetryData(t);a.Telemetry.error(e,n)}}},{key:"info",value:function(e,t){if(this.telemetryEnabled){var n=this._prepareTelemetryData(t);a.Telemetry.info(e,n)}}},{key:"warning",
 value:function(e,t){if(this.telemetryEnabled){var n=this._prepareTelemetryData(t);a.Telemetry.info(e,n)}}},{key:"_cloneForLogging",value:function(e,t,n){
-if(!((n=n||0)>this.maxLoggingLevel))for(var r in e)r.startsWith("_")||isNaN(r)&&r.toUpperCase()===r||r.startsWith("this")||t[r]||("object"===_y(e[r])&&null!==e[r]?(t[r]={},
-this._cloneForLogging(e[r],t[r],n+1)):"function"!=typeof e[r]&&(t[r]=e[r]))}},{key:"_prepareTelemetryData",value:function(e){var t={};return this._cloneForLogging(e,t),t.userAgent=navigator.userAgent,
-t.uuAppClientTraceId=this.uuAppClientTraceId,t.clientInstanceId=this.clientInstanceId,t.uri=location.href,t}}])&&ky(t.prototype,n),r&&ky(t,r),e}());function Sy(e,t){var n=Object.keys(e)
-;if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}
-function wy(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Sy(Object(n),!0).forEach((function(t){My(e,t,n[t])
+if(!((n=n||0)>this.maxLoggingLevel))for(var r in e)try{var o=e[r]
+;this._isError(o)?t[r]=o.toString():r.startsWith("_")||isNaN(r)&&r.toUpperCase()===r||r.startsWith("this")||t[r]||("object"===_y(o)&&null!==o?(t[r]={},
+this._cloneForLogging(o,t[r],n+1)):"function"!=typeof o&&(t[r]=o))}catch(e){t[r]="---"}}},{key:"_isError",value:function(e){
+return!!(e&&e.constructor&&e.constructor.name&&e.constructor.name.indexOf("Error")>=0&&e.toString)}},{key:"_prepareTelemetryData",value:function(e){var t={};return this._cloneForLogging(e,t),
+t.userAgent=navigator.userAgent,t.uuAppClientTraceId=this.uuAppClientTraceId,t.clientInstanceId=this.clientInstanceId,t.uri=location.href,t}}])&&ky(t.prototype,n),r&&ky(t,r),e}());function Sy(e,t){
+var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}
+return n}function wy(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Sy(Object(n),!0).forEach((function(t){My(e,t,n[t])
 })):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Sy(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
 }))}return e}function My(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Py,Ey,Ly,Oy,Ty,xy=E.TAG+"Core.",jy=wy(wy({},E),{},{
 CSS:E.CSS+"core-",TAG:xy,Css:i.a.Common.Css.createCssModule(xy.replace(/\.$/,"").toLowerCase().replace(/\./g,"-").replace(/[^a-z-]/g,""),"uu_chargeup_portalg01-hi/uu_chargeup_portalg01-hi@1.48.0-DEV")
@@ -8493,7 +8495,10 @@ onClick:this._handleReportProblem,className:this.getClassName().contactFlsButton
 var t=this.props.awidConfig.flsBaseUri
 ;return t?this._getFlsSupport(t):e?[this._getContactSupport(),this._getFlsSupport(o.Environment.defaultFlsUri,pn.about.flsLsi,pn.about.slsLsi)]:this._getContactSupport()},
 _handleReportProblem:function(){o.Environment.getPage().getModal().open({size:"l",header:o.Common.Element.create(o.Bricks.Lsi,{lsi:pn.contact.contactTitle}),content:o.Common.Element.create(us,{
-showContactDetail:!0})})},_getLicense:function(){return(o.Environment.goteborgAwidList.includes(this.props.awidConfig.awid)?zk.goteborgLicence:zk.licence)||{}},_getChild:function(e){
+showContactDetail:!0})})},_telemetryTest:function(){console.warn("Telemetry Test - warn message");var e={message1:"Hello World 1"},t={message2:"Hello World 2"}
+;console.warn("Telemetry Test - warn message with params",e,t);try{throw new Error("Sample error")}catch(n){console.error("Telemetry Test - error",n),
+console.error("Telemetry Test - error with params ",n,e,t)}},_getLicense:function(){return(o.Environment.goteborgAwidList.includes(this.props.awidConfig.awid)?zk.goteborgLicence:zk.licence)||{}},
+_getChild:function(e){
 var t=this,n=this._getLicense(),r=this._getAuthors(zk.leadingAuthors),i=this._getAuthors(zk.otherAuthors),a=e?zk.products:zk.products.slice(0,1),c=this.props.awidConfig&&this.props.awidConfig.tradeTermsWebkitUri&&this.props.awidConfig.tradeTermsWebkitUri.replace("%lang%",ie.redirectLang())
 ;return o.Common.Element.create(o.Bricks.Section,this.getMainPropsToPass(),o.Common.Element.create(o.Bricks.Container,{header:[o.Common.Element.create(o.Bricks.Button,{key:0,
 bgStyle:j.bgStyle.transparent,onClick:this.props.awidConfig?by.goBackToInitialPage:by.goPackToHomePage},o.Common.Element.create(o.Bricks.Lsi,null,o.Common.Element.create(o.Bricks.Icon,{
@@ -8510,9 +8515,9 @@ content:t.getLsiItem(pn.about.usedTechnologies.content,pn.about.usedTechnologies
 organisation:this.getLsiItem(n.organisation),authorities:this.getLsiItem(n.authorities),awid:o.Common.Element.create(o.Bricks.Link,{href:window.location.href},this.props.awidConfig.awid)
 }),o.Common.Element.create(o.Bricks.Div,{className:this.getClassName("logos")},o.Common.Element.create(o.Bricks.Image,{responsive:!1,src:"assets/plus4u.svg"}),o.Common.Element.create(o.Bricks.Image,{
 responsive:!1,src:"assets/unicorn.svg"})),o.Common.Element.create(o.Bricks.Div,{className:this.getClassName("logos")},"Session: "+y.getState()))))},render:function(){var e=this
-;return o.Common.Element.create(tC,{processAuthorized:!0},(function(t){var n=t.isCoworker;return e._getChild(n)}))}});function lC(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){
-var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function uC(e){
-for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?lC(Object(n),!0).forEach((function(t){dC(e,t,n[t])
+;return this._telemetryTest(),o.Common.Element.create(tC,{processAuthorized:!0},(function(t){var n=t.isCoworker;return e._getChild(n)}))}});function lC(e,t){var n=Object.keys(e)
+;if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}
+function uC(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?lC(Object(n),!0).forEach((function(t){dC(e,t,n[t])
 })):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):lC(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
 }))}return e}function dC(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var mC=uC(uC({},R),{},{importStation:{formNames:{
 chargingPlaceName:"chargingPlaceName",chargingStationName:"chargingStationName",street:"street",postalCode:"postalCode",city:"city",code:"code",longitude:"longitude",latitude:"latitude",
@@ -8903,27 +8908,35 @@ var r=o.Common.Url.parse(window.location.href),i=function(e){for(var t=1;t<argum
 })):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):qw(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
 }))}return e}({},r.parameters);null!=i&&i.invitationId&&(n=null==i?void 0:i.invitationId,delete i.invitationId,r.set({parameters:i}),window.history.pushState({},window.document.title,r.toString()))}
 return n},_getUserAccount:function(e,t){var n=this;if(e&&"0-0"!==e.uuIdentity){var r={uuIdentity:e.uuIdentity,firstName:ie.getFirstName(e.name),surname:ie.getSurname(e.name),email:e.email
-},i=this._getInvitationId();i&&(r.invitationId=i);var a=this._loadUserAccountCache&&this._loadUserAccountCache.identity&&this._loadUserAccountCache.identity.uuIdentity,s=e&&e.uuIdentity
-;return a===s?Xw.warn("uuIdentity for load-user-account is the same: ".concat(a)):(Xw.warn("Actual and a cached version of uuIdentity for load-user-account differ (cached version: ".concat(a,", actual version: ").concat(s,"), invalidating the cache to block the UI during loading")),
-this._loadUserAccountCache=null),o.Common.Element.create(o.Common.Loader,{onLoad:P.userAccountGetOrCreate,data:r},(function(r){var i=r.isLoading,a=r.isError,s=r.data
-;return i?n._loadUserAccountCache?(Xw.warn("Rendering cached data during loading for load-user-account"),o.Common.Element.create(JS,{awidConfig:n._loadUserAccountCache.awidConfig,
-userAccount:n._loadUserAccountCache.data,identity:n._loadUserAccountCache.identity
-})):n._getCustomLoader("load-user-account-with-identity"):a?(Xw.warn("Clearing a cached version of data for load-user-account on error"),n._loadUserAccountCache=null,o.Common.Element.create(Nw,{
-errorData:s})):(n._loadUserAccountCache={identity:e,data:s,awidConfig:t},o.Common.Element.create(JS,{awidConfig:t,userAccount:s,identity:e}))}))}
-return Xw.warn("Clearing a cached version of data for load-user-account on anonymous access"),this._loadUserAccountCache=null,o.Common.Element.create(Zw,{
-loading:this._getCustomLoader("load-user-account-anonymous")},o.Common.Element.create(JS,{awidConfig:t}))},_getChild:function(e){
-var t=this,n=this._loadPortalConfigurationCache&&this._loadPortalConfigurationCache.identity&&this._loadPortalConfigurationCache.identity.uuIdentity,r=e&&e.uuIdentity
-;return n===r?Xw.warn("uuIdentity for load-portal-configuration is the same: ".concat(n)):(Xw.warn("Actual and a cached version of uuIdentity for load-portal-configuration differ (cached version: ".concat(n,", actual version: ").concat(r,"), invalidating the cache to block the UI during loading")),
-this._loadPortalConfigurationCache=null),o.Common.Element.create(o.Common.Loader,{onLoad:P.portalLoadConfiguration,data:{}},(function(n){var r=n.isLoading,i=n.isError,a=n.data
-;return r?t._loadPortalConfigurationCache?(Xw.warn("Rendering cached data during loading for load-portal-configuration"),
-t._getUserAccount(t._loadPortalConfigurationCache.identity,t._loadPortalConfigurationCache.data)):t._getCustomLoader("load-portal-configuration"):i?(Xw.warn("Clearing a cached version of data for load-portal-configuration on error"),
-t._loadPortalConfigurationCache=null,"uu-app-workspace/runtimeMode/ucNotAvailableAwidRuntimeMode"===a.code?(Rw(a),t._setGlobalCss(),o.Common.Element.create(Dw,{identity:e
-})):o.Common.Element.create(Nw,{errorData:a})):(t._loadPortalConfigurationCache={identity:e,data:a},t._disableTelemetry(a),Rw(a),t._setGlobalCss(),t._getUserAccount(e,a))}))},render:function(){
-var e=this;return o.Common.Element.create(o.Common.Session,Jw({session:c.Session.currentSession},this.getMainPropsToPass()),o.Common.Element.create(o.Common.Identity,null,(function(t){var n=t.identity
-;return void 0===n?e._getCustomLoader("load-identity"):e._getChild(n)})))}}),eM=(n(588),{confirm:"OK",changePermanently:"Spara språk",
-confirmChangePermanently:"Vill du spara språkinställningar? Det ändrar standardspråket i alla Plus4U-program.",confirmChangePermanentlyHeader:"Spara språkinställningar",refuse:"Avbryt"})
-;if(i.a.Environment.appVersion="1.48.0-DEV",!navigator.userAgent.match(/iPhone|iPad|iPod/)){var tM=document.createElement("link");tM.rel="manifest",tM.href="assets/manifest.json",
-document.head.appendChild(tM)}function nM(e){e,i.a.Common.DOM.render(i.a.Common.Element.create(r.AppContainer,null,i.a.Common.Element.create($w,null)),document.getElementById(e))}
+},i=this._getInvitationId();if(i&&(r.invitationId=i),this._loadUserAccountCache){
+var a=this._loadUserAccountCache.identity&&this._loadUserAccountCache.identity.uuIdentity,s=e&&e.uuIdentity,c=this._loadUserAccountCache.dtoIn||{}
+;a===s&&c.firstName===r.firstName&&c.surname===r.surname&&c.email===r.email&&c.invitationId===r.invitationId?(Xw.warn("uuIdentity and dtoIn for load-user-account is the same: ".concat(a,", dtoIn"),r),
+this._loadUserAccountCache.staleData=!1):(Xw.warn("Actual and a cached version of uuIdentity or dtoIn for load-user-account differ - cached uuIdentity: ".concat(a,", actual uuIdentity: ").concat(s,", actual dtoIn"),r),
+this._loadUserAccountCache.staleData=!0)}else Xw.warn("No cached data for load-user-account is available");return o.Common.Element.create(o.Common.Loader,{onLoad:P.userAccountGetOrCreate,data:r
+},(function(i){var a=i.isLoading,s=i.isError,c=i.data;if(a)return n._loadUserAccountCache?(Xw.warn("Rendering cached data during loading for load-user-account"),o.Common.Element.create(JS,{
+awidConfig:n._loadUserAccountCache.awidConfig,userAccount:n._loadUserAccountCache.data,identity:n._loadUserAccountCache.identity})):n._getCustomLoader("load-user-account-with-identity");if(s){
+if(n._loadUserAccountCache){if(!n._loadUserAccountCache.staleData)return Xw.error("Rendering cached data during loading for load-user-account, the call finished with error",c),
+o.Common.Element.create(JS,{awidConfig:n._loadUserAccountCache.awidConfig,userAccount:n._loadUserAccountCache.data,identity:n._loadUserAccountCache.identity})
+;Xw.error("The call load-user-account finished with error",c)}return o.Common.Element.create(Nw,{errorData:c})}return n._loadUserAccountCache={identity:e,data:c,awidConfig:t,dtoIn:r,staleData:!1},
+o.Common.Element.create(JS,{awidConfig:t,userAccount:c,identity:e})}))}return Xw.warn("Clearing a cached version of data for load-user-account on anonymous access"),this._loadUserAccountCache=null,
+o.Common.Element.create(Zw,{loading:this._getCustomLoader("load-user-account-anonymous")},o.Common.Element.create(JS,{awidConfig:t}))},_getChild:function(e){var t=this
+;if(this._loadPortalConfigurationCache){var n=this._loadPortalConfigurationCache.identity&&this._loadPortalConfigurationCache.identity.uuIdentity,r=e&&e.uuIdentity
+;n===r?(Xw.warn("uuIdentity for load-portal-configuration is the same: ".concat(n)),
+this._loadPortalConfigurationCache.staleData=!1):(Xw.warn("Actual and a cached version of uuIdentity for load-portal-configuration differ (cached version: ".concat(n,", actual version: ").concat(r,"), setting the stale-data flag")),
+this._loadPortalConfigurationCache.staleData=!0)}else Xw.warn("No cached data for load-portal-configuration is available");return o.Common.Element.create(o.Common.Loader,{
+onLoad:P.portalLoadConfiguration,data:{}},(function(n){var r=n.isLoading,i=n.isError,a=n.data
+;if(r)return t._loadPortalConfigurationCache?(Xw.warn("Rendering cached data during loading for load-portal-configuration"),
+t._getUserAccount(t._loadPortalConfigurationCache.identity,t._loadPortalConfigurationCache.data)):t._getCustomLoader("load-portal-configuration");if(i){
+if("uu-app-workspace/runtimeMode/ucNotAvailableAwidRuntimeMode"===a.code)return Rw(a),t._setGlobalCss(),o.Common.Element.create(Dw,{identity:e});if(t._loadPortalConfigurationCache){
+if(!t._loadPortalConfigurationCache.staleData)return Xw.error("Rendering cached data after the call load-portal-configuration finished with error",a),
+t._getUserAccount(t._loadPortalConfigurationCache.identity,t._loadPortalConfigurationCache.data);Xw.error("The call load-portal-configuration finished with error",a)}
+return o.Common.Element.create(Nw,{errorData:a})}return t._loadPortalConfigurationCache={identity:e,data:a,staleData:!1},t._disableTelemetry(a),Rw(a),t._setGlobalCss(),t._getUserAccount(e,a)}))},
+render:function(){var e=this;return o.Common.Element.create(o.Common.Session,Jw({session:c.Session.currentSession
+},this.getMainPropsToPass()),o.Common.Element.create(o.Common.Identity,null,(function(t){var n=t.identity;return void 0===n?e._getCustomLoader("load-identity"):e._getChild(n)})))}}),eM=(n(588),{
+confirm:"OK",changePermanently:"Spara språk",confirmChangePermanently:"Vill du spara språkinställningar? Det ändrar standardspråket i alla Plus4U-program.",
+confirmChangePermanentlyHeader:"Spara språkinställningar",refuse:"Avbryt"});if(i.a.Environment.appVersion="1.48.0-DEV",!navigator.userAgent.match(/iPhone|iPad|iPod/)){
+var tM=document.createElement("link");tM.rel="manifest",tM.href="assets/manifest.json",document.head.appendChild(tM)}function nM(e){e,
+i.a.Common.DOM.render(i.a.Common.Element.create(r.AppContainer,null,i.a.Common.Element.create($w,null)),document.getElementById(e))}
 i.a.Environment.deactivateSessionChecker||(y.setRootElementName("uuApp"),y.installSessionChangedListener(),y.installOnAppResumeListener(),y.setResetStateHandler((function(){
 return new Promise((function(e,t){by.goBackToInitialPage(),setTimeout((function(){try{i.a.Environment.page.getAlertBus().setAlert({content:i.a.Common.Element.create(i.a.Bricks.Lsi,{
 lsi:pn.session.automaticLogout}),colorSchema:"success",closeTimer:6e3},(function(){e()}))}catch(t){console.error("Cannot finish reset state",t),e()}}),1e3)}))}))),
