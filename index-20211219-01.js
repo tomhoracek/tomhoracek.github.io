@@ -4548,48 +4548,52 @@ return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototyp
 console.error("React-Hot-Loader: misconfiguration detected, using production version in non-production environment."),console.error("React-Hot-Loader: Hot Module Replacement is not enabled.")),
 i.Children.only(e.children)}a.warnAboutHMRDisabled=!1;var s=function e(){return e.shouldWrapWithAppContainer?function(e){return function(t){return i.createElement(a,null,i.createElement(e,t))}
 }:function(e){return e}};s.shouldWrapWithAppContainer=!1;t.AppContainer=a,t.hot=s,t.areComponentsEqual=function(e,t){return e===t},t.setConfig=function(){},t.cold=function(e){return e},
-t.configureComponent=function(){}},function(e,t,n){"use strict";n.r(t),n.d(t,"render",(function(){return oM}));var r=n(319),o=n(0),i=n.n(o),a=n(5),s=n.n(a),c=n(13),l=n(22);function u(e,t,n,r,o,i,a){
+t.configureComponent=function(){}},function(e,t,n){"use strict";n.r(t),n.d(t,"render",(function(){return rM}));var r=n(319),o=n(0),i=n.n(o),a=n(5),s=n.n(a),c=n(13),l=n(22);function u(e,t,n,r,o,i,a){
 try{var s=e[i](a),c=s.value}catch(e){return void n(e)}s.done?t(c):Promise.resolve(c).then(r,o)}function d(e){return function(){var t=this,n=arguments;return new Promise((function(r,o){
 var i=e.apply(t,n);function a(e){u(i,r,o,a,s,"next",e)}function s(e){u(i,r,o,a,s,"throw",e)}a(void 0)}))}}
-var m=location.href.startsWith("about:")&&window.frameElement?parent:window,p=new RegExp("uu.app.csrf=([^;]+)"),f={prompt:"none"},h=l.LoggerFactory.get("SessionReloadHelper"),g={
-formatTimestamp:function(e,t){var n="";return e&&(n=new Date(e).toISOString()),t&&(n=n.substr(0,16)),n},isForwardStrategy:function(){
+var m=location.href.startsWith("about:")&&window.frameElement?parent:window,p=new RegExp("uu.app.csrf=([^;]+)"),f={prompt:"none"},h=l.LoggerFactory.get("SessionReloadHelper");h.setLevel("DEBUG")
+;var g={formatTimestamp:function(e,t){var n="";return e&&(n=new Date(e).toISOString()),t&&(n=n.substr(0,16)),n},isForwardStrategy:function(){
 var e=UU5.Environment.uu_app_oidc_providers_oidcg02_session_crossdomain_strategy;return!(!e||"forward"!==e)},getCsrfToken:function(){return(p.exec(m.document.cookie)||[])[1]},
 getBrowserSessionValidityTimestamp:function(){var e=g.getCsrfToken();if(e){var t=e.split(".");if(3===t.length){var n=Number(t[0]);if(n)return n*=1e3}}return null},setRootElementName:function(e){
 g.rootElementName=e},setDebugDiv:function(e){g.debugDiv=e},setResetStateHandler:function(e){g.resetStateHandler=e},isSessionExpired:function(){if(UU5.Environment.deactivateSessionChecker)return!1
 ;if(g.initTime&&g.initTime+4e4>Date.now())return!1;var e=!1,t=g.getBrowserSessionValidityTimestamp();if(t&&(e=t+6e4<Date.now()),!e){var n=c.AuthenticationService.getCurrentSession();if(n){
-var r=n.getExpiresAt();r&&(e=r+6e4<Date.now())}}return e},reloadSessionState:function(e){return d(regeneratorRuntime.mark((function t(){var n;return regeneratorRuntime.wrap((function(t){
-for(;;)switch(t.prev=t.next){case 0:if(h.debug("Calling reloadSessionState"),n=(e||{}).waitForAuthentication,!c.AuthenticationService.isAuthenticating()){t.next=9;break}
-if(h.debug("AuthenticationService is authenticating, waitForAuthentication:",n),n){t.next=6;break}return t.abrupt("return");case 6:g.waitForAuthenticationCounter++,t.next=10;break;case 9:
-g.lastReloadTime=Date.now();case 10:if(!g.isForwardStrategy()){t.next=14;break}c.AuthenticationService.isAuthenticating()||window.location.reload(),t.next=20;break;case 14:
-return h.debug("Waiting for AuthenticationService.authenticate()"),g.reloadCounter++,t.next=18,c.AuthenticationService.authenticate(f);case 18:
-h.debug("After AuthenticationService.authenticate(), state:",g.getState()),h.debug("After AuthenticationService.authenticate(), session:",c.AuthenticationService.getCurrentSession());case 20:
-case"end":return t.stop()}}),t)})))()},forceReloadOnExpiredSession:function(e){return d(regeneratorRuntime.mark((function t(){var n,r;return regeneratorRuntime.wrap((function(t){
-for(;;)switch(t.prev=t.next){case 0:if(n=(e||{}).waitForAuthentication,t.prev=1,g.updateStoredDiagnosticInfo(),!g.isSessionExpired()){t.next=16;break}
-return h.debug("Session is expired, current state:",g.getState()),t.next=7,c.AuthenticationService.restoreSession();case 7:if(!g.isForwardStrategy()){t.next=14;break}
-return(r=g.rootElementName&&document.getElementById(g.rootElementName))&&(r.style.display="none",setTimeout((function(){r.style.display="block"}),2e3)),t.next=12,g.reloadSessionState({
-waitForAuthentication:n});case 12:t.next=16;break;case 14:return t.next=16,g.reloadSessionState({waitForAuthentication:n});case 16:t.next=23;break;case 18:t.prev=18,t.t0=t.catch(1),
-h.warn("Cannot force reload on expired session",t.t0),g.errorCounter++,g.lastError=t.t0.toString();case 23:case"end":return t.stop()}}),t,null,[[1,18]])})))()},logoutAndResetState:function(){
-return d(regeneratorRuntime.mark((function e(){var t;return regeneratorRuntime.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:if(e.prev=0,t=c.AuthenticationService.getCurrentSession()){e.next=5
-;break}return h.warn("Cannot logout as there is no session"),e.abrupt("return");case 5:return e.next=7,t.close();case 7:if(e.t0=g.resetStateHandler,!e.t0){e.next=11;break}return e.next=11,
-g.resetStateHandler();case 11:e.next=16;break;case 13:e.prev=13,e.t1=e.catch(0),h.warn("Cannot logout and reset state",e.t1);case 16:case"end":return e.stop()}}),e,null,[[0,13]])})))()},
-installSessionChangedListener:function(){try{if(UU5.Environment.deactivateSessionChecker)return void h.info("Session changed listener not installed because session checker is disabled")
+var r=n.getExpiresAt();r&&(e=r+6e4<Date.now())}}return e},reloadSessionState:function(e){return d(regeneratorRuntime.mark((function t(){var n,r,o;return regeneratorRuntime.wrap((function(t){
+for(;;)switch(t.prev=t.next){case 0:if(r=(n=e||{}).waitForAuthentication,o=n.eventName,!c.AuthenticationService.isAuthenticating()){t.next=8;break}
+if(h.debug("Event ".concat(o," - AuthenticationService is authenticating, waitForAuthentication: ").concat(r)),r){t.next=5;break}return t.abrupt("return");case 5:g.waitForAuthenticationCounter++,
+t.next=9;break;case 8:g.lastReloadTime=Date.now();case 9:if(!g.isForwardStrategy()){t.next=13;break}c.AuthenticationService.isAuthenticating()||window.location.reload(),t.next=17;break;case 13:
+return g.reloadCounter++,t.next=16,c.AuthenticationService.authenticate(f);case 16:
+h.debug("Event ".concat(o," - after session reload, state: ").concat(g.getState(),", session: ").concat(g.getSessionInfo()));case 17:case"end":return t.stop()}}),t)})))()},
+forceReloadOnExpiredSession:function(e){return d(regeneratorRuntime.mark((function t(){var n,r,o,i;return regeneratorRuntime.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:
+if(r=(n=e||{}).waitForAuthentication,o=n.eventName,t.prev=1,g.updateStoredDiagnosticInfo(),!g.isSessionExpired()){t.next=16;break}
+return h.debug("Event ".concat(o," - reloading expired session, state: ").concat(g.getState(),", session: ").concat(g.getSessionInfo())),t.next=7,c.AuthenticationService.restoreSession();case 7:
+if(!g.isForwardStrategy()){t.next=14;break}return(i=g.rootElementName&&document.getElementById(g.rootElementName))&&(i.style.display="none",setTimeout((function(){i.style.display="block"}),2e3)),
+t.next=12,g.reloadSessionState({waitForAuthentication:r,eventName:o});case 12:t.next=16;break;case 14:return t.next=16,g.reloadSessionState({waitForAuthentication:r,eventName:o});case 16:t.next=23
+;break;case 18:t.prev=18,t.t0=t.catch(1),h.warn("Cannot force reload on expired session during event ".concat(o),t.t0),g.errorCounter++,g.lastError=t.t0.toString();case 23:case"end":return t.stop()}
+}),t,null,[[1,18]])})))()},logoutAndResetState:function(){return d(regeneratorRuntime.mark((function e(){var t;return regeneratorRuntime.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:
+if(e.prev=0,t=c.AuthenticationService.getCurrentSession()){e.next=5;break}return h.warn("Cannot logout as there is no session"),e.abrupt("return");case 5:return e.next=7,t.close();case 7:
+if(e.t0=g.resetStateHandler,!e.t0){e.next=11;break}return e.next=11,g.resetStateHandler();case 11:e.next=16;break;case 13:e.prev=13,e.t1=e.catch(0),h.warn("Cannot logout and reset state",e.t1)
+;case 16:case"end":return e.stop()}}),e,null,[[0,13]])})))()},installSessionChangedListener:function(){try{
+if(UU5.Environment.deactivateSessionChecker)return void h.info("Session changed listener not installed because session checker is disabled")
 ;var e=c.AuthenticationService&&c.AuthenticationService._providers&&c.AuthenticationService._providers.oidcg02
 ;e?(h.info("Found a oidcg02 provider instance, installing the forceReloadOnExpiredSession listener with forward strategy set to:"+g.isForwardStrategy()),e.addListener("sessionChanged",(function(){
-h.debug("Firing forceReloadOnExpiredSession on oidcg02Provider sessionChanged event"),g.forceReloadOnExpiredSession()
+h.debug("Firing forceReloadOnExpiredSession on oidcg02Provider sessionChanged event"),g.forceReloadOnExpiredSession({eventName:"session-changed"})
 }))):h.warn("No oidcg02 provider instance found, cannot install the forceReloadOnExpiredSession listener")}catch(e){h.warn("Error occurred during the forceReloadOnExpiredSession expiration",e)}},
 installOnAppResumeListener:function(){
 UU5.Environment.deactivateSessionChecker?h.info("on-application-resume listener not installed because session checker is disabled"):(h.info("Installing on-application-resume listener with forward strategy set to:"+g.isForwardStrategy()),
-window.addEventListener("focus",(function(){g.forceReloadOnExpiredSession()})),document.addEventListener("visibilitychange",(function(){g.forceReloadOnExpiredSession()})))},
-updateStoredDiagnosticInfo:function(){if(g.lastDiagnosticInfo=g.getDiagnosticInfo(),g.debugDiv){var e=document.getElementById(g.debugDiv);if(e){var t=g.getDiagnosticInfo();e.innerHTML=t}}},
-getLastDiagnosticInfo:function(){return g.lastDiagnosticInfo},getDiagnosticInfo:function(){var e=(new Date).toISOString()+": ";return e+="expiredSession:"+g.isSessionExpired(),
-e+=", csrfToken:"+g.getCsrfToken(),e+=", sessionValidityTimestamp:"+g.formatTimestamp(g.getBrowserSessionValidityTimestamp()),e+=", lastReloadTime:"+g.formatTimestamp(g.lastReloadTime),
+window.addEventListener("focus",(function(){g.forceReloadOnExpiredSession({eventName:"focus"})})),document.addEventListener("visibilitychange",(function(){g.forceReloadOnExpiredSession({
+eventName:"visibility-change"})})))},updateStoredDiagnosticInfo:function(){if(g.lastDiagnosticInfo=g.getDiagnosticInfo(),g.debugDiv){var e=document.getElementById(g.debugDiv);if(e){
+var t=g.getDiagnosticInfo();e.innerHTML=t}}},getLastDiagnosticInfo:function(){return g.lastDiagnosticInfo},getDiagnosticInfo:function(){var e=(new Date).toISOString()+": "
+;return e+="expiredSession:"+g.isSessionExpired(),e+=", csrfToken:"+g.getCsrfToken(),e+=", sessionValidityTimestamp:"+g.formatTimestamp(g.getBrowserSessionValidityTimestamp()),
+e+=", lastReloadTime:"+g.formatTimestamp(g.lastReloadTime),
 e+=", sessionExpiresAt:"+g.formatTimestamp(c.AuthenticationService.getCurrentSession()&&c.AuthenticationService.getCurrentSession().getExpiresAt()),e+=", lastError:"+g.lastError},getState:function(){
 return"".concat(g.isForwardStrategy()?"F":"C"," CNT ").concat(g.reloadCounter," WTA ").concat(g.waitForAuthenticationCounter," ERR ").concat(g.errorCounter," INI ").concat(g.formatTimestamp(g.initTime,!0)," LRL ").concat(g.formatTimestamp(g.lastReloadTime,!0)," BSV ").concat(g.formatTimestamp(g.getBrowserSessionValidityTimestamp(),!0))
-},sleep:function(e){return new Promise((function(t){return setTimeout(t,e)}))},rootElementName:null,lastReloadTime:null,lastError:"",lastDiagnosticInfo:"",debugDiv:null};g.initTime=Date.now(),
-g.reloadCounter=0,g.errorCounter=0,g.waitForAuthenticationCounter=0;var y=g,v=(n(4),n(34),n(41));function b(e,t){var n="undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(!n){
-if(Array.isArray(e)||(n=function(e,t){if(!e)return;if("string"==typeof e)return _(e,t);var n=Object.prototype.toString.call(e).slice(8,-1);"Object"===n&&e.constructor&&(n=e.constructor.name)
-;if("Map"===n||"Set"===n)return Array.from(e);if("Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))return _(e,t)}(e))||t&&e&&"number"==typeof e.length){n&&(e=n)
-;var r=0,o=function(){};return{s:o,n:function(){return r>=e.length?{done:!0}:{done:!1,value:e[r++]}},e:function(e){throw e},f:o}}
+},getSessionInfo:function(){var e="[";try{var t=c.AuthenticationService.getCurrentSession();if(!t)return e+=t;var n=t.getExpiresAt();n&&(e+=" sessionExpiresAt: "+g.formatTimestamp(n)+" "),
+t.getIdentity()&&(e+=" identity: "+t.getIdentity()+" ")}catch(t){e+=" err "}finally{return e+="]"}},sleep:function(e){return new Promise((function(t){return setTimeout(t,e)}))},rootElementName:null,
+lastReloadTime:null,lastError:"",lastDiagnosticInfo:"",debugDiv:null};g.initTime=Date.now(),g.reloadCounter=0,g.errorCounter=0,g.waitForAuthenticationCounter=0;var y=g,v=(n(4),n(34),n(41))
+;function b(e,t){var n="undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(!n){if(Array.isArray(e)||(n=function(e,t){if(!e)return;if("string"==typeof e)return _(e,t)
+;var n=Object.prototype.toString.call(e).slice(8,-1);"Object"===n&&e.constructor&&(n=e.constructor.name);if("Map"===n||"Set"===n)return Array.from(e)
+;if("Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))return _(e,t)}(e))||t&&e&&"number"==typeof e.length){n&&(e=n);var r=0,o=function(){};return{s:o,n:function(){
+return r>=e.length?{done:!0}:{done:!1,value:e[r++]}},e:function(e){throw e},f:o}}
 throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var i,a=!0,s=!1;return{s:function(){
 n=n.call(e)},n:function(){var e=n.next();return a=e.done,e},e:function(e){s=!0,i=e},f:function(){try{a||null==n.return||n.return()}finally{if(s)throw i}}}}function _(e,t){
 (null==t||t>e.length)&&(t=e.length);for(var n=0,r=new Array(t);n<t;n++)r[n]=e[n];return r}var k={default:location.protocol+"//"+location.host+o.Environment.getAppBasePath(),
@@ -4600,9 +4604,9 @@ _getStatusFromError:function(e){return e&&(e.status||e.response&&e.response.stat
 ;try{for(c.s();!(o=c.n()).done;){var l=o.value;t.indexOf(l.urlPart)>=0&&(i=l.doneResponse,a=l.failResponse,
 C.info("Using debug response for urlPart ".concat(l.urlPart,": ").concat(JSON.stringify(i||a))))}}catch(e){c.e(e)}finally{c.f()}var u=function(){
 return i?Promise.resolve(i):a?Promise.reject(a):n&&n.done?s.a.Common.Calls.call(e,t,n,r):new Promise((function(o,i){s.a.Common.Calls.call(e,t,{data:n,done:o,fail:i},r)}))},d=function(){
-return y.forceReloadOnExpiredSession({waitForAuthentication:!0})},m=function(){return C.info("Sleeping ".concat(2500," during call ").concat(e," ").concat(t)),new Promise((function(e){
-return setTimeout(e,2500)}))},p=function(n){return C.warn("Next session refresh during call to ".concat(e," ").concat(t," failed, performing the call anyway. Cause: "),n),u()},f=function(n){
-var r=M._getStatusFromError(n)
+return y.forceReloadOnExpiredSession({waitForAuthentication:!0,eventName:"call"})},m=function(){return C.info("Sleeping ".concat(2500," during call ").concat(e," ").concat(t)),
+new Promise((function(e){return setTimeout(e,2500)}))},p=function(n){return C.warn("Next session refresh during call to ".concat(e," ").concat(t," failed, performing the call anyway. Cause: "),n),u()
+},f=function(n){var r=M._getStatusFromError(n)
 ;if(!M._isAuthErrorStatus(r))return C.error("Next call to ".concat(e," ").concat(t," failed with status ").concat(r,", but this is not an authentication/authorization error, so propagating the error. Cause: "),n),
 Promise.reject(n)
 ;C.warn("Next call to ".concat(e," ").concat(t," failed with status ").concat(r," - this is an authentication/authorization error, so logging out and resetting the state. Cause: "),n),
@@ -5062,9 +5066,9 @@ textBadge:Z.Css.css(cr||(cr=pr(["\n    display: flex;\n    justify-content: cent
 onPlaceHover:o.PropTypes.func,onPlaceUnhover:o.PropTypes.func,onLocationSelect:o.PropTypes.func},getDefaultProps:function(){return{places:[]}},getInitialState:function(){return{
 searchActive:Boolean(this.props.mapContext.stationFilter),places:this.props.places}},componentDidMount:function(){var e=this.props.mapContext.raiseMobileMapDisplay(this.getTagName())
 ;this.props.mapContext.setMobileMapDisplay(e||1)},componentWillUnmount:function(){this.props.mapContext.storeMobileMapDisplay(this.getTagName())},_goBackByDefault:function(){o.Environment.setRoute({
-component:o.Common.Element.create(hy,null),url:{useCase:Z.useCases.map,parameters:{}},noHistory:!1})},_handleMapSwitch:function(){
+component:o.Common.Element.create(vy,null),url:{useCase:Z.useCases.map,parameters:{}},noHistory:!1})},_handleMapSwitch:function(){
 1===this.props.mapContext.getMobileMapDisplay()?this.props.mapContext.setMobileMapDisplay(2):this.props.mapContext.setMobileMapDisplay(1)},_handleGoBackInHierarchyClick:function(){
-by.goBackInHierarchy(this.props.mapContext,this.props.spaContext.awidConfig)},_getHeader:function(){return o.Common.Element.create("div",{className:this.getClassName().listHeader()
+Cy.goBackInHierarchy(this.props.mapContext,this.props.spaContext.awidConfig)},_getHeader:function(){return o.Common.Element.create("div",{className:this.getClassName().listHeader()
 },o.Common.Element.create("div",null,o.Common.Element.create(o.Bricks.Button,{bgStyle:"transparent",onClick:this._handleGoBackInHierarchyClick
 },o.Common.Element.create(o.Bricks.Lsi,null,o.Common.Element.create(o.Bricks.Icon,{icon:Z.icons.mdiArrowLeft,tooltip:dr.getFeedbackTooltip("back")}))),o.Common.Element.create(o.Bricks.Lsi,{
 lsi:qn.placeList.listOfStations}),o.Common.Element.create(o.Bricks.Button,{bgStyle:this.state.searchActive?"filled":"transparent",onClick:this._toggleSearch
@@ -5945,7 +5949,7 @@ P.transactionGet(qs(qs(qs({},t.id&&{id:t.id}),t.code&&{code:t.code}),t.email&&{e
 _handleTransactionGetDone:function(e){this.setState({transactionGetState:z.states.ready,transaction:e.transaction})},_handleTransactionGetFail:function(e){this.setState({
 transactionGetState:z.states.error,transactionGetError:e.data})},_isValidTransaction:function(){
 return!!(this.state.transaction&&this.state.transaction.transactionState===z.transaction.state.created&&this.state.transaction.reservation&&this.state.transaction.reservation.validTo&&new Date(this.state.transaction.reservation.validTo)>new Date(Date.now()))
-},_goToTransaction:function(){var e={transactionId:this.state.transaction.id,email:this.state.transaction.userAccount.email};o.Environment.setRoute({component:o.Common.Element.create(hy,{parameters:e
+},_goToTransaction:function(){var e={transactionId:this.state.transaction.id,email:this.state.transaction.userAccount.email};o.Environment.setRoute({component:o.Common.Element.create(vy,{parameters:e
 }),url:{useCase:z.useCases.map,parameters:qs({},e)},noHistory:!0})},render:function(){if(this._isValidTransaction()){var e=this.state.transaction.reservation.validTo
 ;return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create(o.Bricks.Div,null,o.Common.Element.create(o.Bricks.Lsi,{
 lsi:kn.unfinishedTransaction.remainingTimeToFinishTransaction}),o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{
@@ -6198,7 +6202,7 @@ function t(e,t){return i.a.Common.Element.create(i.a.Common.Fragment,null,i.a.Co
 })),i.a.Common.Element.create(Ea,{type:"secondary",bgStyle:de.bgStyle.outline,onClick:a},i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:t})))}function n(){i.a.Environment.getPage().getModal().open({
 sticky:!0,stickyBackground:!0,size:de.sizes.s,header:i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:ys.transactionStart.waitForStationConnection}),
 content:i.a.Common.Element.create("div",null,i.a.Common.Element.create(i.a.Bricks.Loading,null))}),P[e.commandName](e.dtoIn).then(r).catch(o)}function r(t){e.userSignedIn||_l(t.transaction),
-i.a.Environment.getPage().getModal().close();var n={transactionId:t.transaction.id,email:e.dtoIn.email};i.a.Environment.setRoute({component:i.a.Common.Element.create(hy,{parameters:n}),url:{
+i.a.Environment.getPage().getModal().close();var n={transactionId:t.transaction.id,email:e.dtoIn.email};i.a.Environment.setRoute({component:i.a.Common.Element.create(vy,{parameters:n}),url:{
 useCase:de.useCases.map,parameters:Ul({},n)}})}function o(){i.a.Environment.getPage().getModal().open({sticky:!0,stickyBackground:!0,size:de.sizes.s,header:i.a.Common.Element.create(i.a.Bricks.Lsi,{
 lsi:ys.transactionStart.somethingWentWrong}),content:i.a.Common.Element.create("div",{className:$l()},i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:ys.transactionStart.checkConnectorConnection
 }),i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:ys.transactionStart.checkInternetConnection}),i.a.Common.Element.create("div",{className:Xl()
@@ -6214,7 +6218,7 @@ main:R.Css.css(Vl||(Vl=iu(["\n    padding: 16px;\n    background: ",";\n    disp
 text:R.Css.css(Gl||(Gl=iu(["\n    display: flex;\n    flex-direction: column;\n    flex: 1;\n    gap: 8px;\n  "]))),
 button:R.Css.css(Kl||(Kl=iu(["\n    ","\n    ","\n    margin-left: 1rem;\n    padding-left: 1rem;\n    padding-right: 1rem;\n    width: 2rem;\n    height: 2rem;\n    align-self: center;\n  "])),Ke(null===(Zl=i.a.Environment.chargeUp)||void 0===Zl||null===(Jl=Zl.colors)||void 0===Jl?void 0:Jl.primary),Ge),
 link:R.Css.css(ql||(ql=iu(["\n    white-space: nowrap;\n  "])))},mu={displayName:R.TAG+"UnfinishedTransactionAnonym"},pu=Object(ae.createVisualComponent)(ru(ru({},mu),{},{propTypes:{},defaultProps:{},
-render:function(e){var t=kl();function n(){var e={transactionId:t.id};i.a.Environment.setRoute(i.a.Common.Element.create(hy,{parameters:e}),{url:{useCase:R.useCases.map,parameters:e}})}function r(e){
+render:function(e){var t=kl();function n(){var e={transactionId:t.id};i.a.Environment.setRoute(i.a.Common.Element.create(vy,{parameters:e}),{url:{useCase:R.useCases.map,parameters:e}})}function r(e){
 return function(){return e({prompt:"registration"})}}var o=i.a.Common.VisualComponent.getAttrs(e,du.main);return t?i.a.Common.Element.create(i.a.Common.Identity,o,(function(e){
 var t,a,s,c=e.identity,l=e.login;return c?null:i.a.Common.Element.create("div",o,i.a.Common.Element.create("div",{className:du.text
 },i.a.Common.Element.create("strong",null,i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:yn.unfinishedTransactionAnonym.transactionInProcess})," ",i.a.Common.Element.create(i.a.Bricks.Link,{
@@ -6313,8 +6317,8 @@ steps:["CHARGING_POINT_SELECTION","CHARGING_PLAN_SELECTION","PAYMENT"]}});functi
 var n=null!=arguments[t]?arguments[t]:{};t%2?Hu(Object(n),!0).forEach((function(t){Vu(e,t,n[t])
 })):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Hu(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
 }))}return e}function Vu(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function Gu(e,t){return t||(t=e.slice(0)),
-Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var Ku,Zu,Ju,qu,Qu,Xu,$u,ed,td,nd=o.Common.VisualComponent.create({
-mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:Uu.TAG+"TransactionSetupHeader",classNames:{main:function(){
+Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var Ku=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{
+tagName:Uu.TAG+"TransactionSetupHeader",classNames:{main:function(){
 return Uu.Css.css(Yu||(Yu=Gu(["\n        display: flex;\n        padding: 1rem;\n        flex: 0 0 auto;\n        position: relative;\n        > button {\n          position: absolute;\n        }\n      "])))
 },steps:function(){return Uu.Css.css(Ru||(Ru=Gu(["\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        width: 100%;\n        height: 2rem;\n      "])))},
 step:function(){
@@ -6324,26 +6328,48 @@ return Uu.Css.css(Iu||(Iu=Gu(["\n        background: ",";\n        color: ",";\n
 },reachableStep:function(){return Uu.Css.css(zu||(zu=Gu(["\n        cursor: pointer;\n      "])))},unreachableStep:function(){return Uu.Css.css(Fu||(Fu=Gu([""])))}},opt:{pureRender:!0}},propTypes:{
 vuc:o.PropTypes.string,backTraceEnabled:o.PropTypes.bool,onStepChange:o.PropTypes.func,skipPaymentStep:o.PropTypes.bool},_goBackToStation:function(){
 var e={},t=o.Common.Tools.getUrlParam("stationCode"),n=o.Common.Tools.getUrlParam("sygicSessionId");t&&(e.stationCode=t),n&&(e.sygicSessionId=n),o.Environment.setRoute({
-component:o.Common.Element.create(hy,{parameters:e}),url:{useCase:Uu.useCases.map,parameters:Wu({},e)},noHistory:!1})},_isSelectedStep:function(e){return this.props.vuc===e},
+component:o.Common.Element.create(vy,{parameters:e}),url:{useCase:Uu.useCases.map,parameters:Wu({},e)},noHistory:!1})},_isSelectedStep:function(e){return this.props.vuc===e},
 _isReachableStep:function(e){return this.props.backTraceEnabled&&Uu.TransactionSetup.steps.indexOf(e)<=Uu.TransactionSetup.steps.indexOf(this.props.vuc)},_getProgress:function(){
 var e=this,t=Uu.TransactionSetup.steps;return this.props.skipPaymentStep&&(t=t.slice(0,2)),o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().steps()},t.map((function(t,n){
 var r=e._isSelectedStep(t),i=e._isReachableStep(t)||r;return o.Common.Element.create(o.Bricks.Div,{key:t,
 className:[e.getClassName().step(),r?e.getClassName().selectedStep():"",i?e.getClassName().reachableStep():e.getClassName().unreachableStep()].join(" "),mainAttrs:{onClick:function(){
 return i?e.props.onStepChange(n):void 0}}},(n+1).toString())})))},render:function(){
 return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this.props.vuc!==Uu.TransactionSetup.vuc.PAYMENT&&o.Common.Element.create(o.Bricks.Button,{bgStyle:"transparent",
-onClick:this._goBackToStation},o.Common.Element.create(o.Bricks.Icon,{icon:Uu.icons.mdiArrowLeft})),this._getProgress())}});function rd(e,t){return t||(t=e.slice(0)),
-Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var od,id,ad=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],
-statics:{tagName:Ac.TAG+"ChargingPlansList",classNames:{main:function(){return Ac.Css.css(Ku||(Ku=rd(["\n        background: white;\n      "])))},plan:function(){var e,t,n,r,i,a,s,c
-;return Ac.Css.css(Zu||(Zu=rd(["\n        display: flex;\n        align-items: center;\n        background: ",";\n        border-radius: 8px;\n        cursor: pointer;\n        padding: 0.5rem 1rem 0.5rem 0.5rem;\n        ","\n        .uu5-forms-checkbox-button.uu5-bricks-button:focus {\n          outline: none;\n        }\n        .uu5-forms-checkbox {\n          background: ",";\n          cursor: pointer;\n          border-radius: 8px;\n          display: flex;\n          justify-content: space-between;\n          align-items: flex-start;\n          padding-right: 0.5rem;\n          .uu5-forms-label {\n            width: 100%;\n            label {\n              width: 100%;\n            }\n          }\n          .uu5-forms-checkbox-button:not(.uu5-bricks-switch) {\n            border: 3px solid "," !important;\n            flex: 0 0 26px;\n            height: 26px;\n          }\n          .uu5-forms-right-wrapper {\n            padding-right: 4px;\n          }\n        }\n        .uu5-forms-checkbox-checked {\n          background: ",";\n          .uu5-forms-right-wrapper {\n            background-color: transparent !important;\n          }\n          .uu5-forms-checkbox-dot {\n            background-color: "," !important;\n            transform: scale(1.6);\n            width: 8px;\n            height: 8px;\n          }\n        }\n        > span {\n          margin: 0 1rem 0 0;\n          font-size: 2.8rem;\n          color: ",";\n          opacity: 0.5;\n          font-weight: 500;\n          line-height: 1;\n          transform: translate(0, -3px) scale(1.2);\n        }\n        &:not(:last-child) {\n          margin-bottom: 0.5rem;\n        }\n      "])),Be,o.Utils.ScreenSize.getMaxMediaQueries("xs","padding: 0.5rem 0.5rem 0.5rem 0;"),Be,null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor,null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.tertiary.backgroundColor,null===(i=o.Environment.chargeUp)||void 0===i||null===(a=i.colors)||void 0===a?void 0:a.tertiary.color,null===(s=o.Environment.chargeUp)||void 0===s||null===(c=s.colors)||void 0===c?void 0:c.primary.backgroundColor)
+onClick:this._goBackToStation},o.Common.Element.create(o.Bricks.Icon,{icon:Uu.icons.mdiArrowLeft})),this._getProgress())}});function Zu(e){
+return(Zu="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){
+return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function Ju(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,
+r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}var qu,Qu,Xu,$u,ed,td,nd,rd,od,id=new(function(){function e(){var t;!function(e,t){
+if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),this.telemetryEnabled=!1,this.maxLoggingLevel=5,this.telemetrySendInterval=1e4,this.windowErrorHandler=null,
+this.originalConsoleMethods={},this.uuAppClientTraceId=null===(t=localStorage)||void 0===t?void 0:t.getItem("uu_app_client_trace_id"),this.clientInstanceId=o.Common.Tools.generateUUID(),
+this.statesMap={}}var t,n,r;return t=e,(n=[{key:"isTelemetryEnabled",value:function(){return this.telemetryEnabled}},{key:"enableTelemetry",value:function(){var e=this;if(!this.telemetryEnabled){
+a.Environment.telemetry=!0,a.Telemetry.init({interval:1e4,useCase:"portal/logTelemetryData",includeLibraries:!0}),o.Environment.showProductionWarning=!0;var t={warn:"warning",error:"error"}
+;["warn","error"].forEach((function(n){var r=console[n];e.originalConsoleMethods[n]=r;var o=e;console[n]=function(){var e=o._prepareTelemetryData({arguments:arguments})
+;a.Telemetry[t[n]]("console-"+n,e),r.apply(console,arguments)}})),this.windowErrorHandler=window.addEventListener("error",(function(t){
+var n=t.message,r=t.source,o=t.lineno,i=t.colno,s=t.error,c=e._prepareTelemetryData({message:n,source:r,lineno:o,colno:i,error:s&&s.toString(),stackTrace:s&&s.stack})
+;a.Telemetry.error("uncaught-exception",c)})),this.telemetryEnabled=!0,console.info("Telemetry enabled")}}},{key:"disableTelemetry",value:function(){if(this.telemetryEnabled){
+for(var e in this.originalConsoleMethods)this.originalConsoleMethods.hasOwnProperty(e)&&(console[e]=this.originalConsoleMethods[e]);window.removeEventListener("error",this.windowErrorHandler),
+this.telemetryEnabled=!1,console.info("Telemetry disabled"),o.Environment.showProductionWarning=!1,a.Environment.telemetry=!1}}},{key:"error",value:function(e,t){if(this.telemetryEnabled){
+var n=this._prepareTelemetryData(t);a.Telemetry.error(e,n)}}},{key:"info",value:function(e,t){if(this.telemetryEnabled){var n=this._prepareTelemetryData(t);a.Telemetry.info(e,n)}}},{key:"warning",
+value:function(e,t){if(this.telemetryEnabled){var n=this._prepareTelemetryData(t);a.Telemetry.warning(e,n)}}},{key:"errorState",value:function(e){try{var t=Date.now(),n=this.statesMap[e]
+;if(n&&n+1e4>t)return;this.statesMap[e]=t;for(var r=arguments.length,o=new Array(r>1?r-1:0),i=1;i<r;i++)o[i-1]=arguments[i];this.error("error-state-"+e,{stateParams:o})}catch(t){
+console.log("Error occured during logging of event "+e,t)}return!0}},{key:"_cloneForLogging",value:function(e,t,n){if(!((n=n||0)>this.maxLoggingLevel)&&null!=e)for(var r in e)try{var o=e[r]
+;this._isError(o)?t[r]=o.toString()+(o.stack?" - "+o.stack:""):r.startsWith("_")||isNaN(r)&&r.toUpperCase()===r||r.startsWith("this")||t[r]||("object"===Zu(o)&&null!==o?(t[r]={},
+this._cloneForLogging(o,t[r],n+1)):"function"!=typeof o&&(t[r]=o))}catch(e){t[r]="---"}}},{key:"_isError",value:function(e){
+return!!(e&&e.constructor&&e.constructor.name&&e.constructor.name.indexOf("Error")>=0&&e.toString)}},{key:"_prepareTelemetryData",value:function(e){var t={};return this._cloneForLogging(e,t),
+t.userAgent=navigator.userAgent,t.uuAppClientTraceId=this.uuAppClientTraceId,t.clientInstanceId=this.clientInstanceId,t.uri=location.href,t}}])&&Ju(t.prototype,n),r&&Ju(t,r),e}());function ad(e,t){
+return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var sd,cd,ld=o.Common.VisualComponent.create({
+mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:Ac.TAG+"ChargingPlansList",classNames:{main:function(){
+return Ac.Css.css(qu||(qu=ad(["\n        background: white;\n      "])))},plan:function(){var e,t,n,r,i,a,s,c
+;return Ac.Css.css(Qu||(Qu=ad(["\n        display: flex;\n        align-items: center;\n        background: ",";\n        border-radius: 8px;\n        cursor: pointer;\n        padding: 0.5rem 1rem 0.5rem 0.5rem;\n        ","\n        .uu5-forms-checkbox-button.uu5-bricks-button:focus {\n          outline: none;\n        }\n        .uu5-forms-checkbox {\n          background: ",";\n          cursor: pointer;\n          border-radius: 8px;\n          display: flex;\n          justify-content: space-between;\n          align-items: flex-start;\n          padding-right: 0.5rem;\n          .uu5-forms-label {\n            width: 100%;\n            label {\n              width: 100%;\n            }\n          }\n          .uu5-forms-checkbox-button:not(.uu5-bricks-switch) {\n            border: 3px solid "," !important;\n            flex: 0 0 26px;\n            height: 26px;\n          }\n          .uu5-forms-right-wrapper {\n            padding-right: 4px;\n          }\n        }\n        .uu5-forms-checkbox-checked {\n          background: ",";\n          .uu5-forms-right-wrapper {\n            background-color: transparent !important;\n          }\n          .uu5-forms-checkbox-dot {\n            background-color: "," !important;\n            transform: scale(1.6);\n            width: 8px;\n            height: 8px;\n          }\n        }\n        > span {\n          margin: 0 1rem 0 0;\n          font-size: 2.8rem;\n          color: ",";\n          opacity: 0.5;\n          font-weight: 500;\n          line-height: 1;\n          transform: translate(0, -3px) scale(1.2);\n        }\n        &:not(:last-child) {\n          margin-bottom: 0.5rem;\n        }\n      "])),Be,o.Utils.ScreenSize.getMaxMediaQueries("xs","padding: 0.5rem 0.5rem 0.5rem 0;"),Be,null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor,null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.tertiary.backgroundColor,null===(i=o.Environment.chargeUp)||void 0===i||null===(a=i.colors)||void 0===a?void 0:a.tertiary.color,null===(s=o.Environment.chargeUp)||void 0===s||null===(c=s.colors)||void 0===c?void 0:c.primary.backgroundColor)
 },selectedPlan:function(){var e,t,n,r
-;return Ac.Css.css(Ju||(Ju=rd(["\n        background: ",";\n        color: ",";\n        > span {\n          opacity: 1;\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor,null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.tertiary.color)
+;return Ac.Css.css(Xu||(Xu=ad(["\n        background: ",";\n        color: ",";\n        > span {\n          opacity: 1;\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor,null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.tertiary.color)
 },planContent:function(){
-return Ac.Css.css(qu||(qu=rd(["\n        display: flex;\n        flex: 1;\n        justify-content: space-between;\n        align-items: center;\n        > .uu5-common-div {\n          font-size: 0.8rem;\n          display: flex;\n          flex-direction: column;\n          margin-right: 1rem;\n        }\n        > span {\n          margin-right: 1rem;\n          font-size: 0.8rem;\n        }\n        > span:last-child {\n          font-size: 1.5rem;\n          flex: 1;\n          text-align: right;\n          margin-right: 0;\n        }\n      "])))
-},specificPlanContent:function(){return Ac.Css.css(Qu||(Qu=rd(["\n        display: flex;\n        flex: 1;\n        justify-content: space-between;\n        align-items: center;\n      "])))},
-specificPrice:function(){return Ac.Css.css(Xu||(Xu=rd(["\n        text-align: right;\n        font-size: 0.8rem;\n        display: flex;\n        flex-direction: column;\n      "])))},
-specificText:function(){return Ac.Css.css($u||($u=rd(["\n        font-size: 1.5rem;\n        .uu5-bricks-icon {\n          margin-right: 5px;\n        }\n      "])))},infoIcon:function(){
-return Ac.Css.css(ed||(ed=rd(["\n        font-size: 18px;\n        margin-left: 5px;\n        color: rgba(0, 51, 76, .5);\n      "])))},infoPopover:function(){
-return Ac.Css.css(td||(td=rd(["\n        width: calc(100vw - 24px);\n        ","\n        ","\n        .uu5-bricks-popover-body {\n          display: block;\n          width: 100%;\n          padding: 12px;\n          word-break: break-word;\n        }\n      "])),o.Utils.ScreenSize.getMinMediaQueries("s","width: calc(100vw - 64px);"),o.Utils.ScreenSize.getMinMediaQueries("l","width: 372px;"))
+return Ac.Css.css($u||($u=ad(["\n        display: flex;\n        flex: 1;\n        justify-content: space-between;\n        align-items: center;\n        > .uu5-common-div {\n          font-size: 0.8rem;\n          display: flex;\n          flex-direction: column;\n          margin-right: 1rem;\n        }\n        > span {\n          margin-right: 1rem;\n          font-size: 0.8rem;\n        }\n        > span:last-child {\n          font-size: 1.5rem;\n          flex: 1;\n          text-align: right;\n          margin-right: 0;\n        }\n      "])))
+},specificPlanContent:function(){return Ac.Css.css(ed||(ed=ad(["\n        display: flex;\n        flex: 1;\n        justify-content: space-between;\n        align-items: center;\n      "])))},
+specificPrice:function(){return Ac.Css.css(td||(td=ad(["\n        text-align: right;\n        font-size: 0.8rem;\n        display: flex;\n        flex-direction: column;\n      "])))},
+specificText:function(){return Ac.Css.css(nd||(nd=ad(["\n        font-size: 1.5rem;\n        .uu5-bricks-icon {\n          margin-right: 5px;\n        }\n      "])))},infoIcon:function(){
+return Ac.Css.css(rd||(rd=ad(["\n        font-size: 18px;\n        margin-left: 5px;\n        color: rgba(0, 51, 76, .5);\n      "])))},infoPopover:function(){
+return Ac.Css.css(od||(od=ad(["\n        width: calc(100vw - 24px);\n        ","\n        ","\n        .uu5-bricks-popover-body {\n          display: block;\n          width: 100%;\n          padding: 12px;\n          word-break: break-word;\n        }\n      "])),o.Utils.ScreenSize.getMinMediaQueries("s","width: calc(100vw - 64px);"),o.Utils.ScreenSize.getMinMediaQueries("l","width: 372px;"))
 }},opt:{pureRender:!0},lsi:Xc.chargingPlansList},propTypes:{chargingPoint:o.PropTypes.shape({chargingPointId:o.PropTypes.oneOfType([o.PropTypes.number,o.PropTypes.string]),
 priceForEnergy:o.PropTypes.object,priceForChargingTime:o.PropTypes.object}).isRequired,payment:o.PropTypes.shape({selectedChargingPlan:o.PropTypes.object,paymentType:o.PropTypes.string,
 plannedAmount:o.PropTypes.number}),onPlanSelect:o.PropTypes.func,onPlanUnselect:o.PropTypes.func,stationCode:o.PropTypes.number,userGroup:o.PropTypes.string},getInitialState:function(){return{
@@ -6381,16 +6407,16 @@ return e&&e.type!==Ac.pricingPolicy.type.priceUndefined&&e.type!==Ac.pricingPoli
 ;return this.props.userGroup&&null!==(e=t.userGroupTariffMap)&&void 0!==e&&e[this.props.userGroup]&&(t=t.userGroupTariffMap[this.props.userGroup]),t},_getChild:function(){
 var e=ie.getPointPricingPolicy(this._getChargingPointPricing());if(this._isValidChargingPlan(e)){var t;switch(this.state.getChargingPlansState){case Ac.states.loading:
 t=o.Common.Element.create(o.Bricks.Loading,null);break;case Ac.states.ready:t=this._getChargingPlansMap(this.state.chargingPlans,e);break;case Ac.states.error:
-t=o.Common.Element.create(o.Bricks.Error,{content:o.Common.Element.create(o.Bricks.Lsi,{lsi:Xc.chargingPlansList.chargingPlansLoadingError})})}return t}
-return o.Common.Element.create(o.Bricks.Error,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:Xc.chargingPlansList.chargingPointInvalidPolicy}))},render:function(){var e=this
-;return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create(o.Bricks.Popover,{ref_:function(t){return e._popover=t}}),this._getChild())}}),sd=(n(375),
-o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin],statics:{tagName:Wa.TAG+"Info",classNames:{main:Wa.CSS+"info",icon:Wa.CSS+"info-icon"}},propTypes:{
+id.errorState("charging-plans-loading-error"),t=o.Common.Element.create(o.Bricks.Error,{content:o.Common.Element.create(o.Bricks.Lsi,{lsi:Xc.chargingPlansList.chargingPlansLoadingError})})}return t}
+return id.errorState("charging-point-invalid-policy"),o.Common.Element.create(o.Bricks.Error,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:Xc.chargingPlansList.chargingPointInvalidPolicy}))},
+render:function(){var e=this;return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create(o.Bricks.Popover,{ref_:function(t){return e._popover=t}}),this._getChild())}
+}),ud=(n(375),o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin],statics:{tagName:Wa.TAG+"Info",classNames:{main:Wa.CSS+"info",icon:Wa.CSS+"info-icon"}},propTypes:{
 info:o.PropTypes.object},render:function(){var e=this.getClassName();return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create(o.Bricks.Div,{className:e.icon
-},o.Common.Element.create(o.Bricks.Image,{responsive:!1,src:"assets/icons/info.svg"})),o.Common.Element.create(o.Bricks.Div,null,this.props.info))}}));function cd(e,t){return t||(t=e.slice(0)),
-Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var ld=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin],statics:{
+},o.Common.Element.create(o.Bricks.Image,{responsive:!1,src:"assets/icons/info.svg"})),o.Common.Element.create(o.Bricks.Div,null,this.props.info))}}));function dd(e,t){return t||(t=e.slice(0)),
+Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var md=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin],statics:{
 tagName:Ac.TAG+"ChargingPlan",classNames:{main:function(){
-return Ac.Css.css(od||(od=cd(["\n        display: flex;\n        flex-direction: column;\n        background: white;\n        flex: 1;\n        overflow: hidden;\n      "])))},content:function(){
-return Ac.Css.css(id||(id=cd(["\n        overflow-y: auto;\n        padding: 1rem ",";\n        ","\n        ","\n        > span {\n          font-weight: bold;\n          font-size: 1.4rem;\n          display: block;\n          text-align: center;\n          margin-bottom: 1rem;\n        }\n        > div:not(:last-child) {\n          margin-bottom: 1.5rem;\n        }\n      "])),Ve,o.Utils.ScreenSize.getMaxMediaQueries("xs","padding: 1rem ".concat(Ve," / 2;")),o.Utils.ScreenSize.getMaxMediaQueries("m","margin-bottom: 76px;"))
+return Ac.Css.css(sd||(sd=dd(["\n        display: flex;\n        flex-direction: column;\n        background: white;\n        flex: 1;\n        overflow: hidden;\n      "])))},content:function(){
+return Ac.Css.css(cd||(cd=dd(["\n        overflow-y: auto;\n        padding: 1rem ",";\n        ","\n        ","\n        > span {\n          font-weight: bold;\n          font-size: 1.4rem;\n          display: block;\n          text-align: center;\n          margin-bottom: 1rem;\n        }\n        > div:not(:last-child) {\n          margin-bottom: 1.5rem;\n        }\n      "])),Ve,o.Utils.ScreenSize.getMaxMediaQueries("xs","padding: 1rem ".concat(Ve," / 2;")),o.Utils.ScreenSize.getMaxMediaQueries("m","margin-bottom: 76px;"))
 }}},propTypes:{selectedChargingPoint:o.PropTypes.shape({stationCode:o.PropTypes.number,chargingPoint:o.PropTypes.shape({chargingPointId:o.PropTypes.oneOfType([o.PropTypes.number,o.PropTypes.string]),
 priceForEnergy:o.PropTypes.object,priceForChargingTime:o.PropTypes.object})}),selectedChargingPlan:o.PropTypes.shape({key:o.PropTypes.string,currency:o.PropTypes.string,price:o.PropTypes.number}),
 onConfirm:o.PropTypes.func,userGroup:o.PropTypes.string},getInitialState:function(){return{payment:this.props.selectedChargingPlan?{selectedChargingPlan:this.props.selectedChargingPlan,
@@ -6402,69 +6428,69 @@ var e=o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create(o.B
 ;return this.props.userGroup&&(e=o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:Xc.chargingPlan.startCharging}))),o.Common.Element.create(Ea,{
 disabled:!this._canBeConfirmed(),onClick:this._onConfirm},e)},render:function(){return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create("div",{
 className:this.getClassName("content")},o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:Xc.chargingPlan.chooseChargingPlan
-})),!this.props.userGroup&&o.Common.Element.create(sd,{info:o.Common.Element.create(o.Bricks.Lsi,{lsi:Xc.chargingPlan.info})}),o.Common.Element.create(ad,{
+})),!this.props.userGroup&&o.Common.Element.create(ud,{info:o.Common.Element.create(o.Bricks.Lsi,{lsi:Xc.chargingPlan.info})}),o.Common.Element.create(ld,{
 chargingPoint:this.props.selectedChargingPoint.chargingPoint,stationCode:this.props.selectedChargingPoint.stationCode,userGroup:this.props.userGroup,payment:this.state.payment,
-onPlanSelect:this.onChargingPlanSelect,onPlanUnselect:this.onChargingPlanUnselect})),o.Common.Element.create(ic,null,this._getPrimaryButton()))}});function ud(e,t){var n=Object.keys(e)
+onPlanSelect:this.onChargingPlanSelect,onPlanUnselect:this.onChargingPlanUnselect})),o.Common.Element.create(ic,null,this._getPrimaryButton()))}});function pd(e,t){var n=Object.keys(e)
 ;if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}
-function dd(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?ud(Object(n),!0).forEach((function(t){md(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):ud(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function md(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var pd=dd(dd({},Uu),{},{TransactionSetupChargingPoint:{
-reloadInterval:1e4}});function fd(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){
-return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function hd(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{}
-;t%2?fd(Object(n),!0).forEach((function(t){gd(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):fd(Object(n)).forEach((function(t){
-Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function gd(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}
-var yd,vd=hd(hd({},Hc),{},{transactionSetupChargingPoint:{next:{cs:"Dále",en:"Next",de:"Weiter",sk:"Ďalej",uk:"Далі",sv:"Nästa"},stationNotLoaded:{cs:"Stanici nelze načíst.",
-en:"Station can not be loaded.",de:"Ladestation kann nicht geladen werden.",sk:"Stanicu nie je možné načítať.",uk:"Станцію завантажити неможливо. ",sv:"Stationen kan inte laddas."}}});function bd(){
-return(bd=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}
-var _d,kd=Ct(nn(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin],statics:{tagName:pd.TAG+"TransactionSetupChargingPointReady",classNames:{main:function(){
-return pd.Css.css(yd||(yd=function(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}(["\n        margin: 0 -1rem;\n      "])))}}},propTypes:{
+function fd(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?pd(Object(n),!0).forEach((function(t){hd(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):pd(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function hd(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var gd=fd(fd({},Uu),{},{TransactionSetupChargingPoint:{
+reloadInterval:1e4}});function yd(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){
+return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function vd(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{}
+;t%2?yd(Object(n),!0).forEach((function(t){bd(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):yd(Object(n)).forEach((function(t){
+Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function bd(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}
+var _d,kd=vd(vd({},Hc),{},{transactionSetupChargingPoint:{next:{cs:"Dále",en:"Next",de:"Weiter",sk:"Ďalej",uk:"Далі",sv:"Nästa"},stationNotLoaded:{cs:"Stanici nelze načíst.",
+en:"Station can not be loaded.",de:"Ladestation kann nicht geladen werden.",sk:"Stanicu nie je možné načítať.",uk:"Станцію завантажити неможливо. ",sv:"Stationen kan inte laddas."}}});function Cd(){
+return(Cd=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}
+var Sd,wd=Ct(nn(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin],statics:{tagName:gd.TAG+"TransactionSetupChargingPointReady",classNames:{main:function(){
+return gd.Css.css(_d||(_d=function(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}(["\n        margin: 0 -1rem;\n      "])))}}},propTypes:{
 spaContext:o.PropTypes.object,mapContext:o.PropTypes.object,place:o.PropTypes.object,selectedChargingPoint:o.PropTypes.shape({stationCode:o.PropTypes.number,chargingPoint:o.PropTypes.shape({
 chargingPointId:o.PropTypes.oneOfType([o.PropTypes.number,o.PropTypes.string])})}),onConfirm:o.PropTypes.func,selectedPlace:o.PropTypes.object,onReload:o.PropTypes.func},getDefaultProps:function(){
 return{place:{},selectedChargingPoint:{chargingPoint:{}}}},componentDidMount:function(){this._resetReloadInterval()},componentDidUpdate:function(e){
 this.props.selectedPlace&&this.props.selectedPlace.chargingStation&&this.props.selectedPlace.chargingStation.stationCode&&this.props.selectedPlace.chargingStation.stationCode!==e.selectedPlace.chargingStation.stationCode&&(this._resetReloadInterval(),
 this._handleReload())},componentWillUnmount:function(){this._unsetReloadInterval()},_resetReloadInterval:function(){var e=this;clearInterval(this._interval),this._interval=setInterval((function(){
-return e._handleReload()}),pd.TransactionSetupChargingPoint.reloadInterval)},_unsetReloadInterval:function(){clearInterval(this._interval)},_handleReload:function(){this.props.onReload({
+return e._handleReload()}),gd.TransactionSetupChargingPoint.reloadInterval)},_unsetReloadInterval:function(){clearInterval(this._interval)},_handleReload:function(){this.props.onReload({
 stationCode:this.props.selectedPlace&&this.props.selectedPlace.chargingStation&&this.props.selectedPlace.chargingStation.stationCode})},render:function(){
-return o.Common.Element.create(zl,bd({},this.getMainPropsToPass(),{spaContext:this.props.spaContext,mapContext:this.props.mapContext,place:this.props.place,onStartCharging:this.props.onConfirm,
+return o.Common.Element.create(zl,Cd({},this.getMainPropsToPass(),{spaContext:this.props.spaContext,mapContext:this.props.mapContext,place:this.props.place,onStartCharging:this.props.onConfirm,
 selectedChargingPoint:this.props.selectedChargingPoint,email:this.props.mapContext.transaction&&this.props.mapContext.transaction.email,
-chargingControlContent:o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:vd.transactionSetupChargingPoint.next}),o.Common.Element.create(o.Bricks.Icon,{
-icon:pd.icons.right}))}))}})));function Cd(){return(Cd=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t]
-;for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}function Sd(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){
-var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function wd(e){
-for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Sd(Object(n),!0).forEach((function(t){Md(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Sd(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function Md(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Pd=o.Common.VisualComponent.create({
-mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:pd.TAG+"TransactionSetupChargingPoint",classNames:{main:function(){
-return pd.Css.css(_d||(_d=function(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))
+chargingControlContent:o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:kd.transactionSetupChargingPoint.next}),o.Common.Element.create(o.Bricks.Icon,{
+icon:gd.icons.right}))}))}})));function Md(){return(Md=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t]
+;for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}function Pd(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){
+var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function Ed(e){
+for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Pd(Object(n),!0).forEach((function(t){Ld(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Pd(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function Ld(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Od=o.Common.VisualComponent.create({
+mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:gd.TAG+"TransactionSetupChargingPoint",classNames:{main:function(){
+return gd.Css.css(Sd||(Sd=function(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))
 }(["\n        display: flex;\n        flex-direction: column;\n        padding: 0 1rem;\n        background: white;\n        position: relative;\n        overflow: hidden;\n        height: 100%;\n      "])))
 }},opt:{pureRender:!0}},propTypes:{selectedPlace:o.PropTypes.object,selectedChargingPoint:o.PropTypes.shape({stationCode:o.PropTypes.number,chargingPoint:o.PropTypes.shape({
 chargingPointId:o.PropTypes.oneOfType([o.PropTypes.number,o.PropTypes.string])})}),onConfirm:o.PropTypes.func},getDefaultProps:function(){return{selectedPlace:{},selectedChargingPoint:{
 chargingPoint:{}}}},_transformDtoOut:function(e){return e.chargingStation.fullAddress=ie.getStationFullAddress(e.chargingStation.address),
-e.chargingStation.chargingPoints=e.chargingStation.chargingPoints.map((function(e){return wd(wd({},e),{},{connectors:wd(wd({},e.connectors),{},{maxPower:ie.getConnectorsMaxPower(e.connectors)})})})),e
+e.chargingStation.chargingPoints=e.chargingStation.chargingPoints.map((function(e){return Ed(Ed({},e),{},{connectors:Ed(Ed({},e.connectors),{},{maxPower:ie.getConnectorsMaxPower(e.connectors)})})})),e
 },_getDtoIn:function(){return{stationCode:this.props.selectedPlace.chargingStation&&this.props.selectedPlace.chargingStation.stationCode}},_getChild:function(e){
-return o.Common.Element.create(Lu,Cd({},e,{errorMessageLsi:o.Common.Element.create(o.Bricks.Lsi,{lsi:vd.transactionSetupChargingPoint.stationNotLoaded})}),e.data&&o.Common.Element.create(kd,{
+return o.Common.Element.create(Lu,Md({},e,{errorMessageLsi:o.Common.Element.create(o.Bricks.Lsi,{lsi:kd.transactionSetupChargingPoint.stationNotLoaded})}),e.data&&o.Common.Element.create(wd,{
 selectedPlace:this.props.selectedPlace,place:this._transformDtoOut(e.data),selectedChargingPoint:this.props.selectedChargingPoint,onConfirm:this.props.onConfirm,onReload:e.handleReload}))},
 render:function(){return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create(Na.Provider,{pessimistic:!0,onLoad:P.placeGetStation,onReload:P.placeGetStation,
-data:this._getDtoIn()},o.Common.Element.create(Na.Consumer,null,this._getChild)))}});function Ed(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e)
-;t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function Ld(e){for(var t=1;t<arguments.length;t++){
-var n=null!=arguments[t]?arguments[t]:{};t%2?Ed(Object(n),!0).forEach((function(t){Od(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Ed(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function Od(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Td,xd=Ld(Ld({},Rs),{},{TradeTermsAgreement:{link:"#",
+data:this._getDtoIn()},o.Common.Element.create(Na.Consumer,null,this._getChild)))}});function Td(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e)
+;t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function xd(e){for(var t=1;t<arguments.length;t++){
+var n=null!=arguments[t]?arguments[t]:{};t%2?Td(Object(n),!0).forEach((function(t){jd(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Td(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function jd(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Dd,Bd=xd(xd({},Rs),{},{TradeTermsAgreement:{link:"#",
 element:"uupaymentgateway-bricks-payment-ready-form",payButton:"uupaymentgateway-bricks-button",reloadInterval:500},TransactionPayment:{reloadInterval:1500,paymentProcessTimeRequired:{minutes:0,
-seconds:10}}}),jd=n(311),Dd=n.n(jd);function Bd(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){
-return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function Ad(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{}
-;t%2?Bd(Object(n),!0).forEach((function(t){Yd(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Bd(Object(n)).forEach((function(t){
-Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function Yd(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}
-var Rd={displayName:R.TAG+"ReportIssueButton"},Id=function(){return R.Css.css(Td||(Td=function(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))
+seconds:10}}}),Ad=n(311),Yd=n.n(Ad);function Rd(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){
+return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function Id(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{}
+;t%2?Rd(Object(n),!0).forEach((function(t){Nd(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Rd(Object(n)).forEach((function(t){
+Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function Nd(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}
+var zd={displayName:R.TAG+"ReportIssueButton"},Fd=function(){return R.Css.css(Dd||(Dd=function(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))
 }(["\n        padding: 1rem ",";\n        background: white;\n        margin-top: auto;\n        transition: all 0.5s;\n        width: 100%;\n        position: relative;\n        > button {\n          padding: 1rem;\n          margin:auto;\n          &:nth-child(even) {\n            margin-top: 0.5rem;\n          }\n          > span {\n            margin: 0 0.5rem;\n          }\n        }}"])),Ve)
-};function Nd(){return i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:yn.reportIssue})}var zd=Object(ae.createVisualComponent)(Ad(Ad({},Rd),{},{propTypes:{flsBaseUri:i.a.PropTypes.string},
-defaultProps:{},render:function(e){var t=i.a.Common.VisualComponent.getAttrs(e,Id());return i.a.Common.Element.create("div",t,e.flsBaseUri?i.a.Common.Element.create(xs,{text:Nd(),asButton:!0,
+};function Ud(){return i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:yn.reportIssue})}var Hd=Object(ae.createVisualComponent)(Id(Id({},zd),{},{propTypes:{flsBaseUri:i.a.PropTypes.string},
+defaultProps:{},render:function(e){var t=i.a.Common.VisualComponent.getAttrs(e,Fd());return i.a.Common.Element.create("div",t,e.flsBaseUri?i.a.Common.Element.create(xs,{text:Ud(),asButton:!0,
 flsUri:e.flsBaseUri}):i.a.Common.Element.create(Ea,{type:"secondary",bgStyle:R.bgStyle.outline,onClick:function(){i.a.Environment.getPage().getModal().open({size:"l",
-header:i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:yn.reportIssue}),content:i.a.Common.Element.create(us,{showContactDetail:!0})})}},Nd()))}}));function Fd(e,t){var n=Object.keys(e)
+header:i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:yn.reportIssue}),content:i.a.Common.Element.create(us,{showContactDetail:!0})})}},Ud()))}}));function Wd(e,t){var n=Object.keys(e)
 ;if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}
-function Ud(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Fd(Object(n),!0).forEach((function(t){Hd(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Fd(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function Hd(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Wd,Vd,Gd,Kd,Zd,Jd,qd,Qd,Xd,$d,em,tm=Ud(Ud({},Hc),{},{
+function Vd(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Wd(Object(n),!0).forEach((function(t){Gd(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Wd(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function Gd(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Kd,Zd,Jd,qd,Qd,Xd,$d,em,tm,nm,rm,om=Vd(Vd({},Hc),{},{
 paymentMethod:{stationOwner:{cs:"Příjemce platby (vlastník stanice):",en:"Payment recipient (Station Owner):",de:"Zahlungsempfänger (Stationsinhaber):",sk:"Príjemca platby (vlastník stanice):",
 uk:"Одержувач платежу (власник станції):",sv:"Betalningsmottagare (stationsägare):"},choosePaymentMethod:{cs:"Platební metoda",en:"Payment method",de:"Zahlungsmethode",sk:"Platobná metóda",
 uk:"Спосіб оплати",sv:"Betalningsmetod"},transactionCanNotBeLoaded:{cs:"Objednávku se nepodařilo načíst.",en:"Order can not be loaded.",de:"Bestellung kann nicht geladen werden.",
@@ -6494,126 +6520,127 @@ uk:"Часове обмеження оплати замовлення минув
 cs:"Vaše objednávka byla zrušena z důvodu vypršení časového limitu pro zaplacení",en:"Your order was cancelled due to payment reservation timeout",
 de:"Ihre Bestellung wurde aufgrund eines Zahlungszeitlimits storniert",sk:"Vaša objednávka bola zrušená z dôvodu vypršania časového limitu na zaplatenie.",
 uk:"Ваше замовлення скасовано через протермінування очікування платежу ",sv:"Din beställning avbröts på grund av timeout för betalningsreservation "},timeToPay:{cs:"Čas k zaplacení",en:"Time to pay",
-de:"Zeit zu zahlen",sk:"Čas pre zaplatenie",uk:"Термін сплатності",sv:"Tid att betala"}}});function nm(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e)
-;t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function rm(e){for(var t=1;t<arguments.length;t++){
-var n=null!=arguments[t]?arguments[t]:{};t%2?nm(Object(n),!0).forEach((function(t){om(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):nm(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function om(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function im(e,t){return t||(t=e.slice(0)),
-Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var am,sm=Ct(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],
-statics:{tagName:xd.TAG+"PaymentMethodReady",classNames:{main:function(){
-return xd.Css.css(Wd||(Wd=im(["\n        display: flex;\n        flex-direction: column;\n        overflow: hidden;\n      "])))},content:function(){
-return xd.Css.css(Vd||(Vd=im(["\n        width: 100%;\n        height: 100%;\n        overflow-y: auto;\n        padding: 1rem ",";\n        ","\n      "])),Ve,o.Utils.ScreenSize.getMaxMediaQueries("m","margin-bottom: 76px;"))
+de:"Zeit zu zahlen",sk:"Čas pre zaplatenie",uk:"Термін сплатності",sv:"Tid att betala"}}});function im(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e)
+;t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function am(e){for(var t=1;t<arguments.length;t++){
+var n=null!=arguments[t]?arguments[t]:{};t%2?im(Object(n),!0).forEach((function(t){sm(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):im(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function sm(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function cm(e,t){return t||(t=e.slice(0)),
+Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var lm,um=Ct(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],
+statics:{tagName:Bd.TAG+"PaymentMethodReady",classNames:{main:function(){
+return Bd.Css.css(Kd||(Kd=cm(["\n        display: flex;\n        flex-direction: column;\n        overflow: hidden;\n      "])))},content:function(){
+return Bd.Css.css(Zd||(Zd=cm(["\n        width: 100%;\n        height: 100%;\n        overflow-y: auto;\n        padding: 1rem ",";\n        ","\n      "])),Ve,o.Utils.ScreenSize.getMaxMediaQueries("m","margin-bottom: 76px;"))
 },authorizationWarning:function(){
-return xd.Css.css(Gd||(Gd=im(["\n        background: ",";\n        padding: 16px;\n        border-radius: 8px;\n        margin-bottom: 1rem;\n        box-shadow: ",";\n      "])),Ie,Ue)},
+return Bd.Css.css(Jd||(Jd=cm(["\n        background: ",";\n        padding: 16px;\n        border-radius: 8px;\n        margin-bottom: 1rem;\n        box-shadow: ",";\n      "])),Ie,Ue)},
 terminatingTransaction:function(){
-return xd.Css.css(Kd||(Kd=im(["\n        align-items: center;\n        flex-direction: column;\n        background: #ffffff;\n        text-align: center;\n        padding: 0.5rem ",";\n        > span:first-child {\n          font-size: 14pt;\n        }\n        > div.uu5-bricks-loading {\n          margin-top: 1rem;\n        }\n      "])),Ve)
+return Bd.Css.css(qd||(qd=cm(["\n        align-items: center;\n        flex-direction: column;\n        background: #ffffff;\n        text-align: center;\n        padding: 0.5rem ",";\n        > span:first-child {\n          font-size: 14pt;\n        }\n        > div.uu5-bricks-loading {\n          margin-top: 1rem;\n        }\n      "])),Ve)
 },terminatedTransaction:function(){
-return xd.Css.css(Zd||(Zd=im(["\n        align-items: center;\n        flex-direction: column;\n        background: #ffffff;\n        text-align: center;\n        padding: 0.5rem ",";\n        > span:first-child {\n          font-size: 14pt;\n        }\n      "])),Ve)
+return Bd.Css.css(Qd||(Qd=cm(["\n        align-items: center;\n        flex-direction: column;\n        background: #ffffff;\n        text-align: center;\n        padding: 0.5rem ",";\n        > span:first-child {\n          font-size: 14pt;\n        }\n      "])),Ve)
 },modalControls:function(){var e,t,n,r
-;return xd.Css.css(Jd||(Jd=im(["\n        display: flex;\n        flex-direction: column;\n        padding: 0 1.5em;\n        .uu5-bricks-button:not(:last-child) {\n          margin-bottom: 0.5rem;\n        }\n        .uu5-bricks-button {\n          &:last-child {\n            ","\n            ","\n          }\n\n          &:first-child {\n            ","\n            ","\n            ","\n          }\n        }\n      "])),Ge,Ze(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary),Ke(null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.primary),Ge,Xe)
-},cancelled:function(){return xd.Css.css(qd||(qd=im(["\n        text-align: center;\n      "])))},timeout:function(){
-return xd.Css.css(Qd||(Qd=im(["\n        display: flex;\n        flex-direction: column;\n        justify-content: center;\n        align-items: center;\n        > span:first-child {\n          font-size: 0.6rem;\n          margin-bottom: -0.2rem;\n          margin-top: 0.2rem;\n        }\n      "])))
-},payment:function(){return xd.Css.css(Xd||(Xd=im(["\n        margin: 0 -24px;\n      "])))},cancelTransaction:function(){var e,t
-;return xd.Css.css($d||($d=im(["\n        margin-top: auto;\n        ","\n        ","\n      "])),Ge,Ze(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary))
-},stationOwner:xd.Css.css(em||(em=im(["\n        margin: auto;\n        text-align: center;\n      "])))},opt:{pureRender:!0},lsi:tm.paymentMethod},propTypes:{spaContext:o.PropTypes.object,
+;return Bd.Css.css(Xd||(Xd=cm(["\n        display: flex;\n        flex-direction: column;\n        padding: 0 1.5em;\n        .uu5-bricks-button:not(:last-child) {\n          margin-bottom: 0.5rem;\n        }\n        .uu5-bricks-button {\n          &:last-child {\n            ","\n            ","\n          }\n\n          &:first-child {\n            ","\n            ","\n            ","\n          }\n        }\n      "])),Ge,Ze(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary),Ke(null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.primary),Ge,Xe)
+},cancelled:function(){return Bd.Css.css($d||($d=cm(["\n        text-align: center;\n      "])))},timeout:function(){
+return Bd.Css.css(em||(em=cm(["\n        display: flex;\n        flex-direction: column;\n        justify-content: center;\n        align-items: center;\n        > span:first-child {\n          font-size: 0.6rem;\n          margin-bottom: -0.2rem;\n          margin-top: 0.2rem;\n        }\n      "])))
+},payment:function(){return Bd.Css.css(tm||(tm=cm(["\n        margin: 0 -24px;\n      "])))},cancelTransaction:function(){var e,t
+;return Bd.Css.css(nm||(nm=cm(["\n        margin-top: auto;\n        ","\n        ","\n      "])),Ge,Ze(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary))
+},stationOwner:Bd.Css.css(rm||(rm=cm(["\n        margin: auto;\n        text-align: center;\n      "])))},opt:{pureRender:!0},lsi:om.paymentMethod},propTypes:{spaContext:o.PropTypes.object,
 transaction:o.PropTypes.shape({id:o.PropTypes.string.isRequired,transactionState:o.PropTypes.string,chargingPlace:o.PropTypes.object,payment:o.PropTypes.shape({paymentId:o.PropTypes.string.isRequired
 }).isRequired,userAccount:o.PropTypes.shape({email:o.PropTypes.string}).isRequired,reservation:o.PropTypes.shape({validTo:o.PropTypes.string.isRequired}),uuPaymentUri:o.PropTypes.string.isRequired
 }).isRequired,paymentAuthorizationTimeOuted:o.PropTypes.bool,onReload:o.PropTypes.func.isRequired},getInitialState:function(){return{transactionReservationInvalid:!this._isValidPaymentReservation()}},
-componentDidMount:function(){if(ie.getUrlParameters().newTransaction){var e=rm({transactionId:this.props.transaction.id},this.props.transaction.userAccount.email&&{
-email:this.props.transaction.userAccount.email});o.Environment.setRoute({component:o.Common.Element.create(hy,{parameters:e}),url:{useCase:xd.useCases.map,parameters:rm({},e)},noHistory:!0})}
+componentDidMount:function(){if(ie.getUrlParameters().newTransaction){var e=am({transactionId:this.props.transaction.id},this.props.transaction.userAccount.email&&{
+email:this.props.transaction.userAccount.email});o.Environment.setRoute({component:o.Common.Element.create(vy,{parameters:e}),url:{useCase:Bd.useCases.map,parameters:am({},e)},noHistory:!0})}
 this._setPaymentReservationTimeout(),this.state.transactionReservationInvalid&&this._resetReloadInterval()},componentDidUpdate:function(){
-this.props.transaction.transactionState!==xd.transaction.state.ended&&this.props.transaction.transactionState!==xd.transaction.state.error||this._unsetReloadInterval()},
+this.props.transaction.transactionState!==Bd.transaction.state.ended&&this.props.transaction.transactionState!==Bd.transaction.state.error||this._unsetReloadInterval()},
 componentWillUnmount:function(){this._unsetReloadInterval(),this._unsetPaymentReservationTimeout()},_onBackToStation:function(){var e={stationCode:this.props.transaction.chargingPlace.stationCode}
-;return o.Environment.setRoute({component:o.Common.Element.create(hy,{parameters:e}),url:{useCase:xd.useCases.map,parameters:rm({},e)}}),this},_setPaymentReservationTimeout:function(){
+;return o.Environment.setRoute({component:o.Common.Element.create(vy,{parameters:e}),url:{useCase:Bd.useCases.map,parameters:am({},e)}}),this},_setPaymentReservationTimeout:function(){
 var e=this,t=this._getTransactionPaymentReservationTimeout()-new Date(Date.now());this._reservationTimeout=setTimeout((function(){e.setState({transactionReservationInvalid:!0},(function(){
 e._resetReloadInterval()}))}),t)},_unsetPaymentReservationTimeout:function(){clearTimeout(this._reservationTimeout)},_resetReloadInterval:function(){var e=this;clearInterval(this._interval),
-this.props.transaction.transactionState!==xd.transaction.state.ended&&this.props.transaction.transactionState!==xd.transaction.state.error&&(this._interval=setInterval((function(){
-return e.props.onReload(e.props.transaction)}),xd.TransactionPayment.reloadInterval))},_unsetReloadInterval:function(){clearInterval(this._interval)},_goBackByDefault:function(){var e={}
-;o.Environment.setRoute({component:o.Common.Element.create(hy,{parameters:e}),url:{useCase:xd.useCases.map,parameters:rm({},e)},noHistory:!1})},_cancelTransaction:function(){
+this.props.transaction.transactionState!==Bd.transaction.state.ended&&this.props.transaction.transactionState!==Bd.transaction.state.error&&(this._interval=setInterval((function(){
+return e.props.onReload(e.props.transaction)}),Bd.TransactionPayment.reloadInterval))},_unsetReloadInterval:function(){clearInterval(this._interval)},_goBackByDefault:function(){var e={}
+;o.Environment.setRoute({component:o.Common.Element.create(vy,{parameters:e}),url:{useCase:Bd.useCases.map,parameters:am({},e)},noHistory:!1})},_cancelTransaction:function(){
 o.Environment.getPage().getModal().close(),this._handleTransactionCancelReservation()},_handleTransactionCancelReservation:function(){var e=this;this.setState({
-transactionCancelReservationState:xd.states.loading},(function(){P.transactionCancelReservation({reservationId:e.props.transaction.reservation.id,
-cancellationMethod:xd.terminationMethod.paymentReservationCancelled}).then(e._handleTransactionCancelReservationDone).catch(e._handleTransactionCancelReservationFail)}))},
-_handleTransactionCancelReservationDone:function(e){this.props.spaContext.userSignedIn||Cl(this.props.transaction),this.setState({transactionCancelReservationState:xd.states.ready,
-transactionCancelReservation:e})},_handleTransactionCancelReservationFail:function(e){this.setState({transactionCancelReservationState:xd.states.error,transactionCancelReservationError:e.data})},
+transactionCancelReservationState:Bd.states.loading},(function(){P.transactionCancelReservation({reservationId:e.props.transaction.reservation.id,
+cancellationMethod:Bd.terminationMethod.paymentReservationCancelled}).then(e._handleTransactionCancelReservationDone).catch(e._handleTransactionCancelReservationFail)}))},
+_handleTransactionCancelReservationDone:function(e){this.props.spaContext.userSignedIn||Cl(this.props.transaction),this.setState({transactionCancelReservationState:Bd.states.ready,
+transactionCancelReservation:e})},_handleTransactionCancelReservationFail:function(e){this.setState({transactionCancelReservationState:Bd.states.error,transactionCancelReservationError:e.data})},
 _handleConfirm:function(){o.Environment.getPage().getModal().open({sticky:!0,stickyBackground:!0,size:"s",
 header:o.Common.Element.create(o.Bricks.Span,null,this.getLsiComponent("cancelTransactionConfirmMessage")),content:o.Common.Element.create(o.Bricks.Div,null,o.Common.Element.create(o.Bricks.Div,{
 className:this.getClassName().modalControls()},o.Common.Element.create(o.Bricks.Button,{onClick:this._cancelTransaction
-},this.getLsiComponent("cancelTransaction")),o.Common.Element.create(o.Bricks.Button,{bgStyle:xd.bgStyle.transparent,onClick:function(){return o.Environment.getPage().getModal().close()}
+},this.getLsiComponent("cancelTransaction")),o.Common.Element.create(o.Bricks.Button,{bgStyle:Bd.bgStyle.transparent,onClick:function(){return o.Environment.getPage().getModal().close()}
 },this.getLsiComponent("backToTransaction"))))})},_getTransactionPaymentReservationTimeout:function(){var e=new Date(this.props.transaction.reservation.validTo)
-;return e.setMinutes(e.getMinutes()-xd.TransactionPayment.paymentProcessTimeRequired.minutes),e.setSeconds(e.getSeconds()-xd.TransactionPayment.paymentProcessTimeRequired.seconds),e},
+;return e.setMinutes(e.getMinutes()-Bd.TransactionPayment.paymentProcessTimeRequired.minutes),e.setSeconds(e.getSeconds()-Bd.TransactionPayment.paymentProcessTimeRequired.seconds),e},
 _isValidPaymentReservation:function(){var e=new Date(Date.now());return this._getTransactionPaymentReservationTimeout()>e},_getWarningOnPreviousPaymentAuthorizationTimeout:function(){var e,t
 ;return this.props.paymentAuthorizationTimeOuted?o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().authorizationWarning
-},o.Common.Element.create(o.Bricks.Span,null,this.getLsiComponent("paymentAuthorizationTimeOutWarning")),o.Common.Element.create(o.Bricks.Span,null,this.getLsiComponent("inCaseOfAnyProblemsContact")),o.Common.Element.create(zd,{
+},o.Common.Element.create(o.Bricks.Span,null,this.getLsiComponent("paymentAuthorizationTimeOutWarning")),o.Common.Element.create(o.Bricks.Span,null,this.getLsiComponent("inCaseOfAnyProblemsContact")),o.Common.Element.create(Hd,{
 flsBaseUri:null===(e=this.props.spaContext)||void 0===e||null===(t=e.awidConfig)||void 0===t?void 0:t.flsBaseUri})):null},_getPaymentTimeout:function(){return o.Common.Element.create(o.Bricks.Div,{
 className:this.getClassName().timeout()},o.Common.Element.create(o.Bricks.Span,null,this.getLsiComponent("timeToPay")),o.Common.Element.create(Zs,{
 validTo:this._getTransactionPaymentReservationTimeout()}))},_getStationOwner:function(){
 var e,t,n=null===(e=this.props.spaContext.awidConfig.providerConfigList)||void 0===e?void 0:e[this.props.transaction.providerId]
 ;if(null!=n&&null!==(t=n.billingInformation)&&void 0!==t&&t.name)return o.Common.Element.create("div",{className:this.getClassName("stationOwner")},o.Common.Element.create(o.Bricks.Lsi,{
-lsi:tm.paymentMethod.stationOwner}),o.Common.Element.create("div",null,n.billingInformation.name))},_getChild:function(){var e,t=null,n=this.props.spaContext,r=this.getClassName()
-;if(this.state.transactionReservationInvalid)t=this.props.transaction.transactionState===xd.transaction.state.ended||this.props.transaction.transactionState===xd.transaction.state.error?o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create("div",{
+lsi:om.paymentMethod.stationOwner}),o.Common.Element.create("div",null,n.billingInformation.name))},_getChild:function(){var e,t=null,n=this.props.spaContext,r=this.getClassName()
+;if(this.state.transactionReservationInvalid)t=this.props.transaction.transactionState===Bd.transaction.state.ended||this.props.transaction.transactionState===Bd.transaction.state.error?o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create("div",{
 className:this.getClassName("content")},o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().terminatedTransaction()},o.Common.Element.create(o.Bricks.Lsi,{
-lsi:tm.paymentMethod.terminatedTransaction}))),o.Common.Element.create(ic,null,o.Common.Element.create(Ea,{type:xd.buttonTypes.secondary,onClick:this._onBackToStation
-},o.Common.Element.create(o.Bricks.Lsi,{lsi:tm.paymentMethod.goBackToStationDetail})))):o.Common.Element.create("div",{className:this.getClassName("content")},o.Common.Element.create(o.Bricks.Div,{
-className:this.getClassName().terminatingTransaction()},o.Common.Element.create(o.Bricks.Lsi,{lsi:tm.paymentMethod.terminatingTransaction
-}),o.Common.Element.create(o.Bricks.Loading,null)));else switch(this.state.transactionCancelReservationState){case xd.states.loading:t=o.Common.Element.create(o.Bricks.Loading,null);break
-;case xd.states.error:t=o.Common.Element.create(o.Bricks.Error,null,this.getLsiComponent("transactionCancelError"));break;case xd.states.ready:
+lsi:om.paymentMethod.terminatedTransaction}))),o.Common.Element.create(ic,null,o.Common.Element.create(Ea,{type:Bd.buttonTypes.secondary,onClick:this._onBackToStation
+},o.Common.Element.create(o.Bricks.Lsi,{lsi:om.paymentMethod.goBackToStationDetail})))):o.Common.Element.create("div",{className:this.getClassName("content")},o.Common.Element.create(o.Bricks.Div,{
+className:this.getClassName().terminatingTransaction()},o.Common.Element.create(o.Bricks.Lsi,{lsi:om.paymentMethod.terminatingTransaction
+}),o.Common.Element.create(o.Bricks.Loading,null)));else switch(this.state.transactionCancelReservationState){case Bd.states.loading:t=o.Common.Element.create(o.Bricks.Loading,null);break
+;case Bd.states.error:id.errorState("transaction-cancel-error"),t=o.Common.Element.create(o.Bricks.Error,null,this.getLsiComponent("transactionCancelError"));break;case Bd.states.ready:
 t=o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create(o.Bricks.Div,{className:this.getClassName("content")},o.Common.Element.create(o.Bricks.P,{
 className:this.getClassName("cancelled")
 },this.state.transactionCancelReservation.accepted?this.getLsiComponent("transactionCancelSuccess"):this.getLsiComponent("transactionCancelForbidden"))),o.Common.Element.create(ic,null,o.Common.Element.create(Ea,{
-type:xd.buttonTypes.secondary,onClick:this._onBackToStation},o.Common.Element.create(o.Bricks.Lsi,{lsi:tm.paymentMethod.goBackToStationDetail}))));break;default:
+type:Bd.buttonTypes.secondary,onClick:this._onBackToStation},o.Common.Element.create(o.Bricks.Lsi,{lsi:om.paymentMethod.goBackToStationDetail}))));break;default:
 t=o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create("div",{className:this.getClassName("content")
-},this._getWarningOnPreviousPaymentAuthorizationTimeout(),o.Common.Element.create(o.Bricks.Div,{className:r.payment()},this._getStationOwner(),o.Common.Element.create(Dd.a.Bricks.Payment,{
-environment:n.awidConfig.uuPaymentEnvironment,baseUri:this.props.transaction.uuPaymentUri,paymentId:this.props.transaction.payment.paymentId,bgStyle:xd.bgStyle.transparent,buttonBorderRadius:"100rem",
+},this._getWarningOnPreviousPaymentAuthorizationTimeout(),o.Common.Element.create(o.Bricks.Div,{className:r.payment()},this._getStationOwner(),o.Common.Element.create(Yd.a.Bricks.Payment,{
+environment:n.awidConfig.uuPaymentEnvironment,baseUri:this.props.transaction.uuPaymentUri,paymentId:this.props.transaction.payment.paymentId,bgStyle:Bd.bgStyle.transparent,buttonBorderRadius:"100rem",
 colorSchema:null===(e=o.Environment.chargeUp)||void 0===e?void 0:e.colors.paymentGatewayColorSchema})),this._getPaymentTimeout()),o.Common.Element.create(ic,null,o.Common.Element.create(Ea,{
-type:xd.buttonTypes.secondary,onClick:this._handleConfirm},o.Common.Element.create(o.Bricks.Lsi,{lsi:tm.paymentMethod.cancelTransaction}))))}return t},render:function(){
-return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this._getChild())}}));function cm(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e)
-;t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function lm(e){for(var t=1;t<arguments.length;t++){
-var n=null!=arguments[t]?arguments[t]:{};t%2?cm(Object(n),!0).forEach((function(t){um(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):cm(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function um(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var dm,mm,pm=Ct(o.Common.VisualComponent.create({
-mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:xd.TAG+"PaymentMethod",classNames:{main:function(){return xd.Css.css(am||(am=function(e,t){
+type:Bd.buttonTypes.secondary,onClick:this._handleConfirm},o.Common.Element.create(o.Bricks.Lsi,{lsi:om.paymentMethod.cancelTransaction}))))}return t},render:function(){
+return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this._getChild())}}));function dm(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e)
+;t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function mm(e){for(var t=1;t<arguments.length;t++){
+var n=null!=arguments[t]?arguments[t]:{};t%2?dm(Object(n),!0).forEach((function(t){pm(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):dm(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function pm(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var fm,hm,gm=Ct(o.Common.VisualComponent.create({
+mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:Bd.TAG+"PaymentMethod",classNames:{main:function(){return Bd.Css.css(lm||(lm=function(e,t){
 return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))
 }(["\n        display: flex;\n        flex-direction: column;\n        background: white;\n        flex: 1 0 auto;\n        position: relative;\n        height: 100%;\n        > span {\n          font-weight: bold;\n          font-size: 1.4rem;\n          display: block;\n          text-align: center;\n        }\n      "])))
-}},opt:{pureRender:!0},lsi:tm.paymentMethod},propTypes:{spaContext:o.PropTypes.object,transaction:o.PropTypes.shape({id:o.PropTypes.string.isRequired,payment:o.PropTypes.shape({
+}},opt:{pureRender:!0},lsi:om.paymentMethod},propTypes:{spaContext:o.PropTypes.object,transaction:o.PropTypes.shape({id:o.PropTypes.string.isRequired,payment:o.PropTypes.shape({
 paymentId:o.PropTypes.string.isRequired}).isRequired}),newTransaction:o.PropTypes.shape({stationCode:o.PropTypes.number.isRequired,chargingPoint:o.PropTypes.shape({
 chargingPointId:o.PropTypes.oneOfType([o.PropTypes.number,o.PropTypes.string])}).isRequired,payment:o.PropTypes.shape({paymentType:o.PropTypes.string,plannedAmount:o.PropTypes.number}).isRequired,
 email:o.PropTypes.string,phoneNumber:o.PropTypes.string}),paymentAuthorizationTimeOuted:o.PropTypes.bool,onTransactionRegister:o.PropTypes.func},componentDidMount:function(){
-this.props.transaction?this._handleTransactionGet():this._handleTransactionCreateAndOpen()},_handleTransactionGet:function(){var e=this;if(this.state.transactionGetState!==xd.states.loading){
-var t=this.props.transaction;this.setState({transactionGetState:xd.states.loading},(function(){P.transactionGet(lm(lm(lm({},t.id&&{id:t.id}),t.code&&{code:t.code
+this.props.transaction?this._handleTransactionGet():this._handleTransactionCreateAndOpen()},_handleTransactionGet:function(){var e=this;if(this.state.transactionGetState!==Bd.states.loading){
+var t=this.props.transaction;this.setState({transactionGetState:Bd.states.loading},(function(){P.transactionGet(mm(mm(mm({},t.id&&{id:t.id}),t.code&&{code:t.code
 }),t.userAccount&&t.userAccount.email&&{email:t.userAccount.email})).then(e._handleTransactionGetDone).catch(e._handleTransactionGetFail)}))}},_handleTransactionGetDone:function(e){this.setState({
-transactionGetState:xd.states.ready,transaction:e.transaction})},_handleTransactionGetFail:function(e){this.setState({transactionGetState:xd.states.error,transactionGetError:e.data})},
-_handleTransactionCreateAndOpen:function(){var e=this;if(this.state.transactionCreateAndOpenState!==xd.states.loading){var t,n=this.props.newTransaction,r={stationCode:n.stationCode,
+transactionGetState:Bd.states.ready,transaction:e.transaction})},_handleTransactionGetFail:function(e){this.setState({transactionGetState:Bd.states.error,transactionGetError:e.data})},
+_handleTransactionCreateAndOpen:function(){var e=this;if(this.state.transactionCreateAndOpenState!==Bd.states.loading){var t,n=this.props.newTransaction,r={stationCode:n.stationCode,
 chargingPointId:n.chargingPoint.chargingPointId,email:n.email,phoneNumber:n.phoneNumber,payment:{paymentType:n.payment.paymentType,plannedAmount:n.payment.plannedAmount},
 lang:o.Common.Tools.getLanguage()};null!==(t=n.payment.selectedChargingPlan)&&void 0!==t&&t.type&&(r.payment.chargingPlanType=n.payment.selectedChargingPlan.type),
-n.sygicSessionId&&(r.sygicSessionId=n.sygicSessionId),this.setState({transactionCreateAndOpenState:xd.states.loading},(function(){
+n.sygicSessionId&&(r.sygicSessionId=n.sygicSessionId),this.setState({transactionCreateAndOpenState:Bd.states.loading},(function(){
 P.transactionCreateAndOpen(r).then(e._handleTransactionCreateAndOpenDone).catch(e._handleTransactionCreateAndOpenFail)}))}},_handleTransactionCreateAndOpenDone:function(e){var t=this;this.setState({
-transactionCreateAndOpenState:xd.states.ready,transaction:e.transaction},(function(){t.props.spaContext.userSignedIn||_l(e.transaction),t.props.onTransactionRegister(t.state.transaction)}))},
-_handleTransactionCreateAndOpenFail:function(e){this.setState({transactionCreateAndOpenState:xd.states.error,transactionCreateAndOpenError:e.data})},_handleTransactionGetRefresh:function(e){var t=this
-;this.state.transactionGetRefreshState!==xd.states.loading&&this.setState({transactionGetRefreshState:xd.states.loading},(function(){P.transactionGet(lm(lm(lm({},e.id&&{id:e.id}),e.code&&{code:e.code
+transactionCreateAndOpenState:Bd.states.ready,transaction:e.transaction},(function(){t.props.spaContext.userSignedIn||_l(e.transaction),t.props.onTransactionRegister(t.state.transaction)}))},
+_handleTransactionCreateAndOpenFail:function(e){this.setState({transactionCreateAndOpenState:Bd.states.error,transactionCreateAndOpenError:e.data})},_handleTransactionGetRefresh:function(e){var t=this
+;this.state.transactionGetRefreshState!==Bd.states.loading&&this.setState({transactionGetRefreshState:Bd.states.loading},(function(){P.transactionGet(mm(mm(mm({},e.id&&{id:e.id}),e.code&&{code:e.code
 }),e.userAccount&&e.userAccount.email&&{email:e.userAccount.email})).then(t._handleTransactionGetRefreshDone).catch(t._handleTransactionGetRefreshFail)}))},
-_handleTransactionGetRefreshDone:function(e){this.setState({transactionGetRefreshState:xd.states.ready,transaction:e.transaction})},_handleTransactionGetRefreshFail:function(e){this.setState({
-transactionGetRefreshState:xd.states.error,transactionGetError:e.data})},_getChild:function(){var e;if(this.props.transaction)switch(this.state.transactionGetState){case xd.states.loading:
-e=o.Common.Element.create(o.Bricks.Loading,null);break;case xd.states.ready:e=o.Common.Element.create(sm,{transaction:this.state.transaction,
-paymentAuthorizationTimeOuted:this.props.paymentAuthorizationTimeOuted,onReload:this._handleTransactionGetRefresh});break;case xd.states.error:e=o.Common.Element.create(o.Bricks.Error,{
-content:this.getLsiComponent("transactionCanNotBeLoaded")})}else if(this.props.newTransaction)switch(this.state.transactionCreateAndOpenState){case xd.states.loading:
-e=o.Common.Element.create(o.Bricks.Loading,null);break;case xd.states.ready:e=o.Common.Element.create(sm,{transaction:this.state.transaction,
-paymentAuthorizationTimeOuted:this.props.paymentAuthorizationTimeOuted,onReload:this._handleTransactionGetRefresh});break;case xd.states.error:e=o.Common.Element.create(o.Bricks.Error,{
-content:this.getLsiComponent("transactionCanNotBeCreated")})}else e=o.Common.Element.create(o.Bricks.Error,null,this.getLsiComponent("invalidTransaction"));return e},render:function(){
-return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create(o.Bricks.Span,null,this.getLsiComponent("choosePaymentMethod")),this._getChild())}}));function fm(){
-return(fm=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}
-function hm(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),
-n.push.apply(n,r)}return n}function gm(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?hm(Object(n),!0).forEach((function(t){ym(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):hm(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function ym(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function vm(e,t){return t||(t=e.slice(0)),
-Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var bm=Ct(nn(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],
+_handleTransactionGetRefreshDone:function(e){this.setState({transactionGetRefreshState:Bd.states.ready,transaction:e.transaction})},_handleTransactionGetRefreshFail:function(e){this.setState({
+transactionGetRefreshState:Bd.states.error,transactionGetError:e.data})},_getChild:function(){var e;if(this.props.transaction)switch(this.state.transactionGetState){case Bd.states.loading:
+e=o.Common.Element.create(o.Bricks.Loading,null);break;case Bd.states.ready:e=o.Common.Element.create(um,{transaction:this.state.transaction,
+paymentAuthorizationTimeOuted:this.props.paymentAuthorizationTimeOuted,onReload:this._handleTransactionGetRefresh});break;case Bd.states.error:id.errorState("transaction-cancel-error"),
+e=o.Common.Element.create(o.Bricks.Error,{content:this.getLsiComponent("transactionCanNotBeLoaded")})}else if(this.props.newTransaction)switch(this.state.transactionCreateAndOpenState){
+case Bd.states.loading:e=o.Common.Element.create(o.Bricks.Loading,null);break;case Bd.states.ready:e=o.Common.Element.create(um,{transaction:this.state.transaction,
+paymentAuthorizationTimeOuted:this.props.paymentAuthorizationTimeOuted,onReload:this._handleTransactionGetRefresh});break;case Bd.states.error:id.errorState("transaction-cannot-be-created"),
+e=o.Common.Element.create(o.Bricks.Error,{content:this.getLsiComponent("transactionCanNotBeCreated")})}else id.errorState("invalid-transaction"),
+e=o.Common.Element.create(o.Bricks.Error,null,this.getLsiComponent("invalidTransaction"));return e},render:function(){
+return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create(o.Bricks.Span,null,this.getLsiComponent("choosePaymentMethod")),this._getChild())}}));function ym(){
+return(ym=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}
+function vm(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),
+n.push.apply(n,r)}return n}function bm(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?vm(Object(n),!0).forEach((function(t){_m(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):vm(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function _m(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function km(e,t){return t||(t=e.slice(0)),
+Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var Cm=Ct(nn(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],
 statics:{tagName:Uu.TAG+"TransactionSetup",classNames:{main:function(){
-return Uu.Css.css(dm||(dm=vm(["\n        display: flex;\n        flex-direction: column;\n        height: 100%;\n        background: white;\n        flex: 1;\n        overflow: hidden;\n      "])))},
-content:function(){return Uu.Css.css(mm||(mm=vm(["\n        display: flex;\n        flex-direction: column;\n        overflow: hidden;\n        height: 100%;\n      "])))}},opt:{pureRender:!0}},
+return Uu.Css.css(fm||(fm=km(["\n        display: flex;\n        flex-direction: column;\n        height: 100%;\n        background: white;\n        flex: 1;\n        overflow: hidden;\n      "])))},
+content:function(){return Uu.Css.css(hm||(hm=km(["\n        display: flex;\n        flex-direction: column;\n        overflow: hidden;\n        height: 100%;\n      "])))}},opt:{pureRender:!0}},
 propTypes:{mapContext:o.PropTypes.object,spaContext:o.PropTypes.object,transaction:o.PropTypes.shape({redirect:o.PropTypes.bool,id:o.PropTypes.string,payment:o.PropTypes.shape({
 paymentId:o.PropTypes.string})}),selectedPlace:o.PropTypes.object,selectedChargingPoint:o.PropTypes.shape({stationCode:o.PropTypes.number,chargingPoint:o.PropTypes.shape({
 chargingPointId:o.PropTypes.oneOfType([o.PropTypes.number,o.PropTypes.string])})}),paymentAuthorizationTimeOuted:o.PropTypes.bool,onTransactionRegister:o.PropTypes.func},getDefaultProps:function(){
 return{selectedPlace:{},selectedChargingPoint:{chargingPoint:{}},transaction:{payment:{}}}},componentDidMount:function(){this.props.mapContext.setMobileMapDisplay(0)},getInitialState:function(){
-var e=gm(gm({},this.props.transaction),this.props.selectedChargingPoint);return this.props.mapContext.sygicSessionId&&(e.sygicSessionId=this.props.mapContext.sygicSessionId),{
+var e=bm(bm({},this.props.transaction),this.props.selectedChargingPoint);return this.props.mapContext.sygicSessionId&&(e.sygicSessionId=this.props.mapContext.sygicSessionId),{
 backTraceEnabled:this._isBackTrackEnabled(),vuc:this._getVucFromProps(),transaction:e}},componentDidUpdate:function(e,t){this.state.vuc!==t.vuc&&this._toggleBackTrace(this._isBackTrackEnabled())},
 _isBackTrackEnabled:function(){var e;switch(this.state&&this.state.vuc?this.state.vuc:this._getVucFromProps()){case Uu.TransactionSetup.vuc.PAYMENT:e=!1;break
 ;case Uu.TransactionSetup.vuc.CHARGING_PLAN_SELECTION:default:e=!0}return e},_getVucFromProps:function(){
@@ -6621,11 +6648,11 @@ return this.props.transaction&&Object.prototype.hasOwnProperty.call(this.props.t
 },_toggleBackTrace:function(e){this.setState({backTraceEnabled:void 0!==e?e:!this.state.backTraceEnabled})},_nextStep:function(){var e=Uu.TransactionSetup.steps.indexOf(this.state.vuc)
 ;e>=Uu.TransactionSetup.steps.length-1||this.setState({vuc:Uu.TransactionSetup.steps[e+1]})},_prevStep:function(){var e=Uu.TransactionSetup.steps.indexOf(this.state.vuc);0===e||this.setState({
 vuc:Uu.TransactionSetup.steps[e-1]})},_setStep:function(e){this.setState({vuc:Uu.TransactionSetup.steps[e]})},_setTransactionChargingPoint:function(e,t){
-var n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{};tu(e,n.userGroup)?this._processFreeCharging(e,t,n):this.setState((function(r){return{transaction:gm(gm(gm({},r.transaction),e),{},{
+var n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{};tu(e,n.userGroup)?this._processFreeCharging(e,t,n):this.setState((function(r){return{transaction:bm(bm(bm({},r.transaction),e),{},{
 email:t},n)}}),this._nextStep)},_setTransactionChargingPlan:function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};if(t.userGroup){var n=this._getTransactionChargingPoint(),r={
 chargingPointId:n.chargingPoint.chargingPointId,stationCode:n.stationCode,chargingPlanType:e.selectedChargingPlan.type,email:this.props.spaContext.userAccount.email,lang:o.Common.Tools.getLanguage(),
 sygicSessionId:this.props.mapContext.sygicSessionId};r=Oc(r,this.props.spaContext.userAccount,t.userGroup),this._onTransactionConfirmStart(r,Uu.commandNames.transactionStartByCard)
-}else this.setState((function(t){return{transaction:gm(gm({},t.transaction),{},{payment:gm({},e)})}}),this._nextStep)},_getTransactionChargingPoint:function(){
+}else this.setState((function(t){return{transaction:bm(bm({},t.transaction),{},{payment:bm({},e)})}}),this._nextStep)},_getTransactionChargingPoint:function(){
 return this.state.transaction&&Object.prototype.hasOwnProperty.call(this.state.transaction,"stationCode")&&Object.prototype.hasOwnProperty.call(this.state.transaction,"chargingPoint")&&Object.prototype.hasOwnProperty.call(this.state.transaction.chargingPoint,"chargingPointId")?{
 stationCode:this.state.transaction.stationCode,chargingPoint:this.state.transaction.chargingPoint}:void 0},_getTransactionChargingPlan:function(){
 return Object.prototype.hasOwnProperty.call(this.state.transaction,"payment")?this.state.transaction.payment.selectedChargingPlan:void 0},_isTransactionRegistered:function(){
@@ -6636,19 +6663,19 @@ n.userGroup&&(delete(i=Oc(i,this.props.spaContext.userAccount,n.userGroup)).emai
 _onTransactionConfirmStart:function(e,t){o.Environment.getPage().getModal().open({sticky:!0,stickyBackground:!0,size:Uu.sizes.s,
 header:o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:Hc.transactionSetup.confirmStart})),content:o.Common.Element.create(eu,{dtoIn:e,commandName:t,
 userSignedIn:this.props.spaContext.userSignedIn})})},_getChild:function(){var e=this._getTransactionChargingPoint()
-;if(this.state.vuc===Uu.TransactionSetup.vuc.PAYMENT)return o.Common.Element.create(pm,fm({paymentAuthorizationTimeOuted:this.props.paymentAuthorizationTimeOuted},this._isTransactionRegistered()?{
+;if(this.state.vuc===Uu.TransactionSetup.vuc.PAYMENT)return o.Common.Element.create(gm,ym({paymentAuthorizationTimeOuted:this.props.paymentAuthorizationTimeOuted},this._isTransactionRegistered()?{
 transaction:this.state.transaction}:{newTransaction:this.state.transaction},{onTransactionRegister:this.props.onTransactionRegister}))
 ;if(this.state.vuc===Uu.TransactionSetup.vuc.CHARGING_PLAN_SELECTION){
 var t,n,r,i=Lc(null===(t=this.props.spaContext.userAccount)||void 0===t?void 0:t.userGroupMap,null===(n=this.props.selectedPlace)||void 0===n||null===(r=n.chargingStation)||void 0===r?void 0:r.stationCode,e.chargingPoint)
-;return o.Common.Element.create(ld,{selectedChargingPoint:e,selectedChargingPlan:this._getTransactionChargingPlan(),userGroup:i,onConfirm:this._setTransactionChargingPlan,
-userAccount:this.props.spaContext.userAccount,sygicSessionId:this.props.mapContext.sygicSessionId})}return o.Common.Element.create(Pd,{selectedPlace:this.props.selectedPlace,selectedChargingPoint:e,
-onConfirm:this._setTransactionChargingPoint})},render:function(){return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create(nd,{vuc:this.state.vuc,
+;return o.Common.Element.create(md,{selectedChargingPoint:e,selectedChargingPlan:this._getTransactionChargingPlan(),userGroup:i,onConfirm:this._setTransactionChargingPlan,
+userAccount:this.props.spaContext.userAccount,sygicSessionId:this.props.mapContext.sygicSessionId})}return o.Common.Element.create(Od,{selectedPlace:this.props.selectedPlace,selectedChargingPoint:e,
+onConfirm:this._setTransactionChargingPoint})},render:function(){return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create(Ku,{vuc:this.state.vuc,
 onStepChange:this._setStep,backTraceEnabled:this.state.backTraceEnabled}),o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().content()},this._getChild()))}
-}))),_m=i.a.Common.DataManager&&i.a.Common.DataManager.createContext();function km(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e)
-;t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function Cm(e){for(var t=1;t<arguments.length;t++){
-var n=null!=arguments[t]?arguments[t]:{};t%2?km(Object(n),!0).forEach((function(t){Sm(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):km(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function Sm(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var wm,Mm,Pm,Em,Lm,Om,Tm,xm,jm=Cm(Cm({},Nc),{},{transaction:{
+}))),Sm=i.a.Common.DataManager&&i.a.Common.DataManager.createContext();function wm(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e)
+;t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function Mm(e){for(var t=1;t<arguments.length;t++){
+var n=null!=arguments[t]?arguments[t]:{};t%2?wm(Object(n),!0).forEach((function(t){Pm(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):wm(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function Pm(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Em,Lm,Om,Tm,xm,jm,Dm,Bm,Am=Mm(Mm({},Nc),{},{transaction:{
 transactionLoadingFailed:{cs:"Objednávku se nepodařilo načíst.",en:"Order can not be loaded.",de:"Bestellung wurde nicht geladen.",sk:"Objednávku sa nepodarilo načítať.",
 uk:"Не вдалося завантажити замовлення. ",sv:"Fel vid orderinläsning."},somethingWentWrong:{cs:"Něco se pokazilo.",en:"Something went wrong.",de:"Etwas ist schief gelaufen.",sk:"Niečo sa pokazilo.",
 uk:"Щось пішло не так. ",sv:"Något gick fel."},reportIssue:{cs:"Nahlásit problém",en:"Report issue",sk:"Nahlásiť problém",de:"Ein Problem melden",uk:"Повідомити про проблему",sv:"Rapportera problem"}
@@ -6802,65 +6829,65 @@ uk:"Перевірте, чи правильно підключений кабе�
 transactionCode:{cs:"Číslo objednávky",en:"Order number",de:"Bestellnummer",sk:"Číslo objednávky",uk:"Номер замовлення",sv:"Beställningsnummer"},transactionCreation:{cs:"Objednávka vytvořena",
 en:"Order created",de:"Auftrag erstellt",sk:"Objednávka vytvorená",uk:"Замовлення створено",sv:"Beställning skapad"},chargingPoint:{cs:"Nabíjecí bod: %s",en:"Charging point: %s",de:"Ladepunkt: %s",
 sk:"Nabíjací bod: %s",uk:"Точка зарядки: %s",sv:"Laddningspunkt. %s "}},loadingCurrentData:{en:"Loading current data, please wait.",cs:"Načítání aktuálních dat, vyčkejte prosím.",
-de:"Aktuelle Daten werden geladen, bitte warten.",sv:"Laddar aktuell data, vänligen vänta.",sk:"Načítavanie aktuálnych údajov, počkajte, prosím.",uk:"Завантаження поточних даних, зачекайте."}}),Dm={
-testImageUrl:function(e){return new Promise((function(t,n){var r=new Image;r.addEventListener("load",t),r.addEventListener("error",n),r.src=e}))}},Bm=n.p+"assets/graphics/charging-start.png"
-;function Am(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),
-n.push.apply(n,r)}return n}function Ym(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Am(Object(n),!0).forEach((function(t){Rm(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Am(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function Rm(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function Im(e,t){return t||(t=e.slice(0)),
-Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var Nm,zm,Fm,Um,Hm,Wm,Vm,Gm,Km,Zm,Jm,qm,Qm={displayName:Fs.TAG+"TransactionStartChargingExpired"},Xm=function(){
-return Fs.Css.css(wm||(wm=Im(["\n    display: flex;\n    flex-direction: column;\n    height: 100%;\n    align-items: center;\n    flex: 1 0 auto;\n    text-align: center;\n    overflow: hidden;\n  "])))
-},$m=function(){
-return Fs.Css.css(Mm||(Mm=Im(["\n    padding: 1rem 0;\n    width: 100%;\n    height: 100%;\n    overflow-y: auto;\n    ","\n  "])),i.a.Utils.ScreenSize.getMaxMediaQueries("m","margin-bottom: 120px"))
-},ep=function(){var e,t
-;return Fs.Css.css(Pm||(Pm=Im(["\n    color: ",";\n    padding: 0 1rem;\n    font-size: 2rem;\n    font-weight: bold;\n    margin: 1rem 0;\n    text-align: center;\n  "])),null===(e=i.a.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.backgroundColor)
-},tp=function(){return Fs.Css.css(Em||(Em=Im(["\n    padding: 0 ",";\n    margin: 1rem 0;\n  "])),Ve)},np=function(){return Fs.Css.css(Lm||(Lm=Im(["\n    flex: 4\n  "])))},rp=function(){
-return Fs.Css.css(Om||(Om=Im(["\n    margin-top: 2px;\n    padding: 1rem ",";\n    display: flex;\n    background: white;\n    align-items: center;\n    justify-content: space-between;\n    flex-shrink: 0;\n    div:first-child {\n      font-weight: bold;\n      font-size: 100%;\n      display: flex;\n      flex-direction: column;\n      align-items: flex-start;\n      span:last-child {\n        font-size: 0.9rem;\n        font-weight: normal;\n      }\n      ","\n    }\n    div:last-child {\n      flex: 0 0 48px;\n      height: 48px;\n    }\n  "])),Ve,i.a.Utils.ScreenSize.getMaxMediaQueries("s","font-size: 90%; text-align:left;"))
-},op=function(){
-return Fs.Css.css(Tm||(Tm=Im(["\n    text-align: left;\n    padding: 1rem ",";\n    background: #f2f5f6;\n    .uu5-bricks-row {\n      margin-left: -8px;\n      margin-right: -8px;\n      font-size: 1rem;\n      &:not(:last-child) {\n        margin-bottom: 0.5rem;\n      }\n    }\n  "])),Ve)
-},ip=function(){
-return Fs.Css.css(xm||(xm=Im(["\n        padding: 1rem ",";\n        background: white;\n        margin-top: auto;\n        transition: all 0.5s;\n        width: 100%;\n        position: relative;\n        > button {\n          padding: 1rem;\n          margin:auto;\n          &:nth-child(even) {\n            margin-top: 0.5rem;\n          }\n          > span {\n            margin: 0 0.5rem;\n          }\n        }}"])),Ve)
-},ap=i.a.Common.Component.memo((function(){var e,t=Object(ae.useContext)(St);return i.a.Common.Element.create(i.a.Bricks.Div,{className:ip()
-},null!==(e=t.awidConfig)&&void 0!==e&&e.flsBaseUri?i.a.Common.Element.create(xs,{text:i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:jm.transaction.reportIssue}),asButton:!0
+de:"Aktuelle Daten werden geladen, bitte warten.",sv:"Laddar aktuell data, vänligen vänta.",sk:"Načítavanie aktuálnych údajov, počkajte, prosím.",uk:"Завантаження поточних даних, зачекайте."}}),Ym={
+testImageUrl:function(e){return new Promise((function(t,n){var r=new Image;r.addEventListener("load",t),r.addEventListener("error",n),r.src=e}))}},Rm=n.p+"assets/graphics/charging-start.png"
+;function Im(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),
+n.push.apply(n,r)}return n}function Nm(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Im(Object(n),!0).forEach((function(t){zm(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Im(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function zm(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function Fm(e,t){return t||(t=e.slice(0)),
+Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var Um,Hm,Wm,Vm,Gm,Km,Zm,Jm,qm,Qm,Xm,$m,ep={displayName:Fs.TAG+"TransactionStartChargingExpired"},tp=function(){
+return Fs.Css.css(Em||(Em=Fm(["\n    display: flex;\n    flex-direction: column;\n    height: 100%;\n    align-items: center;\n    flex: 1 0 auto;\n    text-align: center;\n    overflow: hidden;\n  "])))
+},np=function(){
+return Fs.Css.css(Lm||(Lm=Fm(["\n    padding: 1rem 0;\n    width: 100%;\n    height: 100%;\n    overflow-y: auto;\n    ","\n  "])),i.a.Utils.ScreenSize.getMaxMediaQueries("m","margin-bottom: 120px"))
+},rp=function(){var e,t
+;return Fs.Css.css(Om||(Om=Fm(["\n    color: ",";\n    padding: 0 1rem;\n    font-size: 2rem;\n    font-weight: bold;\n    margin: 1rem 0;\n    text-align: center;\n  "])),null===(e=i.a.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.backgroundColor)
+},op=function(){return Fs.Css.css(Tm||(Tm=Fm(["\n    padding: 0 ",";\n    margin: 1rem 0;\n  "])),Ve)},ip=function(){return Fs.Css.css(xm||(xm=Fm(["\n    flex: 4\n  "])))},ap=function(){
+return Fs.Css.css(jm||(jm=Fm(["\n    margin-top: 2px;\n    padding: 1rem ",";\n    display: flex;\n    background: white;\n    align-items: center;\n    justify-content: space-between;\n    flex-shrink: 0;\n    div:first-child {\n      font-weight: bold;\n      font-size: 100%;\n      display: flex;\n      flex-direction: column;\n      align-items: flex-start;\n      span:last-child {\n        font-size: 0.9rem;\n        font-weight: normal;\n      }\n      ","\n    }\n    div:last-child {\n      flex: 0 0 48px;\n      height: 48px;\n    }\n  "])),Ve,i.a.Utils.ScreenSize.getMaxMediaQueries("s","font-size: 90%; text-align:left;"))
+},sp=function(){
+return Fs.Css.css(Dm||(Dm=Fm(["\n    text-align: left;\n    padding: 1rem ",";\n    background: #f2f5f6;\n    .uu5-bricks-row {\n      margin-left: -8px;\n      margin-right: -8px;\n      font-size: 1rem;\n      &:not(:last-child) {\n        margin-bottom: 0.5rem;\n      }\n    }\n  "])),Ve)
+},cp=function(){
+return Fs.Css.css(Bm||(Bm=Fm(["\n        padding: 1rem ",";\n        background: white;\n        margin-top: auto;\n        transition: all 0.5s;\n        width: 100%;\n        position: relative;\n        > button {\n          padding: 1rem;\n          margin:auto;\n          &:nth-child(even) {\n            margin-top: 0.5rem;\n          }\n          > span {\n            margin: 0 0.5rem;\n          }\n        }}"])),Ve)
+},lp=i.a.Common.Component.memo((function(){var e,t=Object(ae.useContext)(St);return i.a.Common.Element.create(i.a.Bricks.Div,{className:cp()
+},null!==(e=t.awidConfig)&&void 0!==e&&e.flsBaseUri?i.a.Common.Element.create(xs,{text:i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:Am.transaction.reportIssue}),asButton:!0
 }):i.a.Common.Element.create(Ea,{type:"secondary",bgStyle:Fs.bgStyle.outline,onClick:function(){i.a.Environment.getPage().getModal().open({size:"l",header:i.a.Common.Element.create(i.a.Bricks.Lsi,{
-lsi:jm.transaction.reportIssue}),content:i.a.Common.Element.create(us,{showContactDetail:!0})})}},i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:jm.transaction.reportIssue})))
-})),sp=Object(ae.createVisualComponent)(Ym(Ym({},Qm),{},{propTypes:{transaction:i.a.PropTypes.object.isRequired,onBackToStation:i.a.PropTypes.func},defaultProps:{},render:function(e){
-var t=i.a.Common.VisualComponent.getAttrs(e,Xm());return i.a.Common.Element.create("div",t,i.a.Common.Element.create("div",{className:$m()},i.a.Common.Element.create(i.a.Bricks.Lsi,{className:ep(),
-lsi:jm.transactionStartChargingExpired.header}),i.a.Common.Element.create("div",{className:tp()},i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:jm.transactionStartChargingExpired.text
-}),i.a.Common.Element.create(ap,null)),i.a.Common.Element.create("div",{className:np()},i.a.Common.Element.create("div",{className:rp()
+lsi:Am.transaction.reportIssue}),content:i.a.Common.Element.create(us,{showContactDetail:!0})})}},i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:Am.transaction.reportIssue})))
+})),up=Object(ae.createVisualComponent)(Nm(Nm({},ep),{},{propTypes:{transaction:i.a.PropTypes.object.isRequired,onBackToStation:i.a.PropTypes.func},defaultProps:{},render:function(e){
+var t=i.a.Common.VisualComponent.getAttrs(e,tp());return i.a.Common.Element.create("div",t,i.a.Common.Element.create("div",{className:np()},i.a.Common.Element.create(i.a.Bricks.Lsi,{className:rp(),
+lsi:Am.transactionStartChargingExpired.header}),i.a.Common.Element.create("div",{className:op()},i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:Am.transactionStartChargingExpired.text
+}),i.a.Common.Element.create(lp,null)),i.a.Common.Element.create("div",{className:ip()},i.a.Common.Element.create("div",{className:ap()
 },i.a.Common.Element.create("div",null,i.a.Common.Element.create("span",null,ie.getStationFullAddress(e.transaction.chargingPlace.address)),i.a.Common.Element.create("span",null,e.transaction.chargingPlace.connectorId&&i.a.Common.Element.create(i.a.Bricks.Lsi,{
-lsi:jm.transactionStartChargingExpired.chargingPoint,params:[e.transaction.chargingPlace.connectorId]}))),i.a.Common.Element.create(ft,{stationCode:e.transaction.chargingPlace.stationCode,
-providerId:e.transaction.providerId})),i.a.Common.Element.create("div",{className:op()},i.a.Common.Element.create(i.a.Bricks.Row,null,i.a.Common.Element.create(i.a.Bricks.Column,{colWidth:"xs-6"
-},i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:jm.transactionStartChargingExpired.transactionCode})),i.a.Common.Element.create(i.a.Bricks.Column,{colWidth:"xs-6"
+lsi:Am.transactionStartChargingExpired.chargingPoint,params:[e.transaction.chargingPlace.connectorId]}))),i.a.Common.Element.create(ft,{stationCode:e.transaction.chargingPlace.stationCode,
+providerId:e.transaction.providerId})),i.a.Common.Element.create("div",{className:sp()},i.a.Common.Element.create(i.a.Bricks.Row,null,i.a.Common.Element.create(i.a.Bricks.Column,{colWidth:"xs-6"
+},i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:Am.transactionStartChargingExpired.transactionCode})),i.a.Common.Element.create(i.a.Bricks.Column,{colWidth:"xs-6"
 },i.a.Common.Element.create(i.a.Bricks.Strong,null,e.transaction.payment.orderNumber))),i.a.Common.Element.create(i.a.Bricks.Row,null,i.a.Common.Element.create(i.a.Bricks.Column,{colWidth:"xs-6"
-},i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:jm.transactionStartChargingExpired.transactionCreation})),i.a.Common.Element.create(i.a.Bricks.Column,{colWidth:"xs-6"
+},i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:Am.transactionStartChargingExpired.transactionCreation})),i.a.Common.Element.create(i.a.Bricks.Column,{colWidth:"xs-6"
 },i.a.Common.Element.create(i.a.Bricks.Strong,null,i.a.Common.Element.create(i.a.Bricks.DateTime,{value:e.transaction.sys.cts}))))))),i.a.Common.Element.create(ic,null,i.a.Common.Element.create(Ea,{
-type:"secondary",bgStyle:Fs.bgStyle.outline,onClick:e.onBackToStation},i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:jm.transactionFinished.backToStation}))))}}));function cp(e,t){var n=Object.keys(e)
+type:"secondary",bgStyle:Fs.bgStyle.outline,onClick:e.onBackToStation},i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:Am.transactionFinished.backToStation}))))}}));function dp(e,t){var n=Object.keys(e)
 ;if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}
-function lp(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?cp(Object(n),!0).forEach((function(t){up(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):cp(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function up(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function dp(e,t){return t||(t=e.slice(0)),
-Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var mp,pp,fp,hp,gp,yp,vp,bp,_p,kp,Cp,Sp,wp,Mp,Pp,Ep=o.Common.VisualComponent.create({
+function mp(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?dp(Object(n),!0).forEach((function(t){pp(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):dp(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function pp(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function fp(e,t){return t||(t=e.slice(0)),
+Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var hp,gp,yp,vp,bp,_p,kp,Cp,Sp,wp,Mp,Pp,Ep,Lp,Op,Tp=o.Common.VisualComponent.create({
 mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:Fs.TAG+"TransactionStart",classNames:{main:function(){
-return Fs.Css.css(Nm||(Nm=dp(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        flex: 1;\n        text-align: center;\n        overflow: hidden;\n        height: 100%;\n      "])))
+return Fs.Css.css(Um||(Um=fp(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        flex: 1;\n        text-align: center;\n        overflow: hidden;\n        height: 100%;\n      "])))
 },content:function(){
-return Fs.Css.css(zm||(zm=dp(["\n        overflow-y: auto;\n        width: 100%;\n        height: 100%;\n        padding: 1rem ",";\n        > div,\n        > span {\n          width: 100%;\n          margin-bottom: 1rem;\n        }\n        ","\n      "])),Ve,o.Utils.ScreenSize.getMaxMediaQueries("m","margin-bottom: 120px;"))
-},label:function(){return Fs.Css.css(Fm||(Fm=dp(["\n        font-size: 2rem;\n        font-weight: bold;\n        margin: 1rem 0;\n      "])))},plugInfo:function(){var e,t
-;return Fs.Css.css(Um||(Um=dp(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        padding: 0 !important;\n        > div {\n          margin-top: 5rem;\n          margin-bottom: 1rem;\n          width: 100%;\n          padding-top: 12rem;\n          background-color: ",";\n          position: relative;\n          background-size: contain;\n          background-position: center;\n          > span {\n            position: absolute;\n            top: 0;\n            right: 0;\n            left: 0;\n            background: ",";\n            border-radius: 100%;\n            width: 5rem;\n            height: 5rem;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            margin: 0 auto;\n            font-size: 2.5rem;\n            font-weight: bold;\n            line-height: 1;\n            transform: translateY(-4rem);\n            & .uu5-bricks-icon {\n              position: absolute;\n              bottom: 0;\n              left: 0;\n              right: 0;\n              transform: translateY(1rem);\n              justify-content: center;\n              font-size: 1.8rem;\n            }\n          }\n        }\n      "])),Ae,null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor)
+return Fs.Css.css(Hm||(Hm=fp(["\n        overflow-y: auto;\n        width: 100%;\n        height: 100%;\n        padding: 1rem ",";\n        > div,\n        > span {\n          width: 100%;\n          margin-bottom: 1rem;\n        }\n        ","\n      "])),Ve,o.Utils.ScreenSize.getMaxMediaQueries("m","margin-bottom: 120px;"))
+},label:function(){return Fs.Css.css(Wm||(Wm=fp(["\n        font-size: 2rem;\n        font-weight: bold;\n        margin: 1rem 0;\n      "])))},plugInfo:function(){var e,t
+;return Fs.Css.css(Vm||(Vm=fp(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        padding: 0 !important;\n        > div {\n          margin-top: 5rem;\n          margin-bottom: 1rem;\n          width: 100%;\n          padding-top: 12rem;\n          background-color: ",";\n          position: relative;\n          background-size: contain;\n          background-position: center;\n          > span {\n            position: absolute;\n            top: 0;\n            right: 0;\n            left: 0;\n            background: ",";\n            border-radius: 100%;\n            width: 5rem;\n            height: 5rem;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            margin: 0 auto;\n            font-size: 2.5rem;\n            font-weight: bold;\n            line-height: 1;\n            transform: translateY(-4rem);\n            & .uu5-bricks-icon {\n              position: absolute;\n              bottom: 0;\n              left: 0;\n              right: 0;\n              transform: translateY(1rem);\n              justify-content: center;\n              font-size: 1.8rem;\n            }\n          }\n        }\n      "])),Ae,null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor)
 },timeout:function(){
-return Fs.Css.css(Hm||(Hm=dp(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        > span:first-child {\n          font-size: 2.5rem;\n        }\n        > span:last-child {\n          margin-top: -8px;\n          font-size: 80%;\n        }\n      "])))
+return Fs.Css.css(Gm||(Gm=fp(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        > span:first-child {\n          font-size: 2.5rem;\n        }\n        > span:last-child {\n          margin-top: -8px;\n          font-size: 80%;\n        }\n      "])))
 },controls:function(){
-return Fs.Css.css(Wm||(Wm=dp(["\n        margin-top: 1rem;\n        width: 100%;\n        display: flex;\n        flex-direction: column;\n        background: white;\n        button:not(:last-child) {\n          margin-bottom: 0.5rem;\n        }\n        ","\n      "])),o.Utils.ScreenSize.getMaxMediaQueries("m","\n          position: fixed !important;\n          left: 0;\n          bottom: 0;\n          width: 100%;\n        "))
+return Fs.Css.css(Km||(Km=fp(["\n        margin-top: 1rem;\n        width: 100%;\n        display: flex;\n        flex-direction: column;\n        background: white;\n        button:not(:last-child) {\n          margin-bottom: 0.5rem;\n        }\n        ","\n      "])),o.Utils.ScreenSize.getMaxMediaQueries("m","\n          position: fixed !important;\n          left: 0;\n          bottom: 0;\n          width: 100%;\n        "))
 },tryAgainButton:function(){var e,t
-;return Fs.Css.css(Vm||(Vm=dp(["\n        ","\n        ","\n        ","\n      "])),Ke(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary),Ge,Xe)},
+;return Fs.Css.css(Zm||(Zm=fp(["\n        ","\n        ","\n        ","\n      "])),Ke(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary),Ge,Xe)},
 backToStationButton:function(){var e,t
-;return Fs.Css.css(Gm||(Gm=dp(["\n        ","\n        ","\n      "])),Ze(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary),Ge)},modal:function(){
+;return Fs.Css.css(Jm||(Jm=fp(["\n        ","\n        ","\n      "])),Ze(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary),Ge)},modal:function(){
 var e,t
-;return Fs.Css.css(Km||(Km=dp(["\n        display: flex !important;\n        justify-content: center;\n        align-items: center;\n        .uu5-bricks-modal-dialog {\n          border-radius: 8px;\n          max-width: 400px;\n          padding: 2rem;\n          .uu5-bricks-modal-header {\n            flex-shrink: 0;\n            font-size: 1.5rem;\n            .uu5-bricks-modal-header-title {\n              font-size: 2rem;\n              font-weight: bold;\n              text-align: center;\n              color: ",";\n              width: 100%;\n            }\n          }\n          .uu5-bricks-modal-body {\n            display: flex;\n            flex-direction: column;\n            text-align: center;\n          }\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.backgroundColor)
+;return Fs.Css.css(qm||(qm=fp(["\n        display: flex !important;\n        justify-content: center;\n        align-items: center;\n        .uu5-bricks-modal-dialog {\n          border-radius: 8px;\n          max-width: 400px;\n          padding: 2rem;\n          .uu5-bricks-modal-header {\n            flex-shrink: 0;\n            font-size: 1.5rem;\n            .uu5-bricks-modal-header-title {\n              font-size: 2rem;\n              font-weight: bold;\n              text-align: center;\n              color: ",";\n              width: 100%;\n            }\n          }\n          .uu5-bricks-modal-body {\n            display: flex;\n            flex-direction: column;\n            text-align: center;\n          }\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.backgroundColor)
 },modalControls:function(){var e,t,n,r
-;return Fs.Css.css(Zm||(Zm=dp(["\n        display: flex;\n        flex-direction: column;\n        padding: 0 1.5rem;\n        button:not(:last-child) {\n          margin-bottom: 0.5rem;\n        }\n        button {\n          &:last-child {\n            ","\n            ","\n          }\n\n          &:first-child {\n            ","\n            ","\n            ","\n          }\n        }\n      "])),Ze(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary),Ge,Ke(null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.primary),Ge,Xe)
-},somethingWentWrong:function(){return Fs.Css.css(Jm||(Jm=dp(["\n        padding: 0 1.5rem;\n        display: flex;\n        flex-direction: column;\n      "])))},confirmStart:function(){
-return Fs.Css.css(qm||(qm=dp(["\n       .uu5-bricks-modal-header {\n        padding: 8px 24px !important;\n       }"])))}},opt:{pureRender:!0}},propTypes:{transaction:o.PropTypes.object.isRequired,
+;return Fs.Css.css(Qm||(Qm=fp(["\n        display: flex;\n        flex-direction: column;\n        padding: 0 1.5rem;\n        button:not(:last-child) {\n          margin-bottom: 0.5rem;\n        }\n        button {\n          &:last-child {\n            ","\n            ","\n          }\n\n          &:first-child {\n            ","\n            ","\n            ","\n          }\n        }\n      "])),Ze(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary),Ge,Ke(null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.primary),Ge,Xe)
+},somethingWentWrong:function(){return Fs.Css.css(Xm||(Xm=fp(["\n        padding: 0 1.5rem;\n        display: flex;\n        flex-direction: column;\n      "])))},confirmStart:function(){
+return Fs.Css.css($m||($m=fp(["\n       .uu5-bricks-modal-header {\n        padding: 8px 24px !important;\n       }"])))}},opt:{pureRender:!0}},propTypes:{transaction:o.PropTypes.object.isRequired,
 onTransactionStart:o.PropTypes.func,onTransactionCancelChargingReservation:o.PropTypes.func,onPaymentAuthorizationTimeout:o.PropTypes.func.isRequired,onPaymentUnpaid:o.PropTypes.func.isRequired,
 transactionStartState:o.PropTypes.string,transactionCancelReservationState:o.PropTypes.string,onForceReload:o.PropTypes.func,awidConfig:o.PropTypes.object.isRequired},getInitialState:function(){
 var e=new Date(Date.now()),t=new Date(Date.now());if(e.setMinutes(t.getMinutes()+Fs.TransactionStart.paymentAuthorizationTimeout.minutes),
@@ -6874,171 +6901,171 @@ var t,n=this,r=e.cpoTransactionStartTimeout
 softTimeoutExpired:!0},(function(){return o.Environment.getPage().getModal().close()}))}),t):this.setState({softTimeoutExpired:!0},(function(){return o.Environment.getPage().getModal().close()}))},
 _handleStartChargingLoading:function(){if(this.props.transaction.transactionState===Fs.transaction.state.startCharging){var e=this._getProvider()
 ;"push"===e.txSyncType&&(this._getTransactionStartLoading(),this._handleSoftTimeout(e))}},_getProvider:function(){return this.props.awidConfig.providerConfigList[this.props.transaction.providerId]},
-_getImage:function(e){var t=this;if(null===this.state.imageUrl){var n=P.getBinaryData(e);Dm.testImageUrl(n).then((function(){t.setState({imageUrl:n})})).catch((function(){t.setState({imageUrl:Bm})}))}
+_getImage:function(e){var t=this;if(null===this.state.imageUrl){var n=P.getBinaryData(e);Ym.testImageUrl(n).then((function(){t.setState({imageUrl:n})})).catch((function(){t.setState({imageUrl:Rm})}))}
 },_resetReloadInterval:function(){var e=this;clearInterval(this._interval),this._interval=setInterval((function(){return e.props.onForceReload()}),Fs.TransactionStart.reloadInterval)},
 _unsetReloadInterval:function(){clearInterval(this._interval)},_onTransactionConfirmStart:function(){var e=this;o.Environment.getPage().getModal().open({sticky:!0,stickyBackground:!0,size:"s",
-className:this.getClassName().confirmStart(),header:o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.confirmStart})),
+className:this.getClassName().confirmStart(),header:o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.confirmStart})),
 content:o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().modalControls()},o.Common.Element.create(o.Bricks.Button,{onClick:function(){
-return!e.state.transactionStartTimeout&&e._onTransactionStart()}},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.confirm})),o.Common.Element.create(o.Bricks.Button,{bgStyle:"outline",
-onClick:function(){return o.Environment.getPage().getModal().close()}},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.cancel})))})},_onTransactionConfirmCancel:function(){
-o.Environment.getPage().getModal().open({sticky:!0,stickyBackground:!0,size:"s",header:o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.confirmCancel}),
+return!e.state.transactionStartTimeout&&e._onTransactionStart()}},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.confirm})),o.Common.Element.create(o.Bricks.Button,{bgStyle:"outline",
+onClick:function(){return o.Environment.getPage().getModal().close()}},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.cancel})))})},_onTransactionConfirmCancel:function(){
+o.Environment.getPage().getModal().open({sticky:!0,stickyBackground:!0,size:"s",header:o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.confirmCancel}),
 content:o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().modalControls()},o.Common.Element.create(o.Bricks.Button,{onClick:this._onTransactionCancel
-},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.yes})),o.Common.Element.create(o.Bricks.Button,{bgStyle:"outline",onClick:function(){return o.Environment.getPage().getModal().close()}
-},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.no})))})},_onTransactionStart:function(){this.props.onTransactionStart(),this._getTransactionStartLoading();var e=this._getProvider()
+},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.yes})),o.Common.Element.create(o.Bricks.Button,{bgStyle:"outline",onClick:function(){return o.Environment.getPage().getModal().close()}
+},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.no})))})},_onTransactionStart:function(){this.props.onTransactionStart(),this._getTransactionStartLoading();var e=this._getProvider()
 ;"push"===e.txSyncType&&this._handleSoftTimeout(e)},_getTransactionStartLoading:function(){o.Environment.getPage().getModal().open({sticky:!0,stickyBackground:!0,size:"s",
-header:o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.waitForStationConnection}),content:o.Common.Element.create(o.Bricks.Div,null,o.Common.Element.create(o.Bricks.Loading,null))})},
+header:o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.waitForStationConnection}),content:o.Common.Element.create(o.Bricks.Div,null,o.Common.Element.create(o.Bricks.Loading,null))})},
 _onTransactionCancel:function(){this.props.onTransactionCancelChargingReservation(),o.Environment.getPage().getModal().open({sticky:!0,stickyBackground:!0,size:"s",
-header:o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.waitForCancellation}),content:o.Common.Element.create(o.Bricks.Div,null,o.Common.Element.create(o.Bricks.Loading,null))})},
-_backToStation:function(){var e={stationCode:this.props.transaction.chargingPlace.stationCode};o.Environment.setRoute({component:o.Common.Element.create(hy,{parameters:e}),url:{
-useCase:Fs.useCases.map,parameters:lp({},e)},noHistory:!1})},_onTransactionStartTimeout:function(){this.setState({transactionStartTimeout:!0}),o.Environment.getPage().getModal().open({sticky:!0,
-stickyBackground:!0,size:"s",header:o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.chargingTimeout}),content:o.Common.Element.create(o.Bricks.Div,{style:"text-align: center"
-},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.transactionCancellation}),o.Common.Element.create(o.Bricks.Loading,null))})},_onTransactionStartError:function(){
-o.Environment.getPage().getModal().open({sticky:!0,stickyBackground:!0,size:"s",header:o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.somethingWentWrong}),
-content:o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().somethingWentWrong()},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.checkConnectorConnection
-}),o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.checkInternetConnection}),o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().controls()
-},o.Common.Element.create(o.Bricks.Button,{onClick:this._onTransactionStart,className:this.getClassName().tryAgainButton()},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.tryAgain
+header:o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.waitForCancellation}),content:o.Common.Element.create(o.Bricks.Div,null,o.Common.Element.create(o.Bricks.Loading,null))})},
+_backToStation:function(){var e={stationCode:this.props.transaction.chargingPlace.stationCode};o.Environment.setRoute({component:o.Common.Element.create(vy,{parameters:e}),url:{
+useCase:Fs.useCases.map,parameters:mp({},e)},noHistory:!1})},_onTransactionStartTimeout:function(){this.setState({transactionStartTimeout:!0}),o.Environment.getPage().getModal().open({sticky:!0,
+stickyBackground:!0,size:"s",header:o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.chargingTimeout}),content:o.Common.Element.create(o.Bricks.Div,{style:"text-align: center"
+},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.transactionCancellation}),o.Common.Element.create(o.Bricks.Loading,null))})},_onTransactionStartError:function(){
+o.Environment.getPage().getModal().open({sticky:!0,stickyBackground:!0,size:"s",header:o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.somethingWentWrong}),
+content:o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().somethingWentWrong()},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.checkConnectorConnection
+}),o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.checkInternetConnection}),o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().controls()
+},o.Common.Element.create(o.Bricks.Button,{onClick:this._onTransactionStart,className:this.getClassName().tryAgainButton()},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.tryAgain
 })),o.Common.Element.create(o.Bricks.Button,{onClick:this._backToStation,className:this.getClassName().backToStationButton(),bgStyle:"outline"},o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionStart.backToStation}))))})},_onPaymentAuthorizationTimeout:function(){this.props.onPaymentAuthorizationTimeout()},_getPlugInfo:function(){var e=n(253).default;return this._getImage({
-code:"PORTAL_MAIN_PAGE_LOGO"}),o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().plugInfo()},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.plugConnectorToVehicle
+lsi:Am.transactionStart.backToStation}))))})},_onPaymentAuthorizationTimeout:function(){this.props.onPaymentAuthorizationTimeout()},_getPlugInfo:function(){var e=n(253).default;return this._getImage({
+code:"PORTAL_MAIN_PAGE_LOGO"}),o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().plugInfo()},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.plugConnectorToVehicle
 }),o.Common.Element.create(o.Bricks.Div,{style:{backgroundImage:"url(".concat(this.state.imageUrl,")"),backgroundPosition:"center center",backgroundRepeat:"no-repeat",backgroundColor:"rgba(0,0,0,0)"}
 },o.Common.Element.create(o.Bricks.Span,null,this.props.transaction.chargingPlace.connectorId,o.Common.Element.create(o.Bricks.Icon,{src:e}))),o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionStart.startChargingInfo}))},_renderTimer:function(e){return o.Common.Element.create(o.Bricks.Strong,null,o.Common.Element.create(Zs,{validTo:new Date(e),
+lsi:Am.transactionStart.startChargingInfo}))},_renderTimer:function(e){return o.Common.Element.create(o.Bricks.Strong,null,o.Common.Element.create(Zs,{validTo:new Date(e),
 onTimeout:this._onTransactionStartTimeout}))},_getTimeout:function(){var e
 ;return this.props.transaction.reservation&&"CHARGING"===this.props.transaction.reservation.type&&(e=this.props.transaction.reservation.validTo),o.Common.Element.create(o.Bricks.Div,{
-className:this.getClassName().timeout()},o.Common.Element.create(o.Bricks.Span,null,e?this._renderTimer(e):"-"),o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.timeToConnect}))},
+className:this.getClassName().timeout()},o.Common.Element.create(o.Bricks.Span,null,e?this._renderTimer(e):"-"),o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.timeToConnect}))},
 _getTransactionStartButton:function(){return o.Common.Element.create(Ea,{onClick:this._onTransactionConfirmStart,
 disabled:this.state.transactionStartTimeout||["loading","ready"].includes(this.props.transactionStartState)||["loading","ready"].includes(this.props.transactionCancelReservationState)
-},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.startCharging}))},_getTransactionCancelButton:function(){return o.Common.Element.create(Ea,{onClick:this._onTransactionConfirmCancel,
+},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.startCharging}))},_getTransactionCancelButton:function(){return o.Common.Element.create(Ea,{onClick:this._onTransactionConfirmCancel,
 bgStyle:"outline",type:"secondary",disabled:["loading"].includes(this.props.transactionStartState)||["loading"].includes(this.props.transactionCancelReservationState)
-},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.cancelTransaction}))},_getStartChargingContent:function(){var e=this.getClassName()
-;return this.state.softTimeoutExpired?o.Common.Element.create(sp,{onBackToStation:this.props.onBackToStation,transaction:this.props.transaction
-}):o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create("div",{className:e.content()},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.connectVehicle,className:e.label()
+},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.cancelTransaction}))},_getStartChargingContent:function(){var e=this.getClassName()
+;return this.state.softTimeoutExpired?o.Common.Element.create(up,{onBackToStation:this.props.onBackToStation,transaction:this.props.transaction
+}):o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create("div",{className:e.content()},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.connectVehicle,className:e.label()
 }),this._getPlugInfo(),this._getTimeout()),o.Common.Element.create(ic,null,this._getTransactionStartButton(),this._getTransactionCancelButton()))},_getChild:function(){var e=this.getClassName()
-;return"CREATED"===this.props.transaction.payment.state?o.Common.Element.create("div",{className:e.content()},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.paymentAuthorization
+;return"CREATED"===this.props.transaction.payment.state?o.Common.Element.create("div",{className:e.content()},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.paymentAuthorization
 }),o.Common.Element.create(o.Bricks.Loading,null),o.Common.Element.create(o.Bricks.Div,{className:e.timeout()
 },o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Strong,null,o.Common.Element.create(Zs,{validTo:this.state.authorizationTimeout,
-onTimeout:this._onPaymentAuthorizationTimeout}))),o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStart.paymentAuthorizationWait
+onTimeout:this._onPaymentAuthorizationTimeout}))),o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStart.paymentAuthorizationWait
 }))):"AUTHORIZED"===this.props.transaction.payment.state||"POST_PAID_CONTRACT"===this.props.transaction.payment.paymentType?this._getStartChargingContent():null},render:function(){
-return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this._getChild())}}),Lp=o.Common.VisualComponent.create({
+return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this._getChild())}}),xp=o.Common.VisualComponent.create({
 mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:Ks.TAG+"Clock",opt:{pureRender:!0}},propTypes:{validFrom:o.PropTypes.object},
 componentDidMount:function(){this._tick(),this._intervalHandle=setInterval(this._tick,1e3)},componentWillUnmount:function(){clearInterval(this._intervalHandle)},_tick:function(){
 var e=q()(this.props.validFrom),t=q()(),n=q.a.duration(t.diff(e)).asMilliseconds();n=n<0?0:n,this.setState({difference:n})},render:function(){
-return o.Common.Element.create(o.Bricks.Span,this.getMainPropsToPass(),ie.getHumanizedChargingTime(this.state.difference,o.Common.Tools.getLanguage(),!0))}});function Op(e,t){return t||(t=e.slice(0)),
-Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var Tp=Ct(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],
+return o.Common.Element.create(o.Bricks.Span,this.getMainPropsToPass(),ie.getHumanizedChargingTime(this.state.difference,o.Common.Tools.getLanguage(),!0))}});function jp(e,t){return t||(t=e.slice(0)),
+Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var Dp=Ct(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],
 statics:{tagName:Fs.TAG+"TransactionInProgress",classNames:{main:function(){
-return Fs.Css.css(mp||(mp=Op(["\n        display: flex;\n        flex-direction: column;\n        height: 100%;\n        align-items: center;\n        flex: 1 0 auto;\n        text-align: center;\n        overflow: hidden;\n      "])))
+return Fs.Css.css(hp||(hp=jp(["\n        display: flex;\n        flex-direction: column;\n        height: 100%;\n        align-items: center;\n        flex: 1 0 auto;\n        text-align: center;\n        overflow: hidden;\n      "])))
 },content:function(){
-return Fs.Css.css(pp||(pp=Op(["\n        padding: 1rem ",";\n        width: 100%;\n        height: 100%;\n        overflow-y: auto;\n        > div,\n        > span {\n          width: 100%;\n          margin-bottom: 1rem;\n        }\n        ","\n      "])),Ve,o.Utils.ScreenSize.getMaxMediaQueries("m","margin-bottom: 120px;"))
-},label:function(){return Fs.Css.css(fp||(fp=Op(["\n        font-size: 2rem;\n        font-weight: bold;\n        margin: 1rem 0;\n      "])))},chargingTime:function(){var e,t
-;return Fs.Css.css(hp||(hp=Op(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        > span:nth-child(1) {\n          color: ",";\n          font-size: 1.8rem;\n          margin-bottom: -0.5rem;\n        }\n        > span:nth-child(2) {\n          font-size: 2.5rem;\n        }\n        > span:nth-child(3) {\n          margin-top: -8px;\n          font-size: 80%;\n        }\n        > span:nth-child(4) {\n          font-size: 80%;\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor)
+return Fs.Css.css(gp||(gp=jp(["\n        padding: 1rem ",";\n        width: 100%;\n        height: 100%;\n        overflow-y: auto;\n        > div,\n        > span {\n          width: 100%;\n          margin-bottom: 1rem;\n        }\n        ","\n      "])),Ve,o.Utils.ScreenSize.getMaxMediaQueries("m","margin-bottom: 120px;"))
+},label:function(){return Fs.Css.css(yp||(yp=jp(["\n        font-size: 2rem;\n        font-weight: bold;\n        margin: 1rem 0;\n      "])))},chargingTime:function(){var e,t
+;return Fs.Css.css(vp||(vp=jp(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        > span:nth-child(1) {\n          color: ",";\n          font-size: 1.8rem;\n          margin-bottom: -0.5rem;\n        }\n        > span:nth-child(2) {\n          font-size: 2.5rem;\n        }\n        > span:nth-child(3) {\n          margin-top: -8px;\n          font-size: 80%;\n        }\n        > span:nth-child(4) {\n          font-size: 80%;\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor)
 },chargingInfo:function(){var e,t
-;return Fs.Css.css(gp||(gp=Op(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        padding: 0 !important;\n        > div {\n          margin-top: 5rem;\n          margin-bottom: 1rem;\n          width: calc(100% + 3rem);\n          padding-top: 40%;\n          background-color: ",";\n          position: relative;\n          background-size: contain;\n          background-position: center;\n          > span {\n            position: absolute;\n            top: 0;\n            right: 0;\n            left: 0;\n            background: ",";\n            border-radius: 100%;\n            width: 5rem;\n            height: 5rem;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            margin: 0 auto;\n            font-size: 2.5rem;\n            font-weight: bold;\n            line-height: 1;\n            transform: translateY(-4rem);\n            & .uu5-bricks-icon {\n              position: absolute;\n              bottom: 0;\n              left: 0;\n              right: 0;\n              transform: translateY(1rem);\n              justify-content: center;\n              font-size: 1.8rem;\n            }\n          }\n        }\n      "])),Ae,null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor)
+;return Fs.Css.css(bp||(bp=jp(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        padding: 0 !important;\n        > div {\n          margin-top: 5rem;\n          margin-bottom: 1rem;\n          width: calc(100% + 3rem);\n          padding-top: 40%;\n          background-color: ",";\n          position: relative;\n          background-size: contain;\n          background-position: center;\n          > span {\n            position: absolute;\n            top: 0;\n            right: 0;\n            left: 0;\n            background: ",";\n            border-radius: 100%;\n            width: 5rem;\n            height: 5rem;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            margin: 0 auto;\n            font-size: 2.5rem;\n            font-weight: bold;\n            line-height: 1;\n            transform: translateY(-4rem);\n            & .uu5-bricks-icon {\n              position: absolute;\n              bottom: 0;\n              left: 0;\n              right: 0;\n              transform: translateY(1rem);\n              justify-content: center;\n              font-size: 1.8rem;\n            }\n          }\n        }\n      "])),Ae,null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor)
 },totalConsumption:function(){
-return Fs.Css.css(yp||(yp=Op(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        > span:first-child {\n          font-size: 2rem;\n        }\n        > span:last-child {\n          margin-top: -5px;\n          font-size: 80%;\n        }\n      "])))
+return Fs.Css.css(_p||(_p=jp(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        > span:first-child {\n          font-size: 2rem;\n        }\n        > span:last-child {\n          margin-top: -5px;\n          font-size: 80%;\n        }\n      "])))
 },totalPrice:function(){
-return Fs.Css.css(vp||(vp=Op(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        > span:first-child {\n          font-size: 2rem;\n        }\n        > span:last-child {\n          margin-top: -5px;\n          font-size: 80%;\n        }\n      "])))
+return Fs.Css.css(kp||(kp=jp(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        > span:first-child {\n          font-size: 2rem;\n        }\n        > span:last-child {\n          margin-top: -5px;\n          font-size: 80%;\n        }\n      "])))
 },controls:function(){
-return Fs.Css.css(bp||(bp=Op(["\n        margin-top: auto;\n        width: 100%;\n        padding-top: 1.5rem;\n        display: flex;\n        flex-direction: column;\n        button:not(:last-child) {\n          margin-bottom: 0.5rem;\n        }\n      "])))
+return Fs.Css.css(Cp||(Cp=jp(["\n        margin-top: auto;\n        width: 100%;\n        padding-top: 1.5rem;\n        display: flex;\n        flex-direction: column;\n        button:not(:last-child) {\n          margin-bottom: 0.5rem;\n        }\n      "])))
 },tryAgainButton:function(){var e,t
-;return Fs.Css.css(_p||(_p=Op(["\n        ","\n        ","\n        ","\n      "])),Ke(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary),Ge,Xe)},
+;return Fs.Css.css(Sp||(Sp=jp(["\n        ","\n        ","\n        ","\n      "])),Ke(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary),Ge,Xe)},
 backToChargingButton:function(){var e,t
-;return Fs.Css.css(kp||(kp=Op(["\n        ","\n        ","\n      "])),Ze(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary),Ge)},modal:function(){
+;return Fs.Css.css(wp||(wp=jp(["\n        ","\n        ","\n      "])),Ze(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary),Ge)},modal:function(){
 var e,t
-;return Fs.Css.css(Cp||(Cp=Op(["\n        .uu5-bricks-modal-dialog {\n          border-radius: 8px;\n          max-width: 400px;\n          padding: 2rem;\n          .uu5-bricks-modal-header {\n            flex-shrink: 0;\n            font-size: 1.5rem;\n            .uu5-bricks-modal-header-title {\n              font-size: 2rem;\n              font-weight: bold;\n              text-align: center;\n              color: ",";\n              width: 100%;\n            }\n          }\n          .uu5-bricks-modal-body {\n            display: flex;\n            flex-direction: column;\n            text-align: center;\n          }\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.backgroundColor)
-},modalSubText:Fs.Css.css(Sp||(Sp=Op(["\n        text-align: center;\n        margin: 0 1.5em 2em;\n      "]))),modalControls:function(){var e,t,n,r
-;return Fs.Css.css(wp||(wp=Op(["\n        display: flex;\n        flex-direction: column;\n        padding: 0 1.5rem;\n        button:not(:last-child) {\n          margin-bottom: 0.5rem;\n        }\n        button {\n          &:last-child {\n            ","\n            ","\n          }\n\n          &:first-child {\n            ","\n            ","\n            ","\n          }\n        }\n      "])),Ze(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary),Ge,Ke(null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.primary),Ge,Xe)
-},somethingWentWrong:function(){return Fs.Css.css(Mp||(Mp=Op(["\n        display: flex;\n        flex-direction: column;\n      "])))},stopTransactionButton:function(){
-return Fs.Css.css(Pp||(Pp=Op(["\n        width: 100%;\n        padding: 1rem ",";\n        margin-top: 40px;\n        button {\n          width: 100%;\n        }\n      "])),Ve)}},opt:{pureRender:!0}
+;return Fs.Css.css(Mp||(Mp=jp(["\n        .uu5-bricks-modal-dialog {\n          border-radius: 8px;\n          max-width: 400px;\n          padding: 2rem;\n          .uu5-bricks-modal-header {\n            flex-shrink: 0;\n            font-size: 1.5rem;\n            .uu5-bricks-modal-header-title {\n              font-size: 2rem;\n              font-weight: bold;\n              text-align: center;\n              color: ",";\n              width: 100%;\n            }\n          }\n          .uu5-bricks-modal-body {\n            display: flex;\n            flex-direction: column;\n            text-align: center;\n          }\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.backgroundColor)
+},modalSubText:Fs.Css.css(Pp||(Pp=jp(["\n        text-align: center;\n        margin: 0 1.5em 2em;\n      "]))),modalControls:function(){var e,t,n,r
+;return Fs.Css.css(Ep||(Ep=jp(["\n        display: flex;\n        flex-direction: column;\n        padding: 0 1.5rem;\n        button:not(:last-child) {\n          margin-bottom: 0.5rem;\n        }\n        button {\n          &:last-child {\n            ","\n            ","\n          }\n\n          &:first-child {\n            ","\n            ","\n            ","\n          }\n        }\n      "])),Ze(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary),Ge,Ke(null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.primary),Ge,Xe)
+},somethingWentWrong:function(){return Fs.Css.css(Lp||(Lp=jp(["\n        display: flex;\n        flex-direction: column;\n      "])))},stopTransactionButton:function(){
+return Fs.Css.css(Op||(Op=jp(["\n        width: 100%;\n        padding: 1rem ",";\n        margin-top: 40px;\n        button {\n          width: 100%;\n        }\n      "])),Ve)}},opt:{pureRender:!0}
 },propTypes:{spaContext:o.PropTypes.object,transaction:o.PropTypes.object.isRequired,onTransactionStop:o.PropTypes.func,transactionStopState:o.PropTypes.string,transactionStopError:o.PropTypes.object,
 onForceReload:o.PropTypes.func,onContinueOnStopError:o.PropTypes.func},getInitialState:function(){return{timerDone:!1,imageUrl:null}},componentDidMount:function(){this._resetReloadInterval(),
 this._handleTransactionForAnonym()},componentDidUpdate:function(){this.props.transactionStopState===Fs.states.error&&this._onTransactionStopError()},componentWillUnmount:function(){
 o.Environment.getPage().getModal().close(),this._unsetReloadInterval()},_handleTransactionForAnonym:function(){this.props.spaContext.userSignedIn||function(e){if(localStorage){var t=kl();if(!t)return
 ;if(!Sl(t,e))return;var n={id:e.id,code:e.code,transactionState:e.transactionState};localStorage.setItem(bl,JSON.stringify(n))}}(this.props.transaction)},_getImage:function(e){var t=this
-;if(null===this.state.imageUrl){var n=P.getBinaryData(e);Dm.testImageUrl(n).then((function(){t.setState({imageUrl:n})})).catch((function(){t.setState({imageUrl:Bm})}))}},
+;if(null===this.state.imageUrl){var n=P.getBinaryData(e);Ym.testImageUrl(n).then((function(){t.setState({imageUrl:n})})).catch((function(){t.setState({imageUrl:Rm})}))}},
 _resetReloadInterval:function(){var e=this;clearInterval(this._interval),this._interval=setInterval((function(){return e.props.onForceReload()}),Fs.TransactionInProgress.reloadInterval)},
 _unsetReloadInterval:function(){clearInterval(this._interval)},_onTransactionConfirmCancel:function(){o.Environment.getPage().getModal().open({sticky:!0,stickyBackground:!0,
-header:o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionInProgress.cancelTransactionPrompt})),content:o.Common.Element.create(o.Bricks.Div,{
-className:this.getClassName().modalControls()},o.Common.Element.create(o.Bricks.Button,{onClick:this._onTransactionStop},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionInProgress.yes
+header:o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionInProgress.cancelTransactionPrompt})),content:o.Common.Element.create(o.Bricks.Div,{
+className:this.getClassName().modalControls()},o.Common.Element.create(o.Bricks.Button,{onClick:this._onTransactionStop},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionInProgress.yes
 })),o.Common.Element.create(o.Bricks.Button,{bgStyle:Fs.bgStyle.outline,onClick:function(){return o.Environment.getPage().getModal().close()}},o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionInProgress.no})))})},_onTransactionConfirmStop:function(){var e=this.getClassName();o.Environment.getPage().getModal().open({sticky:!0,stickyBackground:!0,size:Fs.sizes.s,
-header:o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionInProgress.stopTransactionPrompt})),content:o.Common.Element.create(o.Bricks.Div,{
-className:e.modal()},o.Common.Element.create(o.Bricks.P,{className:e.modalSubText,content:o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionInProgress.stopTransactionNote})
+lsi:Am.transactionInProgress.no})))})},_onTransactionConfirmStop:function(){var e=this.getClassName();o.Environment.getPage().getModal().open({sticky:!0,stickyBackground:!0,size:Fs.sizes.s,
+header:o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionInProgress.stopTransactionPrompt})),content:o.Common.Element.create(o.Bricks.Div,{
+className:e.modal()},o.Common.Element.create(o.Bricks.P,{className:e.modalSubText,content:o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionInProgress.stopTransactionNote})
 }),o.Common.Element.create(o.Bricks.Div,{className:e.modalControls()},o.Common.Element.create(o.Bricks.Button,{onClick:this._onTransactionStop},o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionInProgress.yes})),o.Common.Element.create(o.Bricks.Button,{bgStyle:Fs.bgStyle.outline,onClick:function(){return o.Environment.getPage().getModal().close()}
-},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionInProgress.no}))))})},_onTransactionStop:function(){this.props.onTransactionStop(),o.Environment.getPage().getModal().open({sticky:!0,
-stickyBackground:!0,size:Fs.sizes.s,header:o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionInProgress.waitStopTransaction})),
+lsi:Am.transactionInProgress.yes})),o.Common.Element.create(o.Bricks.Button,{bgStyle:Fs.bgStyle.outline,onClick:function(){return o.Environment.getPage().getModal().close()}
+},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionInProgress.no}))))})},_onTransactionStop:function(){this.props.onTransactionStop(),o.Environment.getPage().getModal().open({sticky:!0,
+stickyBackground:!0,size:Fs.sizes.s,header:o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionInProgress.waitStopTransaction})),
 content:o.Common.Element.create(o.Bricks.Div,null,o.Common.Element.create(o.Bricks.Loading,null))})},_onTransactionStopError:function(){var e=this,t=this.getClassName()
 ;o.Environment.getPage().getModal().open({sticky:!0,stickyBackground:!0,size:Fs.sizes.s,header:o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionInProgress.somethingWentWrong})),content:o.Common.Element.create(o.Bricks.Div,{className:t.somethingWentWrong()
-},o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionInProgress.unableToStopTransaction
-})),o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionInProgress.checkInternetConnection})),o.Common.Element.create(o.Bricks.Div,{
+lsi:Am.transactionInProgress.somethingWentWrong})),content:o.Common.Element.create(o.Bricks.Div,{className:t.somethingWentWrong()
+},o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionInProgress.unableToStopTransaction
+})),o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionInProgress.checkInternetConnection})),o.Common.Element.create(o.Bricks.Div,{
 className:t.controls()},o.Common.Element.create(o.Bricks.Button,{onClick:this._onTransactionStop,className:t.tryAgainButton()},o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionInProgress.tryAgain})),o.Common.Element.create(o.Bricks.Button,{onClick:function(){e.props.onContinueOnStopError(),o.Environment.getPage().getModal().close()},
-className:t.backToChargingButton(),bgStyle:Fs.bgStyle.outline},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionInProgress.backToCharging}))))})},_getLabel:function(e){
+lsi:Am.transactionInProgress.tryAgain})),o.Common.Element.create(o.Bricks.Button,{onClick:function(){e.props.onContinueOnStopError(),o.Environment.getPage().getModal().close()},
+className:t.backToChargingButton(),bgStyle:Fs.bgStyle.outline},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionInProgress.backToCharging}))))})},_getLabel:function(e){
 return o.Common.Element.create(o.Bricks.Span,{className:this.getClassName().label()},e)},_handleTimeout:function(){this.setState({timerDone:!0})},_getChargingTime:function(){
 var e=this.props.transaction.transactionState===Fs.transaction.state.charging?Fs.icons.flash:Fs.icons.flashOff;return o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().chargingTime()
-},o.Common.Element.create(o.Bricks.Icon,{icon:e}),o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Strong,null,o.Common.Element.create(Lp,{
-validFrom:ie.getTransactionChargingStartTime(this.props.transaction)}))),o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionInProgress.chargingTime
+},o.Common.Element.create(o.Bricks.Icon,{icon:e}),o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Strong,null,o.Common.Element.create(xp,{
+validFrom:ie.getTransactionChargingStartTime(this.props.transaction)}))),o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionInProgress.chargingTime
 })),!!this.props.transaction.chargingPlace.chargingTimeLimit&&!this.state.timerDone&&o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionInProgress.remainingTime}),": ",o.Common.Element.create(Zs,{validTo:ie.getTransactionChargingRemainingTime(this.props.transaction),humanizedFormat:!0,onTimeout:this._handleTimeout
+lsi:Am.transactionInProgress.remainingTime}),": ",o.Common.Element.create(Zs,{validTo:ie.getTransactionChargingRemainingTime(this.props.transaction),humanizedFormat:!0,onTimeout:this._handleTimeout
 })),!!this.props.transaction.chargingPlace.chargingTimeLimit&&this.state.timerDone&&o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionInProgress.chargingStopInProgress})))},_getChargingInfo:function(){var e=n(253).default;return this._getImage({code:"PORTAL_MAIN_PAGE_LOGO"}),o.Common.Element.create(o.Bricks.Div,{
+lsi:Am.transactionInProgress.chargingStopInProgress})))},_getChargingInfo:function(){var e=n(253).default;return this._getImage({code:"PORTAL_MAIN_PAGE_LOGO"}),o.Common.Element.create(o.Bricks.Div,{
 className:this.getClassName().chargingInfo()},o.Common.Element.create(o.Bricks.Div,{style:{backgroundImage:"url(".concat(this.state.imageUrl,")"),backgroundPosition:"center center",
 backgroundRepeat:"no-repeat",backgroundColor:"rgba(0,0,0,0)"}},o.Common.Element.create(o.Bricks.Span,null,this.props.transaction.chargingPlace.connectorId,o.Common.Element.create(o.Bricks.Icon,{src:e
 }))))},_getTotalConsumption:function(e){
 return this.props.transaction.charging&&this.props.transaction.charging.energy&&this.props.transaction.charging.energy.energy<100?o.Common.Element.create(o.Bricks.Div,{
 className:this.getClassName().totalConsumption()
 },o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Strong,null,ie.getLocalizedChargingInfo(ie.getTransactionTotalConsumption(this.props.transaction,e),e))),o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionInProgress.totalConsumption}))):null},_getTotalPrice:function(e){var t=this.props.transaction,n=null
+lsi:Am.transactionInProgress.totalConsumption}))):null},_getTotalPrice:function(e){var t=this.props.transaction,n=null
 ;return t.charging&&t.charging.transactionPrice&&(n=o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().totalPrice()
 },o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Strong,null,t.payment&&0===t.payment.plannedAmount?o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionInProgress.freeCharging}):ie.getLocalizedChargingInfo(ie.getTransactionTotalPrice(t,e),e))),o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionInProgress.totalPrice})))),n},_getTransactionCancelButton:function(){return o.Common.Element.create(Ea,{type:"secondary",bgStyle:Fs.bgStyle.outline,
-onClick:this._onTransactionConfirmCancel,disabled:[Fs.states.loading].includes(this.props.transactionStopState)},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionInProgress.cancelTransaction}))
+lsi:Am.transactionInProgress.freeCharging}):ie.getLocalizedChargingInfo(ie.getTransactionTotalPrice(t,e),e))),o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{
+lsi:Am.transactionInProgress.totalPrice})))),n},_getTransactionCancelButton:function(){return o.Common.Element.create(Ea,{type:"secondary",bgStyle:Fs.bgStyle.outline,
+onClick:this._onTransactionConfirmCancel,disabled:[Fs.states.loading].includes(this.props.transactionStopState)},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionInProgress.cancelTransaction}))
 },_getTransactionStopButton:function(){return o.Common.Element.create("div",{className:this.getClassName("stopTransactionButton")},o.Common.Element.create(Ea,{onClick:this._onTransactionConfirmStop,
-bgStyle:Fs.bgStyle.outline,type:"secondary",disabled:[Fs.states.loading].includes(this.props.transactionStopState)},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionInProgress.stopCharging})))
+bgStyle:Fs.bgStyle.outline,type:"secondary",disabled:[Fs.states.loading].includes(this.props.transactionStopState)},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionInProgress.stopCharging})))
 },_getChild:function(e){var t,n=this.getClassName();switch(this.props.transaction.transactionState){case Fs.transaction.state.authorized:
 t=o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create("div",{className:n.content()},this._getLabel(o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionInProgress.chargingAuthorization})),o.Common.Element.create(o.Bricks.Loading,null)),o.Common.Element.create(ic,null,this._getTransactionCancelButton()));break
+lsi:Am.transactionInProgress.chargingAuthorization})),o.Common.Element.create(o.Bricks.Loading,null)),o.Common.Element.create(ic,null,this._getTransactionCancelButton()));break
 ;case Fs.transaction.state.charging:t=o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create("div",{className:n.content()},this._getLabel(o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionInProgress.vehicleCharging
+lsi:Am.transactionInProgress.vehicleCharging
 })),this._getChargingTime(),this._getChargingInfo(),this._getTotalConsumption(e),this._getTotalPrice(e),"cpomain"!==this.props.transaction.dataSource&&this._getTransactionStopButton()));break
-;case Fs.transaction.state.stopCharging:t=o.Common.Element.create("div",{className:n.content()},this._getLabel(o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionInProgress.chargingStopInProgress
+;case Fs.transaction.state.stopCharging:t=o.Common.Element.create("div",{className:n.content()},this._getLabel(o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionInProgress.chargingStopInProgress
 })),this._getChargingTime(),this._getChargingInfo(),this._getTotalConsumption(e),this._getTotalPrice(e))}return t},render:function(){var e=this
-;return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create(o.Bricks.Lsi,null,(function(t){var n=t.language;return e._getChild(n)})))}}));function xp(e,t,n,r,o,i,a){
-try{var s=e[i](a),c=s.value}catch(e){return void n(e)}s.done?t(c):Promise.resolve(c).then(r,o)}function jp(e){return function(){var t=this,n=arguments;return new Promise((function(r,o){
-var i=e.apply(t,n);function a(e){xp(i,r,o,a,s,"next",e)}function s(e){xp(i,r,o,a,s,"throw",e)}a(void 0)}))}}function Dp(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){
-var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function Bp(e){
-for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Dp(Object(n),!0).forEach((function(t){Ap(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Dp(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function Ap(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Yp,Rp,Ip,Np,zp,Fp,Up,Hp,Wp,Vp,Gp,Kp,Zp,Jp={
-displayName:R.TAG+"TransactionInvoiceWrapper"},qp=Object(ae.createComponent)(Bp(Bp({},Jp),{},{propTypes:{transaction:o.PropTypes.object.isRequired,isInvoiceReady:o.PropTypes.bool},defaultProps:{
-transaction:{userAccount:{}},isInvoiceReady:!1},render:function(e){function t(e){return n.apply(this,arguments)}function n(){return(n=jp(regeneratorRuntime.mark((function e(t){var n
+;return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create(o.Bricks.Lsi,null,(function(t){var n=t.language;return e._getChild(n)})))}}));function Bp(e,t,n,r,o,i,a){
+try{var s=e[i](a),c=s.value}catch(e){return void n(e)}s.done?t(c):Promise.resolve(c).then(r,o)}function Ap(e){return function(){var t=this,n=arguments;return new Promise((function(r,o){
+var i=e.apply(t,n);function a(e){Bp(i,r,o,a,s,"next",e)}function s(e){Bp(i,r,o,a,s,"throw",e)}a(void 0)}))}}function Yp(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){
+var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function Rp(e){
+for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Yp(Object(n),!0).forEach((function(t){Ip(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Yp(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function Ip(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Np,zp,Fp,Up,Hp,Wp,Vp,Gp,Kp,Zp,Jp,qp,Qp,Xp={
+displayName:R.TAG+"TransactionInvoiceWrapper"},$p=Object(ae.createComponent)(Rp(Rp({},Xp),{},{propTypes:{transaction:o.PropTypes.object.isRequired,isInvoiceReady:o.PropTypes.bool},defaultProps:{
+transaction:{userAccount:{}},isInvoiceReady:!1},render:function(e){function t(e){return n.apply(this,arguments)}function n(){return(n=Ap(regeneratorRuntime.mark((function e(t){var n
 ;return regeneratorRuntime.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:if(null==(n=o.Environment.getSession())||!n.isAuthenticated()||!o.Environment.isTrustedDomain(t)){e.next=5;break}
 return e.next=4,o.Common.Tools.getAuthenticatedUrl(t,n);case 4:return e.abrupt("return",e.sent);case 5:return e.abrupt("return",t);case 6:case"end":return e.stop()}}),e)})))).apply(this,arguments)}
-function r(){return(r=jp(regeneratorRuntime.mark((function n(){var r,a;return regeneratorRuntime.wrap((function(n){for(;;)switch(n.prev=n.next){case 0:return r={id:e.transaction.id,
+function r(){return(r=Ap(regeneratorRuntime.mark((function n(){var r,a;return regeneratorRuntime.wrap((function(n){for(;;)switch(n.prev=n.next){case 0:return r={id:e.transaction.id,
 email:e.transaction.userAccount&&e.transaction.userAccount.email,lang:o.Common.Tools.getLanguage()},n.next=3,t(P.transactionGetInvoice(r));case 3:return a=n.sent,n.abrupt("return",i(a));case 5:
 case"end":return n.stop()}}),n)})))).apply(this,arguments)}function i(t){var n=document.createElement("a")
 ;n.style.cssText="position: absolute; top:0; left: 0; height: 0; width: 0; overflow: hidden; display: block;",document.body.appendChild(n),n.rel="noopener",
-n.download="invoice-".concat(e.transaction.name,".pdf"),n.href=t,n.click()}return e.children((function(){return r.apply(this,arguments)}),e.isInvoiceReady)}}));function Qp(e,t){
-return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var Xp,$p,ef,tf=Ct(o.Common.VisualComponent.create({
+n.download="invoice-".concat(e.transaction.name,".pdf"),n.href=t,n.click()}return e.children((function(){return r.apply(this,arguments)}),e.isInvoiceReady)}}));function ef(e,t){
+return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var tf,nf,rf,of=Ct(o.Common.VisualComponent.create({
 mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:Fs.TAG+"TransactionFinished",classNames:{main:function(){
-return Fs.Css.css(Yp||(Yp=Qp(["\n        display: flex;\n        flex-direction: column;\n        height: 100%;\n        align-items: center;\n        flex: 1 0 auto;\n        text-align: center;\n        overflow: hidden;\n      "])))
+return Fs.Css.css(Np||(Np=ef(["\n        display: flex;\n        flex-direction: column;\n        height: 100%;\n        align-items: center;\n        flex: 1 0 auto;\n        text-align: center;\n        overflow: hidden;\n      "])))
 },content:function(){
-return Fs.Css.css(Rp||(Rp=Qp(["\n        padding: 1rem 0;\n        width: 100%;\n        height: 100%;\n        overflow-y: auto;\n        > div,\n        > span {\n          width: 100%;\n          margin-bottom: 1rem;\n        }\n        ","\n      "])),o.Utils.ScreenSize.getMaxMediaQueries("m","margin-bottom: 120px;"))
-},label:function(){return Fs.Css.css(Ip||(Ip=Qp(["\n        padding: 0 1rem;\n        font-size: 2rem;\n        font-weight: bold;\n        margin: 1rem 0;\n      "])))},
+return Fs.Css.css(zp||(zp=ef(["\n        padding: 1rem 0;\n        width: 100%;\n        height: 100%;\n        overflow-y: auto;\n        > div,\n        > span {\n          width: 100%;\n          margin-bottom: 1rem;\n        }\n        ","\n      "])),o.Utils.ScreenSize.getMaxMediaQueries("m","margin-bottom: 120px;"))
+},label:function(){return Fs.Css.css(Fp||(Fp=ef(["\n        padding: 0 1rem;\n        font-size: 2rem;\n        font-weight: bold;\n        margin: 1rem 0;\n      "])))},
 transactionStatusInfo:function(){var e,t,n,r
-;return Fs.Css.css(Np||(Np=Qp(["\n        flex: 0;\n        padding: 0 ",";\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        > span:not(:last-child) {\n          margin-bottom: 1rem;\n        }\n        > .uu5-bricks-icon {\n          display: flex;\n          justify-content: center;\n          align-items: center;\n          font-size: 1.5rem;\n          padding: 0.5rem;\n          background: ",";\n          color: ",";\n          line-height: 1;\n          border-radius: 100%;\n        }\n      "])),Ve,null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor,null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.tertiary.color)
+;return Fs.Css.css(Up||(Up=ef(["\n        flex: 0;\n        padding: 0 ",";\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        > span:not(:last-child) {\n          margin-bottom: 1rem;\n        }\n        > .uu5-bricks-icon {\n          display: flex;\n          justify-content: center;\n          align-items: center;\n          font-size: 1.5rem;\n          padding: 0.5rem;\n          background: ",";\n          color: ",";\n          line-height: 1;\n          border-radius: 100%;\n        }\n      "])),Ve,null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor,null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.tertiary.color)
 },transactionStatusError:function(){var e,t,n,r,i,a
-;return Fs.Css.css(zp||(zp=Qp(["\n        flex: 0;\n        padding: 0 ",";\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        > span:not(:last-child) {\n          margin-bottom: 1rem;\n        }\n        > .uu5-bricks-icon {\n          display: flex;\n          justify-content: center;\n          align-items: center;\n          font-size: 1.5rem;\n          padding: 0.5rem;\n          background: ",";\n          color: ",";\n          line-height: 1;\n          border-radius: 100%;\n        }\n        > .uu5-bricks-icon {\n          background: ",";\n        }\n      "])),Ve,null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor,null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.tertiary.color,null===(i=o.Environment.chargeUp)||void 0===i||null===(a=i.colors)||void 0===a?void 0:a.tertiary.backgroundColor)
+;return Fs.Css.css(Hp||(Hp=ef(["\n        flex: 0;\n        padding: 0 ",";\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        > span:not(:last-child) {\n          margin-bottom: 1rem;\n        }\n        > .uu5-bricks-icon {\n          display: flex;\n          justify-content: center;\n          align-items: center;\n          font-size: 1.5rem;\n          padding: 0.5rem;\n          background: ",";\n          color: ",";\n          line-height: 1;\n          border-radius: 100%;\n        }\n        > .uu5-bricks-icon {\n          background: ",";\n        }\n      "])),Ve,null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor,null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.tertiary.color,null===(i=o.Environment.chargeUp)||void 0===i||null===(a=i.colors)||void 0===a?void 0:a.tertiary.backgroundColor)
 },transactionStatusCancelled:function(){var e,t,n,r
-;return Fs.Css.css(Fp||(Fp=Qp(["\n        flex: 0;\n        padding: 0 ",";\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        > span:not(:last-child) {\n          margin-bottom: 1rem;\n        }\n        > .uu5-bricks-icon {\n          display: flex;\n          justify-content: center;\n          align-items: center;\n          font-size: 1.5rem;\n          padding: 0.5rem;\n          background: ",";\n          color: ",";\n          line-height: 1;\n          border-radius: 100%;\n        }\n      "])),Ve,null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor,null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.tertiary.color)
-},transactionInfo:function(){return Fs.Css.css(Up||(Up=Qp(["\n        flex: 4;\n      "])))},transactionInfoHeader:function(){
-return Fs.Css.css(Hp||(Hp=Qp(["\n        flex: 4;\n        margin-top: 2px;\n        padding: 1rem ",";\n        display: flex;\n        background: white;\n        align-items: center;\n        justify-content: space-between;\n        flex-shrink: 0;\n        > div:first-child {\n          @media (max-width: 400px) {\n            font-size: 90%;\n            text-align:left;\n          }\n          font-weight: bold;\n          font-size: 100%;\n          display: flex;\n          flex-direction: column;\n          align-items: flex-start;\n          > span:last-child {\n            font-size: 0.9rem;\n            font-weight: normal;\n          }\n        }\n        > div:last-child {\n          flex: 0 0 48px;\n          height: 48px;\n        }\n      "])),Ve)
+;return Fs.Css.css(Wp||(Wp=ef(["\n        flex: 0;\n        padding: 0 ",";\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        > span:not(:last-child) {\n          margin-bottom: 1rem;\n        }\n        > .uu5-bricks-icon {\n          display: flex;\n          justify-content: center;\n          align-items: center;\n          font-size: 1.5rem;\n          padding: 0.5rem;\n          background: ",";\n          color: ",";\n          line-height: 1;\n          border-radius: 100%;\n        }\n      "])),Ve,null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor,null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.tertiary.color)
+},transactionInfo:function(){return Fs.Css.css(Vp||(Vp=ef(["\n        flex: 4;\n      "])))},transactionInfoHeader:function(){
+return Fs.Css.css(Gp||(Gp=ef(["\n        flex: 4;\n        margin-top: 2px;\n        padding: 1rem ",";\n        display: flex;\n        background: white;\n        align-items: center;\n        justify-content: space-between;\n        flex-shrink: 0;\n        > div:first-child {\n          @media (max-width: 400px) {\n            font-size: 90%;\n            text-align:left;\n          }\n          font-weight: bold;\n          font-size: 100%;\n          display: flex;\n          flex-direction: column;\n          align-items: flex-start;\n          > span:last-child {\n            font-size: 0.9rem;\n            font-weight: normal;\n          }\n        }\n        > div:last-child {\n          flex: 0 0 48px;\n          height: 48px;\n        }\n      "])),Ve)
 },transactionInfoContent:function(){
-return Fs.Css.css(Wp||(Wp=Qp(["\n        text-align: left;\n        padding: 1rem ",";\n        background: ",";\n        > .uu5-bricks-row {\n          margin-left: -8px;\n          margin-right: -8px;\n          font-size: 1rem;\n          &:not(:last-child) {\n            margin-bottom: 0.5rem;\n          }\n        }\n      "])),Ve,Be)
-},paid:Fs.Css.css(Vp||(Vp=Qp(["\n        color: ","\n      "])),Ne),ended:Fs.Css.css(Gp||(Gp=Qp(["\n        color: ","\n      "])),Ne),
-error:Fs.Css.css(Kp||(Kp=Qp(["\n        color: ","\n      "])),Re),cancelled:Fs.Css.css(Zp||(Zp=Qp(["\n        color: ","\n      "])),Re)},opt:{pureRender:!0}},propTypes:{
+return Fs.Css.css(Kp||(Kp=ef(["\n        text-align: left;\n        padding: 1rem ",";\n        background: ",";\n        > .uu5-bricks-row {\n          margin-left: -8px;\n          margin-right: -8px;\n          font-size: 1rem;\n          &:not(:last-child) {\n            margin-bottom: 0.5rem;\n          }\n        }\n      "])),Ve,Be)
+},paid:Fs.Css.css(Zp||(Zp=ef(["\n        color: ","\n      "])),Ne),ended:Fs.Css.css(Jp||(Jp=ef(["\n        color: ","\n      "])),Ne),
+error:Fs.Css.css(qp||(qp=ef(["\n        color: ","\n      "])),Re),cancelled:Fs.Css.css(Qp||(Qp=ef(["\n        color: ","\n      "])),Re)},opt:{pureRender:!0}},propTypes:{
 spaContext:o.PropTypes.object,transaction:o.PropTypes.object,onBackToStation:o.PropTypes.func,onForceReload:o.PropTypes.func},getDefaultProps:function(){return{transaction:{payment:{},charging:{}}}},
 getInitialState:function(){return{
 invoicePrepared:this.props.transaction.payment&&(this.props.transaction.payment.state===Fs.paymentStates.paid&&this.props.transaction.payment.variableSymbol||0===this.props.transaction.payment.plannedAmount)?Fs.states.ready:Fs.states.notReady
@@ -7051,156 +7078,156 @@ return r._unsetReloadInterval()}))}},componentWillUnmount:function(){this._unset
 this.props.spaContext.userSignedIn||Cl(this.props.transaction)},_resetReloadInterval:function(){var e=this;clearInterval(this._interval),this._interval=setInterval((function(){
 return e.props.onForceReload()}),Fs.TransactionPaymentAuthorized.reloadInterval)},_unsetReloadInterval:function(){clearInterval(this._interval)},_getLabel:function(){
 var e,t=this.props.transaction,n=[Fs.terminationMethod.paymentReservationTimeout,Fs.terminationMethod.paymentReservationCancelled,Fs.terminationMethod.chargingReservationCancelled,Fs.terminationMethod.chargingReservationTimeout],r=this.getClassName()
-;switch(t.transactionState){case Fs.transaction.state.ended:e=n.includes(t.terminationMethod)?o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.transactionState.cancelled
-}):t.payment&&t.payment.state===Fs.paymentStates.paid?o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.orderNumber,params:[t.payment.orderNumber]
-}):t.payment?o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.transactionState.finished}):null;break;case Fs.transaction.state.error:e=o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionFinished.terminationMethodInfo[ie.convertUnderscoreToCameCase(t.terminationMethod)]});break;default:e=o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionFinished.transactionState.unknown})}return o.Common.Element.create(o.Bricks.Span,{className:r.label()},e)},_getTransactionStatus:function(){
+;switch(t.transactionState){case Fs.transaction.state.ended:e=n.includes(t.terminationMethod)?o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.transactionState.cancelled
+}):t.payment&&t.payment.state===Fs.paymentStates.paid?o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.orderNumber,params:[t.payment.orderNumber]
+}):t.payment?o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.transactionState.finished}):null;break;case Fs.transaction.state.error:e=o.Common.Element.create(o.Bricks.Lsi,{
+lsi:Am.transactionFinished.terminationMethodInfo[ie.convertUnderscoreToCameCase(t.terminationMethod)]});break;default:e=o.Common.Element.create(o.Bricks.Lsi,{
+lsi:Am.transactionFinished.transactionState.unknown})}return o.Common.Element.create(o.Bricks.Span,{className:r.label()},e)},_getTransactionStatus:function(){
 var e,t,n,r,i,a=this.props.transaction,s=a.transactionState,c=a.terminationMethod,l=this.getClassName();switch(s){case Fs.transaction.state.ended:if(n=l.transactionStatusInfo(),
 !a.payment||a.payment.state!==Fs.paymentStates.paid&&0!==a.payment.plannedAmount)if(a.payment)switch(c){case Fs.terminationMethod.paymentReservationTimeout:r=Fs.icons.close,
-i=o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.terminationMethods.paymentReservationTimeout}),n=l.transactionStatusCancelled();break
-;case Fs.terminationMethod.chargingReservationCancelled:r=Fs.icons.close,i=o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.terminationMethods.chargingReservationCancelled}),
+i=o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.terminationMethods.paymentReservationTimeout}),n=l.transactionStatusCancelled();break
+;case Fs.terminationMethod.chargingReservationCancelled:r=Fs.icons.close,i=o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.terminationMethods.chargingReservationCancelled}),
 n=l.transactionStatusCancelled();break;case Fs.terminationMethod.chargingReservationTimeout:r=Fs.icons.close,i=o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionFinished.terminationMethods.chargingReservationTimeout}),n=l.transactionStatusCancelled();break;case Fs.terminationMethod.paymentReservationCancelled:r=Fs.icons.close,
-i=o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.terminationMethods.paymentReservationCancelled}),n=l.transactionStatusCancelled();break;case Fs.terminationMethod.cancelledByUser:
-r=Fs.icons.check,i=o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.terminationMethods.cancelledByUser});break;case Fs.terminationMethod.cancelledByStation:r=Fs.icons.check,
-i=o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.terminationMethods.cancelledByStation});break;case Fs.terminationMethod.optimalRecharge:r=Fs.icons.check,
-i=o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.terminationMethods.optimalRecharge});break;case Fs.terminationMethod.openingTimes:r=Fs.icons.check,
-i=o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.terminationMethods.openingTimes});break;case Fs.terminationMethod.cancelledByOperator:r=Fs.icons.check,
-i=o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.terminationMethods.cancelledByOperator});break;case Fs.terminationMethod.dueToTimeLimit:r=Fs.icons.check,
-i=o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.terminationMethods.dueToTimeLimit});break;case Fs.terminationMethod.dueToPriceLimit:r=Fs.icons.check,
-i=o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.terminationMethods.dueToPriceLimit});break;case Fs.terminationMethod.dueToEnergyLimit:r=Fs.icons.check,
-i=o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.terminationMethods.dueToEnergyLimit});break;case Fs.terminationMethod.chargedUpAsPlanned:default:r=Fs.icons.check,
-i=o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.terminationMethods.chargedUpAsPlanned})}else n=l.transactionStatusInfo(),r=Fs.icons.check;else n=l.transactionStatusInfo(),
+lsi:Am.transactionFinished.terminationMethods.chargingReservationTimeout}),n=l.transactionStatusCancelled();break;case Fs.terminationMethod.paymentReservationCancelled:r=Fs.icons.close,
+i=o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.terminationMethods.paymentReservationCancelled}),n=l.transactionStatusCancelled();break;case Fs.terminationMethod.cancelledByUser:
+r=Fs.icons.check,i=o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.terminationMethods.cancelledByUser});break;case Fs.terminationMethod.cancelledByStation:r=Fs.icons.check,
+i=o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.terminationMethods.cancelledByStation});break;case Fs.terminationMethod.optimalRecharge:r=Fs.icons.check,
+i=o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.terminationMethods.optimalRecharge});break;case Fs.terminationMethod.openingTimes:r=Fs.icons.check,
+i=o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.terminationMethods.openingTimes});break;case Fs.terminationMethod.cancelledByOperator:r=Fs.icons.check,
+i=o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.terminationMethods.cancelledByOperator});break;case Fs.terminationMethod.dueToTimeLimit:r=Fs.icons.check,
+i=o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.terminationMethods.dueToTimeLimit});break;case Fs.terminationMethod.dueToPriceLimit:r=Fs.icons.check,
+i=o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.terminationMethods.dueToPriceLimit});break;case Fs.terminationMethod.dueToEnergyLimit:r=Fs.icons.check,
+i=o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.terminationMethods.dueToEnergyLimit});break;case Fs.terminationMethod.chargedUpAsPlanned:default:r=Fs.icons.check,
+i=o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.terminationMethods.chargedUpAsPlanned})}else n=l.transactionStatusInfo(),r=Fs.icons.check;else n=l.transactionStatusInfo(),
 r=Fs.icons.check;break;case Fs.transaction.state.error:n=l.transactionStatusError(),r=Fs.icons.close,i=o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionFinished.terminationMethods.error}),o.Common.Element.create(zd,{flsBaseUri:null===(e=this.props.spaContext)||void 0===e||null===(t=e.awidConfig)||void 0===t?void 0:t.flsBaseUri}))
+lsi:Am.transactionFinished.terminationMethods.error}),o.Common.Element.create(Hd,{flsBaseUri:null===(e=this.props.spaContext)||void 0===e||null===(t=e.awidConfig)||void 0===t?void 0:t.flsBaseUri}))
 ;break;default:return}return o.Common.Element.create(o.Bricks.Div,{className:n},o.Common.Element.create(o.Bricks.Icon,{icon:r}),o.Common.Element.create(o.Bricks.Div,{content:i}))},
 _getPointIdentifier:function(){
 return this.props.transaction.chargingPlace.evseId?this.props.transaction.chargingPlace.evseId:this.props.transaction.chargingPlace.label?this.props.transaction.chargingPlace.label:o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionFinished.chargingPoint,params:[this.props.transaction.chargingPlace.connectorId]})},_getTransactionInfo:function(e){var t,n=this.getClassName();switch(e){
+lsi:Am.transactionFinished.chargingPoint,params:[this.props.transaction.chargingPlace.connectorId]})},_getTransactionInfo:function(e){var t,n=this.getClassName();switch(e){
 case Fs.transaction.info.success:t=this._getTransactionInfoContent;break;case Fs.transaction.info.cancelled:t=this._getTransactionCancelledInfo;break;case Fs.transaction.info.error:
 t=this._getTransactionErrorInfo}return o.Common.Element.create(o.Bricks.Div,{className:n.transactionInfo()},o.Common.Element.create(o.Bricks.Div,{className:n.transactionInfoHeader()
 },o.Common.Element.create(o.Bricks.Div,null,o.Common.Element.create(o.Bricks.Span,null,ie.getStationFullAddress(this.props.transaction.chargingPlace.address)),o.Common.Element.create(o.Bricks.Span,null,this._getPointIdentifier())),o.Common.Element.create(ft,{
 stationCode:this.props.transaction.chargingPlace.stationCode,providerId:this.props.transaction.providerId})),o.Common.Element.create(o.Bricks.Lsi,null,(function(e){var n=e.language;return t(n)})))},
 _getTariff:function(e,t){var n,r,i
 ;return(null===(n=e.payment)||void 0===n?void 0:n.plannedAmount)>0||0!==(null===(r=e.chargingPlace.priceForEnergy)||void 0===r?void 0:r.price)||0!==(null===(i=e.chargingPlace.priceForChargingTime)||void 0===i?void 0:i.price)?ie.getLocalizedChargingInfo(ie.getPointChargingPrice(e.chargingPlace,t),t):o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionFinished.freeCharging})},_getTransactionInfoContent:function(e){
+lsi:Am.transactionFinished.freeCharging})},_getTransactionInfoContent:function(e){
 var t,n,r=this.props.transaction,i=this.getClassName(),a=r.payment&&r.payment.plannedAmount>0||!r.payment||"POST_PAID_CONTRACT"===(null==r||null===(t=r.payment)||void 0===t?void 0:t.paymentType)&&r.charging.transactionPrice.customPrice>0,s="POST_PAID_CONTRACT"===(null==r||null===(n=r.payment)||void 0===n?void 0:n.paymentType)
 ;return o.Common.Element.create(o.Bricks.Div,{className:i.transactionInfoContent()},o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
-},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.transactionStatus})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Strong,{
-className:i[r.transactionState.toLowerCase()]},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.transactionStateInfo[r.transactionState.toLowerCase()]
-})))),o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.terminationMethod
+},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.transactionStatus})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Strong,{
+className:i[r.transactionState.toLowerCase()]},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.transactionStateInfo[r.transactionState.toLowerCase()]
+})))),o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.terminationMethod
 })),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Strong,null,o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionFinished.terminationMethodInfo[ie.convertUnderscoreToCameCase(r.terminationMethod)]
+lsi:Am.transactionFinished.terminationMethodInfo[ie.convertUnderscoreToCameCase(r.terminationMethod)]
 })))),ie.hasFullTransactionAccess(r)&&r.payment&&r.payment.state?o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
-},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.paymentStatus})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Strong,{
-className:i[r.payment.state.toLowerCase()]},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.paymentInfo[r.payment.state.toLowerCase()]
-})))):null,o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.dateOfCharging
+},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.paymentStatus})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Strong,{
+className:i[r.payment.state.toLowerCase()]},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.paymentInfo[r.payment.state.toLowerCase()]
+})))):null,o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.dateOfCharging
 })),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Strong,null,o.Common.Element.create(o.Bricks.DateTime,{country:e,value:r.charging.chargingFrom,
-dateOnly:!0})))),o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.startOfCharging
+dateOnly:!0})))),o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.startOfCharging
 })),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Strong,null,o.Common.Element.create(o.Bricks.DateTime,{country:e,value:r.charging.chargingFrom,
-timeOnly:!0})))),o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.endOfCharging
+timeOnly:!0})))),o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.endOfCharging
 })),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Strong,null,o.Common.Element.create(o.Bricks.DateTime,{country:e,value:r.charging.chargingTo,timeOnly:!0
-})))),s&&o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.cardName
+})))),s&&o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.cardName
 })),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
 },o.Common.Element.create(o.Bricks.Strong,null,ie.getLocalizedChargingInfo(ie.getCardName(r))))),r.payment&&o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{
-colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.tarif})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
+colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.tarif})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
 },o.Common.Element.create(o.Bricks.Strong,null,this._getTariff(r,e)))),o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
-},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.chargingTime})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
+},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.chargingTime})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
 },o.Common.Element.create(o.Bricks.Strong,null,ie.getHumanizedChargingTime(ie.getTransactionChargingTimeInMs(r),e,!0)))),o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{
-colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.totalConsumption})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
+colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.totalConsumption})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
 },o.Common.Element.create(o.Bricks.Strong,null,ie.getLocalizedChargingInfo(ie.getTransactionTotalConsumption(r,e,3),e)))),a&&o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{
-colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.totalPrice})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
+colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.totalPrice})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
 },o.Common.Element.create(o.Bricks.Strong,null,ie.getLocalizedChargingInfo(ie.getTransactionTotalPrice(r,e),e)))))},_getTransactionErrorInfo:function(){var e=this.getClassName()
 ;return o.Common.Element.create(o.Bricks.Div,{className:e.transactionInfoContent()},o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
-},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.transactionCode})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
+},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.transactionCode})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
 },o.Common.Element.create(o.Bricks.Strong,null,this.props.transaction.payment.orderNumber))),o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
-},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.terminationMethod})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
+},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.terminationMethod})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
 },o.Common.Element.create(o.Bricks.Strong,null,o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionFinished.terminationMethodInfo[ie.convertUnderscoreToCameCase(this.props.transaction.terminationMethod)]
+lsi:Am.transactionFinished.terminationMethodInfo[ie.convertUnderscoreToCameCase(this.props.transaction.terminationMethod)]
 })))),this.props.transaction.payment.state&&o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionFinished.paymentStatus})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Strong,{
+lsi:Am.transactionFinished.paymentStatus})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Strong,{
 className:e[this.props.transaction.payment.state.toLowerCase()]},this.props.transaction.payment.state===Fs.paymentStates.created?o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionFinished.blockingNotMade}):o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.paymentInfo[this.props.transaction.payment.state.toLowerCase()]
-})))),o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.transactionCreation
+lsi:Am.transactionFinished.blockingNotMade}):o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.paymentInfo[this.props.transaction.payment.state.toLowerCase()]
+})))),o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.transactionCreation
 })),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Strong,null,o.Common.Element.create(o.Bricks.DateTime,{value:this.props.transaction.sys.cts
 })))),this.props.transaction.charging&&this.props.transaction.charging.chargingFrom&&o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
-},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.startOfCharging})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
+},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.startOfCharging})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
 },o.Common.Element.create(o.Bricks.Strong,null,o.Common.Element.create(o.Bricks.DateTime,{value:this.props.transaction.charging.chargingFrom})))))},_getTransactionCancelledInfo:function(){
 var e=this.getClassName();return o.Common.Element.create(o.Bricks.Div,{className:e.transactionInfoContent()},o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{
-colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.transactionCode})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
+colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.transactionCode})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
 },o.Common.Element.create(o.Bricks.Strong,null,this.props.transaction.payment.orderNumber))),o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
-},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.terminationMethod})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
+},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.terminationMethod})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
 },o.Common.Element.create(o.Bricks.Strong,null,o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionFinished.terminationMethodInfo[ie.convertUnderscoreToCameCase(this.props.transaction.terminationMethod)]
+lsi:Am.transactionFinished.terminationMethodInfo[ie.convertUnderscoreToCameCase(this.props.transaction.terminationMethod)]
 })))),this.props.transaction.payment.state&&o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionFinished.paymentStatus})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Strong,{
-className:e[this.props.transaction.payment.state.toLowerCase()]},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.paymentInfo[this.props.transaction.payment.state.toLowerCase()]
-})))),o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.stationCode
+lsi:Am.transactionFinished.paymentStatus})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Strong,{
+className:e[this.props.transaction.payment.state.toLowerCase()]},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.paymentInfo[this.props.transaction.payment.state.toLowerCase()]
+})))),o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.stationCode
 })),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
 },o.Common.Element.create(o.Bricks.Strong,null,this.props.transaction.chargingPlace.stationCode))),o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
-},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.transactionCreation})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
+},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.transactionCreation})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
 },o.Common.Element.create(o.Bricks.Strong,null,o.Common.Element.create(o.Bricks.DateTime,{value:this.props.transaction.sys.cts
 })))),this.props.transaction.charging&&this.props.transaction.charging.chargingFrom&&o.Common.Element.create(o.Bricks.Row,null,o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
-},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.startOfCharging})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
+},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.startOfCharging})),o.Common.Element.create(o.Bricks.Column,{colWidth:"xs-6"
 },o.Common.Element.create(o.Bricks.Strong,null,o.Common.Element.create(o.Bricks.DateTime,{value:this.props.transaction.charging.chargingFrom})))))},_getDownLoadPdf:function(){
 var e=!1,t=o.Common.Url.parse(window.location.href).parameters;return t&&t.downloadPdf&&this.props.transaction.payment.finalAmount>0&&(e=!0),e},_getControls:function(e){var t=this.props.transaction
-;return o.Common.Element.create(ic,null,e&&o.Common.Element.create(qp,{downloadPdf:this._getDownLoadPdf(),transaction:t,isInvoiceReady:this.state.invoicePrepared===Fs.states.ready},(function(e,t){
-return o.Common.Element.create(Ea,{disabled:!t,onClick:e},t?o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionFinished.showInvoice}):o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionFinished.invoiceInPreparation}))})),o.Common.Element.create(Ea,{type:"secondary",bgStyle:Fs.bgStyle.outline,onClick:this.props.onBackToStation},o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.transactionFinished.backToStation})))},_getChild:function(){
+;return o.Common.Element.create(ic,null,e&&o.Common.Element.create($p,{downloadPdf:this._getDownLoadPdf(),transaction:t,isInvoiceReady:this.state.invoicePrepared===Fs.states.ready},(function(e,t){
+return o.Common.Element.create(Ea,{disabled:!t,onClick:e},t?o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionFinished.showInvoice}):o.Common.Element.create(o.Bricks.Lsi,{
+lsi:Am.transactionFinished.invoiceInPreparation}))})),o.Common.Element.create(Ea,{type:"secondary",bgStyle:Fs.bgStyle.outline,onClick:this.props.onBackToStation},o.Common.Element.create(o.Bricks.Lsi,{
+lsi:Am.transactionFinished.backToStation})))},_getChild:function(){
 var e=this.props.transaction,t=[Fs.terminationMethod.cancelledByUser,Fs.terminationMethod.cancelledByStation,Fs.terminationMethod.chargedUpAsPlanned,Fs.terminationMethod.cancelledByOperator,Fs.terminationMethod.dueToTimeLimit,Fs.terminationMethod.dueToPriceLimit,Fs.terminationMethod.dueToEnergyLimit,Fs.terminationMethod.optimalRecharge,Fs.terminationMethod.openingTimes].includes(e.terminationMethod)&&e.transactionState===Fs.transaction.state.ended,n=t&&e.payment&&(e.payment.finalAmount>0||0===e.payment.plannedAmount)&&e.invoicing.invoiceEnabled,r=[Fs.terminationMethod.creationFailed].includes(e.terminationMethod)||e.transactionState===Fs.transaction.state.error,i=[Fs.terminationMethod.chargingReservationTimeout,Fs.terminationMethod.chargingReservationCancelled,Fs.terminationMethod.paymentReservationCancelled,Fs.terminationMethod.paymentReservationTimeout].includes(e.terminationMethod)&&e.transactionState===Fs.transaction.state.ended
 ;return o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create("div",{className:this.getClassName("content")
 },this._getLabel(),this._getTransactionStatus(),t&&this._getTransactionInfo(Fs.transaction.info.success),r&&this._getTransactionInfo(Fs.transaction.info.error),i&&this._getTransactionInfo(Fs.transaction.info.cancelled)),this._getControls(n))
-},render:function(){return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this._getChild())}}));function nf(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{
-value:Object.freeze(t)}}))}var rf,of,af=Ct(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{
+},render:function(){return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this._getChild())}}));function af(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{
+value:Object.freeze(t)}}))}var sf,cf,lf=Ct(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{
 tagName:Fs.TAG+"TransactionStartCharging",classNames:{main:function(){
-return Fs.Css.css(Xp||(Xp=nf(["\n        display: flex;\n        flex-direction: column;\n        flex: 1 0 auto;\n        overflow-x: hidden;\n        overflow-y: auto;\n        height: 100%;\n      "])))
-},label:function(){return Fs.Css.css($p||($p=nf(["\n        padding: 20px;\n        font-size: 2rem;\n        font-weight: bold;\n        margin: 1rem 0;\n        text-align: center;\n      "])))},
+return Fs.Css.css(tf||(tf=af(["\n        display: flex;\n        flex-direction: column;\n        flex: 1 0 auto;\n        overflow-x: hidden;\n        overflow-y: auto;\n        height: 100%;\n      "])))
+},label:function(){return Fs.Css.css(nf||(nf=af(["\n        padding: 20px;\n        font-size: 2rem;\n        font-weight: bold;\n        margin: 1rem 0;\n        text-align: center;\n      "])))},
 timeout:function(){
-return Fs.Css.css(ef||(ef=nf(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        font-size: 2.5rem;\n        > span:first-child {\n          font-size: 2.5rem;\n        }\n        > span:last-child {\n          margin-top: -8px;\n          font-size: 80%;\n        }\n      "])))
-}},opt:{pureRender:!0},lsi:jm.transactionStartCharging},propTypes:{spaContext:o.PropTypes.object,transaction:o.PropTypes.object.isRequired,onForceReload:o.PropTypes.func,
+return Fs.Css.css(rf||(rf=af(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        font-size: 2.5rem;\n        > span:first-child {\n          font-size: 2.5rem;\n        }\n        > span:last-child {\n          margin-top: -8px;\n          font-size: 80%;\n        }\n      "])))
+}},opt:{pureRender:!0},lsi:Am.transactionStartCharging},propTypes:{spaContext:o.PropTypes.object,transaction:o.PropTypes.object.isRequired,onForceReload:o.PropTypes.func,
 onBackToStation:o.PropTypes.func},getInitialState:function(){var e=this.props.spaContext.awidConfig.providerConfigList[this.props.transaction.providerId].cpoTransactionStartTimeout
 ;return this.softTimeout=(new Date).setSeconds((new Date).getSeconds()+e),{softTimeoutExpired:new Date>this.softTimeout}},componentDidMount:function(){this._resetReloadInterval(),window.scrollTo(0,0)
 },componentWillUnmount:function(){this._unsetReloadInterval()},_setSoftTimeoutExpired:function(){this.setState({softTimeoutExpired:!0})},_resetReloadInterval:function(){var e=this
 ;clearInterval(this._interval),this._interval=setInterval((function(){return e.props.onForceReload()}),Fs.TransactionStartCharging.reloadInterval)},_unsetReloadInterval:function(){
 clearInterval(this._interval)},_getStartCharging:function(){return o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create("span",{className:this.getClassName().label()
-},o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transactionStartCharging.beingStarted})),o.Common.Element.create("div",{className:this.getClassName().timeout()
+},o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transactionStartCharging.beingStarted})),o.Common.Element.create("div",{className:this.getClassName().timeout()
 },o.Common.Element.create(o.Bricks.Strong,null,o.Common.Element.create(Zs,{validTo:this.softTimeout,onTimeout:this._setSoftTimeoutExpired}))))},_getStartChargingExpired:function(){
-return o.Common.Element.create(sp,{onBackToStation:this.props.onBackToStation,transaction:this.props.transaction})},render:function(){
-return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this.state.softTimeoutExpired?this._getStartChargingExpired():this._getStartCharging())}}));function sf(e,t){var n=Object.keys(e)
+return o.Common.Element.create(up,{onBackToStation:this.props.onBackToStation,transaction:this.props.transaction})},render:function(){
+return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this.state.softTimeoutExpired?this._getStartChargingExpired():this._getStartCharging())}}));function uf(e,t){var n=Object.keys(e)
 ;if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}
-function cf(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?sf(Object(n),!0).forEach((function(t){lf(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):sf(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function lf(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function uf(e,t){return t||(t=e.slice(0)),
-Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var df={displayName:R.TAG+"Login"},mf={main:R.Css.css(rf||(rf=uf([""]))),
-label:R.Css.css(of||(of=uf(["\n    font-weight: bold;\n    font-size: 120%;\n    margin-top: 50px;\n    text-align: center;\n  "])))},pf=Object(ae.createVisualComponent)(cf(cf({},df),{},{propTypes:{
-text:i.a.PropTypes.object},defaultProps:{text:yn.login.login},render:function(e){var t=i.a.Common.VisualComponent.getAttrs(e,mf.main)
-;return i.a.Common.Element.create(i.a.Common.Identity,t,(function(t){var n,r=t.identity,o=t.login;return i.a.Common.Element.create("div",{className:mf.label},i.a.Common.Element.create(i.a.Bricks.Lsi,{
+function df(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?uf(Object(n),!0).forEach((function(t){mf(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):uf(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function mf(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function pf(e,t){return t||(t=e.slice(0)),
+Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var ff={displayName:R.TAG+"Login"},hf={main:R.Css.css(sf||(sf=pf([""]))),
+label:R.Css.css(cf||(cf=pf(["\n    font-weight: bold;\n    font-size: 120%;\n    margin-top: 50px;\n    text-align: center;\n  "])))},gf=Object(ae.createVisualComponent)(df(df({},ff),{},{propTypes:{
+text:i.a.PropTypes.object},defaultProps:{text:yn.login.login},render:function(e){var t=i.a.Common.VisualComponent.getAttrs(e,hf.main)
+;return i.a.Common.Element.create(i.a.Common.Identity,t,(function(t){var n,r=t.identity,o=t.login;return i.a.Common.Element.create("div",{className:hf.label},i.a.Common.Element.create(i.a.Bricks.Lsi,{
 lsi:yn.login.loggedIn})," ",i.a.Common.Element.create(i.a.Bricks.Link,{colorSchema:null===(n=i.a.Environment.chargeUp)||void 0===n?void 0:n.colors.colorSchema,onClick:function(){void 0!==r&&o()}
-},i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:e.text})),".")}))}}));function ff(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e)
-;t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function hf(e){for(var t=1;t<arguments.length;t++){
-var n=null!=arguments[t]?arguments[t]:{};t%2?ff(Object(n),!0).forEach((function(t){gf(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):ff(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function gf(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var yf,vf={displayName:Rs.TAG+"TransactionMissingRights"
-},bf=Object(ae.createVisualComponent)(hf(hf({},vf),{},{propTypes:{},defaultProps:{},render:function(e){var t=Object(ae.useContext)(St).userSignedIn,n=i.a.Common.VisualComponent.getAttrs(e)
-;return i.a.Common.Element.create("div",n,t?i.a.Common.Element.create(i.a.Bricks.Error,null,i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:Nc.transactionMissingRight.noRightsToSeeTransaction
-})):i.a.Common.Element.create(pf,null))}}));function _f(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){
-return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function kf(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{}
-;t%2?_f(Object(n),!0).forEach((function(t){Cf(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):_f(Object(n)).forEach((function(t){
-Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function Cf(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}
-var Sf=Ct(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin],statics:{tagName:Fs.TAG+"TransactionReady",classNames:{main:function(){
-return Fs.Css.css(yf||(yf=function(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))
-}(["\n        overflow: hidden;\n        height: 100%;\n      "])))}}},propTypes:{spaContext:o.PropTypes.object,transaction:o.PropTypes.object,onForceReload:o.PropTypes.func,
-onPaymentAuthorizationTimeout:o.PropTypes.func.isRequired,onPaymentUnpaid:o.PropTypes.func.isRequired,onTransactionPlaceLoaded:o.PropTypes.func.isRequired,viewState:o.PropTypes.string},
-getDefaultProps:function(){return{transaction:{chargingPlace:{},userAccount:{}}}},getInitialState:function(){return{vuc:this._getVucFromProps()}},componentDidMount:function(){
-this._handlePlaceGetStation()},componentDidUpdate:function(e,t){if(!t.placeGetStation&&this.state.placeGetStation){this.props.onTransactionPlaceLoaded(this.state.placeGetStation,!0)}},
-onTransactionStart:function(){return this._handleTransactionStart(),this},onTransactionCancelReservation:function(){
+},i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:e.text})),".")}))}}));function yf(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e)
+;t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function vf(e){for(var t=1;t<arguments.length;t++){
+var n=null!=arguments[t]?arguments[t]:{};t%2?yf(Object(n),!0).forEach((function(t){bf(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):yf(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function bf(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var _f,kf={displayName:Rs.TAG+"TransactionMissingRights"
+},Cf=Object(ae.createVisualComponent)(vf(vf({},kf),{},{propTypes:{},defaultProps:{},render:function(e){var t=Object(ae.useContext)(St).userSignedIn,n=i.a.Common.VisualComponent.getAttrs(e)
+;return i.a.Common.Element.create("div",n,t?id.errorState("transaction-missing-rights")&&i.a.Common.Element.create(i.a.Bricks.Error,null,i.a.Common.Element.create(i.a.Bricks.Lsi,{
+lsi:Nc.transactionMissingRight.noRightsToSeeTransaction})):i.a.Common.Element.create(gf,null))}}));function Sf(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){
+var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function wf(e){
+for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Sf(Object(n),!0).forEach((function(t){Mf(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Sf(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function Mf(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Pf=Ct(o.Common.VisualComponent.create({
+mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin],statics:{tagName:Fs.TAG+"TransactionReady",classNames:{main:function(){return Fs.Css.css(_f||(_f=function(e,t){return t||(t=e.slice(0)),
+Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}(["\n        overflow: hidden;\n        height: 100%;\n      "])))}}},propTypes:{spaContext:o.PropTypes.object,
+transaction:o.PropTypes.object,onForceReload:o.PropTypes.func,onPaymentAuthorizationTimeout:o.PropTypes.func.isRequired,onPaymentUnpaid:o.PropTypes.func.isRequired,
+onTransactionPlaceLoaded:o.PropTypes.func.isRequired,viewState:o.PropTypes.string},getDefaultProps:function(){return{transaction:{chargingPlace:{},userAccount:{}}}},getInitialState:function(){return{
+vuc:this._getVucFromProps()}},componentDidMount:function(){this._handlePlaceGetStation()},componentDidUpdate:function(e,t){if(!t.placeGetStation&&this.state.placeGetStation){
+this.props.onTransactionPlaceLoaded(this.state.placeGetStation,!0)}},onTransactionStart:function(){return this._handleTransactionStart(),this},onTransactionCancelReservation:function(){
 return this._handleTransactionCancelReservation(Fs.terminationMethod.cancelledByUser),this},onTransactionCancelChargingReservation:function(){
 return this._handleTransactionCancelReservation(Fs.terminationMethod.chargingReservationCancelled),this},onTransactionStartTimeout:function(){
 return this._handleTransactionCancelReservation(Fs.terminationMethod.chargingReservationTimeout),this},onTransactionStop:function(){return this._handleTransactionStop(),this},
-onBackToStation:function(){var e={stationCode:this.props.transaction.chargingPlace.stationCode};return o.Environment.setRoute({component:o.Common.Element.create(hy,{parameters:e}),url:{
-useCase:Fs.useCases.map,parameters:kf({},e)}}),this},onContinueOnStopError:function(e){return this.setState({transactionStopState:Fs.states.ready,transactionStopError:null},e),this},
+onBackToStation:function(){var e={stationCode:this.props.transaction.chargingPlace.stationCode};return o.Environment.setRoute({component:o.Common.Element.create(vy,{parameters:e}),url:{
+useCase:Fs.useCases.map,parameters:wf({},e)}}),this},onContinueOnStopError:function(e){return this.setState({transactionStopState:Fs.states.ready,transactionStopError:null},e),this},
 _getVucFromProps:function(){var e
 ;if([Fs.transaction.state.created].includes(this.props.transaction.transactionState))e=Fs.TransactionReady.vuc.TRANSACTION_START;else if([Fs.transaction.state.authorized,Fs.transaction.state.charging,Fs.transaction.state.stopCharging].includes(this.props.transaction.transactionState))e=Fs.TransactionReady.vuc.TRANSACTION_IN_PROGRESS;else if([Fs.transaction.state.ended,Fs.transaction.state.error].includes(this.props.transaction.transactionState))e=Fs.TransactionReady.vuc.TRANSACTION_FINISHED;else if([Fs.transaction.state.startCharging].includes(this.props.transaction.transactionState)){
 var t=this.props.transaction.providerId
@@ -7219,41 +7246,41 @@ transactionCancelReservationState:Fs.states.error,transactionCancelReservationEr
 ;this.state.transactionStopState!==Fs.states.loading&&this.setState({transactionStopState:Fs.states.loading},(function(){P.transactionStop({transactionId:e.props.transaction.id,
 email:e.props.transaction.userAccount.email}).then(e._handleTransactionStopDone).catch(e._handleTransactionStopFail)}))},_handleTransactionStopDone:function(e){this.setState({
 transactionStopState:Fs.states.ready,transactionStop:e})},_handleTransactionStopFail:function(e){this.setState({transactionStopState:Fs.states.error,transactionStopError:e.data})},
-_getChild:function(){var e=this._getVucFromProps(),t=this.props.transaction;if(!ie.hasFullTransactionAccess(t))return o.Common.Element.create(bf,null);switch(e){
-case Fs.TransactionReady.vuc.TRANSACTION_START:return o.Common.Element.create(Ep,{transaction:t,onTransactionStart:this.onTransactionStart,
+_getChild:function(){var e=this._getVucFromProps(),t=this.props.transaction;if(!ie.hasFullTransactionAccess(t))return o.Common.Element.create(Cf,null);switch(e){
+case Fs.TransactionReady.vuc.TRANSACTION_START:return o.Common.Element.create(Tp,{transaction:t,onTransactionStart:this.onTransactionStart,
 onTransactionCancelReservation:this.onTransactionCancelReservation,onTransactionCancelChargingReservation:this.onTransactionCancelChargingReservation,
 onPaymentAuthorizationTimeout:this.props.onPaymentAuthorizationTimeout,onPaymentUnpaid:this.props.onPaymentUnpaid,onTransactionStartTimeout:this.onTransactionStartTimeout,
 transactionStartState:this.state.transactionStartState,transactionStartError:this.state.transactionStartError,onForceReload:this.props.onForceReload,onBackToStation:this.onBackToStation,
-awidConfig:this.props.spaContext.awidConfig});case Fs.TransactionReady.vuc.TRANSACTION_IN_PROGRESS:return o.Common.Element.create(Tp,{transaction:t,onTransactionStop:this.onTransactionStop,
+awidConfig:this.props.spaContext.awidConfig});case Fs.TransactionReady.vuc.TRANSACTION_IN_PROGRESS:return o.Common.Element.create(Dp,{transaction:t,onTransactionStop:this.onTransactionStop,
 transactionStopState:this.state.transactionStopState,transactionStopError:this.state.transactionStopError,onForceReload:this.props.onForceReload,onContinueOnStopError:this.onContinueOnStopError})
-;case Fs.TransactionReady.vuc.TRANSACTION_FINISHED:return o.Common.Element.create(tf,{transaction:t,onBackToStation:this.onBackToStation,onForceReload:this.props.onForceReload})
-;case Fs.TransactionReady.vuc.TRANSACTION_START_CHARGING:return o.Common.Element.create(af,{transaction:t,onForceReload:this.props.onForceReload,onBackToStation:this.onBackToStation});default:
-return o.Common.Element.create(o.Bricks.Error,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transaction.somethingWentWrong}))}},render:function(){
-return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),"error"===this.props.viewState&&o.Common.Element.create(o.Bricks.Alert,{content:o.Common.Element.create(o.Bricks.Lsi,{
-lsi:jm.loadingCurrentData}),block:!1,closeDisabled:!0,colorSchema:"yellow"}),this._getChild())}}));function wf(){return(wf=Object.assign||function(e){for(var t=1;t<arguments.length;t++){
-var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}var Mf,Pf=nn(o.Common.VisualComponent.create({
-mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:Fs.TAG+"TransactionStateManager",opt:{pureRender:!0}},propTypes:{values:o.PropTypes.object,
-onPaymentAuthorizationTimeout:o.PropTypes.func.isRequired,onPaymentUnpaid:o.PropTypes.func.isRequired,onTransactionPlaceLoaded:o.PropTypes.func.isRequired,onForceReload:o.PropTypes.func.isRequired},
-getInitialState:function(){return{values:this.props.values}},componentDidMount:function(){this.props.mapContext.setMobileMapDisplay(0)},componentDidUpdate:function(){
-"ready"===this.props.values.viewState&&(this._checkSameData()||this.setState({values:this.props.values}))},_checkSameData:function(){var e,t
+;case Fs.TransactionReady.vuc.TRANSACTION_FINISHED:return o.Common.Element.create(of,{transaction:t,onBackToStation:this.onBackToStation,onForceReload:this.props.onForceReload})
+;case Fs.TransactionReady.vuc.TRANSACTION_START_CHARGING:return o.Common.Element.create(lf,{transaction:t,onForceReload:this.props.onForceReload,onBackToStation:this.onBackToStation});default:
+return id.errorState("transaction-ready-something-went-wrong"),o.Common.Element.create(o.Bricks.Error,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transaction.somethingWentWrong}))}},
+render:function(){return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),"error"===this.props.viewState&&o.Common.Element.create(o.Bricks.Alert,{
+content:o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.loadingCurrentData}),block:!1,closeDisabled:!0,colorSchema:"yellow"}),this._getChild())}}));function Ef(){return(Ef=Object.assign||function(e){
+for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}
+var Lf,Of=nn(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:Fs.TAG+"TransactionStateManager",opt:{pureRender:!0}},
+propTypes:{values:o.PropTypes.object,onPaymentAuthorizationTimeout:o.PropTypes.func.isRequired,onPaymentUnpaid:o.PropTypes.func.isRequired,onTransactionPlaceLoaded:o.PropTypes.func.isRequired,
+onForceReload:o.PropTypes.func.isRequired},getInitialState:function(){return{values:this.props.values}},componentDidMount:function(){this.props.mapContext.setMobileMapDisplay(0)},
+componentDidUpdate:function(){"ready"===this.props.values.viewState&&(this._checkSameData()||this.setState({values:this.props.values}))},_checkSameData:function(){var e,t
 ;return o.Common.Tools.deepEqual(null===(e=this.state.values)||void 0===e?void 0:e.data,null===(t=this.props.values)||void 0===t?void 0:t.data)},_getChild:function(e){
-return o.Common.Element.create(Lu,wf({},e,{errorMessageLsi:o.Common.Element.create(o.Bricks.Lsi,{lsi:jm.transaction.transactionLoadingFailed})}),e.data&&o.Common.Element.create(Sf,{
+return o.Common.Element.create(Lu,Ef({},e,{errorMessageLsi:o.Common.Element.create(o.Bricks.Lsi,{lsi:Am.transaction.transactionLoadingFailed})}),e.data&&o.Common.Element.create(Pf,{
 onForceReload:this.props.onForceReload,transaction:e.data.transaction,onPaymentAuthorizationTimeout:this.props.onPaymentAuthorizationTimeout,onPaymentUnpaid:this.props.onPaymentUnpaid,
-onTransactionPlaceLoaded:this.props.onTransactionPlaceLoaded,viewState:this.props.values.viewState}))},render:function(){return this._getChild(this.state.values)}}));function Ef(e,t){
+onTransactionPlaceLoaded:this.props.onTransactionPlaceLoaded,viewState:this.props.values.viewState}))},render:function(){return this._getChild(this.state.values)}}));function Tf(e,t){
 var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}
-return n}function Lf(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Ef(Object(n),!0).forEach((function(t){Of(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Ef(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function Of(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Tf,xf=o.Common.VisualComponent.create({
-mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:Fs.TAG+"Transaction",classNames:{main:function(){return Fs.Css.css(Mf||(Mf=function(e,t){
+return n}function xf(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Tf(Object(n),!0).forEach((function(t){jf(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Tf(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function jf(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Df,Bf=o.Common.VisualComponent.create({
+mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:Fs.TAG+"Transaction",classNames:{main:function(){return Fs.Css.css(Lf||(Lf=function(e,t){
 return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}(["\n        background: white;\n        overflow: hidden;\n        height: 100%;\n      "])))}},opt:{
 pureRender:!0}},propTypes:{transaction:o.PropTypes.shape({id:o.PropTypes.string,code:o.PropTypes.string,selectedPlace:o.PropTypes.shape({stationCode:o.PropTypes.number,pointId:o.PropTypes.number}),
 email:o.PropTypes.string}).isRequired,onPaymentAuthorizationTimeout:o.PropTypes.func.isRequired,onPaymentUnpaid:o.PropTypes.func.isRequired,onTransactionPlaceLoaded:o.PropTypes.func.isRequired},
-getDefaultProps:function(){return{transaction:{selectedPlace:{}}}},_getDtoIn:function(){return Lf(Lf(Lf(Lf({},this.props.transaction.id&&{id:this.props.transaction.id}),this.props.transaction.code&&{
+getDefaultProps:function(){return{transaction:{selectedPlace:{}}}},_getDtoIn:function(){return xf(xf(xf(xf({},this.props.transaction.id&&{id:this.props.transaction.id}),this.props.transaction.code&&{
 code:this.props.transaction.code}),this.props.transaction.selectedPlace&&{place:this.props.transaction.selectedPlace}),this.props.transaction.email&&{email:this.props.transaction.email})},
-_getChild:function(e){var t=this;return o.Common.Element.create(Pf,{values:e,onPaymentAuthorizationTimeout:this.props.onPaymentAuthorizationTimeout,onPaymentUnpaid:this.props.onPaymentUnpaid,
-onTransactionPlaceLoaded:this.props.onTransactionPlaceLoaded,onForceReload:function(){e.handleReload(t._getDtoIn())}})},render:function(){return o.Common.Element.create(_m.Provider,{pessimistic:!0,
-onLoad:P.transactionGet,onReload:P.transactionGet,data:this._getDtoIn()},o.Common.Element.create(_m.Consumer,null,this._getChild))}});var jf,Df=Ct(o.Common.VisualComponent.create({
-mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:Rs.TAG+"TransactionDetailReady",classNames:{main:function(){return Rs.Css.css(Tf||(Tf=function(e,t){
+_getChild:function(e){var t=this;return o.Common.Element.create(Of,{values:e,onPaymentAuthorizationTimeout:this.props.onPaymentAuthorizationTimeout,onPaymentUnpaid:this.props.onPaymentUnpaid,
+onTransactionPlaceLoaded:this.props.onTransactionPlaceLoaded,onForceReload:function(){e.handleReload(t._getDtoIn())}})},render:function(){return o.Common.Element.create(Sm.Provider,{pessimistic:!0,
+onLoad:P.transactionGet,onReload:P.transactionGet,data:this._getDtoIn()},o.Common.Element.create(Sm.Consumer,null,this._getChild))}});var Af,Yf=Ct(o.Common.VisualComponent.create({
+mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:Rs.TAG+"TransactionDetailReady",classNames:{main:function(){return Rs.Css.css(Df||(Df=function(e,t){
 return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}(["\n        overflow: hidden;\n        height: 100%;\n      "])))}},opt:{pureRender:!0}},propTypes:{
 selectedPlace:o.PropTypes.object,selectedChargingPoint:o.PropTypes.shape({stationCode:o.PropTypes.number,chargingPoint:o.PropTypes.shape({
 chargingPointId:o.PropTypes.oneOfType([o.PropTypes.number,o.PropTypes.string])})}),transaction:o.PropTypes.shape({id:o.PropTypes.string,code:o.PropTypes.string,transactionState:o.PropTypes.string,
@@ -7265,17 +7292,17 @@ _getVucFromProps:function(){
 var e,t,n,r=this.props.transaction&&Object.prototype.hasOwnProperty.call(this.props.transaction,"userAccount")&&Object.prototype.hasOwnProperty.call(this.props.transaction,"payment"),o=this.props.transaction&&"Ended"!==this.props.transaction.transactionState&&"Error"!==this.props.transaction.transactionState,i=this.props.transaction&&(Object.prototype.hasOwnProperty.call(this.props.transaction,"id")&&void 0!==this.props.transaction.id||Object.prototype.hasOwnProperty.call(this.props.transaction,"code")&&void 0!==this.props.transaction.code),a=this.props.transaction.payment&&Object.prototype.hasOwnProperty.call(this.props.transaction.payment,"paymentId")&&void 0!==this.props.transaction.payment.paymentId
 ;i?r&&o?a?this.props.transaction.redirect?(e=Rs.TransactionDetailReady.vuc.TRANSACTION,
 e="UNPAID"===this.props.transaction.payment.state?Rs.TransactionDetailReady.vuc.TRANSACTION_SETUP:Rs.TransactionDetailReady.vuc.TRANSACTION):e="CREATED"===this.props.transaction.payment.state||"UNPAID"===this.props.transaction.payment.state?Rs.TransactionDetailReady.vuc.TRANSACTION_SETUP:Rs.TransactionDetailReady.vuc.TRANSACTION:e=0===(null===(t=this.props.transaction.payment)||void 0===t?void 0:t.plannedAmount)||(null===(n=this.props.transaction.payment)||void 0===n?void 0:n.paymentType)===Rs.paymentTypes.postPaidContract?Rs.TransactionDetailReady.vuc.TRANSACTION:Rs.TransactionDetailReady.vuc.TRANSACTION_SETUP:e=Rs.TransactionDetailReady.vuc.TRANSACTION:e=Rs.TransactionDetailReady.vuc.TRANSACTION_SETUP
-;return e},_setVuc:function(e,t){this.setState({vuc:e},t)},_getChild:function(){return this.state.vuc===Rs.TransactionDetailReady.vuc.TRANSACTION?o.Common.Element.create(xf,{refireLoad:!1,
+;return e},_setVuc:function(e,t){this.setState({vuc:e},t)},_getChild:function(){return this.state.vuc===Rs.TransactionDetailReady.vuc.TRANSACTION?o.Common.Element.create(Bf,{refireLoad:!1,
 transaction:{id:this.props.transaction.id,code:this.props.transaction.code,selectedPlace:void 0,email:this.props.transaction.userAccount&&this.props.transaction.userAccount.email},
 onPaymentAuthorizationTimeout:this.onPaymentAuthorizationTimeout,onPaymentUnpaid:this.onPaymentUnpaid,onTransactionPlaceLoaded:this.props.onTransactionPlaceLoaded
-}):this.state.vuc===Rs.TransactionDetailReady.vuc.TRANSACTION_SETUP?o.Common.Element.create(bm,{transaction:this.props.transaction,selectedPlace:this.props.selectedPlace,
+}):this.state.vuc===Rs.TransactionDetailReady.vuc.TRANSACTION_SETUP?o.Common.Element.create(Cm,{transaction:this.props.transaction,selectedPlace:this.props.selectedPlace,
 selectedChargingPoint:this.props.selectedChargingPoint,paymentAuthorizationTimeOuted:this.state.paymentAuthorizationTimeOuted,onTransactionRegister:this.props.onTransactionRegister}):void 0},
-render:function(){return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this._getChild())}}));function Bf(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){
-var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function Af(e){
-for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Bf(Object(n),!0).forEach((function(t){Yf(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Bf(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function Yf(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Rf,If,Nf,zf=o.Common.VisualComponent.create({
-mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:Rs.TAG+"TransactionDetail",classNames:{main:function(){return Rs.Css.css(jf||(jf=function(e,t){
+render:function(){return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this._getChild())}}));function Rf(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){
+var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function If(e){
+for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Rf(Object(n),!0).forEach((function(t){Nf(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Rf(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function Nf(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var zf,Ff,Uf,Hf=o.Common.VisualComponent.create({
+mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:Rs.TAG+"TransactionDetail",classNames:{main:function(){return Rs.Css.css(Af||(Af=function(e,t){
 return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))
 }(["\n        height: 100%;\n        width: 100%;\n        overflow: hidden;\n        background: white;\n      "])))}},opt:{pureRender:!0}},propTypes:{selectedPlace:o.PropTypes.object,
 selectedChargingPoint:o.PropTypes.shape({stationCode:o.PropTypes.number,chargingPoint:o.PropTypes.shape({chargingPointId:o.PropTypes.oneOfType([o.PropTypes.number,o.PropTypes.string])})}),
@@ -7284,45 +7311,45 @@ onTransactionRegister:o.PropTypes.func},componentDidMount:function(){this._loadT
 e.transaction.id&&e.transaction.id!==this.props.transaction.id&&this._handleTransactionGet(e.transaction)},_loadTransaction:function(){this._transactionIsNotNew()?this.setState({
 transactionGetState:Rs.states.ready}):this._handleTransactionGet(this.props.transaction)},_transactionIsNotNew:function(){
 return this.props.transaction&&Object.prototype.hasOwnProperty.call(this.props.transaction,"id")&&void 0===this.props.transaction.id},_handleTransactionGet:function(e,t){var n=this
-;this.state.transactionGetState!==Rs.states.loading&&this.setState({transactionGetState:Rs.states.loading},(function(){P.transactionGet(Af(Af(Af({},e.id&&{id:e.id}),e.code&&{code:e.code}),e.email&&{
+;this.state.transactionGetState!==Rs.states.loading&&this.setState({transactionGetState:Rs.states.loading},(function(){P.transactionGet(If(If(If({},e.id&&{id:e.id}),e.code&&{code:e.code}),e.email&&{
 email:e.email})).then(n._handleTransactionGetDone).catch(n._handleTransactionGetFail)}),t)},_handleTransactionGetDone:function(e){this.setState({transactionGetState:Rs.states.ready,
 transaction:e.transaction})},_handleTransactionGetFail:function(e){this.setState({transactionGetState:Rs.states.error,transactionGetError:e.data})},_getTransaction:function(){
 return this._transactionIsNotNew()?this.props.transaction:this.state.transaction},_getChild:function(){var e;switch(this.state.transactionGetState){case Rs.states.loading:
-e=o.Common.Element.create(o.Bricks.Loading,null);break;case Rs.states.ready:e=o.Common.Element.create(Df,{selectedPlace:this.props.selectedPlace,transaction:Af(Af({},this._getTransaction()),{},{
+e=o.Common.Element.create(o.Bricks.Loading,null);break;case Rs.states.ready:e=o.Common.Element.create(Yf,{selectedPlace:this.props.selectedPlace,transaction:If(If({},this._getTransaction()),{},{
 redirect:this.props.transaction.redirect}),selectedChargingPoint:this.props.selectedChargingPoint,onTransactionPlaceLoaded:this.props.onTransactionPlaceLoaded,
-onTransactionRegister:this.props.onTransactionRegister});break;case Rs.states.error:e=o.Common.Element.create(o.Bricks.Error,{content:o.Common.Element.create(o.Bricks.Lsi,{
-lsi:Nc.transactionDetail.transactionLoadingFailed})})}return e},render:function(){return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this._getChild())}})
-;var Ff,Uf,Hf,Wf,Vf,Gf=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin],statics:{tagName:mn.TAG+"StationSearchInputHeader",classNames:{main:mn.Css.css(Rf||(Rf=function(e,t){
-return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))
-}(["\n        margin: -1rem 0 1rem;\n        font-size: 1.5rem;\n        font-weight: bold;\n        display: flex;\n        flex: 0 0 auto;\n        align-items: center;\n        > *:not(:last-child) {\n            margin-right: 0.5rem;\n          }\n          button {\n            ","\n            width: 2rem;\n            span {\n              font-size: 18pt;\n            }\n            &:last-child {\n              margin-left: auto;\n            }\n          }\n      "])),Je(null===(If=o.Environment.chargeUp)||void 0===If||null===(Nf=If.colors)||void 0===Nf?void 0:Nf.secondary))
+onTransactionRegister:this.props.onTransactionRegister});break;case Rs.states.error:id.errorState("transaction-detail-loading-failed"),e=o.Common.Element.create(o.Bricks.Error,{
+content:o.Common.Element.create(o.Bricks.Lsi,{lsi:Nc.transactionDetail.transactionLoadingFailed})})}return e},render:function(){
+return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this._getChild())}});var Wf,Vf,Gf,Kf,Zf,Jf=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin],statics:{
+tagName:mn.TAG+"StationSearchInputHeader",classNames:{main:mn.Css.css(zf||(zf=function(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))
+}(["\n        margin: -1rem 0 1rem;\n        font-size: 1.5rem;\n        font-weight: bold;\n        display: flex;\n        flex: 0 0 auto;\n        align-items: center;\n        > *:not(:last-child) {\n            margin-right: 0.5rem;\n          }\n          button {\n            ","\n            width: 2rem;\n            span {\n              font-size: 18pt;\n            }\n            &:last-child {\n              margin-left: auto;\n            }\n          }\n      "])),Je(null===(Ff=o.Environment.chargeUp)||void 0===Ff||null===(Uf=Ff.colors)||void 0===Uf?void 0:Uf.secondary))
 }},propTypes:{onClick:o.PropTypes.func.isRequired},render:function(){return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create(o.Bricks.Button,{
 bgStyle:"transparent",onClick:this.props.onClick},o.Common.Element.create(o.Bricks.Lsi,null,o.Common.Element.create(o.Bricks.Icon,{icon:mn.icons.mdiArrowLeft,tooltip:dr.getFeedbackTooltip("back")
-}))),o.Common.Element.create(o.Bricks.Lsi,{lsi:An.stationSearchInput.searchStation}))}});function Kf(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}
-}))}var Zf=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.PureRenderMixin],statics:{tagName:mn.TAG+"StationSearchInput",classNames:{
-main:mn.Css.css(Ff||(Ff=Kf(["\n        background: white;\n        display: flex;\n        flex-direction: column;\n      "]))),
-showInfo:mn.Css.css(Uf||(Uf=Kf(["\n        position: absolute;\n        padding: 1rem;\n        height: 95%;\n        z-index: 1000;\n      "]))),
-input:mn.Css.css(Hf||(Hf=Kf(["\n        width: 100%;\n        display: flex;\n        align-items: center;\n        overflow: hidden;\n        justify-content: center;\n        flex-shrink: 0;\n        position: relative;\n      "]))),
+}))),o.Common.Element.create(o.Bricks.Lsi,{lsi:An.stationSearchInput.searchStation}))}});function qf(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}
+}))}var Qf=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.PureRenderMixin],statics:{tagName:mn.TAG+"StationSearchInput",classNames:{
+main:mn.Css.css(Wf||(Wf=qf(["\n        background: white;\n        display: flex;\n        flex-direction: column;\n      "]))),
+showInfo:mn.Css.css(Vf||(Vf=qf(["\n        position: absolute;\n        padding: 1rem;\n        height: 95%;\n        z-index: 1000;\n      "]))),
+input:mn.Css.css(Gf||(Gf=qf(["\n        width: 100%;\n        display: flex;\n        align-items: center;\n        overflow: hidden;\n        justify-content: center;\n        flex-shrink: 0;\n        position: relative;\n      "]))),
 stationCodeInputField:function(){var e,t,n,r,i,a,s,c,l,u
-;return mn.Css.css(Wf||(Wf=Kf(["\n        flex: 1;\n        margin: 0 !important;\n        .uu5-forms-text-input {\n          display: flex;\n          justify-content: center;\n          align-items: center;\n          input {\n            height: 64px !important;\n            padding-right: 70px !important;\n            padding-left: 70px !important;\n            font-size: 14pt;\n            font-weight: bold;\n            text-align: center;\n            ::placeholder {\n              color: "," !important;\n              opacity: 1;\n            }\n          }\n        }\n        .uu5-forms-input-form-item {\n          border: 2px solid ",";\n          border-radius: 100rem;\n          background-color: ",";\n          color: ",";\n        }\n        .uu5-forms-input-error {\n          background-color: "," !important;\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.color,null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.primary.backgroundColor,null===(i=o.Environment.chargeUp)||void 0===i||null===(a=i.colors)||void 0===a?void 0:a.primary.backgroundColor,null===(s=o.Environment.chargeUp)||void 0===s||null===(c=s.colors)||void 0===c?void 0:c.primary.color,null===(l=o.Environment.chargeUp)||void 0===l||null===(u=l.colors)||void 0===u?void 0:u.primary.backgroundColor)
+;return mn.Css.css(Kf||(Kf=qf(["\n        flex: 1;\n        margin: 0 !important;\n        .uu5-forms-text-input {\n          display: flex;\n          justify-content: center;\n          align-items: center;\n          input {\n            height: 64px !important;\n            padding-right: 70px !important;\n            padding-left: 70px !important;\n            font-size: 14pt;\n            font-weight: bold;\n            text-align: center;\n            ::placeholder {\n              color: "," !important;\n              opacity: 1;\n            }\n          }\n        }\n        .uu5-forms-input-form-item {\n          border: 2px solid ",";\n          border-radius: 100rem;\n          background-color: ",";\n          color: ",";\n        }\n        .uu5-forms-input-error {\n          background-color: "," !important;\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.color,null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.primary.backgroundColor,null===(i=o.Environment.chargeUp)||void 0===i||null===(a=i.colors)||void 0===a?void 0:a.primary.backgroundColor,null===(s=o.Environment.chargeUp)||void 0===s||null===(c=s.colors)||void 0===c?void 0:c.primary.color,null===(l=o.Environment.chargeUp)||void 0===l||null===(u=l.colors)||void 0===u?void 0:u.primary.backgroundColor)
 },button:function(){var e,t
-;return mn.Css.css(Vf||(Vf=Kf(["\n        height: 3rem;\n        width: 3rem;\n        flex-shrink: 0;\n        border-radius: 100rem;\n        position: absolute;\n        top: 8px;\n        right: 10px;\n        ","\n        span {\n          font-size: 18pt;\n        }\n      "])),qe(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary))
+;return mn.Css.css(Zf||(Zf=qf(["\n        height: 3rem;\n        width: 3rem;\n        flex-shrink: 0;\n        border-radius: 100rem;\n        position: absolute;\n        top: 8px;\n        right: 10px;\n        ","\n        span {\n          font-size: 18pt;\n        }\n      "])),qe(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary))
 }},opt:{pureRender:!0}},propTypes:{mapContext:o.PropTypes.object},getInitialState:function(){return{showInfo:!1}},_onInputFocus:function(){window.scrollTo({top:0}),this.setState({showInfo:!0})},
 _handleSearchClick:function(){var e=this._input.getValue();this._handleValidate({value:e,component:this._input})&&this.props.mapContext.onChangeStationListFilter(e)},_hideInfo:function(){var e=this
 ;this.setState({showInfo:!1},(function(){return e._input.setValue("")}))},_handleValidate:function(e){var t;if((null===(t=e.value)||void 0===t?void 0:t.length)>=3)return!0
 ;e.component.setFeedback("error",o.Common.Tools.getLsiValueByLanguage(An.stationSearchInput.shortSearchText),e.value)},render:function(){var e=this,t=this.getClassName(),n=this.getMainPropsToPass()
-;return this.state.showInfo&&(n.className=[n.className,t.showInfo].join(" ")),o.Common.Element.create(o.Bricks.Div,n,this.state.showInfo&&o.Common.Element.create(Gf,{onClick:this._hideInfo
+;return this.state.showInfo&&(n.className=[n.className,t.showInfo].join(" ")),o.Common.Element.create(o.Bricks.Div,n,this.state.showInfo&&o.Common.Element.create(Jf,{onClick:this._hideInfo
 }),o.Common.Element.create("div",{className:t.input},o.Common.Element.create(o.Bricks.Lsi,null,(function(n){var r=n.language;return o.Common.Element.create(o.Forms.Text,{ref_:function(t){
 return e._input=t},name:"stationSearch",className:t.stationCodeInputField(),placeholder:An.stationSearchInput.searchStation[r],size:"l",onFocus:e._onInputFocus,onEnter:e._handleSearchClick,
 controlled:!1})})),o.Common.Element.create(o.Bricks.Button,{className:t.button(),onClick:this._handleSearchClick},o.Common.Element.create(o.Bricks.Icon,{icon:mn.icons.magnify
-}))),this.state.showInfo&&o.Common.Element.create(Rn,null))}});function Jf(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){
-return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function qf(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0
-}):e[t]=n,e}var Qf=function(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Jf(Object(n),!0).forEach((function(t){qf(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Jf(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}({},cn),Xf=n(312),$f=n.n(Xf);function eh(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){
-return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function th(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{}
-;t%2?eh(Object(n),!0).forEach((function(t){nh(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):eh(Object(n)).forEach((function(t){
-Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function nh(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}
-var rh,oh,ih,ah,sh,ch,lh=th(th({},Ln),{},{stationQrCodeReader:{scanQrCode:{cs:"Naskenujte QR kód",en:"Scan QR code",de:"QR Code scannen",sk:"Naskenujte QR kód",uk:"Відскануйте QR-код ",
+}))),this.state.showInfo&&o.Common.Element.create(Rn,null))}});function Xf(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){
+return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function $f(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0
+}):e[t]=n,e}var eh=function(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Xf(Object(n),!0).forEach((function(t){$f(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Xf(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}({},cn),th=n(312),nh=n.n(th);function rh(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){
+return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function oh(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{}
+;t%2?rh(Object(n),!0).forEach((function(t){ih(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):rh(Object(n)).forEach((function(t){
+Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function ih(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}
+var ah,sh,ch,lh,uh,dh,mh=oh(oh({},Ln),{},{stationQrCodeReader:{scanQrCode:{cs:"Naskenujte QR kód",en:"Scan QR code",de:"QR Code scannen",sk:"Naskenujte QR kód",uk:"Відскануйте QR-код ",
 sv:"Skanna QR-kod"},station:{cs:"Stanice",en:"Station",de:"Ladestation",sk:"Stanica",uk:"Станція ",sv:"Station"},stationWithCode:{cs:"Stanice s kódem",en:"Station with code",de:"Ladestation mit Code",
 sk:"Stanica s kódom",uk:"Станцію з кодом",sv:"Station med kod"},notFound:{cs:"nenalezena",en:"was not found",de:"nicht gefunden",sk:"nenájdená",uk:" не знайдено ",sv:"har inte hittats"},
 stationDoesNotExist:{cs:"Stanice neexistuje!",en:"Station does not exist!",de:"Ladestation existiert nicht!",sk:"Stanica neexistuje!",uk:"Станція не існує! ",sv:"Stationen finns inte!"},openStation:{
@@ -7331,14 +7358,14 @@ sk:"Skenovať znova",uk:"Знову скануйте ",sv:"Skanna igen"},uploadI
 doScanQrCode:{cs:"Naskenovat QR kód",en:"Scan QR code",de:"QR Code scannen",sk:"Naskenovať QR kód",uk:"Відскануйте QR-код ",sv:"Skanna QR-kod"},doUseCamera:{cs:"Použít kameru",en:"Use camera",
 de:"Kamera benutzen",sk:"Použiť kameru",uk:"Використайте камеру",sv:"Använd kamera"},invalidQrCode:{cs:"QR kód není validní",de:"QR Code is ungültig",uk:"QR-код недійсний ",sv:"Ogiltig QR-kod"},
 stationWithCodeNotFound:{cs:"Stanice s kódem %s nenalezena!",en:"Station with code %s was not found!",de:"Station mit Code %s nicht gefunden!",sk:"Stanica s kódom %s nenájdená!",
-uk:"Станцію з кодом % s не знайдено! ",sv:"Station med kod %s hittades inte!"}}});function uh(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}
-var dh,mh,ph=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:cn.TAG+"StationQrCodeReaderContent",classNames:{
-main:function(){return cn.Css.css(rh||(rh=uh(["\n        height: 100%;\n        overflow: visible;\n        padding: 0 1.5em;\n        text-align: center;\n      "])))},feedback:function(){
-return cn.Css.css(oh||(oh=uh(["\n        width: 100%;\n        font-size: 1.5rem;\n        margin-top: 1rem;\n      "])))},controls:function(){var e,t,n,r
-;return cn.Css.css(ih||(ih=uh(["\n        display: flex;\n        flex-direction: column;\n        flex-shrink: 0;\n        margin-top: 1rem;\n        button {\n          ","\n          ","\n          &:last-child {\n            ","\n          }\n\n          &:not(:last-child) {\n            margin-bottom: 0.5rem;\n          }\n        }\n      "])),Ge,Ke(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary),Ze(null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.secondary))
-},qrReader:function(){return cn.Css.css(ah||(ah=uh(["\n        border-radius: 1rem;\n        overflow: hidden;\n        background: black;\n      "])))},qrReaderOk:function(){
-return cn.Css.css(sh||(sh=uh(["\n        box-shadow: 0 0 6px 4px ",";\n      "])),Fe)},qrReaderFail:function(){return cn.Css.css(ch||(ch=uh(["\n        box-shadow: 0 0 6px 4px ",";\n      "])),Re)}},
-opt:{pureRender:!1},lsi:lh.stationQrCodeReader},propTypes:{onPlaceSelect:o.PropTypes.func},getInitialState:function(){return{legacyMode:!1}},componentDidUpdate:function(e,t){
+uk:"Станцію з кодом % s не знайдено! ",sv:"Station med kod %s hittades inte!"}}});function ph(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}
+var fh,hh,gh=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:cn.TAG+"StationQrCodeReaderContent",classNames:{
+main:function(){return cn.Css.css(ah||(ah=ph(["\n        height: 100%;\n        overflow: visible;\n        padding: 0 1.5em;\n        text-align: center;\n      "])))},feedback:function(){
+return cn.Css.css(sh||(sh=ph(["\n        width: 100%;\n        font-size: 1.5rem;\n        margin-top: 1rem;\n      "])))},controls:function(){var e,t,n,r
+;return cn.Css.css(ch||(ch=ph(["\n        display: flex;\n        flex-direction: column;\n        flex-shrink: 0;\n        margin-top: 1rem;\n        button {\n          ","\n          ","\n          &:last-child {\n            ","\n          }\n\n          &:not(:last-child) {\n            margin-bottom: 0.5rem;\n          }\n        }\n      "])),Ge,Ke(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary),Ze(null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.secondary))
+},qrReader:function(){return cn.Css.css(lh||(lh=ph(["\n        border-radius: 1rem;\n        overflow: hidden;\n        background: black;\n      "])))},qrReaderOk:function(){
+return cn.Css.css(uh||(uh=ph(["\n        box-shadow: 0 0 6px 4px ",";\n      "])),Fe)},qrReaderFail:function(){return cn.Css.css(dh||(dh=ph(["\n        box-shadow: 0 0 6px 4px ",";\n      "])),Re)}},
+opt:{pureRender:!1},lsi:mh.stationQrCodeReader},propTypes:{onPlaceSelect:o.PropTypes.func},getInitialState:function(){return{legacyMode:!1}},componentDidUpdate:function(e,t){
 t.stationCode!==this.state.stationCode&&this.state.stationCode&&this._handlePlaceGetStation()},_onStationCodeConfirm:function(){var e=this
 ;this.state.placeGetStation&&this.state.placeGetStation!==cn.states.error&&o.Environment.getPage().getModal().close((function(){return e.props.onPlaceSelect(e.state.placeGetStation)}))},
 _onStationCodeClear:function(){this.setState({stationCode:"",placeGetStation:null,legacyMode:!1})},_handleError:function(e){console.log("QR reader Error: ",e)},_handleScan:function(e){if(e){
@@ -7346,9 +7373,10 @@ var t=o.Common.Url.parse(e).parameters;t&&Object.prototype.hasOwnProperty.call(t
 legacyMode:e||!this.state.legacyMode},(function(){t.state.legacyMode&&t._qrReader.openImageDialog()}))},_getFeedback:function(){var e
 ;if(this.state.placeGetStation)switch(this.state.placeGetStationState){case cn.states.loading:e=o.Common.Element.create(o.Bricks.Loading,null);break;case cn.states.ready:
 e=o.Common.Element.create(o.Bricks.Span,null,this.getLsiComponent("station"),": ",o.Common.Element.create(o.Bricks.Strong,null,this.state.placeGetStation.chargingStation.stationCode));break
-;case cn.states.error:e=o.Common.Element.create(o.Bricks.Error,null,this.getLsiComponent("stationWithCode")," ",this.state.stationCode," ",this.getLsiComponent("notFound"),"!")
-}else this.state.placeGetStationState===cn.states.error&&(e=o.Common.Element.create(o.Bricks.Span,null,this.getLsiComponent("stationDoesNotExist")));return o.Common.Element.create(o.Bricks.Div,{
-className:this.getClassName().feedback()},e)},_getControls:function(){var e,t=this
+;case cn.states.error:id.errorState("station-qr-code-not-found",this.state.stationCode),
+e=o.Common.Element.create(o.Bricks.Error,null,this.getLsiComponent("stationWithCode")," ",this.state.stationCode," ",this.getLsiComponent("notFound"),"!")
+}else this.state.placeGetStationState===cn.states.error&&(id.errorState("station-does-not-exist"),e=o.Common.Element.create(o.Bricks.Span,null,this.getLsiComponent("stationDoesNotExist")))
+;return o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().feedback()},e)},_getControls:function(){var e,t=this
 ;return e=this.state.placeGetStation?this.state.placeGetStationState===cn.states.ready?o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create(o.Bricks.Button,{
 onClick:this._onStationCodeConfirm},this.getLsiComponent("openStation")),o.Common.Element.create(o.Bricks.Button,{onClick:this._onStationCodeClear,bgStyle:"outline"
 },this.getLsiComponent("scanAgain"))):this.state.placeGetStationState===cn.states.error?o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create(o.Bricks.Button,{onClick:function(){
@@ -7364,73 +7392,73 @@ _handlePlaceGetStation:function(){var e=this,t=this.state.stationCode.match(/\d/
 placeGetStationState:cn.states.ready,placeGetStation:e})},_handlePlaceGetStationFail:function(e){this.setState({placeGetStationState:cn.states.error,placeGetStationError:e.data})},render:function(){
 var e=this;return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create(o.Bricks.Div,{
 className:o.Common.Tools.joinClassNames(this.getClassName().qrReader(),this.state.placeGetStationState===cn.states.error?this.getClassName().qrReaderOk():this.state.placeGetStation?this.getClassName().qrReaderFail():"")
-},o.Common.Element.create($f.a,{ref:function(t){return e._qrReader=t},legacyMode:this.state.legacyMode,delay:!this.state.stationCode&&500,onError:this._handleError,onScan:this._handleScan
-})),this._getFeedback(),this._getControls())}});function fh(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}
-var hh,gh,yh=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin],statics:{tagName:cn.TAG+"StationQrCodeReaderWrapper",classNames:{main:function(){
-return cn.Css.css(dh||(dh=fh(["\n        height: 100%;\n        overflow: visible;\n        padding: 0 1.5em;\n        text-align: center;\n      "])))},controls:function(){var e,t
-;return cn.Css.css(mh||(mh=fh(["\n        display: flex;\n        flex-direction: column;\n        flex-shrink: 0;\n        margin-top: 1rem;\n        button {\n          ","\n          ","\n        }\n      "])),Ge,Ze(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary))
-}},lsi:lh.stationQrCodeReader},propTypes:{onPlaceSelect:o.PropTypes.func},_getControls:function(){return o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().controls()
+},o.Common.Element.create(nh.a,{ref:function(t){return e._qrReader=t},legacyMode:this.state.legacyMode,delay:!this.state.stationCode&&500,onError:this._handleError,onScan:this._handleScan
+})),this._getFeedback(),this._getControls())}});function yh(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}
+var vh,bh,_h=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin],statics:{tagName:cn.TAG+"StationQrCodeReaderWrapper",classNames:{main:function(){
+return cn.Css.css(fh||(fh=yh(["\n        height: 100%;\n        overflow: visible;\n        padding: 0 1.5em;\n        text-align: center;\n      "])))},controls:function(){var e,t
+;return cn.Css.css(hh||(hh=yh(["\n        display: flex;\n        flex-direction: column;\n        flex-shrink: 0;\n        margin-top: 1rem;\n        button {\n          ","\n          ","\n        }\n      "])),Ge,Ze(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary))
+}},lsi:mh.stationQrCodeReader},propTypes:{onPlaceSelect:o.PropTypes.func},_getControls:function(){return o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().controls()
 },o.Common.Element.create(o.Bricks.Button,{onClick:this._onStationCodeClear,content:this.getLsiComponent("scanAgain"),bgStyle:"outline"}))},_onStationCodeClear:function(){
 o.Environment.getPage().getModal().close((function(){return window.webkit.messageHandlers.uuAppGetQrCode.postMessage("handleQr")}))},render:function(){
-return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this.props.children,this._getControls())}});function vh(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{
-raw:{value:Object.freeze(t)}}))}var bh=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin],statics:{tagName:cn.TAG+"StationQrCodeReaderWebViewContent",classNames:{feedback:function(){
-return cn.Css.css(hh||(hh=vh(["\n        width: 100%;\n        font-size: 1.5rem;\n        margin-top: 1rem;\n      "])))},controls:function(){var e,t
-;return cn.Css.css(gh||(gh=vh(["\n        display: flex;\n        flex-direction: column;\n        flex-shrink: 0;\n        margin-top: 1rem;\n        button {\n          ","\n          ","\n          &:not(:last-child) {\n            margin-bottom: 0.5rem;\n          }\n        }\n      "])),Ge,Ke(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary))
-}},lsi:lh.stationQrCodeReader},propTypes:{onPlaceSelect:o.PropTypes.func.isRequired,data:o.PropTypes.object.isRequired},_getFeedback:function(){return o.Common.Element.create(o.Bricks.Div,{
-className:this.getClassName("feedback")},o.Common.Element.create(o.Bricks.Lsi,{lsi:lh.stationQrCodeReader.station
+return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this.props.children,this._getControls())}});function kh(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{
+raw:{value:Object.freeze(t)}}))}var Ch=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin],statics:{tagName:cn.TAG+"StationQrCodeReaderWebViewContent",classNames:{feedback:function(){
+return cn.Css.css(vh||(vh=kh(["\n        width: 100%;\n        font-size: 1.5rem;\n        margin-top: 1rem;\n      "])))},controls:function(){var e,t
+;return cn.Css.css(bh||(bh=kh(["\n        display: flex;\n        flex-direction: column;\n        flex-shrink: 0;\n        margin-top: 1rem;\n        button {\n          ","\n          ","\n          &:not(:last-child) {\n            margin-bottom: 0.5rem;\n          }\n        }\n      "])),Ge,Ke(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary))
+}},lsi:mh.stationQrCodeReader},propTypes:{onPlaceSelect:o.PropTypes.func.isRequired,data:o.PropTypes.object.isRequired},_getFeedback:function(){return o.Common.Element.create(o.Bricks.Div,{
+className:this.getClassName("feedback")},o.Common.Element.create(o.Bricks.Lsi,{lsi:mh.stationQrCodeReader.station
 }),": ",o.Common.Element.create(o.Bricks.Strong,null,this.props.data.chargingStation.stationCode))},_getControls:function(){return o.Common.Element.create(o.Bricks.Div,{
 className:this.getClassName("controls")},o.Common.Element.create(o.Bricks.Button,{onClick:this._onStationCodeConfirm,content:this.getLsiComponent("openStation")}))},_onStationCodeConfirm:function(){
 var e=this;o.Environment.getPage().getModal().close((function(){return e.props.onPlaceSelect(e.props.data)}))},render:function(){
-return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this._getFeedback(),this._getControls())}});function _h(){return(_h=Object.assign||function(e){
+return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this._getFeedback(),this._getControls())}});function Sh(){return(Sh=Object.assign||function(e){
 for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}
-var kh,Ch,Sh,wh,Mh=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin],statics:{tagName:cn.TAG+"StationQrCodeReaderWebViewLoader",lsi:lh.stationQrCodeReader},
+var wh,Mh,Ph,Eh,Lh=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin],statics:{tagName:cn.TAG+"StationQrCodeReaderWebViewLoader",lsi:mh.stationQrCodeReader},
 propTypes:{onPlaceSelect:o.PropTypes.func.isRequired,stationCode:o.PropTypes.string.isRequired},render:function(){var e=this,t=this.props,n=t.stationCode,r=t.onPlaceSelect
 ;return o.Common.Element.create(o.Common.DataManager,{pessimistic:!0,onLoad:P.placeGetStation,data:{stationCode:n}},(function(t){var i=t.errorState,a=t.data
-;return i?o.Common.Element.create(o.Bricks.Error,{content:o.Common.Element.create(o.Bricks.Lsi,{lsi:lh.stationQrCodeReader.stationWithCodeNotFound,params:[n]})
-}):a?o.Common.Element.create(bh,_h({},e.getMainPropsToPass(),{data:a,onPlaceSelect:r})):o.Common.Element.create(o.Bricks.Loading,null)}))}});function Ph(){return(Ph=Object.assign||function(e){
-for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}function Eh(e,t){return t||(t=e.slice(0)),
-Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var Lh,Oh,Th,xh,jh,Dh,Bh=o.Common.VisualComponent.create({
-mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:Qf.TAG+"StationQrCodeReader",classNames:{
-main:Qf.Css.css(kh||(kh=Eh(["\n        width: 100%;\n        height: 64px;\n        margin-bottom: 1rem;\n        font-weight: bold;\n      "]))),
-text:Qf.Css.css(Ch||(Ch=Eh(["\n        font-size: 14pt !important;\n      "]))),icon:Qf.Css.css(Sh||(Sh=Eh(["\n        font-size: 32px !important;\n      "]))),modal:function(){var e,t
-;return Qf.Css.css(wh||(wh=Eh(["\n        display: flex !important;\n        justify-content: center;\n        align-items: center;\n        .uu5-bricks-modal-dialog {\n          border-radius: 8px;\n          max-width: 400px;\n          padding: 2rem;\n          .uu5-bricks-modal-header {\n            flex-shrink: 0;\n            font-size: 1.5rem;\n            .uu5-bricks-modal-header-title {\n              font-size: 2rem;\n              font-weight: bold;\n              text-align: center;\n              color: ",";\n              width: 100%;\n            }\n          }\n          .uu5-bricks-modal-body {\n            display: flex;\n            flex-direction: column;\n            text-align: center;\n          }\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.backgroundColor)
-}},opt:{pureRender:!0},lsi:lh.stationQrCodeReader},propTypes:{onPlaceSelect:o.PropTypes.func.isRequired},_handleBasicScanner:function(){o.Environment.getPage().getModal().open({size:"l",
-header:this.getLsiComponent("scanQrCode"),content:o.Common.Element.create(ph,{onPlaceSelect:this.props.onPlaceSelect})})},_handleWebviewScanner:function(e){var t,n=o.Common.Url.parse(e).parameters
-;t=n&&n.stationCode?o.Common.Element.create(Mh,{stationCode:n.stationCode,onPlaceSelect:this.props.onPlaceSelect}):o.Common.Element.create(o.Bricks.Error,{content:this.getLsiComponent("invalidQrCode")
-}),o.Environment.getPage().getModal().open({size:"l",header:this.getLsiComponent("scanQrCode"),content:o.Common.Element.create(yh,null,t)})},_handleQrScanner:function(){var e=this
-;window.navigator&&window.navigator.userAgent.startsWith("uuAppNativeWebView")?(window.handleQr=function(t){e._handleWebviewScanner(t)},
-window.webkit.messageHandlers.uuAppGetQrCode.postMessage("handleQr")):this._handleBasicScanner()},render:function(){return o.Common.Element.create(Ea,Ph({type:"tertiary"},this.getMainPropsToPass(),{
-onClick:this._handleQrScanner}),o.Common.Element.create(o.Bricks.Icon,{className:this.getClassName("icon"),icon:"mdi-qrcode"}),o.Common.Element.create(o.Bricks.Lsi,{lsi:lh.stationSearch.scanQrCode,
-className:this.getClassName("text")}))}});function Ah(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}
-var Yh,Rh=Ct(nn(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:cn.TAG+"StationSearch",classNames:{main:function(){
-return cn.Css.css(Lh||(Lh=Ah(["\n        background: white;\n        display: flex;\n        flex-direction: column;\n        height: 100%;\n        overflow-x: hidden;\n        overflow-y: auto;\n        padding: 1rem;\n        position: relative;\n      "])))
+;return i?(id.errorState("station-with-code-not-found",n),o.Common.Element.create(o.Bricks.Error,{content:o.Common.Element.create(o.Bricks.Lsi,{lsi:mh.stationQrCodeReader.stationWithCodeNotFound,
+params:[n]})})):a?o.Common.Element.create(Ch,Sh({},e.getMainPropsToPass(),{data:a,onPlaceSelect:r})):o.Common.Element.create(o.Bricks.Loading,null)}))}});function Oh(){
+return(Oh=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}
+function Th(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var xh,jh,Dh,Bh,Ah,Yh,Rh=o.Common.VisualComponent.create({
+mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:eh.TAG+"StationQrCodeReader",classNames:{
+main:eh.Css.css(wh||(wh=Th(["\n        width: 100%;\n        height: 64px;\n        margin-bottom: 1rem;\n        font-weight: bold;\n      "]))),
+text:eh.Css.css(Mh||(Mh=Th(["\n        font-size: 14pt !important;\n      "]))),icon:eh.Css.css(Ph||(Ph=Th(["\n        font-size: 32px !important;\n      "]))),modal:function(){var e,t
+;return eh.Css.css(Eh||(Eh=Th(["\n        display: flex !important;\n        justify-content: center;\n        align-items: center;\n        .uu5-bricks-modal-dialog {\n          border-radius: 8px;\n          max-width: 400px;\n          padding: 2rem;\n          .uu5-bricks-modal-header {\n            flex-shrink: 0;\n            font-size: 1.5rem;\n            .uu5-bricks-modal-header-title {\n              font-size: 2rem;\n              font-weight: bold;\n              text-align: center;\n              color: ",";\n              width: 100%;\n            }\n          }\n          .uu5-bricks-modal-body {\n            display: flex;\n            flex-direction: column;\n            text-align: center;\n          }\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.backgroundColor)
+}},opt:{pureRender:!0},lsi:mh.stationQrCodeReader},propTypes:{onPlaceSelect:o.PropTypes.func.isRequired},_handleBasicScanner:function(){o.Environment.getPage().getModal().open({size:"l",
+header:this.getLsiComponent("scanQrCode"),content:o.Common.Element.create(gh,{onPlaceSelect:this.props.onPlaceSelect})})},_handleWebviewScanner:function(e){var t,n=o.Common.Url.parse(e).parameters
+;n&&n.stationCode?t=o.Common.Element.create(Lh,{stationCode:n.stationCode,onPlaceSelect:this.props.onPlaceSelect}):(id.errorState("invalid-qr-code",e),t=o.Common.Element.create(o.Bricks.Error,{
+content:this.getLsiComponent("invalidQrCode")})),o.Environment.getPage().getModal().open({size:"l",header:this.getLsiComponent("scanQrCode"),content:o.Common.Element.create(_h,null,t)})},
+_handleQrScanner:function(){var e=this;window.navigator&&window.navigator.userAgent.startsWith("uuAppNativeWebView")?(window.handleQr=function(t){e._handleWebviewScanner(t)},
+window.webkit.messageHandlers.uuAppGetQrCode.postMessage("handleQr")):this._handleBasicScanner()},render:function(){return o.Common.Element.create(Ea,Oh({type:"tertiary"},this.getMainPropsToPass(),{
+onClick:this._handleQrScanner}),o.Common.Element.create(o.Bricks.Icon,{className:this.getClassName("icon"),icon:"mdi-qrcode"}),o.Common.Element.create(o.Bricks.Lsi,{lsi:mh.stationSearch.scanQrCode,
+className:this.getClassName("text")}))}});function Ih(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}
+var Nh,zh=Ct(nn(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:cn.TAG+"StationSearch",classNames:{main:function(){
+return cn.Css.css(xh||(xh=Ih(["\n        background: white;\n        display: flex;\n        flex-direction: column;\n        height: 100%;\n        overflow-x: hidden;\n        overflow-y: auto;\n        padding: 1rem;\n        position: relative;\n      "])))
 },body:function(){
-return cn.Css.css(Oh||(Oh=Ah(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        flex: 1 0 auto;\n        text-align: center;\n        padding-bottom: 20px;\n        > div,\n        > span {\n          width: 100%;\n          &:not(:last-child) {\n            margin-bottom: 1rem;\n          }\n        }\n        button {\n          flex-shrink: 0;\n        }\n      "])))
+return cn.Css.css(jh||(jh=Ih(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        flex: 1 0 auto;\n        text-align: center;\n        padding-bottom: 20px;\n        > div,\n        > span {\n          width: 100%;\n          &:not(:last-child) {\n            margin-bottom: 1rem;\n          }\n        }\n        button {\n          flex-shrink: 0;\n        }\n      "])))
 },label:function(){
-return cn.Css.css(Th||(Th=Ah(["\n        font-size: 2rem;\n        font-weight: bold;\n        margin: 3rem 0 1rem;\n        ","\n      "])),o.Utils.ScreenSize.getMaxMediaQueries("m","margin-top: 1rem;"))
+return cn.Css.css(Dh||(Dh=Ih(["\n        font-size: 2rem;\n        font-weight: bold;\n        margin: 3rem 0 1rem;\n        ","\n      "])),o.Utils.ScreenSize.getMaxMediaQueries("m","margin-top: 1rem;"))
 },searchInfo:function(){var e,t
-;return cn.Css.css(xh||(xh=Ah(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        padding: 0 !important;\n        flex-shrink: 0;\n        > span {\n          font-size: 100%;\n        }\n        > div {\n          margin-top: 7rem;\n          margin-bottom: 1rem;\n          width: calc(100% + 2rem);\n          padding-top: 40%;\n          background: ",";\n          position: relative;\n          background-size: contain;\n          background-position: center;\n          > button {\n            position: absolute;\n            top: 0;\n            right: 0;\n            left: 0;\n            border-radius: 100%;\n            width: 5rem;\n            height: 5rem;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            margin: 0 auto;\n            font-size: 2.5rem;\n            font-weight: bold;\n            line-height: 1;\n            transform: translateY(-4rem);\n            cursor: pointer;\n            ","\n            & .uu5-bricks-icon {\n              font-size: 3rem;\n            }\n          }\n        }\n      "])),Ae,qe(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary))
+;return cn.Css.css(Bh||(Bh=Ih(["\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n        padding: 0 !important;\n        flex-shrink: 0;\n        > span {\n          font-size: 100%;\n        }\n        > div {\n          margin-top: 7rem;\n          margin-bottom: 1rem;\n          width: calc(100% + 2rem);\n          padding-top: 40%;\n          background: ",";\n          position: relative;\n          background-size: contain;\n          background-position: center;\n          > button {\n            position: absolute;\n            top: 0;\n            right: 0;\n            left: 0;\n            border-radius: 100%;\n            width: 5rem;\n            height: 5rem;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            margin: 0 auto;\n            font-size: 2.5rem;\n            font-weight: bold;\n            line-height: 1;\n            transform: translateY(-4rem);\n            cursor: pointer;\n            ","\n            & .uu5-bricks-icon {\n              font-size: 3rem;\n            }\n          }\n        }\n      "])),Ae,qe(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary))
 },howItWorksButton:function(){var e,t
-;return cn.Css.css(jh||(jh=Ah(["\n        ","\n        ","\n        margin-top: auto !important;\n      "])),Ge,Je(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary))
+;return cn.Css.css(Ah||(Ah=Ih(["\n        ","\n        ","\n        margin-top: auto !important;\n      "])),Ge,Je(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary))
 },showMapButton:function(){var e,t
-;return cn.Css.css(Dh||(Dh=Ah(["\n        ","\n        ","\n        margin-bottom: 0.5rem;\n        ","\n      "])),Ge,Ze(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary),o.Utils.ScreenSize.getMinMediaQueries("l","display: none;"))
+;return cn.Css.css(Yh||(Yh=Ih(["\n        ","\n        ","\n        margin-bottom: 0.5rem;\n        ","\n      "])),Ge,Ze(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.secondary),o.Utils.ScreenSize.getMinMediaQueries("l","display: none;"))
 }},opt:{pureRender:!0},lsi:Ln.stationSearch},propTypes:{mapContext:o.PropTypes.object,spaContext:o.PropTypes.object,onPlaceSelect:o.PropTypes.func,onStationSearchFocus:o.PropTypes.func},
 getInitialState:function(){return{imageUrl:null}},componentDidMount:function(){this.props.mapContext.setMobileMapDisplay(0)},onPlaceSelect:function(e){return this.props.onPlaceSelect(e,!0,!0),this},
-_getImage:function(e){var t=this;if(null===this.state.imageUrl){var n=P.getBinaryData(e);Dm.testImageUrl(n).then((function(){t.setState({imageUrl:n})})).catch((function(){t.setState({imageUrl:Bm})}))}
+_getImage:function(e){var t=this;if(null===this.state.imageUrl){var n=P.getBinaryData(e);Ym.testImageUrl(n).then((function(){t.setState({imageUrl:n})})).catch((function(){t.setState({imageUrl:Rm})}))}
 },_getSearchInfo:function(){return this._getImage({code:"PORTAL_MAIN_PAGE_LOGO"}),o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().searchInfo()
 },o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:Ln.stationSearch.stationSearchSubHeaderText})),o.Common.Element.create(o.Bricks.Div,{style:{
 backgroundImage:"url(".concat(this.state.imageUrl,")"),backgroundPosition:"center center",backgroundRepeat:"no-repeat",backgroundColor:"rgba(0,0,0,0)"}}))},_getStationCodeInput:function(){
-return o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create(Bh,{onPlaceSelect:this.onPlaceSelect}),o.Common.Element.create(Zf,{mapContext:this.props.mapContext}))},
+return o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create(Rh,{onPlaceSelect:this.onPlaceSelect}),o.Common.Element.create(Qf,{mapContext:this.props.mapContext}))},
 _getNearestWidget:function(){return o.Common.Element.create(Er,null)},_getShowMapButton:function(){return o.Common.Element.create(o.Bricks.Button,{className:this.getClassName().showMapButton(),
 bgStyle:"outline",displayBlock:!0,onClick:this._handleShowMap},o.Common.Element.create(o.Bricks.Lsi,{lsi:Ln.stationSearch.showMap}))},_getHowItWorksButton:function(){
 return o.Common.Element.create(o.Bricks.Button,{className:this.getClassName().howItWorksButton(),displayBlock:!0,onClick:this._handleHowItWorksButtonClick},o.Common.Element.create(o.Bricks.Lsi,{
 lsi:Ln.stationSearch.showMeHowItWorks}))},_handleShowMap:function(){var e={lat:this.props.mapContext.mapOptions.center.lat,lng:this.props.mapContext.mapOptions.center.lng,
-zoom:this.props.mapContext.mapOptions.zoom};o.Environment.setRoute(o.Common.Element.create(hy,{parameters:e}),{url:{useCase:"map",parameters:e}})},_handleHowItWorksButtonClick:function(){
+zoom:this.props.mapContext.mapOptions.zoom};o.Environment.setRoute(o.Common.Element.create(vy,{parameters:e}),{url:{useCase:"map",parameters:e}})},_handleHowItWorksButtonClick:function(){
 var e=this.props.spaContext.awidConfig.howItWorksUri.replace("%lang%",o.Common.Tools.getLanguage());window.open(e,"_blank")},render:function(){
 return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create(o.Bricks.Div,{className:this.getClassName().body()},o.Common.Element.create(o.Bricks.Span,{
 className:this.getClassName().label()},o.Common.Element.create(o.Bricks.Lsi,{lsi:Ln.stationSearch.stationSearchHeaderText
-})),this._getSearchInfo(),this._getStationCodeInput(),this._getNearestWidget(),this._getShowMapButton(),this._getHowItWorksButton()))}})));var Ih=o.Common.VisualComponent.create({
-mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:H.TAG+"MapInfoPanel",classNames:{main:function(){return H.Css.css(Yh||(Yh=function(e,t){
+})),this._getSearchInfo(),this._getStationCodeInput(),this._getNearestWidget(),this._getShowMapButton(),this._getHowItWorksButton()))}})));var Fh=o.Common.VisualComponent.create({
+mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:H.TAG+"MapInfoPanel",classNames:{main:function(){return H.Css.css(Nh||(Nh=function(e,t){
 return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))
 }(["\n        background: ",";\n        box-shadow: ",";\n        overflow-y: auto;\n        display: flex;\n        flex-direction: column;\n        > * {\n          flex: 1 0 auto;\n        }\n        ","\n        ","\n      "])),Be,Ue,o.Utils.ScreenSize.getMaxMediaQueries("m","width: 100%;"),o.Utils.ScreenSize.getMinMediaQueries("l","z-index: 1;width: 30%;max-width: 600px;min-width: 420px;"))
 }},opt:{pureRender:!0}},propTypes:{vuc:o.PropTypes.string,isPlaceSelectable:o.PropTypes.bool,places:o.PropTypes.array,selectedPlace:o.PropTypes.object,place:o.PropTypes.object,
@@ -7442,44 +7470,45 @@ componentDidUpdate:function(e){if(e.vuc!==this.props.vuc)switch(this.props.vuc){
 return this.setState({registredTransaction:e},t),this},onTransactionUnregister:function(e){return this.setState({registredTransaction:null},e),this},_getPublicPlaceList:function(){var e=this
 ;return this.props.places.map((function(t){return t.chargingStations=t.chargingStations.filter((function(t){var n,r
 ;return t.isPublic||(null===(n=e.props.selectedPlace)||void 0===n||null===(r=n.chargingStation)||void 0===r?void 0:r.stationCode)===t.stationCode})),t}))},_getChild:function(){var e,t=this
-;switch(this.props.vuc){case j.Map.vuc.TRANSACTION_DETAIL:e=o.Common.Element.create(zf,{selectedPlace:this.props.selectedPlace,transaction:this.props.transaction,
+;switch(this.props.vuc){case j.Map.vuc.TRANSACTION_DETAIL:e=o.Common.Element.create(Hf,{selectedPlace:this.props.selectedPlace,transaction:this.props.transaction,
 selectedChargingPoint:this.props.selectedChargingPoint,onTransactionPlaceLoaded:this.props.onTransactionPlaceLoaded,onTransactionRegister:this.onTransactionRegister,
 onTransactionUnregister:this.onTransactionUnregister,registredTransaction:this.state.registredTransaction});break;case j.Map.vuc.STATION_DETAIL:e=o.Common.Element.create(Na.Provider,{
 onLoad:P.placeGetStation,onReload:P.placeGetStation,data:{stationCode:this.props.selectedPlace.chargingStation.stationCode}},o.Common.Element.create(Na.Consumer,null,(function(e){
 return o.Common.Element.create(ju,{id:H.ids.stationDetail,selectedPlace:t.props.selectedPlace,place:t.props.place,onPlaceUnselect:t.props.onPlaceUnselect,
 onPlaceStationLoaded:t.props.onPlaceStationLoaded,registredTransaction:t.state.registredTransaction,onTransactionUnregister:t.onTransactionUnregister,values:e})})));break;case j.Map.vuc.PLACE_LIST:
 e=o.Common.Element.create(gr,{places:this._getPublicPlaceList(),hoveredPlace:this.props.hoveredPlace,onPlaceSelect:this.props.onPlaceSelect,onPlaceHover:this.props.onPlaceHover,
-onPlaceUnhover:this.props.onPlaceUnhover,onLocationSelect:this.props.onLocationSelect});break;case j.Map.vuc.STATION_SEARCH:e=o.Common.Element.create(Rh,{onPlaceSelect:this.props.onPlaceSelect,
-onStationSearchFocus:this.props.onStationSearchFocus});break;default:e=o.Common.Element.create(o.Bricks.Error,null,o.Common.Element.create(o.Bricks.Lsi,{lsi:pn.mapInfoPanel.unknownVuc}))}return e},
-render:function(){return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this._getChild())}}),Nh=n(19);function zh(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){
-var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function Fh(e,t,n){
-return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Uh=function(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{}
-;t%2?zh(Object(n),!0).forEach((function(t){Fh(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):zh(Object(n)).forEach((function(t){
-Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}({},z);function Hh(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e)
-;t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function Wh(e){for(var t=1;t<arguments.length;t++){
-var n=null!=arguments[t]?arguments[t]:{};t%2?Hh(Object(n),!0).forEach((function(t){Vh(e,t,n[t])
+onPlaceUnhover:this.props.onPlaceUnhover,onLocationSelect:this.props.onLocationSelect});break;case j.Map.vuc.STATION_SEARCH:e=o.Common.Element.create(zh,{onPlaceSelect:this.props.onPlaceSelect,
+onStationSearchFocus:this.props.onStationSearchFocus});break;default:id.errorState("map-info-panel-unknown-vuc"),e=o.Common.Element.create(o.Bricks.Error,null,o.Common.Element.create(o.Bricks.Lsi,{
+lsi:pn.mapInfoPanel.unknownVuc}))}return e},render:function(){return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this._getChild())}}),Uh=n(19);function Hh(e,t){var n=Object.keys(e)
+;if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}
+function Wh(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Vh=function(e){for(var t=1;t<arguments.length;t++){
+var n=null!=arguments[t]?arguments[t]:{};t%2?Hh(Object(n),!0).forEach((function(t){Wh(e,t,n[t])
 })):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Hh(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function Vh(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Gh,Kh,Zh,Jh,qh,Qh,Xh,$h=Wh(Wh({},kn),{},{stationFilter:{
-selectPrefferedConnectors:{cs:"Vyberte upřednostňovaný konektor",en:"Select your preferred connector",de:"Wählen Sie Ihren bevorzugten Ladeanschluss aus",sk:"Vyberte preferovaný konektor",
-uk:"Виберіть бажаний роз’єм ",sv:"Välj din föredragna kontakt"},showOnlyAvailableStalls:{cs:"Zobrazit pouze dostupné body",en:"Show only available points on the map",
-de:"Nur verfügbare Ladeunkte anzeigen",sk:"Zobraziť iba dostupné body",uk:"Показати тільки доступні пункти ",sv:"Visa enbart tillgänliga punkter på kartan"},confirm:{cs:"Filtrovat",en:"Filter",
-de:"Filtern",sk:"Filtrovať",uk:"Фільтр",sv:"Filtrera"}}});function eg(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){
-return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function tg(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{}
-;t%2?eg(Object(n),!0).forEach((function(t){ng(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):eg(Object(n)).forEach((function(t){
-Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function ng(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}
-function rg(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var og,ig,ag,sg,cg=o.Common.VisualComponent.create({
-mixins:[o.Common.BaseMixin,o.Common.PureRenderMixin],statics:{tagName:Uh.TAG+"StationFilterContent",classNames:{main:function(){
-return Uh.Css.css(Gh||(Gh=rg(["\n        display: flex;\n        flex-direction: column;\n        width: 100%;\n      "])))},connectorOption:function(){var e,t,n,r,i,a
-;return Uh.Css.css(Kh||(Kh=rg(["\n        display: flex;\n        justify-content: flex-start;\n        align-items: center;\n        background: ",";\n        border-radius: 8px;\n        padding: 0.3rem;\n        color: ",";\n        cursor: pointer;\n        .uu5-forms-checkbox {\n          .uu5-bricks-button {\n            border: 2px solid "," !important;\n            border-radius: 4px;\n            &:hover, &:focus, &:active:focus {\n              border-radius: 4px;\n              border: 2px solid ",";\n            }\n          }\n        }\n        &:not(:last-child){\n          margin-bottom: 0.5rem;\n        }\n      "])),Be,null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.fontColor,null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.tertiary.backgroundColor,null===(i=o.Environment.chargeUp)||void 0===i||null===(a=i.colors)||void 0===a?void 0:a.tertiary.backgroundColor)
-},label:function(){return Uh.Css.css(Zh||(Zh=rg(["\n        flex: 1 0 auto;\n        text-align: left;\n        font-weight: bold;\n        font-size: 110%;\n      "])))},icon:function(){
-return Uh.Css.css(Jh||(Jh=rg(["\n        font-size: 2rem !important;\n        margin-right: 0.2rem;\n        min-width: 3rem;\n        justify-content: center;\n      "])))},selected:function(){
+}))}return e}({},z);function Gh(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){
+return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function Kh(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{}
+;t%2?Gh(Object(n),!0).forEach((function(t){Zh(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Gh(Object(n)).forEach((function(t){
+Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function Zh(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}
+var Jh,qh,Qh,Xh,$h,eg,tg,ng=Kh(Kh({},kn),{},{stationFilter:{selectPrefferedConnectors:{cs:"Vyberte upřednostňovaný konektor",en:"Select your preferred connector",
+de:"Wählen Sie Ihren bevorzugten Ladeanschluss aus",sk:"Vyberte preferovaný konektor",uk:"Виберіть бажаний роз’єм ",sv:"Välj din föredragna kontakt"},showOnlyAvailableStalls:{
+cs:"Zobrazit pouze dostupné body",en:"Show only available points on the map",de:"Nur verfügbare Ladeunkte anzeigen",sk:"Zobraziť iba dostupné body",uk:"Показати тільки доступні пункти ",
+sv:"Visa enbart tillgänliga punkter på kartan"},confirm:{cs:"Filtrovat",en:"Filter",de:"Filtern",sk:"Filtrovať",uk:"Фільтр",sv:"Filtrera"}}});function rg(e,t){var n=Object.keys(e)
+;if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}
+function og(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?rg(Object(n),!0).forEach((function(t){ig(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):rg(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function ig(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function ag(e,t){return t||(t=e.slice(0)),
+Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var sg,cg,lg,ug,dg=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.PureRenderMixin],statics:{
+tagName:Vh.TAG+"StationFilterContent",classNames:{main:function(){return Vh.Css.css(Jh||(Jh=ag(["\n        display: flex;\n        flex-direction: column;\n        width: 100%;\n      "])))},
+connectorOption:function(){var e,t,n,r,i,a
+;return Vh.Css.css(qh||(qh=ag(["\n        display: flex;\n        justify-content: flex-start;\n        align-items: center;\n        background: ",";\n        border-radius: 8px;\n        padding: 0.3rem;\n        color: ",";\n        cursor: pointer;\n        .uu5-forms-checkbox {\n          .uu5-bricks-button {\n            border: 2px solid "," !important;\n            border-radius: 4px;\n            &:hover, &:focus, &:active:focus {\n              border-radius: 4px;\n              border: 2px solid ",";\n            }\n          }\n        }\n        &:not(:last-child){\n          margin-bottom: 0.5rem;\n        }\n      "])),Be,null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.fontColor,null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.tertiary.backgroundColor,null===(i=o.Environment.chargeUp)||void 0===i||null===(a=i.colors)||void 0===a?void 0:a.tertiary.backgroundColor)
+},label:function(){return Vh.Css.css(Qh||(Qh=ag(["\n        flex: 1 0 auto;\n        text-align: left;\n        font-weight: bold;\n        font-size: 110%;\n      "])))},icon:function(){
+return Vh.Css.css(Xh||(Xh=ag(["\n        font-size: 2rem !important;\n        margin-right: 0.2rem;\n        min-width: 3rem;\n        justify-content: center;\n      "])))},selected:function(){
 var e,t,n,r,i,a
-;return Uh.Css.css(qh||(qh=rg(["\n        background: "," !important;\n        color: "," !important;\n        .uu5-bricks-icon {\n          color: "," !important;\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor,null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.customAction.color,null===(i=o.Environment.chargeUp)||void 0===i||null===(a=i.colors)||void 0===a?void 0:a.customAction.color)
+;return Vh.Css.css($h||($h=ag(["\n        background: "," !important;\n        color: "," !important;\n        .uu5-bricks-icon {\n          color: "," !important;\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor,null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.customAction.color,null===(i=o.Environment.chargeUp)||void 0===i||null===(a=i.colors)||void 0===a?void 0:a.customAction.color)
 },availableToggleOption:function(){
-return Uh.Css.css(Qh||(Qh=rg(["\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        width: 100%;\n        margin: 1rem 0;\n        padding-top: 1rem;\n        border-top: 1px solid ",";\n        > .uu5-common-div {\n          margin-right: 1rem;\n        }\n        > .uu5-bricks-span {\n          font-size: 120%;\n        }\n        .uu5-forms-checkbox {\n          margin: 0;\n          .uu5-common-div {\n            margin: 0;\n            padding: 0;\n          }\n        }\n      "])),Be)
+return Vh.Css.css(eg||(eg=ag(["\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        width: 100%;\n        margin: 1rem 0;\n        padding-top: 1rem;\n        border-top: 1px solid ",";\n        > .uu5-common-div {\n          margin-right: 1rem;\n        }\n        > .uu5-bricks-span {\n          font-size: 120%;\n        }\n        .uu5-forms-checkbox {\n          margin: 0;\n          .uu5-common-div {\n            margin: 0;\n            padding: 0;\n          }\n        }\n      "])),Be)
 },confirmButton:function(){var e,t
-;return Uh.Css.css(Xh||(Xh=rg(["\n        ","\n        ","\n        ","\n        font-size: 120%;\n        font-weight: bold;\n        padding: 0.5rem;\n        line-height: 1.5;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n      "])),Ke(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary),Qe,Ge)
-}},opt:{pureRender:!1},lsi:$h.stationFilter},propTypes:{filterOptions:o.PropTypes.object,onConfirm:o.PropTypes.func},getDefaultProps:function(){return{filterOptions:{onlyAvailable:!1,
+;return Vh.Css.css(tg||(tg=ag(["\n        ","\n        ","\n        ","\n        font-size: 120%;\n        font-weight: bold;\n        padding: 0.5rem;\n        line-height: 1.5;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n      "])),Ke(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary),Qe,Ge)
+}},opt:{pureRender:!1},lsi:ng.stationFilter},propTypes:{filterOptions:o.PropTypes.object,onConfirm:o.PropTypes.func},getDefaultProps:function(){return{filterOptions:{onlyAvailable:!1,
 connectors:Object.keys(lc.connectors).map((function(e){return{type:e,caption:lc.connectors[e].caption,icon:lc.connectors[e].icon,selected:!1}}))}}},getInitialState:function(){return{
 filterOptions:this.props.filterOptions}},getFilterState:function(){return this.state.filterOptions},_getConnectorOptions:function(){var e=this,t=this.getClassName()
 ;return this.state.filterOptions.connectors.map((function(n){var r;return o.Common.Element.create(o.Bricks.Div,{key:n.type,className:[t.connectorOption(),n.selected?t.selected():""].join(" "),
@@ -7490,98 +7519,98 @@ return o.Common.Element.create(o.Bricks.Div,{className:this.getClassName("availa
 },o.Common.Element.create(o.Bricks.Span,null,this.getLsiComponent("showOnlyAvailableStalls")),o.Common.Element.create(o.Forms.Checkbox,{spacing:0,size:"l",type:2,
 value:this.state.filterOptions.onlyAvailable,onChange:this._onOnlyAvailableToggle}))},_getConfirmButton:function(){var e=this;return o.Common.Element.create(o.Bricks.Button,{onClick:function(){
 return e.props.onConfirm(e.state.filterOptions)},className:this.getClassName("confirmButton")},this.getLsiComponent("confirm"))},_onConnectorToggle:function(e){this.setState({
-filterOptions:tg(tg({},this.state.filterOptions),{},{connectors:this.state.filterOptions.connectors.map((function(t){return t.type===e?tg(tg({},t),{},{selected:!t.selected}):t}))})})},
-_onOnlyAvailableToggle:function(){this.setState({filterOptions:tg(tg({},this.state.filterOptions),{},{onlyAvailable:!this.state.filterOptions.onlyAvailable})})},render:function(){
-return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this._getConnectorOptions(),this._getAvailableToggleOption(),this._getConfirmButton())}});function lg(){
-return(lg=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}
-function ug(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var dg,mg,pg,fg,hg,gg,yg,vg,bg=Ct(o.Common.VisualComponent.create({
-mixins:[o.Common.BaseMixin],statics:{tagName:Uh.TAG+"StationFilter",classNames:{main:function(){var e,t
-;return Uh.Css.css(og||(og=ug(["\n        ","\n        ","\n        ","\n        position: absolute;\n        top: 1rem;\n        right: 1rem;\n        z-index: 2;\n        border-radius: 100%;\n        width: 4rem;\n        height: 4rem;\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        border: 3px solid white;\n      "])),Ge,qe(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary),Qe)
-},icon:function(){return Uh.Css.css(ig||(ig=ug(["\n        font-size: 200% !important;\n        margin: 0 !important;\n        margin-top: 3px;\n      "])))},badge:function(){
-return Uh.Css.css(ag||(ag=ug(["\n        position: absolute;\n        top: -6px;\n        right: -4px;\n        background: ",";\n        border-radius: 100%;\n        height: 24px;\n        width: 24px;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        color: white;\n        font-size: 20px !important;\n        cursor: pointer;\n        margin-left: 0 !important;\n        margin-right: 0 !important;\n        pointer-events: all;\n        box-shadow: ",";\n      "])),Re,He)
+filterOptions:og(og({},this.state.filterOptions),{},{connectors:this.state.filterOptions.connectors.map((function(t){return t.type===e?og(og({},t),{},{selected:!t.selected}):t}))})})},
+_onOnlyAvailableToggle:function(){this.setState({filterOptions:og(og({},this.state.filterOptions),{},{onlyAvailable:!this.state.filterOptions.onlyAvailable})})},render:function(){
+return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),this._getConnectorOptions(),this._getAvailableToggleOption(),this._getConfirmButton())}});function mg(){
+return(mg=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}
+function pg(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var fg,hg,gg,yg,vg,bg,_g,kg,Cg=Ct(o.Common.VisualComponent.create({
+mixins:[o.Common.BaseMixin],statics:{tagName:Vh.TAG+"StationFilter",classNames:{main:function(){var e,t
+;return Vh.Css.css(sg||(sg=pg(["\n        ","\n        ","\n        ","\n        position: absolute;\n        top: 1rem;\n        right: 1rem;\n        z-index: 2;\n        border-radius: 100%;\n        width: 4rem;\n        height: 4rem;\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        border: 3px solid white;\n      "])),Ge,qe(null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary),Qe)
+},icon:function(){return Vh.Css.css(cg||(cg=pg(["\n        font-size: 200% !important;\n        margin: 0 !important;\n        margin-top: 3px;\n      "])))},badge:function(){
+return Vh.Css.css(lg||(lg=pg(["\n        position: absolute;\n        top: -6px;\n        right: -4px;\n        background: ",";\n        border-radius: 100%;\n        height: 24px;\n        width: 24px;\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        color: white;\n        font-size: 20px !important;\n        cursor: pointer;\n        margin-left: 0 !important;\n        margin-right: 0 !important;\n        pointer-events: all;\n        box-shadow: ",";\n      "])),Re,He)
 },modal:function(){var e,t
-;return Uh.Css.css(sg||(sg=ug(["\n        display: flex !important;\n        justify-content: center;\n        align-items: center;\n        .uu5-bricks-modal-dialog {\n          border-radius: 8px;\n          max-width: 500px !important;\n          width: auto !important;\n          padding: 0.5rem;\n          .uu5-bricks-modal-header {\n            flex-shrink: 0;\n            font-size: 1.5rem;\n            .uu5-bricks-modal-header-title {\n              font-size: 2rem !important;\n              font-weight: bold;\n              text-align: center;\n              color: ",";\n              width: 100%;\n            }\n          }\n           .uu5-bricks-modal-body {\n               padding: 8px 16px !important;\n           }\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.backgroundColor)
-}},lsi:$h.stationFilter},propTypes:{spaContext:o.PropTypes.object,filterOptions:o.PropTypes.object,onStationFilterOptionsChange:o.PropTypes.func},getDefaultProps:function(){return{spaContext:{}}},
+;return Vh.Css.css(ug||(ug=pg(["\n        display: flex !important;\n        justify-content: center;\n        align-items: center;\n        .uu5-bricks-modal-dialog {\n          border-radius: 8px;\n          max-width: 500px !important;\n          width: auto !important;\n          padding: 0.5rem;\n          .uu5-bricks-modal-header {\n            flex-shrink: 0;\n            font-size: 1.5rem;\n            .uu5-bricks-modal-header-title {\n              font-size: 2rem !important;\n              font-weight: bold;\n              text-align: center;\n              color: ",";\n              width: 100%;\n            }\n          }\n           .uu5-bricks-modal-body {\n               padding: 8px 16px !important;\n           }\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.backgroundColor)
+}},lsi:ng.stationFilter},propTypes:{spaContext:o.PropTypes.object,filterOptions:o.PropTypes.object,onStationFilterOptionsChange:o.PropTypes.func},getDefaultProps:function(){return{spaContext:{}}},
 componentWillMount:function(){var e=this.props.spaContext.getFilterOptions();e&&this.props.onStationFilterOptionsChange(e)},componentWillUnmount:function(){
 this.props.spaContext.storeFilterOptions(this.props.filterOptions)},_onOpenFilter:function(){var e=this;o.Environment.getPage().getModal().open({
-header:this.getLsiComponent("selectPrefferedConnectors"),content:o.Common.Element.create(cg,{ref_:function(t){return e._stationFilterContent=t},filterOptions:this.props.filterOptions,
+header:this.getLsiComponent("selectPrefferedConnectors"),content:o.Common.Element.create(dg,{ref_:function(t){return e._stationFilterContent=t},filterOptions:this.props.filterOptions,
 onConfirm:this._onConfirm}),className:this.getClassName().modal(),onClose:this._onModalClose})},_onModalClose:function(e){
 this.props.onStationFilterOptionsChange(this._stationFilterContent.getFilterState()),e.component.onCloseDefault(e)},_onConfirm:function(e){this.props.onStationFilterOptionsChange(e),
 o.Environment.getPage().getModal().close()},_isFilterActive:function(){
 return!!this.props.filterOptions.onlyAvailable||(this.props.filterOptions.connectors?this.props.filterOptions.connectors.some((function(e){return e.selected})):void 0)},_getActiveBadge:function(){
-return this._isFilterActive()?o.Common.Element.create(o.Bricks.Icon,{icon:Uh.icons.check,className:this.getClassName().badge()}):null},render:function(){
-return o.Common.Element.create(o.Bricks.Button,lg({},this.getMainPropsToPass(),{onClick:this._onOpenFilter}),o.Common.Element.create(o.Bricks.Lsi,null,o.Common.Element.create(o.Bricks.Icon,{
-icon:Uh.icons.filter,className:this.getClassName().icon(),tooltip:dr.getFeedbackTooltip("stationFilter")})),this._getActiveBadge())}})),_g=n(316),kg=n.n(_g),Cg=n(54),Sg=n.n(Cg);function wg(e,t){
+return this._isFilterActive()?o.Common.Element.create(o.Bricks.Icon,{icon:Vh.icons.check,className:this.getClassName().badge()}):null},render:function(){
+return o.Common.Element.create(o.Bricks.Button,mg({},this.getMainPropsToPass(),{onClick:this._onOpenFilter}),o.Common.Element.create(o.Bricks.Lsi,null,o.Common.Element.create(o.Bricks.Icon,{
+icon:Vh.icons.filter,className:this.getClassName().icon(),tooltip:dr.getFeedbackTooltip("stationFilter")})),this._getActiveBadge())}})),Sg=n(316),wg=n.n(Sg),Mg=n(54),Pg=n.n(Mg);function Eg(e,t){
 var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}
-return n}function Mg(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?wg(Object(n),!0).forEach((function(t){Pg(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):wg(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function Pg(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function Eg(e,t){return t||(t=e.slice(0)),
-Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var Lg={displayName:Uh.TAG+"ChargingMarker"},Og=function(){
-return Uh.Css.css(dg||(dg=Eg(['\n        background-color: white;\n        text-align: center;\n        border-radius: 50%;\n        position: absolute;\n        overflow: unset !important;\n        box-shadow: 0 12px 20px 0 rgba(0, 0, 0, 0.2);\n        z-index: 1;\n        transform: translate(-50%, -10px) !important;\n        &:after {\n          content: "";\n          position: absolute;\n          top: calc(100% - 2px);\n          left: calc(50% - 10px);\n          border-width: 10px 10px;\n          border-style: solid;\n          border-color: white transparent transparent transparent;\n        }\n      '])))
-},Tg=function(){
-return Uh.Css.css(mg||(mg=Eg(["\n        &>span:first-child {\n            font-weight: normal;\n            font-size: 100%;\n            margin-left: -2px;\n            margin-top: 0;\n          }\n      "])))
-},xg=function(){var e,t;return Uh.Css.css(pg||(pg=Eg(["\n        background: ",";\n      "])),null===(e=i.a.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.color)
-},jg=function(){return Uh.Css.css(fg||(fg=Eg(["\n        background: ",";\n      "])),Re)},Dg=function(){var e,t,n,r
-;return Uh.Css.css(hg||(hg=Eg(["\n        transform: scale(1.4);\n        transform-origin: bottom center;\n        background-color: ",";\n        color: ",";\n      "])),null===(e=i.a.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor,null===(n=i.a.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.primary.backgroundColor)
-},Bg=function(){return Uh.Css.css(gg||(gg=Eg(["\n        transform: scale(1.4);\n        transform-origin: bottom center;\n      "])))},Ag=function(){
-return Uh.Css.css(yg||(yg=Eg(["\n        opacity: 0.2;\n        cursor: not-allowed;\n      "])))},Yg=function(){var e,t
-;return Uh.Css.css(vg||(vg=Eg(["\n      cursor: pointer;\n\n        background: ",';\n        line-height: 1 !important;\n        color: white;\n        border: 3px solid white;\n        padding: 8px;\n        font-size: 14px;\n        z-index: 2;\n        border-radius: 50%;\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        min-width: 50px;\n        width: inherit;\n        height: inherit;\n        transition: all 0.5s;\n        > span:first-child {\n          font-weight: bold;\n          font-size: 140%;\n          margin-top: -2px;\n        }\n        &:before {\n          content: "";\n          padding-top: 100%;\n          float: left;\n        }\n      '])),null===(e=i.a.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.backgroundColor)
-};var Rg=Object(ae.createVisualComponent)(Mg(Mg({},Lg),{},{propTypes:{isPlaceSelectable:i.a.PropTypes.bool,place:i.a.PropTypes.object,station:i.a.PropTypes.object,selectedPlace:i.a.PropTypes.object,
+return n}function Lg(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Eg(Object(n),!0).forEach((function(t){Og(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Eg(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function Og(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function Tg(e,t){return t||(t=e.slice(0)),
+Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var xg={displayName:Vh.TAG+"ChargingMarker"},jg=function(){
+return Vh.Css.css(fg||(fg=Tg(['\n        background-color: white;\n        text-align: center;\n        border-radius: 50%;\n        position: absolute;\n        overflow: unset !important;\n        box-shadow: 0 12px 20px 0 rgba(0, 0, 0, 0.2);\n        z-index: 1;\n        transform: translate(-50%, -10px) !important;\n        &:after {\n          content: "";\n          position: absolute;\n          top: calc(100% - 2px);\n          left: calc(50% - 10px);\n          border-width: 10px 10px;\n          border-style: solid;\n          border-color: white transparent transparent transparent;\n        }\n      '])))
+},Dg=function(){
+return Vh.Css.css(hg||(hg=Tg(["\n        &>span:first-child {\n            font-weight: normal;\n            font-size: 100%;\n            margin-left: -2px;\n            margin-top: 0;\n          }\n      "])))
+},Bg=function(){var e,t;return Vh.Css.css(gg||(gg=Tg(["\n        background: ",";\n      "])),null===(e=i.a.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.color)
+},Ag=function(){return Vh.Css.css(yg||(yg=Tg(["\n        background: ",";\n      "])),Re)},Yg=function(){var e,t,n,r
+;return Vh.Css.css(vg||(vg=Tg(["\n        transform: scale(1.4);\n        transform-origin: bottom center;\n        background-color: ",";\n        color: ",";\n      "])),null===(e=i.a.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.tertiary.backgroundColor,null===(n=i.a.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.primary.backgroundColor)
+},Rg=function(){return Vh.Css.css(bg||(bg=Tg(["\n        transform: scale(1.4);\n        transform-origin: bottom center;\n      "])))},Ig=function(){
+return Vh.Css.css(_g||(_g=Tg(["\n        opacity: 0.2;\n        cursor: not-allowed;\n      "])))},Ng=function(){var e,t
+;return Vh.Css.css(kg||(kg=Tg(["\n      cursor: pointer;\n\n        background: ",';\n        line-height: 1 !important;\n        color: white;\n        border: 3px solid white;\n        padding: 8px;\n        font-size: 14px;\n        z-index: 2;\n        border-radius: 50%;\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        min-width: 50px;\n        width: inherit;\n        height: inherit;\n        transition: all 0.5s;\n        > span:first-child {\n          font-weight: bold;\n          font-size: 140%;\n          margin-top: -2px;\n        }\n        &:before {\n          content: "";\n          padding-top: 100%;\n          float: left;\n        }\n      '])),null===(e=i.a.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.backgroundColor)
+};var zg=Object(ae.createVisualComponent)(Lg(Lg({},xg),{},{propTypes:{isPlaceSelectable:i.a.PropTypes.bool,place:i.a.PropTypes.object,station:i.a.PropTypes.object,selectedPlace:i.a.PropTypes.object,
 hoveredPlace:i.a.PropTypes.shape({placeId:i.a.PropTypes.string,stationCode:i.a.PropTypes.number}),onPlaceSelect:i.a.PropTypes.func,onPlaceUnselect:i.a.PropTypes.func,onPlaceHover:i.a.PropTypes.func,
 onPlaceUnhover:i.a.PropTypes.func,stationStateColors:i.a.PropTypes.shape({active:i.a.PropTypes.string,inActive:i.a.PropTypes.string,info:i.a.PropTypes.string,selected:i.a.PropTypes.string})},
 defaultProps:{},render:function(e){function t(){var t
 ;return(null===(t=e.selectedPlace)||void 0===t?void 0:t.chargingStation)&&Object.prototype.hasOwnProperty.call(e.selectedPlace.chargingStation,"stationCode")&&e.station.stationCode===e.selectedPlace.chargingStation.stationCode
 }var n,r,o,a,s=function(e){var t=0,n=0;return e.forEach((function(e){t+=e.connectors.types.length,
 "Available"!==e.chargingPointState&&"Preparing"!==e.chargingPointState&&"Finishing"!==e.chargingPointState||!0===e.reserved||(n+=e.connectors.types.length)})),{totalConnectors:t,freeConnectors:n}
-}(e.station.chargingPoints),c=s.totalConnectors,l=s.freeConnectors;return i.a.Common.Element.create(Nh.Marker,{visible:!1,tracksViewChanges:!1,options:{position:{lat:e.station.location.coordinates[1],
-lng:e.station.location.coordinates[0]},optimized:!0},noRedraw:!0},i.a.Common.Element.create(Sg.a,{options:{closeBoxURL:"",disableAutoPan:!0,enableEventPropagation:!0,alignBottom:!0,boxClass:Og()}
-},i.a.Common.Element.create("div",{onClick:function(){e.isPlaceSelectable&&e.onPlaceSelect(Mg(Mg({},e.place),{},{chargingStation:e.station}),!0,!0)},onMouseEnter:function(){
-e.isPlaceSelectable&&e.onPlaceHover(e.place.id,e.station.stationCode)},onMouseLeave:function(){return e.onPlaceUnhover()},className:(a=[Yg()],e.station.availablePoints>0?a.push(xg()):a.push(jg),
-e.hoveredPlace&&e.station.stationCode===e.hoveredPlace.stationCode&&a.push(Bg()),t()&&a.push(Dg()),t()||e.isPlaceSelectable||a.push(Ag()),e.station.state===Uh.stationStates.info&&a.push(Tg()),
-a.join(" ")),style:{backgroundColor:(n=e.stationStateColors,r=e.station,o=Uh.defaultStationStateColors,n&&(o=Mg(Mg({},o),n)),
-t()?o.selected:r.state===Uh.stationStates.info?o.info:r.availablePoints>0?o.active:o.inActive)}
-},e.station.state!==Uh.stationStates.info&&i.a.Common.Element.create(i.a.Common.Fragment,null,i.a.Common.Element.create("span",null,l.toString()),"/"),i.a.Common.Element.create("span",null,c.toString()))))
-}})),Ig=n.p+"assets/icons/marker-cluster-1.svg";function Ng(){return(Ng=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t]
-;for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}var zg,Fg,Ug,Hg=o.Common.VisualComponent.create({
-mixins:[o.Common.BaseMixin,o.Common.PureRenderMixin],statics:{tagName:Uh.TAG+"ChargingMarkers",opt:{pureRender:!0}},propTypes:{isPlaceSelectable:o.PropTypes.bool,places:o.PropTypes.array,
+}(e.station.chargingPoints),c=s.totalConnectors,l=s.freeConnectors;return i.a.Common.Element.create(Uh.Marker,{visible:!1,tracksViewChanges:!1,options:{position:{lat:e.station.location.coordinates[1],
+lng:e.station.location.coordinates[0]},optimized:!0},noRedraw:!0},i.a.Common.Element.create(Pg.a,{options:{closeBoxURL:"",disableAutoPan:!0,enableEventPropagation:!0,alignBottom:!0,boxClass:jg()}
+},i.a.Common.Element.create("div",{onClick:function(){e.isPlaceSelectable&&e.onPlaceSelect(Lg(Lg({},e.place),{},{chargingStation:e.station}),!0,!0)},onMouseEnter:function(){
+e.isPlaceSelectable&&e.onPlaceHover(e.place.id,e.station.stationCode)},onMouseLeave:function(){return e.onPlaceUnhover()},className:(a=[Ng()],e.station.availablePoints>0?a.push(Bg()):a.push(Ag),
+e.hoveredPlace&&e.station.stationCode===e.hoveredPlace.stationCode&&a.push(Rg()),t()&&a.push(Yg()),t()||e.isPlaceSelectable||a.push(Ig()),e.station.state===Vh.stationStates.info&&a.push(Dg()),
+a.join(" ")),style:{backgroundColor:(n=e.stationStateColors,r=e.station,o=Vh.defaultStationStateColors,n&&(o=Lg(Lg({},o),n)),
+t()?o.selected:r.state===Vh.stationStates.info?o.info:r.availablePoints>0?o.active:o.inActive)}
+},e.station.state!==Vh.stationStates.info&&i.a.Common.Element.create(i.a.Common.Fragment,null,i.a.Common.Element.create("span",null,l.toString()),"/"),i.a.Common.Element.create("span",null,c.toString()))))
+}})),Fg=n.p+"assets/icons/marker-cluster-1.svg";function Ug(){return(Ug=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t]
+;for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}var Hg,Wg,Vg,Gg=o.Common.VisualComponent.create({
+mixins:[o.Common.BaseMixin,o.Common.PureRenderMixin],statics:{tagName:Vh.TAG+"ChargingMarkers",opt:{pureRender:!0}},propTypes:{isPlaceSelectable:o.PropTypes.bool,places:o.PropTypes.array,
 selectedPlace:o.PropTypes.object,hoveredPlace:o.PropTypes.shape({placeId:o.PropTypes.string,stationCode:o.PropTypes.number}),onPlaceSelect:o.PropTypes.func,onPlaceUnselect:o.PropTypes.func,
 onPlaceHover:o.PropTypes.func,onPlaceUnhover:o.PropTypes.func,stationStateColors:o.PropTypes.shape({active:o.PropTypes.string,inActive:o.PropTypes.string,info:o.PropTypes.string,
 selected:o.PropTypes.string}),place:o.PropTypes.object},getDefaultProps:function(){return{stationStateColors:{}}},_getMarkerClusterIcons:function(){return[{height:53,width:53,textSize:15,
-textColor:"white",url:Ig},{height:53,width:53,textSize:15,textColor:"white",url:Ig},{height:53,width:53,textSize:15,textColor:"white",url:Ig},{height:53,width:53,textSize:15,textColor:"white",url:Ig
-},{height:53,width:53,textSize:15,textColor:"white",url:Ig}]},_getMarkers:function(){
+textColor:"white",url:Fg},{height:53,width:53,textSize:15,textColor:"white",url:Fg},{height:53,width:53,textSize:15,textColor:"white",url:Fg},{height:53,width:53,textSize:15,textColor:"white",url:Fg
+},{height:53,width:53,textSize:15,textColor:"white",url:Fg}]},_getMarkers:function(){
 for(var e=[],t=this.props.places.length,n=0;n<t;n++)for(var r=this.props.places[n],i=0;i<r.chargingStations.length;i++){var a,s=r.chargingStations[i]
-;(s.isPublic||(null===(a=this.props.place)||void 0===a?void 0:a.chargingStation.stationCode)===s.stationCode)&&e.push(o.Common.Element.create(Rg,{station:s,place:r,
+;(s.isPublic||(null===(a=this.props.place)||void 0===a?void 0:a.chargingStation.stationCode)===s.stationCode)&&e.push(o.Common.Element.create(zg,{station:s,place:r,
 isPlaceSelectable:this.props.isPlaceSelectable,selectedPlace:this.props.selectedPlace,hoveredPlace:this.props.hoveredPlace,onPlaceSelect:this.props.onPlaceSelect,
 onPlaceUnselect:this.props.onPlaceUnselect,onPlaceHover:this.props.onPlaceHover,onPlaceUnhover:this.props.onPlaceUnhover,stationStateColors:this.props.stationStateColors}))}return e},
-render:function(){return o.Common.Element.create(kg.a,Ng({},this.getMainPropsToPass(),{averageCenter:!0,enableRetinaIcons:!0,gridSize:40,styles:this._getMarkerClusterIcons(),noRedraw:!0
-}),this._getMarkers())}}),Wg=Ct(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.ScreenSizeMixin,o.Common.PureRenderMixin],statics:{
-tagName:Uh.TAG+"CurrentPositionMarker",opt:{pureRender:!0}},propTypes:{spaContext:o.PropTypes.object},render:function(){var e=this.props.spaContext
+render:function(){return o.Common.Element.create(wg.a,Ug({},this.getMainPropsToPass(),{averageCenter:!0,enableRetinaIcons:!0,gridSize:40,styles:this._getMarkerClusterIcons(),noRedraw:!0
+}),this._getMarkers())}}),Kg=Ct(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.ScreenSizeMixin,o.Common.PureRenderMixin],statics:{
+tagName:Vh.TAG+"CurrentPositionMarker",opt:{pureRender:!0}},propTypes:{spaContext:o.PropTypes.object},render:function(){var e=this.props.spaContext
 ;if(e.currentPosition&&"error"!==e.currentPositionState){var t={scaledSize:new google.maps.Size(30,30),anchor:new google.maps.Point(30/2.05,30/2.1),url:n(580).default
-},r=e.currentPosition.coords.latitude,i=e.currentPosition.coords.longitude,a=e.currentPosition.coords.accuracy;return o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create(Nh.Marker,{
-icon:t,position:{lat:r,lng:i}}),o.Common.Element.create(Nh.Circle,{clickable:!1,center:{lat:r,lng:i},radius:a<300?a:300,options:{strokeWeight:0,fillColor:"#0064ff",fillOpacity:.12}}))}return null}}))
-;function Vg(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var Gg=nn(o.Common.VisualComponent.create({
-mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin],statics:{tagName:Uh.TAG+"StationNavigationRoute",classNames:{
-routeInfoBox:Uh.Css.css(zg||(zg=Vg(["\n        background-color: white;\n        text-align: center;\n        border-radius: 50%;\n        position: absolute;\n        overflow: unset !important;\n        box-shadow: 0 12px 20px 0 rgba(0,0,0,.2);\n        z-index: 1;\n        transform: translate(-50%, 50%) !important;\n        & > div {\n          width: 35px !important;\n          height: 35px !important;\n          display: flex;\n          justify-content: center;\n          align-items: center;\n          border-radius: 50%;\n          border: 3px solid white;\n          color: white;\n          span {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n          }\n        }\n        & > img {\n          display: none;\n        }\n      "]))),
+},r=e.currentPosition.coords.latitude,i=e.currentPosition.coords.longitude,a=e.currentPosition.coords.accuracy;return o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create(Uh.Marker,{
+icon:t,position:{lat:r,lng:i}}),o.Common.Element.create(Uh.Circle,{clickable:!1,center:{lat:r,lng:i},radius:a<300?a:300,options:{strokeWeight:0,fillColor:"#0064ff",fillOpacity:.12}}))}return null}}))
+;function Zg(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var Jg=nn(o.Common.VisualComponent.create({
+mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin],statics:{tagName:Vh.TAG+"StationNavigationRoute",classNames:{
+routeInfoBox:Vh.Css.css(Hg||(Hg=Zg(["\n        background-color: white;\n        text-align: center;\n        border-radius: 50%;\n        position: absolute;\n        overflow: unset !important;\n        box-shadow: 0 12px 20px 0 rgba(0,0,0,.2);\n        z-index: 1;\n        transform: translate(-50%, 50%) !important;\n        & > div {\n          width: 35px !important;\n          height: 35px !important;\n          display: flex;\n          justify-content: center;\n          align-items: center;\n          border-radius: 50%;\n          border: 3px solid white;\n          color: white;\n          span {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n          }\n        }\n        & > img {\n          display: none;\n        }\n      "]))),
 origin:function(){var e,t
-;return Uh.Css.css(Fg||(Fg=Vg(["\n        > div {\n          background: ",";\n          font-size: 15pt;\n          span {\n            position: relative;\n            top: -1px;\n          }\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.backgroundColor)
+;return Vh.Css.css(Wg||(Wg=Zg(["\n        > div {\n          background: ",";\n          font-size: 15pt;\n          span {\n            position: relative;\n            top: -1px;\n          }\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.backgroundColor)
 },destination:function(){var e,t
-;return Uh.Css.css(Ug||(Ug=Vg(["\n        > div {\n          width: 30px !important;\n          height: 30px !important;\n          background: ",";\n          font-size: 12pt;\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.backgroundColor)
+;return Vh.Css.css(Vg||(Vg=Zg(["\n        > div {\n          width: 30px !important;\n          height: 30px !important;\n          background: ",";\n          font-size: 12pt;\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.backgroundColor)
 }},defaults:{polylineOptions:{strokeColor:"#00334c",strokeOpacity:.8,strokeWeight:4}}},propTypes:{mapContext:o.PropTypes.object,zoom:o.PropTypes.number},_getRoute:function(e){
-var t=this.props.mapContext,n=t.navigation&&t.navigation.preserveViewport;return o.Common.Element.create(Nh.DirectionsRenderer,{directions:e,options:{suppressMarkers:!0,preserveViewport:n,
+var t=this.props.mapContext,n=t.navigation&&t.navigation.preserveViewport;return o.Common.Element.create(Uh.DirectionsRenderer,{directions:e,options:{suppressMarkers:!0,preserveViewport:n,
 polylineOptions:{strokeColor:this.getDefault().polylineOptions.strokeColor,strokeOpacity:this.getDefault().polylineOptions.strokeOpacity,strokeWeight:this.getDefault().polylineOptions.strokeWeight}}})
-},_getOriginMarker:function(e){var t=e.routes[0].overview_path;return o.Common.Element.create(Nh.Marker,{visible:!1,position:{lat:t[0].lat(),lng:t[0].lng()}},o.Common.Element.create(Sg.a,{options:{
+},_getOriginMarker:function(e){var t=e.routes[0].overview_path;return o.Common.Element.create(Uh.Marker,{visible:!1,position:{lat:t[0].lat(),lng:t[0].lng()}},o.Common.Element.create(Pg.a,{options:{
 closeBoxURL:"",disableAutoPan:!0,enableEventPropagation:!0,alignBottom:!0,boxClass:o.Common.Tools.joinClassNames(this.getClassName().routeInfoBox,this.getClassName().origin())}
 },o.Common.Element.create(o.Bricks.Icon,{icon:"mdi-navigation"})))},_getDestinationMarker:function(e){var t=e.routes[0].overview_path,n=!0;if(this.props.zoom&&this.props.zoom<17&&(n=!1),
-n)return o.Common.Element.create(Nh.Marker,{visible:!1,position:{lat:t[t.length-1].lat(),lng:t[t.length-1].lng()}},o.Common.Element.create(Sg.a,{options:{closeBoxURL:"",disableAutoPan:!0,
+n)return o.Common.Element.create(Uh.Marker,{visible:!1,position:{lat:t[t.length-1].lat(),lng:t[t.length-1].lng()}},o.Common.Element.create(Pg.a,{options:{closeBoxURL:"",disableAutoPan:!0,
 enableEventPropagation:!0,alignBottom:!0,boxClass:o.Common.Tools.joinClassNames(this.getClassName().routeInfoBox,this.getClassName().destination())}},o.Common.Element.create(o.Bricks.Icon,{
 icon:"mdi-map-marker"})))},render:function(){var e=this.props.mapContext,t=e.navigation&&e.navigation.visible,n=e.navigation&&e.navigation.place,r=e.navigation&&e.navigation.route
-;return t&&n&&r?o.Common.Element.create(o.Common.Fragment,null,this._getRoute(r),this._getOriginMarker(r),this._getDestinationMarker(r)):null}}));n(581);function Kg(e,t){var n=Object.keys(e)
+;return t&&n&&r?o.Common.Element.create(o.Common.Fragment,null,this._getRoute(r),this._getOriginMarker(r),this._getDestinationMarker(r)):null}}));n(581);function qg(e,t){var n=Object.keys(e)
 ;if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}
-function Zg(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Jg=Object(Nh.withGoogleMap)((function(e){
-return o.Common.Element.create(Nh.GoogleMap,{ref:function(t){return e.parent._map=t},defaultOptions:e.defaultOptions(),defaultZoom:e.zoom,defaultCenter:e.center,zoom:e.zoom,center:e.center,
-onIdle:e.onIdle},e.children)}));function qg(e){return e-116}var Qg=new Set([Uh.Map.vuc.STATION_SEARCH,Uh.Map.vuc.TRANSACTION_DETAIL]),Xg=Ct(o.Common.VisualComponent.create({
-mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.ScreenSizeMixin,o.Common.PureRenderMixin],statics:{tagName:Uh.TAG+"ChargingMap",classNames:{main:Uh.CSS+"charging-map",
-mapWrapper:Uh.CSS+"charging-map-map-wrapper",googleMap:Uh.CSS+"charging-map-google-map"},opt:{pureRender:!0}},propTypes:{spaContext:o.PropTypes.object.isRequired,vuc:o.PropTypes.string.isRequired,
+function Qg(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Xg=Object(Uh.withGoogleMap)((function(e){
+return o.Common.Element.create(Uh.GoogleMap,{ref:function(t){return e.parent._map=t},defaultOptions:e.defaultOptions(),defaultZoom:e.zoom,defaultCenter:e.center,zoom:e.zoom,center:e.center,
+onIdle:e.onIdle},e.children)}));function $g(e){return e-116}var ey=new Set([Vh.Map.vuc.STATION_SEARCH,Vh.Map.vuc.TRANSACTION_DETAIL]),ty=Ct(o.Common.VisualComponent.create({
+mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.ScreenSizeMixin,o.Common.PureRenderMixin],statics:{tagName:Vh.TAG+"ChargingMap",classNames:{main:Vh.CSS+"charging-map",
+mapWrapper:Vh.CSS+"charging-map-map-wrapper",googleMap:Vh.CSS+"charging-map-google-map"},opt:{pureRender:!0}},propTypes:{spaContext:o.PropTypes.object.isRequired,vuc:o.PropTypes.string.isRequired,
 isPlaceSelectable:o.PropTypes.bool.isRequired,places:o.PropTypes.array,filterOptions:o.PropTypes.object,selectedPlace:o.PropTypes.object,hoveredPlace:o.PropTypes.shape({placeId:o.PropTypes.string,
 stationCode:o.PropTypes.number}),center:o.PropTypes.shape({lat:o.PropTypes.number,lng:o.PropTypes.number}),zoom:o.PropTypes.number,onMapChange:o.PropTypes.func,onPlaceSelect:o.PropTypes.func,
 onPlaceUnselect:o.PropTypes.func,onPlaceHover:o.PropTypes.func,onPlaceUnhover:o.PropTypes.func,onStationFilterOptionsChange:o.PropTypes.func,screenSize:o.PropTypes.string,place:o.PropTypes.object},
@@ -7591,42 +7620,42 @@ lng:this.props.center.lng}:this._getDefaultCenter()}},componentDidUpdate:functio
 this.props.zoom&&e!==this.props.zoom&&this.props.zoom!==this.state.zoom&&this.setZoom(this.props.zoom)},setCenter:function(e,t,n){return e=parseFloat(e),t=parseFloat(t),this.setState({center:{lat:e,
 lng:t}},n),this},setZoom:function(e,t){return e=parseFloat(e),this.setState({zoom:e},t),this},fitBounds:function(e){return this._map.fitBounds(e),this},_onBoundsChanged:function(){
 var e=this,t=this._map.getBounds();if(!ie.isSameBounds(t,this.state.bounds)){var n={zoom:this._map.getZoom(),center:ie.getSimplifiedGpsLocation(this._map.getCenter()),bounds:t}
-;this.setState(function(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Kg(Object(n),!0).forEach((function(t){Zg(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Kg(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+;this.setState(function(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?qg(Object(n),!0).forEach((function(t){Qg(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):qg(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
 }))}return e}({},n),(function(){return e.props.onMapChange(n)}))}},_getDefaultOptions:function(){var e={clickableIcons:!1,fullscreenControl:!1,streetViewControl:!1,mapTypeControl:!1,rotateControl:!1,
 zoomControl:this.isL()||this.isXl(),zoomControlOptions:{style:google.maps.ZoomControlStyle.DEFAULT,position:google.maps.ControlPosition.RIGHT_BOTTOM}}
 ;return window.navigator.userAgent.toLowerCase().indexOf("uuappmobileapp")>=0&&(e.gestureHandling="greedy"),e},_getDefaultZoom:function(){var e,t,n
-;return(null===(e=this.props)||void 0===e||null===(t=e.spaContext)||void 0===t||null===(n=t.awidConfig)||void 0===n?void 0:n.defaultZoom)||Uh.defaultZoom},_getDefaultCenter:function(){var e,t,n
+;return(null===(e=this.props)||void 0===e||null===(t=e.spaContext)||void 0===t||null===(n=t.awidConfig)||void 0===n?void 0:n.defaultZoom)||Vh.defaultZoom},_getDefaultCenter:function(){var e,t,n
 ;return null!==(e=this.props)&&void 0!==e&&null!==(t=e.spaContext)&&void 0!==t&&null!==(n=t.awidConfig)&&void 0!==n&&n.defaultCenter?{lat:this.props.spaContext.awidConfig.defaultCenter[0],
-lng:this.props.spaContext.awidConfig.defaultCenter[1]}:Uh.defaultCenter},_getMap:function(e){var t={className:this.getClassName("mapWrapper")};return Uh.smallDevices.has(e)&&(t.style={
-height:qg(this.props.chargingMapHeight)
-}),o.Common.Element.create(o.Bricks.Div,t,this.props.spaContext&&this.props.spaContext.isScriptLoaded&&this.props.spaContext.isScriptLoadSucceed?o.Common.Element.create(Jg,{parent:this,
+lng:this.props.spaContext.awidConfig.defaultCenter[1]}:Vh.defaultCenter},_getMap:function(e){var t={className:this.getClassName("mapWrapper")};return Vh.smallDevices.has(e)&&(t.style={
+height:$g(this.props.chargingMapHeight)
+}),o.Common.Element.create(o.Bricks.Div,t,this.props.spaContext&&this.props.spaContext.isScriptLoaded&&this.props.spaContext.isScriptLoadSucceed?o.Common.Element.create(Xg,{parent:this,
 loadingElement:o.Common.Element.create("div",{style:{height:"100%"}}),containerElement:o.Common.Element.create("div",{style:{height:"100%"}}),mapElement:o.Common.Element.create("div",{id:"mapElement",
-style:{height:"100%"}}),zoom:this.state.zoom,center:this.state.center,onIdle:this._onBoundsChanged,defaultOptions:this._getDefaultOptions},o.Common.Element.create(Wg,null),o.Common.Element.create(Gg,{
-zoom:this.state.zoom}),o.Common.Element.create(Hg,{isPlaceSelectable:this.props.isPlaceSelectable,places:this.props.places,selectedPlace:this.props.selectedPlace,hoveredPlace:this.props.hoveredPlace,
+style:{height:"100%"}}),zoom:this.state.zoom,center:this.state.center,onIdle:this._onBoundsChanged,defaultOptions:this._getDefaultOptions},o.Common.Element.create(Kg,null),o.Common.Element.create(Jg,{
+zoom:this.state.zoom}),o.Common.Element.create(Gg,{isPlaceSelectable:this.props.isPlaceSelectable,places:this.props.places,selectedPlace:this.props.selectedPlace,hoveredPlace:this.props.hoveredPlace,
 onPlaceSelect:this.props.onPlaceSelect,onPlaceUnselect:this.props.onPlaceUnselect,onPlaceHover:this.props.onPlaceHover,onPlaceUnhover:this.props.onPlaceUnhover,
 stationStateColors:this.props.spaContext.awidConfig&&this.props.spaContext.awidConfig.stationStateColors,place:this.props.place})):o.Common.Element.create(o.Bricks.Loading,null))},
-_getStationFilter:function(e){return Uh.smallDevices.has(e)&&Qg.has(this.props.vuc)?null:o.Common.Element.create(bg,{filterOptions:this.props.filterOptions,
-onStationFilterOptionsChange:this.props.onStationFilterOptionsChange})},render:function(){var e=this.getMainPropsToPass();return Uh.smallDevices.has(this.props.screenSize)&&(e.style={
-height:qg(this.props.chargingMapHeight)}),o.Common.Element.create(o.Bricks.Div,e,this._getStationFilter(this.props.screenSize),this._getMap(this.props.screenSize))}}));function $g(e){this.message=e}
-$g.prototype=new Error,$g.prototype.name="InvalidCharacterError";var ey="undefined"!=typeof window&&window.atob&&window.atob.bind(window)||function(e){var t=String(e).replace(/=+$/,"")
-;if(t.length%4==1)throw new $g("'atob' failed: The string to be decoded is not correctly encoded.");for(var n,r,o=0,i=0,a="";r=t.charAt(i++);~r&&(n=o%4?64*n+r:r,
-o++%4)?a+=String.fromCharCode(255&n>>(-2*o&6)):0)r="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".indexOf(r);return a};function ty(e){var t=e.replace(/-/g,"+").replace(/_/g,"/")
-;switch(t.length%4){case 0:break;case 2:t+="==";break;case 3:t+="=";break;default:throw"Illegal base64url string!"}try{return function(e){return decodeURIComponent(ey(e).replace(/(.)/g,(function(e,t){
-var n=t.charCodeAt(0).toString(16).toUpperCase();return n.length<2&&(n="0"+n),"%"+n})))}(t)}catch(e){return ey(t)}}function ny(e){this.message=e}ny.prototype=new Error,
-ny.prototype.name="InvalidTokenError";var ry=function(e,t){if("string"!=typeof e)throw new ny("Invalid token specified");var n=!0===(t=t||{}).header?0:1;try{return JSON.parse(ty(e.split(".")[n]))
-}catch(e){throw new ny("Invalid token specified: "+e.message)}};function oy(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e)
-;t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function iy(e){for(var t=1;t<arguments.length;t++){
-var n=null!=arguments[t]?arguments[t]:{};t%2?oy(Object(n),!0).forEach((function(t){ay(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):oy(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function ay(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var sy={stationId:"stationCode",sessionId:"sygicSessionId",
-lang:"lang",connectorId:"chargingPointId","userData.invoicingEmail":"email"},cy={eng:"en",cze:"cz",de:"de",sk:"sk"};function ly(e){var t={};if(e){var n=function(e){return ry(e)}(e)
-;if(n)for(var r in sy){var o=void 0;try{o=r.split(".").reduce((function(e,t){return e[t]}),n)}catch(e){continue}o&&(t[sy[r]]=o)}}return t}function uy(e){
-localStorage&&localStorage.setItem(E.localStorageKeys.language,e)}n(583);function dy(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e)
-;t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function my(e){for(var t=1;t<arguments.length;t++){
-var n=null!=arguments[t]?arguments[t]:{};t%2?dy(Object(n),!0).forEach((function(t){py(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):dy(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function py(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var fy=o.Common.VisualComponent.create({
+_getStationFilter:function(e){return Vh.smallDevices.has(e)&&ey.has(this.props.vuc)?null:o.Common.Element.create(Cg,{filterOptions:this.props.filterOptions,
+onStationFilterOptionsChange:this.props.onStationFilterOptionsChange})},render:function(){var e=this.getMainPropsToPass();return Vh.smallDevices.has(this.props.screenSize)&&(e.style={
+height:$g(this.props.chargingMapHeight)}),o.Common.Element.create(o.Bricks.Div,e,this._getStationFilter(this.props.screenSize),this._getMap(this.props.screenSize))}}));function ny(e){this.message=e}
+ny.prototype=new Error,ny.prototype.name="InvalidCharacterError";var ry="undefined"!=typeof window&&window.atob&&window.atob.bind(window)||function(e){var t=String(e).replace(/=+$/,"")
+;if(t.length%4==1)throw new ny("'atob' failed: The string to be decoded is not correctly encoded.");for(var n,r,o=0,i=0,a="";r=t.charAt(i++);~r&&(n=o%4?64*n+r:r,
+o++%4)?a+=String.fromCharCode(255&n>>(-2*o&6)):0)r="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".indexOf(r);return a};function oy(e){var t=e.replace(/-/g,"+").replace(/_/g,"/")
+;switch(t.length%4){case 0:break;case 2:t+="==";break;case 3:t+="=";break;default:throw"Illegal base64url string!"}try{return function(e){return decodeURIComponent(ry(e).replace(/(.)/g,(function(e,t){
+var n=t.charCodeAt(0).toString(16).toUpperCase();return n.length<2&&(n="0"+n),"%"+n})))}(t)}catch(e){return ry(t)}}function iy(e){this.message=e}iy.prototype=new Error,
+iy.prototype.name="InvalidTokenError";var ay=function(e,t){if("string"!=typeof e)throw new iy("Invalid token specified");var n=!0===(t=t||{}).header?0:1;try{return JSON.parse(oy(e.split(".")[n]))
+}catch(e){throw new iy("Invalid token specified: "+e.message)}};function sy(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e)
+;t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function cy(e){for(var t=1;t<arguments.length;t++){
+var n=null!=arguments[t]?arguments[t]:{};t%2?sy(Object(n),!0).forEach((function(t){ly(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):sy(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function ly(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var uy={stationId:"stationCode",sessionId:"sygicSessionId",
+lang:"lang",connectorId:"chargingPointId","userData.invoicingEmail":"email"},dy={eng:"en",cze:"cz",de:"de",sk:"sk"};function my(e){var t={};if(e){var n=function(e){return ay(e)}(e)
+;if(n)for(var r in uy){var o=void 0;try{o=r.split(".").reduce((function(e,t){return e[t]}),n)}catch(e){continue}o&&(t[uy[r]]=o)}}return t}function py(e){
+localStorage&&localStorage.setItem(E.localStorageKeys.language,e)}n(583);function fy(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e)
+;t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function hy(e){for(var t=1;t<arguments.length;t++){
+var n=null!=arguments[t]?arguments[t]:{};t%2?fy(Object(n),!0).forEach((function(t){gy(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):fy(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function gy(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var yy=o.Common.VisualComponent.create({
 mixins:[o.Common.BaseMixin,o.Common.RouteMixin,o.Common.PureRenderMixin],statics:{tagName:j.TAG+"Map",classNames:{main:j.CSS+"map",mapDisplay:j.CSS+"map-mobile-display-",mapExpand:j.CSS+"map-expand"},
 opt:{pureRender:!0},lsi:pn.map},propTypes:{parameters:o.PropTypes.shape({firstLoad:o.PropTypes.bool,lat:o.PropTypes.any,lng:o.PropTypes.any,zoom:o.PropTypes.any,stationCode:o.PropTypes.any,
 transactionId:o.PropTypes.any,paymentId:o.PropTypes.any,code:o.PropTypes.any,email:o.PropTypes.any,vuc:o.PropTypes.any}),transaction:o.PropTypes.object,isScriptLoaded:o.PropTypes.bool,
@@ -7635,40 +7664,40 @@ var e,t,n,r=null===(e=this.props.parameters)||void 0===e?void 0:e.firstLoad,o=nu
 transactionCode:o,isPlaceSelectable:!0,placeListWithinPolygon:[],selectedPlace:this._getSelectedPlaceFromProps(this.props.parameters,r),filterOptions:this._getDefaultFilterOptions(),
 mobileMapDisplay:j.Map.mobileMapDisplay.NONE,stationDetailUnZoom:!1,mobileMapDisplayStore:{},stationSearchFocus:!1,chargingMapHeight:window.innerHeight,
 stationFilter:null===(n=this.props.parameters)||void 0===n?void 0:n.stationFilter}},componentDidMount:function(){if(this.props.parameters&&this.props.parameters.lang){
-var e=(t=this.props.parameters.lang,cy[t]?cy[t]:cy.eng);uy(e),o.Common.Tools.setLanguage(e)}var t;this._resetReloadInterval(),this._mapHistory=[]},componentWillUnmount:function(){
+var e=(t=this.props.parameters.lang,dy[t]?dy[t]:dy.eng);py(e),o.Common.Tools.setLanguage(e)}var t;this._resetReloadInterval(),this._mapHistory=[]},componentWillUnmount:function(){
 this._unsetReloadInterval(),o.Environment.EventListener.removeWindowEvent("touchend",this.getId())},componentDidUpdate:function(e){var t,n,r,o,i=!1,a={}
 ;(null===(t=e.parameters)||void 0===t?void 0:t.stationFilter)!==(null===(n=this.props.parameters)||void 0===n?void 0:n.stationFilter)&&(null!==(o=this.props.parameters)&&void 0!==o&&o.stationFilter||!this.state.stationFilter||(i=!0,
 a.stationFilter=null));return null!==(r=e.parameters)&&void 0!==r&&r.stationFilter||this.props.parameters||e.parameters&&(i=!0,a.stationFilter=null),
 this.state.transactionCode?this._openTransaction(this.state.transactionCode,a):ie.getUrlUseCase().startsWith(j.useCases.apiChargeflow)?void(i&&this.setState({attributes:a
 })):this._updateStateFromParams(ie.getUrlParameters(),a)},onShowCurrentPositionOptionSelected:function(e){var t=this,n=e.latitude.toFixed(5),r=e.longitude.toFixed(5),i=j.Map.currentPositionMapZoom,a={
-lat:n,lng:r,zoom:i};return o.Environment.setRoute({component:o.Common.Element.create(fy,{parameters:a}),url:{useCase:j.useCases.map,parameters:my({},a)},noHistory:!1},(function(){
+lat:n,lng:r,zoom:i};return o.Environment.setRoute({component:o.Common.Element.create(yy,{parameters:a}),url:{useCase:j.useCases.map,parameters:hy({},a)},noHistory:!1},(function(){
 t._chargingMap.setCenter(n,r),t._chargingMap.setZoom(i)})),this},onShowNearOptionSelected:function(e){return this._chargingMap.fitBounds(e),this},onStationSearchFocus:function(e){
-return this.setState({stationSearchFocus:e}),this},onShowNearOptionSelectedWithStateUpdate:function(e,t){return this._chargingMap.fitBounds(e),this.setState(my({},t)),this},
+return this.setState({stationSearchFocus:e}),this},onShowNearOptionSelectedWithStateUpdate:function(e,t){return this._chargingMap.fitBounds(e),this.setState(hy({},t)),this},
 onLocationSelect:function(e){var t=e.placeDetails.geometry.viewport;return this._chargingMap.fitBounds(t),this},onPlaceSelect:function(e,t,n){var r,i=this
 ;r=!!this.state.selectedPlace&&this.state.selectedPlace.chargingStation.stationCode===e.chargingStation.stationCode;var a={stationCode:e.chargingStation.stationCode};return this.setState({place:e
-},(function(){o.Environment.setRoute({component:o.Common.Element.create(fy,{parameters:a}),url:{useCase:j.useCases.map,parameters:my({},a)},noHistory:r},(function(){
+},(function(){o.Environment.setRoute({component:o.Common.Element.create(yy,{parameters:a}),url:{useCase:j.useCases.map,parameters:hy({},a)},noHistory:r},(function(){
 t&&i._chargingMap.setCenter(e.chargingStation.location.coordinates[1],e.chargingStation.location.coordinates[0]),n&&i._chargingMap.setZoom(j.Map.placeMapZoom)}))})),this.setMobileMapDisplay(1),this},
 onPlaceUnselect:function(){var e=this,t={lat:this.state.mapOptions.center.lat,lng:this.state.mapOptions.center.lng,zoom:this.state.mapOptions.zoom}
-;return this.state.stationFilter&&(t.stationFilter=this.state.stationFilter),o.Environment.setRoute({component:o.Common.Element.create(fy,{parameters:t}),url:{useCase:j.useCases.map,
-parameters:my({},t)},noHistory:!1},(function(){e.setState({selectedPlace:void 0,stationDetailUnZoom:!1,navigation:{visible:!1}})})),this},onPlaceHover:function(e,t,n){return this.setState({
+;return this.state.stationFilter&&(t.stationFilter=this.state.stationFilter),o.Environment.setRoute({component:o.Common.Element.create(yy,{parameters:t}),url:{useCase:j.useCases.map,
+parameters:hy({},t)},noHistory:!1},(function(){e.setState({selectedPlace:void 0,stationDetailUnZoom:!1,navigation:{visible:!1}})})),this},onPlaceHover:function(e,t,n){return this.setState({
 hoveredPlace:{placeId:e,stationCode:t}},n),this},onPlaceUnhover:function(e){return this.setState({hoveredPlace:void 0},e),this},onFilterOptionsChange:function(e){var t=this;return this.setState({
 filterOptions:e},(function(){t._resetReloadInterval(),t._handlePlaceListWithinPolygon()})),this},onMapOptionsChange:function(e){
 var t=this,n=!ie.isSameGpsLocation(ie.getSimplifiedGpsLocation(e.center),ie.getSimplifiedGpsLocation(this.state.mapOptions?this.state.mapOptions.center:null))||e.zoom!==this.state.mapOptions.zoom
 ;return this.state.stationSearchFocus||this.setState({mapOptions:e},(function(){
 if(t.state.mapOptions&&t.state.mapOptions.center&&Object.prototype.hasOwnProperty.call(t.state.mapOptions,"zoom"))if(!t.state.mapLoaded&&t.state.mapOptions.bounds){
-var e,r=my(my({},ie.getSimplifiedGpsLocation(t.state.mapOptions.center)),{},{zoom:t.state.mapOptions.zoom})
+var e,r=hy(hy({},ie.getSimplifiedGpsLocation(t.state.mapOptions.center)),{},{zoom:t.state.mapOptions.zoom})
 ;null!==(e=t.state.stationFilter)&&void 0!==e&&e.length&&(r.stationFilter=t.state.stationFilter),t._mapHistory.push(r),t.setState({mapLoaded:!0})}else if(n){
-var i,a=my(my({},ie.getSimplifiedGpsLocation(t.state.mapOptions.center)),{},{zoom:t.state.mapOptions.zoom})
+var i,a=hy(hy({},ie.getSimplifiedGpsLocation(t.state.mapOptions.center)),{},{zoom:t.state.mapOptions.zoom})
 ;if(null!==(i=t.state.stationFilter)&&void 0!==i&&i.length&&(a.stationFilter=t.state.stationFilter),t.state.vuc===j.Map.vuc.STATION_SEARCH)t._mapHistory.push(a),o.Environment.setRoute({
-component:o.Common.Element.create(fy,{parameters:a}),url:{useCase:j.useCases.map,parameters:my({},a)},noHistory:!n});else if(t.state.vuc===j.Map.vuc.PLACE_LIST){
-var s=ie.getRouterParams(t.props.parameters),c=s&&!!s.firstLoad;t._mapHistory.push(a),o.Environment.setRoute({component:o.Common.Element.create(fy,{parameters:a}),url:{useCase:j.useCases.map,
-parameters:my({},a)},noHistory:c})}else t.state.vuc===j.Map.vuc.STATION_DETAIL&&t.state.stationDetailUnZoom&&t.onPlaceUnselect()}else if(t.state.mapLoaded&&!n&&t.state.vuc===j.Map.vuc.STATION_SEARCH){
-var l,u=my(my({},ie.getSimplifiedGpsLocation(t.state.mapOptions.center)),{},{zoom:t.state.mapOptions.zoom})
-;null!==(l=t.state.stationFilter)&&void 0!==l&&l.length&&(u.stationFilter=t.state.stationFilter),t._mapHistory.push(u),o.Environment.setRoute({component:o.Common.Element.create(fy,{parameters:u}),
-url:{useCase:j.useCases.map,parameters:my({},u)},noHistory:!n})}t._resetReloadInterval(),t._handlePlaceListWithinPolygon()})),this},setPlacesSelectable:function(e,t){return this.setState({
+component:o.Common.Element.create(yy,{parameters:a}),url:{useCase:j.useCases.map,parameters:hy({},a)},noHistory:!n});else if(t.state.vuc===j.Map.vuc.PLACE_LIST){
+var s=ie.getRouterParams(t.props.parameters),c=s&&!!s.firstLoad;t._mapHistory.push(a),o.Environment.setRoute({component:o.Common.Element.create(yy,{parameters:a}),url:{useCase:j.useCases.map,
+parameters:hy({},a)},noHistory:c})}else t.state.vuc===j.Map.vuc.STATION_DETAIL&&t.state.stationDetailUnZoom&&t.onPlaceUnselect()}else if(t.state.mapLoaded&&!n&&t.state.vuc===j.Map.vuc.STATION_SEARCH){
+var l,u=hy(hy({},ie.getSimplifiedGpsLocation(t.state.mapOptions.center)),{},{zoom:t.state.mapOptions.zoom})
+;null!==(l=t.state.stationFilter)&&void 0!==l&&l.length&&(u.stationFilter=t.state.stationFilter),t._mapHistory.push(u),o.Environment.setRoute({component:o.Common.Element.create(yy,{parameters:u}),
+url:{useCase:j.useCases.map,parameters:hy({},u)},noHistory:!n})}t._resetReloadInterval(),t._handlePlaceListWithinPolygon()})),this},setPlacesSelectable:function(e,t){return this.setState({
 isPlaceSelectable:e},t),this},onSetupNewTransaction:function(e,t,n){var r=this,i=arguments.length>3&&void 0!==arguments[3]?arguments[3]:{};return this.setState({selectedChargingPoint:n},(function(){
-var n=my({stationCode:e.chargingStation.stationCode,newTransaction:!0},i);t.email&&(n.email=t.email),o.Environment.setRoute({component:o.Common.Element.create(fy,{parameters:n,transaction:t}),url:{
-useCase:j.useCases.map,parameters:my({},n)},noHistory:!0}),r._chargingMap.setCenter(e.chargingStation.location.coordinates[1],e.chargingStation.location.coordinates[0]),
+var n=hy({stationCode:e.chargingStation.stationCode,newTransaction:!0},i);t.email&&(n.email=t.email),o.Environment.setRoute({component:o.Common.Element.create(yy,{parameters:n,transaction:t}),url:{
+useCase:j.useCases.map,parameters:hy({},n)},noHistory:!0}),r._chargingMap.setCenter(e.chargingStation.location.coordinates[1],e.chargingStation.location.coordinates[0]),
 r._chargingMap.setZoom(j.Map.transactionMapZoom)})),this},onPlaceStationLoaded:function(e,t){var n=this;return this.setState({place:e},(function(){
 t&&(n._chargingMap.setCenter(e.chargingStation.location.coordinates[1],e.chargingStation.location.coordinates[0]),n._chargingMap.setZoom(j.Map.placeMapZoom))})),this},
 onTransactionPlaceLoaded:function(e,t){var n=this;return this.setState({place:e},(function(){
@@ -7677,12 +7706,12 @@ setMobileMapDisplay:function(e,t){var n=this.getMobileMapDisplay(e,!0);return n!
 this},getMobileMapDisplay:function(e,t){if(t)switch(e){case 0:return j.Map.mobileMapDisplay.NONE;case 1:return j.Map.mobileMapDisplay.TINY;case 2:return j.Map.mobileMapDisplay.FULL;case 3:
 return j.Map.mobileMapDisplay.FNAV}else switch(e||this.state.mobileMapDisplay){case j.Map.mobileMapDisplay.NONE:return 0;case j.Map.mobileMapDisplay.TINY:return 1;case j.Map.mobileMapDisplay.FULL:
 return 2;case j.Map.mobileMapDisplay.FNAV:return 3}},storeMobileMapDisplay:function(e,t){return this.setState({
-mobileMapDisplayStore:my(my({},this.state.mobileMapDisplayStore),{},py({},e,this.state.mobileMapDisplay))},t),this},raiseMobileMapDisplay:function(e){
+mobileMapDisplayStore:hy(hy({},this.state.mobileMapDisplayStore),{},gy({},e,this.state.mobileMapDisplay))},t),this},raiseMobileMapDisplay:function(e){
 return this.getMobileMapDisplay(this.state.mobileMapDisplayStore[e])},setNavigation:function(e,t){var n=this;return this.setState({navigation:Object.assign({},e)},(function(){
 e.place&&!e.visible&&(n._chargingMap.setCenter(e.place.chargingStation.location.coordinates[1],e.place.chargingStation.location.coordinates[0]),n._chargingMap.setZoom(j.Map.placeMapZoom)),t&&t()})),
 this},_updateStateFromParams:function(e){var t,n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r=this._getVuc(e),o=e&&!!e.firstLoad;switch(r){case j.Map.vuc.STATION_DETAIL:
 var i=this._getSelectedPlaceFromProps(e,o);t={selectedPlace:i};break;case j.Map.vuc.TRANSACTION_DETAIL:break;case j.Map.vuc.STATION_SEARCH:t={selectedPlace:void 0};break;case j.Map.vuc.PLACE_LIST:t={
-selectedPlace:void 0,mapOptions:my(my({},this.state.mapOptions),{},{center:{lat:parseFloat(e.lat),lng:parseFloat(e.lng)},zoom:parseFloat(e.zoom)})}}this.setState(my(my(my({},n),t),{},{vuc:r}))},
+selectedPlace:void 0,mapOptions:hy(hy({},this.state.mapOptions),{},{center:{lat:parseFloat(e.lat),lng:parseFloat(e.lng)},zoom:parseFloat(e.zoom)})}}this.setState(hy(hy(hy({},n),t),{},{vuc:r}))},
 _getVuc:function(e){var t=j.Map.vuc.STATION_SEARCH
 ;return e&&(Object.prototype.hasOwnProperty.call(e,"stationCode")?t=e.newTransaction?j.Map.vuc.TRANSACTION_DETAIL:j.Map.vuc.STATION_DETAIL:Object.prototype.hasOwnProperty.call(e,"transactionId")||Object.prototype.hasOwnProperty.call(e,"code")||Object.prototype.hasOwnProperty.call(e,"paymentId")?t=t=j.Map.vuc.TRANSACTION_DETAIL:Object.prototype.hasOwnProperty.call(e,"lat")&&Object.prototype.hasOwnProperty.call(e,"lng")&&Object.prototype.hasOwnProperty.call(e,"zoom")?t=j.Map.vuc.PLACE_LIST:Object.prototype.hasOwnProperty.call(e,"vuc")&&"howItWorks"===e.vuc&&(t=j.Map.vuc.HOW_IT_WORKS)),
 t},_getSelectedPlaceFromProps:function(e){var t=this.state?this.state.selectedPlace:void 0;if(e&&Object.prototype.hasOwnProperty.call(e,"stationCode")){var n,r=parseInt(e.stationCode)
@@ -7690,8 +7719,8 @@ t},_getSelectedPlaceFromProps:function(e){var t=this.state?this.state.selectedPl
 chargingStation:{stationCode:r,chargingPointId:n}}}return t},_getDefaultFilterOptions:function(){return{onlyAvailable:!1,connectors:Object.keys(lc.connectors).map((function(e){return{type:e,
 caption:lc.connectors[e].caption,icon:lc.connectors[e].icon,selected:!1}}))}},_resetReloadInterval:function(){var e=this;clearInterval(this._interval),this._interval=setInterval((function(){
 return e._handlePlaceListWithinPolygon()}),j.Map.reloadInterval)},_unsetReloadInterval:function(){clearInterval(this._interval)},_openTransaction:function(e){
-var t=this,n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r={code:e};o.Environment.setRoute({component:o.Common.Element.create(fy,{parameters:r}),url:{useCase:j.useCases.map,
-parameters:my({},r)},noHistory:!1},(function(){return t.setState(my(my({},n),{},{transactionCode:void 0}))}))},_handlePlaceListWithinPolygon:function(){
+var t=this,n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},r={code:e};o.Environment.setRoute({component:o.Common.Element.create(yy,{parameters:r}),url:{useCase:j.useCases.map,
+parameters:hy({},r)},noHistory:!1},(function(){return t.setState(hy(hy({},n),{},{transactionCode:void 0}))}))},_handlePlaceListWithinPolygon:function(){
 var e=this,t=arguments.length>0&&void 0!==arguments[0]&&arguments[0];this.state.mapOptions&&this.state.mapOptions.bounds&&this.state.placeListWithinPolygonState!==j.states.loading&&this.setState({
 placeListWithinPolygonState:j.states.loading},(function(){var n={criteria:{connectors:e.state.filterOptions?ie.getConnectorsListFromFilter(e.state.filterOptions.connectors):void 0,
 onlyAvailable:e.state.filterOptions?e.state.filterOptions.onlyAvailable:void 0}};e.state.stationFilter&&(n.stationFilter=e.state.stationFilter),t&&e.state.stationFilter||(n.northEast={
@@ -7699,73 +7728,53 @@ lat:e.state.mapOptions.bounds.getNorthEast().lat(),lng:e.state.mapOptions.bounds
 lng:e.state.mapOptions.bounds.getSouthWest().lng()}),P.placeListWithinPolygon(n).then((function(n){return e._handlePlaceListWithinPolygonDone(n,t)})).catch(e._handlePlaceListWithinPolygonFail)}))},
 _handlePlaceListWithinPolygonDone:function(e,t){var n=this,r=e.chargingPlaces.itemList.map((function(e){return e.chargingStations=e.chargingStations.map((function(e){
 return e.availablePoints=ie.getNumberOfAvailablePoints(e.chargingPoints),e.fullAddress=ie.getStationFullAddress(e.address),e})),e}));if(t){
-var i=o.Common.Url.parse(window.top.location.href),a=my(my({},null==i?void 0:i.parameters),{},{stationFilter:this.state.stationFilter});i.set({parameters:a}),
+var i=o.Common.Url.parse(window.top.location.href),a=hy(hy({},null==i?void 0:i.parameters),{},{stationFilter:this.state.stationFilter});i.set({parameters:a}),
 window.history.pushState(a,"",i.toString())}this.setState({placeListWithinPolygonState:j.states.ready,placeListWithinPolygon:r},(function(){if(e.bounds){var i=new google.maps.LatLngBounds
 ;return i.extend({lat:e.bounds.latLngMinMin[1],lng:e.bounds.latLngMinMin[0]}),i.extend({lat:e.bounds.latLngMaxMax[1],lng:e.bounds.latLngMaxMax[0]}),n._chargingMap.fitBounds(i)}
-if(n.state.stationFilter&&!r.length&&n.state.vuc===j.Map.vuc.PLACE_LIST){var a=o.Common.Url.parse(window.top.location.href),s=my(my({},null==a?void 0:a.parameters),{},{
+if(n.state.stationFilter&&!r.length&&n.state.vuc===j.Map.vuc.PLACE_LIST){var a=o.Common.Url.parse(window.top.location.href),s=hy(hy({},null==a?void 0:a.parameters),{},{
 stationFilter:n.state.stationFilter});return a.set({parameters:s}),void window.history.pushState(s,"",a.toString())}if(t&&n.state.stationFilter&&!r.length&&n.state.vuc===j.Map.vuc.STATION_SEARCH){
-var c=my(my({},ie.getSimplifiedGpsLocation(n.state.mapOptions.center)),{},{zoom:n.state.mapOptions.zoom,stationFilter:n.state.stationFilter});o.Environment.setRoute({
-component:o.Common.Element.create(fy,{parameters:c}),url:{useCase:j.useCases.map,parameters:my({},c)},noHistory:!1})}else;}))},_handlePlaceListWithinPolygonFail:function(e){this.setState({
+var c=hy(hy({},ie.getSimplifiedGpsLocation(n.state.mapOptions.center)),{},{zoom:n.state.mapOptions.zoom,stationFilter:n.state.stationFilter});o.Environment.setRoute({
+component:o.Common.Element.create(yy,{parameters:c}),url:{useCase:j.useCases.map,parameters:hy({},c)},noHistory:!1})}else;}))},_handlePlaceListWithinPolygonFail:function(e){this.setState({
 placeListWithinPolygonState:j.states.error,placeListWithinPolygonError:e.data})},_setMobileMapDisplayCallback:function(){this._dummyDiv.scrollIntoView(!0),
 document.body.classList.add("overflow-hidden"),o.Environment.EventListener.addWindowEvent("touchend",this.getId(),this._setChargingMapHeight)},_setChargingMapHeight:function(){this.setState({
 chargingMapHeight:window.innerHeight})},_handleChangeStationListFilter:function(e){var t=this;this.setState({stationFilter:e},(function(){t._resetReloadInterval(),t._handlePlaceListWithinPolygon(!0)
-}))},_handleRemoveStationListFilter:function(){var e=this;this.setState({stationFilter:null},(function(){var t=my(my({},ie.getSimplifiedGpsLocation(e.state.mapOptions.center)),{},{
-zoom:e.state.mapOptions.zoom});o.Environment.setRoute({component:o.Common.Element.create(fy,{parameters:t}),url:{useCase:j.useCases.map,parameters:my({},t)},noHistory:!1}),e._resetReloadInterval(),
+}))},_handleRemoveStationListFilter:function(){var e=this;this.setState({stationFilter:null},(function(){var t=hy(hy({},ie.getSimplifiedGpsLocation(e.state.mapOptions.center)),{},{
+zoom:e.state.mapOptions.zoom});o.Environment.setRoute({component:o.Common.Element.create(yy,{parameters:t}),url:{useCase:j.useCases.map,parameters:hy({},t)},noHistory:!1}),e._resetReloadInterval(),
 e._handlePlaceListWithinPolygon()}))},render:function(){
 var e=this,t=ie.getRouterParams(this.props.parameters),n=t&&t.transactionId,r=t&&t.code,i=t&&t.email||this.props.transaction&&this.props.transaction.email,a=t&&parseFloat(t.lat),s=t&&parseFloat(t.lng),c=t&&parseFloat(t.zoom),l=t&&!!t.firstLoad,u=t&&!!t.redirect,d=t&&t.sygicSessionId,m=this.getMainPropsToPass()
 ;return m.className=o.Common.Tools.joinClassNames(this.getClassName().main,this.getClassName().mapDisplay+this.state.mobileMapDisplay.toLowerCase()),
 o.Common.Element.create(o.Bricks.ScreenSize,null,(function(t){var p=t.screenSize;return j.smallDevices.has(p)&&(m.style={minHeight:e.state.chargingMapHeight-56}),o.Common.Element.create(rn.Provider,{
-value:my(my({},e.state),{},{setMobileMapDisplay:e.setMobileMapDisplay,getMobileMapDisplay:e.getMobileMapDisplay,storeMobileMapDisplay:e.storeMobileMapDisplay,
+value:hy(hy({},e.state),{},{setMobileMapDisplay:e.setMobileMapDisplay,getMobileMapDisplay:e.getMobileMapDisplay,storeMobileMapDisplay:e.storeMobileMapDisplay,
 raiseMobileMapDisplay:e.raiseMobileMapDisplay,onShowCurrentPositionOptionSelected:e.onShowCurrentPositionOptionSelected,onShowNearOptionSelected:e.onShowNearOptionSelected,
 setNavigation:e.setNavigation,onPlaceUnselect:e.onPlaceUnselect,onShowNearOptionSelectedWithStateUpdate:e.onShowNearOptionSelectedWithStateUpdate,mapHistory:e._mapHistory,transaction:{redirect:u,id:n,
 code:r,email:i},screenSize:p,sygicSessionId:d,onSetupNewTransaction:e.onSetupNewTransaction,onMapChange:e.onMapOptionsChange,onChangeStationListFilter:e._handleChangeStationListFilter,
-onRemoveStationListFilter:e._handleRemoveStationListFilter,stationFilter:e.state.stationFilter,firstLoad:l})},o.Common.Element.create(o.Bricks.Div,m,o.Common.Element.create(Ih,{vuc:e.state.vuc,
+onRemoveStationListFilter:e._handleRemoveStationListFilter,stationFilter:e.state.stationFilter,firstLoad:l})},o.Common.Element.create(o.Bricks.Div,m,o.Common.Element.create(Fh,{vuc:e.state.vuc,
 firstLoad:l,isPlaceSelectable:e.state.isPlaceSelectable,places:e.state.placeListWithinPolygon,selectedPlace:e.state.selectedPlace,place:e.state.place,hoveredPlace:e.state.hoveredPlace,transaction:{
 redirect:u,id:n,code:r,email:i},selectedChargingPoint:e.state.selectedChargingPoint,onPlaceSelect:e.onPlaceSelect,onPlaceUnselect:e.onPlaceUnselect,onPlaceHover:e.onPlaceHover,
 onPlaceUnhover:e.onPlaceUnhover,onSetupNewTransaction:e.onSetupNewTransaction,onPlaceStationLoaded:e.onPlaceStationLoaded,onTransactionPlaceLoaded:e.onTransactionPlaceLoaded,
-setPlacesSelectable:e.setPlacesSelectable,onLocationSelect:e.onLocationSelect,onStationSearchFocus:e.onStationSearchFocus}),o.Common.Element.create(Xg,{ref_:function(t){return e._chargingMap=t},
+setPlacesSelectable:e.setPlacesSelectable,onLocationSelect:e.onLocationSelect,onStationSearchFocus:e.onStationSearchFocus}),o.Common.Element.create(ty,{ref_:function(t){return e._chargingMap=t},
 vuc:e.state.vuc,isPlaceSelectable:e.state.isPlaceSelectable,filterOptions:e.state.filterOptions,places:e.state.placeListWithinPolygon,selectedPlace:e.state.selectedPlace,
 hoveredPlace:e.state.hoveredPlace,center:{lat:a,lng:s},zoom:c,onMapChange:e.onMapOptionsChange,onPlaceSelect:e.onPlaceSelect,onPlaceUnselect:e.onPlaceUnselect,onPlaceHover:e.onPlaceHover,
 onPlaceUnhover:e.onPlaceUnhover,onStationFilterOptionsChange:e.onFilterOptionsChange,chargingMapHeight:e.state.chargingMapHeight,screenSize:p,place:e.state.place
 }),e.state.mobileMapDisplay===j.Map.mobileMapDisplay.TINY&&o.Common.Element.create(o.Bricks.Button,{className:e.getClassName().mapExpand,bgStyle:j.bgStyle.map,onClick:function(){
-return e.setMobileMapDisplay(2,e._setMobileMapDisplayCallback)}})),o.Common.Element.create("div",{ref:function(t){return e._dummyDiv=t}}))}))}}),hy=fy;function gy(e,t){var n=Object.keys(e)
+return e.setMobileMapDisplay(2,e._setMobileMapDisplayCallback)}})),o.Common.Element.create("div",{ref:function(t){return e._dummyDiv=t}}))}))}}),vy=yy;function by(e,t){var n=Object.keys(e)
 ;if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}
-function yy(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?gy(Object(n),!0).forEach((function(t){vy(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):gy(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function vy(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var by={goBackToInitialPage:function(){o.Environment.setRoute({
-component:o.Common.Element.create(hy,null),url:{useCase:"map"},noHistory:!1})},goPackToHomePage:function(){o.Environment.setRoute("home")},goBackInHierarchy:function(e,t){var n,r
+function _y(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?by(Object(n),!0).forEach((function(t){ky(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):by(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function ky(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Cy={goBackToInitialPage:function(){o.Environment.setRoute({
+component:o.Common.Element.create(vy,null),url:{useCase:"map"},noHistory:!1})},goPackToHomePage:function(){o.Environment.setRoute("home")},goBackInHierarchy:function(e,t){var n,r
 ;e.mapHistory.splice(-1,1);var i=e.mapHistory[e.mapHistory.length-1],a={lat:(null==t||null===(n=t.defaultCenter)||void 0===n?void 0:n[0])||E.defaultCenter[0],
-lng:(null==t||null===(r=t.defaultCenter)||void 0===r?void 0:r[1])||E.defaultCenter[1],zoom:(null==t?void 0:t.defaultZoom)||E.defaultZoom};a.zoom===e.mapOptions.zoom?i={}:i||(i=yy({},a)),
-e.stationFilter&&(i.stationFilter=e.stationFilter),o.Environment.setRoute({component:o.Common.Element.create(hy,{parameters:i}),url:{useCase:E.useCases.map,parameters:yy({},i)},noHistory:!1})}}
-;function _y(e){return(_y="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){
-return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function ky(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,
-r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}var Cy=new(function(){function e(){var t;!function(e,t){
-if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),this.telemetryEnabled=!1,this.maxLoggingLevel=5,this.telemetrySendInterval=1e4,this.windowErrorHandler=null,
-this.originalConsoleMethods={},this.uuAppClientTraceId=null===(t=localStorage)||void 0===t?void 0:t.getItem("uu_app_client_trace_id"),this.clientInstanceId=o.Common.Tools.generateUUID()}var t,n,r
-;return t=e,(n=[{key:"isTelemetryEnabled",value:function(){return this.telemetryEnabled}},{key:"enableTelemetry",value:function(){var e=this;if(!this.telemetryEnabled){a.Environment.telemetry=!0,
-a.Telemetry.init({interval:1e4,useCase:"portal/logTelemetryData",includeLibraries:!0}),o.Environment.showProductionWarning=!0;var t={warn:"warning",error:"error"}
-;["warn","error"].forEach((function(n){var r=console[n];e.originalConsoleMethods[n]=r;var o=e;console[n]=function(){var e=o._prepareTelemetryData({arguments:arguments})
-;a.Telemetry[t[n]]("console-"+n,e),r.apply(console,arguments)}})),this.windowErrorHandler=window.addEventListener("error",(function(t){
-var n=t.message,r=t.source,o=t.lineno,i=t.colno,s=t.error,c=e._prepareTelemetryData({message:n,source:r,lineno:o,colno:i,error:s&&s.toString(),stackTrace:s&&s.stack})
-;a.Telemetry.error("uncaught-exception",c)})),this.telemetryEnabled=!0,console.info("Telemetry enabled")}}},{key:"disableTelemetry",value:function(){if(this.telemetryEnabled){
-for(var e in this.originalConsoleMethods)this.originalConsoleMethods.hasOwnProperty(e)&&(console[e]=this.originalConsoleMethods[e]);window.removeEventListener("error",this.windowErrorHandler),
-this.telemetryEnabled=!1,console.info("Telemetry disabled"),o.Environment.showProductionWarning=!1,a.Environment.telemetry=!1}}},{key:"error",value:function(e,t){if(this.telemetryEnabled){
-var n=this._prepareTelemetryData(t);a.Telemetry.error(e,n)}}},{key:"info",value:function(e,t){if(this.telemetryEnabled){var n=this._prepareTelemetryData(t);a.Telemetry.info(e,n)}}},{key:"warning",
-value:function(e,t){if(this.telemetryEnabled){var n=this._prepareTelemetryData(t);a.Telemetry.info(e,n)}}},{key:"_cloneForLogging",value:function(e,t,n){
-if(!((n=n||0)>this.maxLoggingLevel))for(var r in e)try{var o=e[r]
-;this._isError(o)?t[r]=o.toString()+(o.stack?" - "+o.stack:""):r.startsWith("_")||isNaN(r)&&r.toUpperCase()===r||r.startsWith("this")||t[r]||("object"===_y(o)&&null!==o?(t[r]={},
-this._cloneForLogging(o,t[r],n+1)):"function"!=typeof o&&(t[r]=o))}catch(e){t[r]="---"}}},{key:"_isError",value:function(e){
-return!!(e&&e.constructor&&e.constructor.name&&e.constructor.name.indexOf("Error")>=0&&e.toString)}},{key:"_prepareTelemetryData",value:function(e){var t={};return this._cloneForLogging(e,t),
-t.userAgent=navigator.userAgent,t.uuAppClientTraceId=this.uuAppClientTraceId,t.clientInstanceId=this.clientInstanceId,t.uri=location.href,t}}])&&ky(t.prototype,n),r&&ky(t,r),e}());function Sy(e,t){
-var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}
-return n}function wy(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Sy(Object(n),!0).forEach((function(t){My(e,t,n[t])
+lng:(null==t||null===(r=t.defaultCenter)||void 0===r?void 0:r[1])||E.defaultCenter[1],zoom:(null==t?void 0:t.defaultZoom)||E.defaultZoom};a.zoom===e.mapOptions.zoom?i={}:i||(i=_y({},a)),
+e.stationFilter&&(i.stationFilter=e.stationFilter),o.Environment.setRoute({component:o.Common.Element.create(vy,{parameters:i}),url:{useCase:E.useCases.map,parameters:_y({},i)},noHistory:!1})}}
+;function Sy(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),
+n.push.apply(n,r)}return n}function wy(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Sy(Object(n),!0).forEach((function(t){My(e,t,n[t])
 })):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Sy(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
 }))}return e}function My(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Py,Ey,Ly,Oy,Ty,xy=E.TAG+"Core.",jy=wy(wy({},E),{},{
 CSS:E.CSS+"core-",TAG:xy,Css:i.a.Common.Css.createCssModule(xy.replace(/\.$/,"").toLowerCase().replace(/\./g,"-").replace(/[^a-z-]/g,""),"uu_chargeup_portalg01-hi/uu_chargeup_portalg01-hi@1.48.0-DEV")
 });n(306);function Dy(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){
 return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function By(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0
 }):e[t]=n,e}function Ay(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var Yy,Ry,Iy,Ny=function(){o.Environment.setRoute({
-component:o.Common.Element.create(hy,null),url:{useCase:jy.useCases.map}})},zy=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin],statics:{tagName:jy.TAG+"Top",classNames:{main:function(){
+component:o.Common.Element.create(vy,null),url:{useCase:jy.useCases.map}})},zy=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin],statics:{tagName:jy.TAG+"Top",classNames:{main:function(){
 var e,t
 ;return jy.Css.css(Py||(Py=Ay(["\n        height: 56px;\n        background-color: white;\n        box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.25);\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n        padding: 4px;\n        > div {\n          height: inherit;\n          flex: 1;\n          display: flex;\n          align-items: center;\n        }\n        .uu5-bricks-page-top {\n          box-shadow: none;\n        }\n        .plus4u5-app-button {\n          top: 8px;\n          right: 8px;\n        }\n        .plus4u5-app-navigator {\n          border-radius: 0;\n          border: 5px solid #003a56;\n          background: white;\n        }\n        .uu5-bricks-page-menu-button {\n          .uu5-bricks-icon {\n            font-size: 24px;\n            color: ",";\n          }\n        }\n      "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.primary.backgroundColor)
 },left:function(){return jy.Css.css(Ey||(Ey=Ay(["\n        justify-content: flex-start;\n      "])))},center:function(){
@@ -7863,7 +7872,7 @@ _handleTransactionList:function(){var e=this;this.state.transactionListState!==j
 transactionStates:[jy.transaction.state.startCharging,jy.transaction.state.charging,jy.transaction.state.stopCharging],from:Vy(Wy(-2))
 }).then(e._handleTransactionListDone).catch(e._handleTransactionListFail)}))},_handleTransactionListDone:function(e){this.setState({transactionListState:jy.states.ready,transactionList:e.itemList,
 currentCharging:1===e.itemList.length?e.itemList[0]:null})},_handleTransactionListFail:function(e){this.setState({transactionListState:jy.states.error,transactionListError:e.data,currentCharging:null
-})},_handleShowCurrentCharging:function(e){o.Environment.setRoute(o.Common.Element.create(hy,{parameters:e}),{url:{useCase:jy.useCases.map,parameters:e}}),
+})},_handleShowCurrentCharging:function(e){o.Environment.setRoute(o.Common.Element.create(vy,{parameters:e}),{url:{useCase:jy.useCases.map,parameters:e}}),
 this.props.toggleLeftMenu&&this.props.toggleLeftMenu()},_renderTransactionButtons:function(){var e=this;return this.state.transactionList.map((function(t){return o.Common.Element.create(Ea,{key:t.id,
 type:"tertiary",onClick:function(){return e._handleShowCurrentCharging({transactionId:t.id})},className:e.getClassName("button")},o.Common.Element.create(o.Bricks.Icon,{icon:jy.icons.flash
 }),o.Common.Element.create(o.Bricks.Lsi,{lsi:Qy.currentChargingButton.currentCharging}))}))},render:function(){var e
@@ -8159,9 +8168,9 @@ _getContentNoBilling:function(e,t){return o.Common.Element.create("div",null,o.C
 awidConfig:this.props.spaContext.awidConfig}))},_getDataManager:function(e){var t=this;return o.Common.Element.create(o.Common.DataManager,{onLoad:P.userAccountGetOrCreate,
 onUpdate:P.userAccountUpdate,data:{uuIdentity:e.uuIdentity}},(function(e){
 var n,r,i,a=e.errorState,s=e.errorData,c=e.data,l=e.handleUpdate,u=null===(n=t.props)||void 0===n||null===(r=n.spaContext)||void 0===r||null===(i=r.awidConfig)||void 0===i?void 0:i.allowBillingInfo
-;return"load"===a?o.Common.Element.create(o.Bricks.Error,{content:s.message}):c||"update"===a?!1===u?t._getContentNoBilling(c,l):t._getContent(c,l):o.Common.Element.create(o.Bricks.Loading,null)}))},
-_getChild:function(e){var t=e.identity;return void 0===t?o.Common.Element.create(o.Bricks.Loading,null):t?this._getDataManager(t):o.Common.Element.create(o.Bricks.Error,{
-content:o.Common.Element.create(o.Bricks.Lsi,{lsi:gv.userAccountSettings.accountNotLoaded})})},render:function(){
+;return"load"===a?(id.errorState("settings-load-error",s),o.Common.Element.create(o.Bricks.Error,{content:s.message
+})):c||"update"===a?!1===u?t._getContentNoBilling(c,l):t._getContent(c,l):o.Common.Element.create(o.Bricks.Loading,null)}))},_getChild:function(e){var t=e.identity
+;return void 0===t?o.Common.Element.create(o.Bricks.Loading,null):t?this._getDataManager(t):o.Common.Element.create(gf,null)},render:function(){
 return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create(o.Common.Identity,null,this._getChild))}}));function Eb(e,t){var n=Object.keys(e)
 ;if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}
 function Lb(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Ob=function(e){for(var t=1;t<arguments.length;t++){
@@ -8283,10 +8292,10 @@ lsi:Wb.userAccountTransactions["transaction".concat(t.transactionState.charAt(0)
 ;return o.Common.Element.create(o.Bricks.Div,{className:n.price()},o.Common.Element.create(o.Bricks.Div,{className:n.priceText()},this._renderPrice(t,e),o.Common.Element.create(o.Bricks.Text,{
 className:"".concat(n.priceTextState()," ").concat(i),content:r})),this._getInvoice(t))},_getInvoice:function(e){
 var t=[Ob.terminationMethod.cancelledByStation,Ob.terminationMethod.openingTimes,Ob.terminationMethod.optimalRecharge,Ob.terminationMethod.cancelledByUser,Ob.terminationMethod.chargedUpAsPlanned,Ob.terminationMethod.dueToTimeLimit,Ob.terminationMethod.dueToPriceLimit,Ob.terminationMethod.dueToEnergyLimit,Ob.terminationMethod.cancelledByOperator]
-;return e.transactionState===Ob.transaction.state.ended&&e.payment&&(e.payment.finalAmount>0||0===e.payment.plannedAmount)&&e.invoicing.invoiceEnabled&&t.includes(e.terminationMethod)&&o.Common.Element.create(qp,{
+;return e.transactionState===Ob.transaction.state.ended&&e.payment&&(e.payment.finalAmount>0||0===e.payment.plannedAmount)&&e.invoicing.invoiceEnabled&&t.includes(e.terminationMethod)&&o.Common.Element.create($p,{
 transaction:this.props.transaction},(function(e){return o.Common.Element.create(o.Bricks.Button,{content:o.Common.Element.create(o.Bricks.Lsi,{lsi:Wb.userAccountTransactions.showInvoice}),
 onClick:function(t,n){n.preventDefault(),n.stopPropagation(),n.nativeEvent.stopImmediatePropagation(),e()}})}))},_handleShowTransactionDetail:function(){var e={transactionId:this.props.transaction.id,
-email:this.props.transaction.userAccount&&this.props.transaction.userAccount.email};o.Environment.setRoute({component:o.Common.Element.create(hy,{parameters:e}),url:{useCase:Ob.useCases.map,
+email:this.props.transaction.userAccount&&this.props.transaction.userAccount.email};o.Environment.setRoute({component:o.Common.Element.create(vy,{parameters:e}),url:{useCase:Ob.useCases.map,
 parameters:Kb({},e)}})},render:function(){var e=this;return o.Common.Element.create(o.Bricks.Link,Vb({},this.getMainPropsToPass(),{onClick:this._handleShowTransactionDetail
 }),o.Common.Element.create(o.Bricks.Lsi,null,(function(t){var n=t.language;return o.Common.Element.create(o.Common.Fragment,null,e._getLabel(n),e._getInfo(n),e._getPrice(n))})))}});function t_(e,t){
 var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}
@@ -8350,7 +8359,7 @@ key:e.id,transaction:e})}));r=i.a.Common.Element.create("div",null,a)}else r=i.a
 },i.a.Common.Element.create("div",{className:Y_.filter},i.a.Common.Element.create(T_,{ref:t}),i.a.Common.Element.create(R_,{authorizationData:e.authorizationData
 }))),i.a.Common.Element.create(i.a.Bricks.Column,{colWidth:"xs-12 l-6"},i.a.Common.Element.create(p_,null))),r)}})),z_=Ct(o.Common.VisualComponent.create({
 mixins:[o.Common.BaseMixin,o.Common.PureRenderMixin],statics:{tagName:Ob.TAG+"Transactions",opt:{pureRender:!0}},propTypes:{spaContext:o.PropTypes.object,authorizationData:o.PropTypes.string},
-_getChild:function(e){return e.errorOverride=this.props.spaContext.userSignedIn?null:o.Common.Element.create(pf,null),o.Common.Element.create(Lu,e,e.data&&o.Common.Element.create(N_,{
+_getChild:function(e){return e.errorOverride=this.props.spaContext.userSignedIn?null:o.Common.Element.create(gf,null),o.Common.Element.create(Lu,e,e.data&&o.Common.Element.create(N_,{
 transactionList:e.data.itemList,authorizationData:this.props.authorizationData}))},_getDtoIn:function(){var e=Hy(),t=e.firstDay,n=e.lastDay,r={from:Vy(t),to:Vy(n)}
 ;return this.props.authorizationData&&(r.authorizationData=this.props.authorizationData),r},_handleReload:function(e){
 return this.props.authorizationData&&(e.authorizationData=this.props.authorizationData),P.transactionList(e)},render:function(){return o.Common.Element.create(Tb.Provider,{onLoad:P.transactionList,
@@ -8397,7 +8406,7 @@ i.a.Common.Element.create("div",n,t)}}));function Sk(e,t){var n=Object.keys(e);i
 return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function wk(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{}
 ;t%2?Sk(Object(n),!0).forEach((function(t){Mk(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Sk(Object(n)).forEach((function(t){
 Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function Mk(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}
-var Pk={displayName:Q_.TAG+"Cards"};function Ek(e){var t=e.values,n=e.userSignedIn;return t.errorOverride=n?null:UU5.Common.Element.create(pf,null),
+var Pk={displayName:Q_.TAG+"Cards"};function Ek(e){var t=e.values,n=e.userSignedIn;return t.errorOverride=n?null:UU5.Common.Element.create(gf,null),
 UU5.Common.Element.create(Lu,t,t.data&&UU5.Common.Element.create(Ck,{cardList:t.data.authorizationMethodList}))}var Lk=Object(ae.createComponent)(wk(wk({},Pk),{},{render:function(e){
 var t=Object(ae.useContext)(St).userSignedIn;return UU5.Common.Element.create(X_.Provider,{onLoad:P.userAccountGetCustomersAndCards},UU5.Common.Element.create(X_.Consumer,null,(function(e){
 return UU5.Common.Element.create(Ek,{values:e,userSignedIn:t})})))}}));function Ok(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e)
@@ -8420,7 +8429,7 @@ Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))
 case j.UserAccount.vuc.SETTINGS:e=o.Common.Element.create(Pb,{controlled:!1});break;case j.UserAccount.vuc.CARDS:e=o.Common.Element.create(Lk,{controlled:!1});break
 ;case j.UserAccount.vuc.TRANSACTIONS:default:e=o.Common.Element.create(z_,{controlled:!1,authorizationData:o.Common.Tools.getUrlParam("authorizationData")})}return e},render:function(){
 return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create(o.Bricks.Container,{header:[o.Common.Element.create(o.Bricks.Button,{key:0,bgStyle:j.bgStyle.transparent,
-onClick:by.goBackToInitialPage},o.Common.Element.create(o.Bricks.Lsi,null,o.Common.Element.create(o.Bricks.Icon,{icon:j.icons.mdiArrowLeft,tooltip:dr.getFeedbackTooltip("back")
+onClick:Cy.goBackToInitialPage},o.Common.Element.create(o.Bricks.Lsi,null,o.Common.Element.create(o.Bricks.Icon,{icon:j.icons.mdiArrowLeft,tooltip:dr.getFeedbackTooltip("back")
 }))),this.getLsiComponent(this.props.vuc)]},this._getChild()))}});var Ik=Ct(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.PureRenderMixin],statics:{
 tagName:jy.TAG+"TransactionInProcessButton",classNames:{main:jy.Css.css(Bk||(Bk=function(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))
 }(["\n        margin: 16px 32px 0 32px;\n        .uu5-bricks-button {\n          ","\n          background-color: ",';\n          display: block;\n          width: 100%;\n          text-align: left;\n          font-family: "ClearSans-Bold", sans-serif;\n          padding: 12px 12px 12px 24px;\n          border-radius: 8px;\n        }\n      '])),qe(null===(Ak=o.Environment.chargeUp)||void 0===Ak||null===(Yk=Ak.colors)||void 0===Yk?void 0:Yk.tertiary),Ie)
@@ -8429,7 +8438,7 @@ return this._handleTransactionList(),this},_handleTransactionList:function(){var
 },(function(){P.transactionList({transactionStates:[jy.transaction.state.created],from:Vy(Wy(-2))}).then(e._handleTransactionListDone).catch(e._handleTransactionListFail)}))},
 _handleTransactionListDone:function(e){this.setState({transactionListState:jy.states.ready,transactionList:e.itemList,transactionsInProcess:e.itemList.length>0&&e.itemList})},
 _handleTransactionListFail:function(e){this.setState({transactionListState:jy.states.error,transactionListError:e.data,transactionsInProcess:null})},_handleShowTransactionInProcess:function(){var e={
-transactionId:this.state.transactionsInProcess[0].id};o.Environment.setRoute(o.Common.Element.create(hy,{parameters:e}),{url:{useCase:jy.useCases.map,parameters:e}}),
+transactionId:this.state.transactionsInProcess[0].id};o.Environment.setRoute(o.Common.Element.create(vy,{parameters:e}),{url:{useCase:jy.useCases.map,parameters:e}}),
 this.props.toggleLeftMenu&&this.props.toggleLeftMenu()},_handleShowTransactionsInProcess:function(){var e={vuc:jy.vuc.transactions};o.Environment.setRoute(o.Common.Element.create(Rk,{vuc:e.vuc}),{
 url:{useCase:jy.useCases.userAccount,parameters:e}}),this.props.toggleLeftMenu&&this.props.toggleLeftMenu()},render:function(){var e=this.props.spaContext.userAccount
 ;if(e&&this.state.transactionsInProcess&&1===this.state.transactionsInProcess.length)return o.Common.Element.create(o.Bricks.Div,this.getMainPropsToPass(),o.Common.Element.create(o.Bricks.Button,{
@@ -8496,12 +8505,13 @@ var t=this.props.awidConfig.flsBaseUri
 ;return t?this._getFlsSupport(t):e?[this._getContactSupport(),this._getFlsSupport(o.Environment.defaultFlsUri,pn.about.flsLsi,pn.about.slsLsi)]:this._getContactSupport()},
 _handleReportProblem:function(){o.Environment.getPage().getModal().open({size:"l",header:o.Common.Element.create(o.Bricks.Lsi,{lsi:pn.contact.contactTitle}),content:o.Common.Element.create(us,{
 showContactDetail:!0})})},_telemetryTest:function(){sC.warn("Telemetry Test - logger - warn message"),console.warn("Telemetry Test - console - warn message");var e={message1:"Hello World 1"},t={
-message2:"Hello World 2"};console.warn("Telemetry Test - console - warn message with params",e,t);try{throw new Error("Sample error")}catch(n){sC.error("Telemetry Test - logger - error",n),
-console.error("Telemetry Test - console - error",n),console.error("Telemetry Test - console - error with params ",n,e,t)}},_getLicense:function(){
-return(o.Environment.goteborgAwidList.includes(this.props.awidConfig.awid)?zk.goteborgLicence:zk.licence)||{}},_getChild:function(e){
+message2:"Hello World 2"};console.warn("Telemetry Test - console - warn message with params",e,t),id.errorState("test-with-params",e,t);try{throw new Error("Sample error")}catch(n){
+sC.error("Telemetry Test - logger - error",n),console.error("Telemetry Test - console - error",n),console.error("Telemetry Test - console - error with params ",n,e,t),
+id.errorState("test-with-error-params",n,e,t)}},_getLicense:function(){return(o.Environment.goteborgAwidList.includes(this.props.awidConfig.awid)?zk.goteborgLicence:zk.licence)||{}},
+_getChild:function(e){
 var t=this,n=this._getLicense(),r=this._getAuthors(zk.leadingAuthors),i=this._getAuthors(zk.otherAuthors),a=e?zk.products:zk.products.slice(0,1),c=this.props.awidConfig&&this.props.awidConfig.tradeTermsWebkitUri&&this.props.awidConfig.tradeTermsWebkitUri.replace("%lang%",ie.redirectLang())
 ;return o.Common.Element.create(o.Bricks.Section,this.getMainPropsToPass(),o.Common.Element.create(o.Bricks.Container,{header:[o.Common.Element.create(o.Bricks.Button,{key:0,
-bgStyle:j.bgStyle.transparent,onClick:this.props.awidConfig?by.goBackToInitialPage:by.goPackToHomePage},o.Common.Element.create(o.Bricks.Lsi,null,o.Common.Element.create(o.Bricks.Icon,{
+bgStyle:j.bgStyle.transparent,onClick:this.props.awidConfig?Cy.goBackToInitialPage:Cy.goPackToHomePage},o.Common.Element.create(o.Bricks.Lsi,null,o.Common.Element.create(o.Bricks.Icon,{
 icon:j.icons.mdiArrowLeft,tooltip:dr.getFeedbackTooltip("back")}))),this.getLsiComponent("header")]},o.Common.Element.create(o.Bricks.Div,null,o.Common.Element.create(o.Bricks.Heading,{
 content:this.getLsiComponent("appName")}),o.Common.Element.create(s.a.App.About,{content:o.Common.Element.create(o.Bricks.Lsi,{lsi:pn.about.desc})}),o.Common.Element.create(o.Bricks.Div,{
 className:this.getClassName().textCenter},o.Common.Element.create(o.Bricks.Lsi,{lsi:pn.contact.contactText
@@ -8691,9 +8701,9 @@ content:o.Common.Element.create(o.Bricks.Span,null,o.Common.Element.create(o.Bri
 content:"".concat(r.name," - ").concat(r.stationCode),onClick:function(){return n._setRouteToStation(r.stationCode)}})),colorSchema:j.colors.success},(function(){return n._handleReset(e)}))},
 _handleCreateStationFail:function(e,t){o.Environment.getPage().getAlertBus().setAlert({block:!0,content:o.Common.Element.create(o.Bricks.Lsi,{lsi:Dk.importStation.createStationFailed}),
 colorSchema:j.colors.danger})},_handleReset:function(e){e.reset(),this._chargingPoints.resetState()},_setRouteToStation:function(e){var t={stationCode:e};o.Environment.setRoute({
-component:o.Common.Element.create(hy,{parameters:t}),url:{useCase:j.useCases.map,parameters:XC({},t)},noHistory:!0})},_setChargingPointsRef:function(e){this._chargingPoints=e},render:function(){
+component:o.Common.Element.create(vy,{parameters:t}),url:{useCase:j.useCases.map,parameters:XC({},t)},noHistory:!0})},_setChargingPointsRef:function(e){this._chargingPoints=e},render:function(){
 var e=this.getClassName();return o.Common.Element.create(o.Bricks.Section,this.getMainPropsToPass(),o.Common.Element.create(o.Bricks.Container,{header:[o.Common.Element.create(o.Bricks.Button,{key:0,
-bgStyle:j.bgStyle.transparent,onClick:by.goBackToInitialPage},o.Common.Element.create(o.Bricks.Lsi,null,o.Common.Element.create(o.Bricks.Icon,{icon:j.icons.mdiArrowLeft,
+bgStyle:j.bgStyle.transparent,onClick:Cy.goBackToInitialPage},o.Common.Element.create(o.Bricks.Lsi,null,o.Common.Element.create(o.Bricks.Icon,{icon:j.icons.mdiArrowLeft,
 tooltip:dr.getFeedbackTooltip("back")}))),o.Common.Element.create(o.Bricks.Lsi,{key:1,lsi:Dk.importStation.header})]},o.Common.Element.create(o.Bricks.Div,{className:e.forms()
 },o.Common.Element.create(qC,{onSave:this._handleCreateStation,_setChargingPointsRef:this._setChargingPointsRef}))))}});function sS(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){
 var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function cS(e){
@@ -8706,7 +8716,7 @@ process:R.Css.css(iS||(iS=uS(["\n    background-color: ",";\n  "])),Ie)},mS={dis
 return e===R.transaction.state.created?"".concat(dS.button," ").concat(dS.process):dS.button}var fS,hS,gS,yS,vS=Object(ae.createVisualComponent)(cS(cS({},mS),{},{propTypes:{
 toggleLeftMenu:i.a.PropTypes.func},defaultProps:{toggleLeftMenu:function(){}},render:function(e){var t=kl();var n=i.a.Common.VisualComponent.getAttrs(e,dS.main)
 ;return t?i.a.Common.Element.create("div",n,i.a.Common.Element.create(i.a.Bricks.Button,{className:pS(t.transactionState),onClick:function(){var n={transactionId:t.id}
-;i.a.Environment.setRoute(i.a.Common.Element.create(hy,{parameters:n}),{url:{useCase:R.useCases.map,parameters:n}}),e.toggleLeftMenu()}},function(e){
+;i.a.Environment.setRoute(i.a.Common.Element.create(vy,{parameters:n}),{url:{useCase:R.useCases.map,parameters:n}}),e.toggleLeftMenu()}},function(e){
 var t=yn.transactionInProcessButton.currentCharging,n=R.icons.flash;e===R.transaction.state.created&&(t=yn.transactionInProcessButton.transactionInProcess,n=R.icons.cart)
 ;return i.a.Common.Element.create(i.a.Common.Fragment,null,i.a.Common.Element.create(i.a.Bricks.Icon,{icon:n}),i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:t}))}(t.transactionState))):null}}))
 ;function bS(e){return function(e){if(Array.isArray(e))return _S(e)}(e)||function(e){if("undefined"!=typeof Symbol&&null!=e[Symbol.iterator]||null!=e["@@iterator"])return Array.from(e)
@@ -8733,7 +8743,7 @@ lsi:Qy.leftLinks.contact}),content:o.Common.Element.create(us,{showContactDetail
 return e.isCoworker?[this._getBasicContactForm(),this._getFlsForm(o.Environment.defaultFlsUri,Qy.leftLinks.contactFls)]:this.props.awidConfig.flsBaseUri?[this._getFlsForm(this.props.awidConfig.flsBaseUri,Qy.leftLinks.contact)]:[this._getBasicContactForm()]
 },_getDefaultLinks:function(e){
 var t=this,n=this.getClassName(),r=this.props.awidConfig&&this.props.awidConfig.tradeTermsWebkitUri&&this.props.awidConfig.tradeTermsWebkitUri.replace("%lang%",ie.redirectLang()),i=[{
-uc:jy.useCases.map,component:o.Common.Element.create(hy,null),content:o.Common.Element.create(o.Bricks.Lsi,{lsi:Qy.leftLinks.map})}];return this.props.userSignedIn&&(i.push({
+uc:jy.useCases.map,component:o.Common.Element.create(vy,null),content:o.Common.Element.create(o.Bricks.Lsi,{lsi:Qy.leftLinks.map})}];return this.props.userSignedIn&&(i.push({
 uc:jy.useCases.userAccount,component:o.Common.Element.create(Rk,{vuc:jy.vuc.transactions}),parameters:{vuc:jy.vuc.transactions},content:o.Common.Element.create(o.Bricks.Lsi,{
 lsi:Qy.leftLinks.transactions})},{uc:jy.useCases.userAccount,component:o.Common.Element.create(Rk,{vuc:jy.vuc.cards}),parameters:{vuc:jy.vuc.cards},content:o.Common.Element.create(o.Bricks.Lsi,{
 lsi:Qy.leftLinks.cards})},{uc:jy.useCases.userAccount,component:o.Common.Element.create(Rk,{vuc:jy.vuc.settings}),parameters:{vuc:jy.vuc.settings},content:o.Common.Element.create(o.Bricks.Lsi,{
@@ -8781,7 +8791,7 @@ getInitialState:function(){return{userAccount:this.props.userAccount,filterOptio
 userAccount:e.userAccount})},componentDidMount:function(){this._handleClientLanguage(),function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};if(e.plannedOutage){
 var t=PS(),n=e.plannedOutageMsgInterval||3600;if(t){var r=new Date,o=new Date(t);return o.setSeconds(o.getSeconds()+n),r>o}return!0}}(this.props.awidConfig)&&function(e){
 var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};e&&e.getAlertBus().setAlert({content:t.plannedOutageText,colorSchema:"yellow-rich",block:!0,closeTimer:0,onClose:ES})
-}(this._page,this.props.awidConfig),this._checkAndProcessWrapperVersion(),o.Environment.EventListener.registerEvent("lsi",this.getId(),uy);var e=this.props,t=e.isScriptLoaded,n=e.isScriptLoadSucceed
+}(this._page,this.props.awidConfig),this._checkAndProcessWrapperVersion(),o.Environment.EventListener.registerEvent("lsi",this.getId(),py);var e=this.props,t=e.isScriptLoaded,n=e.isScriptLoadSucceed
 ;this.setState({isScriptLoaded:t,isScriptLoadSucceed:n})},componentDidUpdate:function(e){var t=this,n=this.props,r=n.isScriptLoaded,o=n.isScriptLoadSucceed;!e.isScriptLoaded&&r&&o&&this.setState({
 isScriptLoaded:r,isScriptLoadSucceed:o},(function(){t._initGoogleMapServices()}))},componentWillUnmount:function(){var e=o.Environment.getSession();e&&e.removeListener("sessionExpiring")},
 toggleLeftMenu:function(){return this._page.toggleLeft(),this},getCurrentPosition:function(e){return this._handleGetCurrentPosition(e),this},showAlert:function(e){
@@ -8795,10 +8805,10 @@ lsi:Qy.spa.recommendedWrapperVersion})};FS.setWrapperVersionInfo(this._page,e,t)
 var e=new google.maps.places.AutocompleteService(document.createElement("div")),t=new google.maps.places.PlacesService(document.createElement("div")),n=new google.maps.DirectionsService,r=new google.maps.DistanceMatrixService,o=new google.maps.Geocoder
 ;this.setState({googleServices:{autoCompleteService:e,placesService:t,directionsService:n,distanceMatrixService:r,geocoder:o}})},_getImportStationRoute:function(){var e=null
 ;return this.props.identity&&vl.isAuthorized(jy.profiles.productAuthorities,this.props.awidConfig.profiles)&&(e=o.Common.Element.create(aS,null)),e},_getRoute:function(){
-var e,t=ie.getUrlUseCase(),n=ie.getUrlParameters();if(!(e=function(e,t,n){var r;if(e.startsWith(E.useCases.apiChargeflow)){var o=e.split(E.useCases.apiChargeflow);o[1]&&(t=iy(iy({},t),ly(o[1])),
-r=UU5.Common.Element.create(n,{parameters:t}))}return r}(t,n=n?WS(WS({},n),{},{firstLoad:!0}):{firstLoad:!0},hy)))switch(t){case"":case"map":e=o.Common.Element.create(hy,{parameters:n});break
+var e,t=ie.getUrlUseCase(),n=ie.getUrlParameters();if(!(e=function(e,t,n){var r;if(e.startsWith(E.useCases.apiChargeflow)){var o=e.split(E.useCases.apiChargeflow);o[1]&&(t=cy(cy({},t),my(o[1])),
+r=UU5.Common.Element.create(n,{parameters:t}))}return r}(t,n=n?WS(WS({},n),{},{firstLoad:!0}):{firstLoad:!0},vy)))switch(t){case"":case"map":e=o.Common.Element.create(vy,{parameters:n});break
 ;case"userAccount":e=o.Common.Element.create(Rk,{vuc:n.vuc});break;case"about":e=o.Common.Element.create(lC,{userSignedIn:Boolean(this.props.identity),awidConfig:this.props.awidConfig});break
-;case"importStation":e=this._getImportStationRoute();break;default:ie.isValidTransactionCode(t)?(n=WS(WS({},n),{},{code:t}),e=o.Common.Element.create(hy,{parameters:n})):e=o.Common.Element.create(hy,{
+;case"importStation":e=this._getImportStationRoute();break;default:ie.isValidTransactionCode(t)?(n=WS(WS({},n),{},{code:t}),e=o.Common.Element.create(vy,{parameters:n})):e=o.Common.Element.create(vy,{
 parameters:n})}return e},_handleGetCurrentPosition:function(e){var t=this,n={timeout:5e3,maximumAge:0};if(navigator.geolocation)this.state.getCurrentPositionState!==jy.states.loading&&this.setState({
 getCurrentPositionState:jy.states.loading},(function(){var r={content:o.Common.Element.create(o.Bricks.Lsi,{lsi:Qy.spa.gettingCurrentPosition})};t.showAlert(r),
 navigator.geolocation.getCurrentPosition((function(n){return t._handleGetCurrentPositionDone(n,e)}),(function(n){return t._handleGetCurrentPositionFail(n,e)}),n)}));else{
@@ -8878,74 +8888,74 @@ route:i.a.Common.Element.create(Lw,null),routes:{"":"home",home:{component:i.a.C
 n.push.apply(n,r)}return n}function Rw(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Yw(Object(n),!0).forEach((function(t){Iw(e,t,n[t])
 })):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Yw(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
 }))}return e}function Iw(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function Nw(e){
-e.portalColors&&(i.a.Environment.chargeUp.colors=Rw(Rw({},i.a.Environment.chargeUp.colors),e.portalColors))}var zw=n(22).LoggerFactory.get("CommonError"),Fw=i.a.Common.VisualComponent.create({
+e.portalColors&&(i.a.Environment.chargeUp.colors=Rw(Rw({},i.a.Environment.chargeUp.colors),e.portalColors))}n(22).LoggerFactory.get("CommonError");var zw=i.a.Common.VisualComponent.create({
 mixins:[i.a.Common.BaseMixin],statics:{tagName:jy.TAG+"CommonError",classNames:{reloadBtn:jy.Css.css(jw||(jw=function(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{
-value:Object.freeze(t)}}))}(["\n        margin: 16px;\n      "])))}},getInitialState:function(){return{reloadBtn:!1}},componentDidMount:function(){try{
-zw.error("Common error: "+JSON.stringify(this.props.errorData))}catch(e){console.error("Common error ",this.props.errorData)}this._handleTimeout()},componentWillUnmount:function(){
-clearTimeout(this._timeout)},_handleTimeout:function(){var e=this;this._timeout=setTimeout((function(){return e.setState({reloadBtn:!0})}),2e3)},_handleClick:function(){window.location.reload()},
-render:function(){return i.a.Common.Element.create(i.a.Common.Div,this.getMainPropsToPass(),i.a.Common.Element.create(i.a.Bricks.Error,{silent:!0,moreInfo:!0,errorData:this.props.errorData,
+value:Object.freeze(t)}}))}(["\n        margin: 16px;\n      "])))}},getInitialState:function(){return{reloadBtn:!1}},componentDidMount:function(){this._handleTimeout()},
+componentWillUnmount:function(){clearTimeout(this._timeout)},_handleTimeout:function(){var e=this;this._timeout=setTimeout((function(){return e.setState({reloadBtn:!0})}),2e3)},
+_handleClick:function(){window.location.reload()},render:function(){return id.errorState("common-error",this.props.errorData),
+i.a.Common.Element.create(i.a.Common.Div,this.getMainPropsToPass(),i.a.Common.Element.create(i.a.Bricks.Error,{silent:!0,moreInfo:!0,errorData:this.props.errorData,
 content:i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:Qy.commonError.text})}),this.state.reloadBtn&&i.a.Common.Element.create(i.a.Bricks.Button,{onClick:this._handleClick,
-className:this.getClassName("reloadBtn"),content:i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:Qy.commonError.reloadBtn})}))}});function Uw(){return(Uw=Object.assign||function(e){
-for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}function Hw(e,t){var n=Object.keys(e)
+className:this.getClassName("reloadBtn"),content:i.a.Common.Element.create(i.a.Bricks.Lsi,{lsi:Qy.commonError.reloadBtn})}))}});function Fw(){return(Fw=Object.assign||function(e){
+for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}function Uw(e,t){var n=Object.keys(e)
 ;if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}
-function Ww(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Hw(Object(n),!0).forEach((function(t){Vw(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Hw(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function Vw(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Gw=new Set(["Ended","Error"]),Kw={
-displayName:jy.TAG+"TransactionInStorage"};function Zw(e){return e.errorState||e.data?(e.data&&function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{}
-;Gw.has(e.transactionState)&&Cl(e)}(e.data.transaction),e.children):e.loading}var Jw,qw=Object(ae.createComponent)(Ww(Ww({},Kw),{},{propTypes:{loading:i.a.PropTypes.element},defaultProps:{
-loading:i.a.Common.Element.create(i.a.Bricks.Loading,null)},render:function(e){var t=kl();return t?i.a.Common.Element.create(_m.Provider,{pessimistic:!0,onLoad:P.transactionGet,data:{id:t.id}
-},i.a.Common.Element.create(_m.Consumer,null,(function(t){return i.a.Common.Element.create(Zw,Uw({},t,{loading:e.loading}),e.children)}))):e.children}}));function Qw(){
-return(Qw=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}
-function Xw(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),
-n.push.apply(n,r)}return n}function $w(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}
-var eM=l.LoggerFactory.get("Spa"),tM=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin],statics:{tagName:jy.TAG+"Spa"},_getImageUrl:function(e){return P.getBinaryData({
-code:"CUSTOM_LOADER_".concat(e)})},_setGlobalCss:function(){var e,t,n,r,i,a,s,c;jy.Css.injectGlobal(Jw||(Jw=function(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{
+function Hw(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Uw(Object(n),!0).forEach((function(t){Ww(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Uw(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+}))}return e}function Ww(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var Vw=new Set(["Ended","Error"]),Gw={
+displayName:jy.TAG+"TransactionInStorage"};function Kw(e){return e.errorState||e.data?(e.data&&function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{}
+;Vw.has(e.transactionState)&&Cl(e)}(e.data.transaction),e.children):e.loading}var Zw,Jw=Object(ae.createComponent)(Hw(Hw({},Gw),{},{propTypes:{loading:i.a.PropTypes.element},defaultProps:{
+loading:i.a.Common.Element.create(i.a.Bricks.Loading,null)},render:function(e){var t=kl();return t?i.a.Common.Element.create(Sm.Provider,{pessimistic:!0,onLoad:P.transactionGet,data:{id:t.id}
+},i.a.Common.Element.create(Sm.Consumer,null,(function(t){return i.a.Common.Element.create(Kw,Fw({},t,{loading:e.loading}),e.children)}))):e.children}}));function qw(){
+return(qw=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e}).apply(this,arguments)}
+function Qw(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),
+n.push.apply(n,r)}return n}function Xw(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var $w=l.LoggerFactory.get("Spa")
+;$w.setLevel("DEBUG");var eM=o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin],statics:{tagName:jy.TAG+"Spa"},_getImageUrl:function(e){return P.getBinaryData({
+code:"CUSTOM_LOADER_".concat(e)})},_setGlobalCss:function(){var e,t,n,r,i,a,s,c;jy.Css.injectGlobal(Zw||(Zw=function(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{
 value:Object.freeze(t)}}))
 }(["\n      body { color: "," }\n      .uu5-forms-checkbox.uu5-forms-checkbox-type-switch {\n        .uu5-forms-checkbox-button.uu5-bricks-button:focus {\n          outline: none;\n        }\n        &.uu5-forms-checkbox-checked {\n          .uu5-bricks-switch.uu5-bricks-button {\n            svg {\n              fill: ",";\n            }\n            .uu5-bricks-switch-icon {\n              color: ",";\n              background-color: ",";\n            }\n          }\n        }\n        &:not(.uu5-forms-checkbox-checked) {\n          .color-schema-grey.uu5-bricks-switch.uu5-bricks-button {\n            svg,\n            &:hover svg,\n            &:active svg,\n            &:focus svg,\n            &:focus:active svg {\n              fill: ",";\n            }\n            .uu5-bricks-switch-icon {\n              visibility: hidden;\n            }\n          }\n        }\n        &.uu5-forms-input-l {\n          .uu5-forms-checkbox-button.uu5-bricks-button {\n            width: 48px;\n            height: 32px;\n          }\n          &.uu5-forms-checkbox-checked {\n            .uu5-bricks-switch.uu5-bricks-button {\n              .uu5-bricks-switch-icon {\n                font-size: 24px;\n              }\n            }\n          }\n        }\n      }\n    "])),null===(e=o.Environment.chargeUp)||void 0===e||null===(t=e.colors)||void 0===t?void 0:t.fontColor,null===(n=o.Environment.chargeUp)||void 0===n||null===(r=n.colors)||void 0===r?void 0:r.primary.backgroundColor,null===(i=o.Environment.chargeUp)||void 0===i||null===(a=i.colors)||void 0===a?void 0:a.primary.backgroundColor,null===(s=o.Environment.chargeUp)||void 0===s||null===(c=s.colors)||void 0===c?void 0:c.tertiary.backgroundColor,Ae)
-},_disableTelemetry:function(e){e.clientTelemetryEnabled||Cy.disableTelemetry()},_getCustomLoader:function(e){var t=this;return eM.warn("Displaying loader for event ".concat(e)),
+},_disableTelemetry:function(e){e.clientTelemetryEnabled||id.disableTelemetry()},_getCustomLoader:function(e){var t=this;return $w.warn("Displaying loader for event ".concat(e)),
 o.Environment.useCustomLoader?o.Common.Element.create(o.Bricks.ScreenSize,null,(function(e){var n=e.screenSize;return o.Common.Element.create("img",{src:t._getImageUrl(n.toUpperCase()),alt:"loader",
 className:"custom-loader"})})):o.Common.Element.create(s.a.App.SpaLoading,{content:this.getLsiItem(Qy.spa.loadingText)})},_getInvitationId:function(){
 var e,t,n=null===(e=c.AuthenticationService.getCurrentSession())||void 0===e||null===(t=e.getAuthenticationContext())||void 0===t?void 0:t.invitationId;if(!n){
-var r=o.Common.Url.parse(window.location.href),i=function(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Xw(Object(n),!0).forEach((function(t){$w(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Xw(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
+var r=o.Common.Url.parse(window.location.href),i=function(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?Qw(Object(n),!0).forEach((function(t){Xw(e,t,n[t])
+})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):Qw(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
 }))}return e}({},r.parameters);null!=i&&i.invitationId&&(n=null==i?void 0:i.invitationId,delete i.invitationId,r.set({parameters:i}),window.history.pushState({},window.document.title,r.toString()))}
 return n},_getUserAccount:function(e,t){var n=this;if(e&&"0-0"!==e.uuIdentity){var r={uuIdentity:e.uuIdentity,firstName:ie.getFirstName(e.name),surname:ie.getSurname(e.name),email:e.email
 },i=this._getInvitationId();if(i&&(r.invitationId=i),this._loadUserAccountCache){
 var a=this._loadUserAccountCache.identity&&this._loadUserAccountCache.identity.uuIdentity,s=e&&e.uuIdentity,c=this._loadUserAccountCache.dtoIn||{}
-;a===s&&c.firstName===r.firstName&&c.surname===r.surname&&c.email===r.email&&c.invitationId===r.invitationId?(eM.warn("uuIdentity and dtoIn for load-user-account is the same: ".concat(a,", dtoIn: ").concat(JSON.stringify(r))),
-this._loadUserAccountCache.staleData=!1):(eM.warn("Actual and a cached version of uuIdentity or dtoIn for load-user-account differ - cached uuIdentity: ".concat(a,", actual uuIdentity: ").concat(s,", actual dtoIn: ").concat(JSON.stringify(r))),
-this._loadUserAccountCache.staleData=!0)}else eM.warn("No cached data for load-user-account is available");return o.Common.Element.create(o.Common.Loader,{onLoad:P.userAccountGetOrCreate,data:r
-},(function(i){var a=i.isLoading,s=i.isError,c=i.data;if(a)return n._loadUserAccountCache?(eM.warn("Rendering cached data during loading for load-user-account"),o.Common.Element.create(QS,{
+;a===s&&c.firstName===r.firstName&&c.surname===r.surname&&c.email===r.email&&c.invitationId===r.invitationId?($w.warn("uuIdentity and dtoIn for load-user-account is the same: ".concat(a,", dtoIn: ").concat(JSON.stringify(r))),
+this._loadUserAccountCache.staleData=!1):($w.debug("Actual and cached version of uuIdentity or dtoIn for load-user-account differ - cached uuIdentity: ".concat(a,", actual uuIdentity: ").concat(s,", actual dtoIn: ").concat(JSON.stringify(r))),
+this._loadUserAccountCache.staleData=!0)}else $w.debug("No cached data for load-user-account is available");return o.Common.Element.create(o.Common.Loader,{onLoad:P.userAccountGetOrCreate,data:r
+},(function(i){var a=i.isLoading,s=i.isError,c=i.data;if(a)return n._loadUserAccountCache?($w.debug("Rendering cached data during loading for load-user-account"),o.Common.Element.create(QS,{
 awidConfig:n._loadUserAccountCache.awidConfig,userAccount:n._loadUserAccountCache.data,identity:n._loadUserAccountCache.identity})):n._getCustomLoader("load-user-account-with-identity");if(s){
-if(n._loadUserAccountCache){if(!n._loadUserAccountCache.staleData)return eM.error("Rendering cached data during loading for load-user-account, the call finished with error",c),
+if(n._loadUserAccountCache){if(!n._loadUserAccountCache.staleData)return $w.error("Rendering cached data during loading for load-user-account, the call finished with error",c),
 o.Common.Element.create(QS,{awidConfig:n._loadUserAccountCache.awidConfig,userAccount:n._loadUserAccountCache.data,identity:n._loadUserAccountCache.identity})
-;eM.error("The call load-user-account finished with error",c)}return o.Common.Element.create(Fw,{errorData:c})}return n._loadUserAccountCache={identity:e,data:c,awidConfig:t,dtoIn:r,staleData:!1},
-o.Common.Element.create(QS,{awidConfig:t,userAccount:c,identity:e})}))}return eM.warn("Clearing a cached version of data for load-user-account on anonymous access"),this._loadUserAccountCache=null,
-o.Common.Element.create(qw,{loading:this._getCustomLoader("load-user-account-anonymous")},o.Common.Element.create(QS,{awidConfig:t}))},_getChild:function(e){var t=this
+;$w.error("The call load-user-account finished with error",c)}return o.Common.Element.create(zw,{errorData:c})}return n._loadUserAccountCache={identity:e,data:c,awidConfig:t,dtoIn:r,staleData:!1},
+o.Common.Element.create(QS,{awidConfig:t,userAccount:c,identity:e})}))}return $w.debug("Clearing cached version of data for load-user-account on anonymous access"),this._loadUserAccountCache=null,
+o.Common.Element.create(Jw,{loading:this._getCustomLoader("load-user-account-anonymous")},o.Common.Element.create(QS,{awidConfig:t}))},_getChild:function(e){var t=this
 ;if(this._loadPortalConfigurationCache){var n=this._loadPortalConfigurationCache.identity&&this._loadPortalConfigurationCache.identity.uuIdentity,r=e&&e.uuIdentity
-;n===r?(eM.warn("uuIdentity for load-portal-configuration is the same: ".concat(n)),
-this._loadPortalConfigurationCache.staleData=!1):(eM.warn("Actual and a cached version of uuIdentity for load-portal-configuration differ (cached version: ".concat(n,", actual version: ").concat(r,"), setting the stale-data flag")),
-this._loadPortalConfigurationCache.staleData=!0)}else eM.warn("No cached data for load-portal-configuration is available");return o.Common.Element.create(o.Common.Loader,{
-onLoad:P.portalLoadConfiguration,data:{}},(function(n){var r=n.isLoading,i=n.isError,a=n.data
-;if(r)return t._loadPortalConfigurationCache?(eM.warn("Rendering cached data during loading for load-portal-configuration"),
+;n===r?($w.debug("uuIdentity for load-portal-configuration is the same: ".concat(n)),
+this._loadPortalConfigurationCache.staleData=!1):($w.debug("Actual and cached version of uuIdentity for load-portal-configuration differ (cached version: ".concat(n,", actual version: ").concat(r,"), setting the stale-data flag")),
+this._loadPortalConfigurationCache.staleData=!0,null===r&&o.Environment.page.getAlertBus().setAlert({content:"Updating current state ...",colorSchema:"success",closeTimer:2e3}))
+}else $w.debug("No cached data for load-portal-configuration is available");return o.Common.Element.create(o.Common.Loader,{onLoad:P.portalLoadConfiguration,data:{}},(function(n){
+var r=n.isLoading,i=n.isError,a=n.data;if(r)return t._loadPortalConfigurationCache?($w.debug("Rendering cached data during loading for load-portal-configuration"),
 t._getUserAccount(t._loadPortalConfigurationCache.identity,t._loadPortalConfigurationCache.data)):t._getCustomLoader("load-portal-configuration");if(i){
 if("uu-app-workspace/runtimeMode/ucNotAvailableAwidRuntimeMode"===a.code)return Nw(a),t._setGlobalCss(),o.Common.Element.create(Aw,{identity:e});if(t._loadPortalConfigurationCache){
-if(!t._loadPortalConfigurationCache.staleData)return eM.error("Rendering cached data after the call load-portal-configuration finished with error",a),
-t._getUserAccount(t._loadPortalConfigurationCache.identity,t._loadPortalConfigurationCache.data);eM.error("The call load-portal-configuration finished with error",a)}
-return o.Common.Element.create(Fw,{errorData:a})}return t._loadPortalConfigurationCache={identity:e,data:a,staleData:!1},t._disableTelemetry(a),Nw(a),t._setGlobalCss(),t._getUserAccount(e,a)}))},
-render:function(){var e=this;return o.Common.Element.create(o.Common.Session,Qw({session:c.Session.currentSession
-},this.getMainPropsToPass()),o.Common.Element.create(o.Common.Identity,null,(function(t){var n=t.identity;return void 0===n?e._getCustomLoader("load-identity"):e._getChild(n)})))}}),nM=(n(588),{
+if(!t._loadPortalConfigurationCache.staleData)return $w.error("Rendering cached data after the call load-portal-configuration finished with error",a),
+t._getUserAccount(t._loadPortalConfigurationCache.identity,t._loadPortalConfigurationCache.data);$w.error("The call load-portal-configuration finished with error",a)}
+return o.Common.Element.create(zw,{errorData:a})}return t._loadPortalConfigurationCache={identity:e,data:a,staleData:!1},t._disableTelemetry(a),Nw(a),t._setGlobalCss(),t._getUserAccount(e,a)}))},
+render:function(){var e=this;return o.Common.Element.create(o.Common.Session,qw({session:c.Session.currentSession
+},this.getMainPropsToPass()),o.Common.Element.create(o.Common.Identity,null,(function(t){var n=t.identity;return void 0===n?e._getCustomLoader("load-identity"):e._getChild(n)})))}}),tM=(n(588),{
 confirm:"OK",changePermanently:"Spara språk",confirmChangePermanently:"Vill du spara språkinställningar? Det ändrar standardspråket i alla Plus4U-program.",
 confirmChangePermanentlyHeader:"Spara språkinställningar",refuse:"Avbryt"});if(i.a.Environment.appVersion="1.48.0-DEV",!navigator.userAgent.match(/iPhone|iPad|iPod/)){
-var rM=document.createElement("link");rM.rel="manifest",rM.href="assets/manifest.json",document.head.appendChild(rM)}function oM(e){e,
-i.a.Common.DOM.render(i.a.Common.Element.create(r.AppContainer,null,i.a.Common.Element.create(tM,null)),document.getElementById(e))}
+var nM=document.createElement("link");nM.rel="manifest",nM.href="assets/manifest.json",document.head.appendChild(nM)}function rM(e){e,
+i.a.Common.DOM.render(i.a.Common.Element.create(r.AppContainer,null,i.a.Common.Element.create(eM,null)),document.getElementById(e))}
 i.a.Environment.deactivateSessionChecker||(y.setRootElementName("uuApp"),y.installSessionChangedListener(),y.installOnAppResumeListener(),y.setResetStateHandler((function(){
-return new Promise((function(e,t){by.goBackToInitialPage(),setTimeout((function(){try{i.a.Environment.page.getAlertBus().setAlert({content:i.a.Common.Element.create(i.a.Bricks.Lsi,{
+return new Promise((function(e,t){Cy.goBackToInitialPage(),setTimeout((function(){try{i.a.Environment.page.getAlertBus().setAlert({content:i.a.Common.Element.create(i.a.Bricks.Lsi,{
 lsi:pn.session.automaticLogout}),colorSchema:"success",closeTimer:6e3},(function(){e()}))}catch(t){console.error("Cannot finish reset state",t),e()}}),1e3)}))}))),
-s.a.Environment.Lsi.App.languageSelector.confirm.sv=nM.confirm,s.a.Environment.Lsi.App.languageSelector.changePermanently.sv=nM.changePermanently,
-s.a.Environment.Lsi.App.languageSelector.confirmChangePermanently.sv=nM.confirmChangePermanently,
-s.a.Environment.Lsi.App.languageSelector.confirmChangePermanentlyHeader.sv=nM.confirmChangePermanentlyHeader,s.a.Environment.Lsi.App.languageSelector.refuse.sv=nM.refuse,
-s.a.Environment.Lsi.App.technologies.default=s.a.Environment.Lsi.App.technologies,Cy.enableTelemetry()},function(e,t,n){"use strict";n.r(t);var r={};n.r(r),n.d(r,"shimGetUserMedia",(function(){
+s.a.Environment.Lsi.App.languageSelector.confirm.sv=tM.confirm,s.a.Environment.Lsi.App.languageSelector.changePermanently.sv=tM.changePermanently,
+s.a.Environment.Lsi.App.languageSelector.confirmChangePermanently.sv=tM.confirmChangePermanently,
+s.a.Environment.Lsi.App.languageSelector.confirmChangePermanentlyHeader.sv=tM.confirmChangePermanentlyHeader,s.a.Environment.Lsi.App.languageSelector.refuse.sv=tM.refuse,
+s.a.Environment.Lsi.App.technologies.default=s.a.Environment.Lsi.App.technologies,id.enableTelemetry()},function(e,t,n){"use strict";n.r(t);var r={};n.r(r),n.d(r,"shimGetUserMedia",(function(){
 return S})),n.d(r,"shimGetDisplayMedia",(function(){return w})),n.d(r,"shimMediaStream",(function(){return E})),n.d(r,"shimOnTrack",(function(){return L})),n.d(r,"shimGetSendersWithDtmf",(function(){
 return O})),n.d(r,"shimGetStats",(function(){return T})),n.d(r,"shimSenderReceiverGetStats",(function(){return x})),n.d(r,"shimAddTrackRemoveTrackWithNative",(function(){return j})),
 n.d(r,"shimAddTrackRemoveTrack",(function(){return D})),n.d(r,"shimPeerConnection",(function(){return B})),n.d(r,"fixNegotiationNeeded",(function(){return A}));var o={};n.r(o),
