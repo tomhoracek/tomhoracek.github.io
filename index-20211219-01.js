@@ -4551,8 +4551,8 @@ i.Children.only(e.children)}a.warnAboutHMRDisabled=!1;var s=function e(){return 
 t.configureComponent=function(){}},function(e,t,n){"use strict";n.r(t),n.d(t,"render",(function(){return rM}));var r=n(319),o=n(0),i=n.n(o),a=n(5),s=n.n(a),c=n(13),l=n(22);function u(e,t,n,r,o,i,a){
 try{var s=e[i](a),c=s.value}catch(e){return void n(e)}s.done?t(c):Promise.resolve(c).then(r,o)}function d(e){return function(){var t=this,n=arguments;return new Promise((function(r,o){
 var i=e.apply(t,n);function a(e){u(i,r,o,a,s,"next",e)}function s(e){u(i,r,o,a,s,"throw",e)}a(void 0)}))}}
-var m=location.href.startsWith("about:")&&window.frameElement?parent:window,p=new RegExp("uu.app.csrf=([^;]+)"),f={prompt:"none",maxAge:3600},h=l.LoggerFactory.get("SessionReloadHelper")
-;h.setLevel("DEBUG");var g={formatTimestamp:function(e,t){var n="";return e&&(n=new Date(e).toISOString()),t&&(n=n.substr(0,16)),n},isForwardStrategy:function(){
+var m=location.href.startsWith("about:")&&window.frameElement?parent:window,p=new RegExp("uu.app.csrf=([^;]+)"),f={prompt:"none"},h=l.LoggerFactory.get("SessionReloadHelper");h.setLevel("DEBUG")
+;var g={formatTimestamp:function(e,t){var n="";return e&&(n=new Date(e).toISOString()),t&&(n=n.substr(0,16)),n},isForwardStrategy:function(){
 var e=UU5.Environment.uu_app_oidc_providers_oidcg02_session_crossdomain_strategy;return!(!e||"forward"!==e)},getCsrfToken:function(){return(p.exec(m.document.cookie)||[])[1]},
 getBrowserSessionValidityTimestamp:function(){var e=g.getCsrfToken();if(e){var t=e.split(".");if(3===t.length){var n=Number(t[0]);if(n)return n*=1e3}}return null},setRootElementName:function(e){
 g.rootElementName=e},setDebugDiv:function(e){g.debugDiv=e},setResetStateHandler:function(e){g.resetStateHandler=e},isSessionExpired:function(){if(UU5.Environment.deactivateSessionChecker)return!1
@@ -6351,8 +6351,10 @@ for(var e in this.originalConsoleMethods)this.originalConsoleMethods.hasOwnPrope
 this.telemetryEnabled=!1,console.info("Telemetry disabled"),o.Environment.showProductionWarning=!1,a.Environment.telemetry=!1}}},{key:"error",value:function(e,t){if(this.telemetryEnabled){
 var n=this._prepareTelemetryData(t);a.Telemetry.error(e,n)}}},{key:"info",value:function(e,t){if(this.telemetryEnabled){var n=this._prepareTelemetryData(t);a.Telemetry.info(e,n)}}},{key:"warning",
 value:function(e,t){if(this.telemetryEnabled){var n=this._prepareTelemetryData(t);a.Telemetry.warning(e,n)}}},{key:"errorState",value:function(e){try{var t=Date.now(),n=this.statesMap[e]
-;if(n&&n+1e4>t)return;this.statesMap[e]=t;for(var r=arguments.length,o=new Array(r>1?r-1:0),i=1;i<r;i++)o[i-1]=arguments[i];this.error("error-state-"+e,{stateParams:o})}catch(t){
-console.log("Error occured during logging of event "+e,t)}return!0}},{key:"_cloneForLogging",value:function(e,t,n){if(!((n=n||0)>this.maxLoggingLevel)&&null!=e)for(var r in e)try{var o=e[r]
+;if(n&&n+1e4>t)return;this.statesMap[e]=t;for(var r="error-state-".concat(e),o=arguments.length,i=new Array(o>1?o-1:0),a=1;a<o;a++)i[a-1]=arguments[a];var s={stateParams:i};this.error(r,s),
+this._consoleError("Telemetry - ".concat(r),s)}catch(t){console.log("Error occurred during logging of event ".concat(e),t)}return!0}},{key:"_consoleError",value:function(){var e
+;this.originalConsoleMethods.error?this.originalConsoleMethods.error.apply(console,arguments):(e=console).error.apply(e,arguments)}},{key:"_cloneForLogging",value:function(e,t,n){
+if(!((n=n||0)>this.maxLoggingLevel)&&null!=e)for(var r in e)try{var o=e[r]
 ;this._isError(o)?t[r]=o.toString()+(o.stack?" - "+o.stack:""):r.startsWith("_")||isNaN(r)&&r.toUpperCase()===r||r.startsWith("this")||t[r]||("object"===Zu(o)&&null!==o?(t[r]={},
 this._cloneForLogging(o,t[r],n+1)):"function"!=typeof o&&(t[r]=o))}catch(e){t[r]="---"}}},{key:"_isError",value:function(e){
 return!!(e&&e.constructor&&e.constructor.name&&e.constructor.name.indexOf("Error")>=0&&e.toString)}},{key:"_prepareTelemetryData",value:function(e){var t={};return this._cloneForLogging(e,t),
