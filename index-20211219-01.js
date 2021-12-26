@@ -4551,8 +4551,8 @@ i.Children.only(e.children)}a.warnAboutHMRDisabled=!1;var s=function e(){return 
 t.configureComponent=function(){}},function(e,t,n){"use strict";n.r(t),n.d(t,"render",(function(){return rM}));var r=n(319),o=n(0),i=n.n(o),a=n(5),s=n.n(a),c=n(13),l=n(22);function u(e,t,n,r,o,i,a){
 try{var s=e[i](a),c=s.value}catch(e){return void n(e)}s.done?t(c):Promise.resolve(c).then(r,o)}function d(e){return function(){var t=this,n=arguments;return new Promise((function(r,o){
 var i=e.apply(t,n);function a(e){u(i,r,o,a,s,"next",e)}function s(e){u(i,r,o,a,s,"throw",e)}a(void 0)}))}}
-var m=location.href.startsWith("about:")&&window.frameElement?parent:window,p=new RegExp("uu.app.csrf=([^;]+)"),f={prompt:"none"},h=l.LoggerFactory.get("SessionReloadHelper");h.setLevel("DEBUG")
-;var g={formatTimestamp:function(e,t){var n="";return e&&(n=new Date(e).toISOString()),t&&(n=n.substr(0,16)),n},isForwardStrategy:function(){
+var m=location.href.startsWith("about:")&&window.frameElement?parent:window,p=new RegExp("uu.app.csrf=([^;]+)"),f={prompt:"none",maxAge:3600},h=l.LoggerFactory.get("SessionReloadHelper")
+;h.setLevel("DEBUG");var g={formatTimestamp:function(e,t){var n="";return e&&(n=new Date(e).toISOString()),t&&(n=n.substr(0,16)),n},isForwardStrategy:function(){
 var e=UU5.Environment.uu_app_oidc_providers_oidcg02_session_crossdomain_strategy;return!(!e||"forward"!==e)},getCsrfToken:function(){return(p.exec(m.document.cookie)||[])[1]},
 getBrowserSessionValidityTimestamp:function(){var e=g.getCsrfToken();if(e){var t=e.split(".");if(3===t.length){var n=Number(t[0]);if(n)return n*=1e3}}return null},setRootElementName:function(e){
 g.rootElementName=e},setDebugDiv:function(e){g.debugDiv=e},setResetStateHandler:function(e){g.resetStateHandler=e},isSessionExpired:function(){if(UU5.Environment.deactivateSessionChecker)return!1
@@ -4561,16 +4561,15 @@ var r=n.getExpiresAt();r&&(e=r+6e4<Date.now())}}return e},reloadSessionState:fun
 for(;;)switch(t.prev=t.next){case 0:if(r=(n=e||{}).waitForAuthentication,o=n.eventName,!c.AuthenticationService.isAuthenticating()){t.next=8;break}
 if(h.debug("Event ".concat(o," - AuthenticationService is authenticating, waitForAuthentication: ").concat(r)),r){t.next=5;break}return t.abrupt("return");case 5:g.waitForAuthenticationCounter++,
 t.next=9;break;case 8:g.lastReloadTime=Date.now();case 9:if(!g.isForwardStrategy()){t.next=13;break}c.AuthenticationService.isAuthenticating()||window.location.reload(),t.next=17;break;case 13:
-return g.reloadCounter++,t.next=16,c.AuthenticationService.authenticate(f);case 16:
-h.debug("Event ".concat(o," - after session reload, state: ").concat(g.getState(),", session: ").concat(g.getSessionInfo()));case 17:case"end":return t.stop()}}),t)})))()},
-forceReloadOnExpiredSession:function(e){return d(regeneratorRuntime.mark((function t(){var n,r,o,i;return regeneratorRuntime.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:
+return g.reloadCounter++,t.next=16,c.AuthenticationService.authenticate(f);case 16:h.debug("Event ".concat(o," - after session reload, state: ").concat(g.getState()));case 17:case"end":return t.stop()
+}}),t)})))()},forceReloadOnExpiredSession:function(e){return d(regeneratorRuntime.mark((function t(){var n,r,o,i;return regeneratorRuntime.wrap((function(t){for(;;)switch(t.prev=t.next){case 0:
 if(r=(n=e||{}).waitForAuthentication,o=n.eventName,t.prev=1,g.updateStoredDiagnosticInfo(),!g.isSessionExpired()){t.next=16;break}
-return h.debug("Event ".concat(o," - reloading expired session, state: ").concat(g.getState(),", session: ").concat(g.getSessionInfo())),t.next=7,c.AuthenticationService.restoreSession();case 7:
-if(!g.isForwardStrategy()){t.next=14;break}return(i=g.rootElementName&&document.getElementById(g.rootElementName))&&(i.style.display="none",setTimeout((function(){i.style.display="block"}),2e3)),
-t.next=12,g.reloadSessionState({waitForAuthentication:r,eventName:o});case 12:t.next=16;break;case 14:return t.next=16,g.reloadSessionState({waitForAuthentication:r,eventName:o});case 16:t.next=23
-;break;case 18:t.prev=18,t.t0=t.catch(1),h.warn("Cannot force reload on expired session during event ".concat(o),t.t0),g.errorCounter++,g.lastError=t.t0.toString();case 23:case"end":return t.stop()}
-}),t,null,[[1,18]])})))()},logoutAndResetState:function(){return d(regeneratorRuntime.mark((function e(){var t;return regeneratorRuntime.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:
-if(e.prev=0,t=c.AuthenticationService.getCurrentSession()){e.next=5;break}return h.warn("Cannot logout as there is no session"),e.abrupt("return");case 5:return e.next=7,t.close();case 7:
+return h.debug("Event ".concat(o," - reloading expired session, state: ").concat(g.getState())),t.next=7,c.AuthenticationService.restoreSession();case 7:if(!g.isForwardStrategy()){t.next=14;break}
+return(i=g.rootElementName&&document.getElementById(g.rootElementName))&&(i.style.display="none",setTimeout((function(){i.style.display="block"}),2e3)),t.next=12,g.reloadSessionState({
+waitForAuthentication:r,eventName:o});case 12:t.next=16;break;case 14:return t.next=16,g.reloadSessionState({waitForAuthentication:r,eventName:o});case 16:t.next=23;break;case 18:t.prev=18,
+t.t0=t.catch(1),h.warn("Cannot force reload on expired session during event ".concat(o),t.t0),g.errorCounter++,g.lastError=t.t0.toString();case 23:case"end":return t.stop()}}),t,null,[[1,18]])})))()},
+logoutAndResetState:function(){return d(regeneratorRuntime.mark((function e(){var t;return regeneratorRuntime.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:if(e.prev=0,
+t=c.AuthenticationService.getCurrentSession()){e.next=5;break}return h.warn("Cannot logout as there is no session"),e.abrupt("return");case 5:return e.next=7,t.close();case 7:
 if(e.t0=g.resetStateHandler,!e.t0){e.next=11;break}return e.next=11,g.resetStateHandler();case 11:e.next=16;break;case 13:e.prev=13,e.t1=e.catch(0),h.warn("Cannot logout and reset state",e.t1)
 ;case 16:case"end":return e.stop()}}),e,null,[[0,13]])})))()},installSessionChangedListener:function(){try{
 if(UU5.Environment.deactivateSessionChecker)return void h.info("Session changed listener not installed because session checker is disabled")
@@ -4582,18 +4581,19 @@ installOnAppResumeListener:function(){
 UU5.Environment.deactivateSessionChecker?h.info("on-application-resume listener not installed because session checker is disabled"):(h.info("Installing on-application-resume listener with forward strategy set to:"+g.isForwardStrategy()),
 window.addEventListener("focus",(function(){g.forceReloadOnExpiredSession({eventName:"focus"})})),document.addEventListener("visibilitychange",(function(){g.forceReloadOnExpiredSession({
 eventName:"visibility-change"})})))},updateStoredDiagnosticInfo:function(){if(g.lastDiagnosticInfo=g.getDiagnosticInfo(),g.debugDiv){var e=document.getElementById(g.debugDiv);if(e){
-var t=g.getDiagnosticInfo();e.innerHTML=t}}},getLastDiagnosticInfo:function(){return g.lastDiagnosticInfo},getDiagnosticInfo:function(){var e=(new Date).toISOString()+": "
-;return e+="expiredSession:"+g.isSessionExpired(),e+=", csrfToken:"+g.getCsrfToken(),e+=", sessionValidityTimestamp:"+g.formatTimestamp(g.getBrowserSessionValidityTimestamp()),
-e+=", lastReloadTime:"+g.formatTimestamp(g.lastReloadTime),
-e+=", sessionExpiresAt:"+g.formatTimestamp(c.AuthenticationService.getCurrentSession()&&c.AuthenticationService.getCurrentSession().getExpiresAt()),e+=", lastError:"+g.lastError},getState:function(){
-return"".concat(g.isForwardStrategy()?"F":"C"," CNT ").concat(g.reloadCounter," WTA ").concat(g.waitForAuthenticationCounter," ERR ").concat(g.errorCounter," INI ").concat(g.formatTimestamp(g.initTime,!0)," LRL ").concat(g.formatTimestamp(g.lastReloadTime,!0)," BSV ").concat(g.formatTimestamp(g.getBrowserSessionValidityTimestamp(),!0))
-},getSessionInfo:function(){var e="[";try{var t=c.AuthenticationService.getCurrentSession();if(!t)return e+=t;var n=t.getExpiresAt();n&&(e+=" sessionExpiresAt: "+g.formatTimestamp(n)+" "),
-t.getIdentity()&&(e+=" identity: "+t.getIdentity()+" ")}catch(t){e+=" err "}finally{return e+="]"}},sleep:function(e){return new Promise((function(t){return setTimeout(t,e)}))},rootElementName:null,
-lastReloadTime:null,lastError:"",lastDiagnosticInfo:"",debugDiv:null};g.initTime=Date.now(),g.reloadCounter=0,g.errorCounter=0,g.waitForAuthenticationCounter=0;var y=g,v=(n(4),n(34),n(41))
-;function b(e,t){var n="undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(!n){if(Array.isArray(e)||(n=function(e,t){if(!e)return;if("string"==typeof e)return _(e,t)
-;var n=Object.prototype.toString.call(e).slice(8,-1);"Object"===n&&e.constructor&&(n=e.constructor.name);if("Map"===n||"Set"===n)return Array.from(e)
-;if("Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))return _(e,t)}(e))||t&&e&&"number"==typeof e.length){n&&(e=n);var r=0,o=function(){};return{s:o,n:function(){
-return r>=e.length?{done:!0}:{done:!1,value:e[r++]}},e:function(e){throw e},f:o}}
+var t=g.getDiagnosticInfo();e.innerHTML=t}}},getLastDiagnosticInfo:function(){return g.lastDiagnosticInfo},getDiagnosticInfo:function(){var e=(new Date).toISOString()+": ",t=g.isSessionExpired()
+;return e+="expiredSession: ".concat(t),e+=", csrfToken: ".concat(g.getCsrfToken()),e+=", sessionValidityTimestamp: ".concat(g.formatTimestamp(g.getBrowserSessionValidityTimestamp())),
+e+=", lastReloadTime: ".concat(g.formatTimestamp(g.lastReloadTime)),
+e+=", sessionExpiresAt: ".concat(g.formatTimestamp(c.AuthenticationService.getCurrentSession()&&c.AuthenticationService.getCurrentSession().getExpiresAt())),e+=", lastError: ".concat(g.lastError)},
+getState:function(){
+return"".concat(g.isForwardStrategy()?"F":"C"," CNT ").concat(g.reloadCounter," WTA ").concat(g.waitForAuthenticationCounter," ERR ").concat(g.errorCounter," INI ").concat(g.formatTimestamp(g.initTime,!0)," LRL ").concat(g.formatTimestamp(g.lastReloadTime,!0)," BSV ").concat(g.formatTimestamp(g.getBrowserSessionValidityTimestamp(),!0)," SESS ").concat(g.getSessionInfo())
+},getSessionInfo:function(){var e="[";try{var t=c.AuthenticationService.getCurrentSession();if(!t)return e+=t;var n=t.getExpiresAt();n&&(e+=" EXP  ".concat(g.formatTimestamp(n,!0)," "))
+;var r=t.getIdentity();r&&(e+=" ID ".concat(r.uuIdentity," LVL ").concat(r.getAuthenticationLevelOfAssurance()," "))}catch(t){e+=" err "}finally{return e+="]"}},sleep:function(e){
+return new Promise((function(t){return setTimeout(t,e)}))},rootElementName:null,lastReloadTime:null,lastError:"",lastDiagnosticInfo:"",debugDiv:null};g.initTime=Date.now(),g.reloadCounter=0,
+g.errorCounter=0,g.waitForAuthenticationCounter=0;var y=g,v=(n(4),n(34),n(41));function b(e,t){var n="undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(!n){
+if(Array.isArray(e)||(n=function(e,t){if(!e)return;if("string"==typeof e)return _(e,t);var n=Object.prototype.toString.call(e).slice(8,-1);"Object"===n&&e.constructor&&(n=e.constructor.name)
+;if("Map"===n||"Set"===n)return Array.from(e);if("Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))return _(e,t)}(e))||t&&e&&"number"==typeof e.length){n&&(e=n)
+;var r=0,o=function(){};return{s:o,n:function(){return r>=e.length?{done:!0}:{done:!1,value:e[r++]}},e:function(e){throw e},f:o}}
 throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var i,a=!0,s=!1;return{s:function(){
 n=n.call(e)},n:function(){var e=n.next();return a=e.done,e},e:function(e){s=!0,i=e},f:function(){try{a||null==n.return||n.return()}finally{if(s)throw i}}}}function _(e,t){
 (null==t||t>e.length)&&(t=e.length);for(var n=0,r=new Array(t);n<t;n++)r[n]=e[n];return r}var k={default:location.protocol+"//"+location.host+o.Environment.getAppBasePath(),
@@ -7823,8 +7823,9 @@ sk:"Odhlásiť sa",uk:"Вийти",sv:"Logga ut"}},currentChargingButton:{curren
 sv:"Aktuell laddning"}},transactionInProcessButton:{transactionInProcess:{cs:"Rozpracovaná objednávka",en:"Order in process",de:"Bestellung in Bearbeitung",sk:"Rozpracovaná objednávka",
 uk:"Замовлення виконується ",sv:"Beställning behandlas"},transactionsInProcessTwo:{cs:"rozpracované objednávky",en:"orders in process",de:"Bestellungen in Bearbeitung",sk:"rozpracované objednávky",
 uk:"замовлення в процесі опрацювання",sv:"beställningar behandlas"},transactionsInProcessFive:{cs:"rozpracovaných objednávek",en:"orders in process",de:"Bestellungen in Bearbeitung",
-sk:"rozpracovaných objednávok",uk:"замовлення, що очікують на розгляд ",sv:"beställningar behandlas"}},spa:{loadingText:{cs:"ChargeUp",en:"ChargeUp",de:"ChargeUp",sk:"ChargeUp",uk:"ChargeUp",
-sv:"ChargeUp"},gettingCurrentPosition:{cs:"Získávám aktuální pozici...",en:"Getting current location...",de:"Aktuellen Standort ermitteln...",sk:"Získavam aktuálnu polohu...",
+sk:"rozpracovaných objednávok",uk:"замовлення, що очікують на розгляд ",sv:"beställningar behandlas"}},spa:{loadingCurrentData:{cs:"Načítám aktuální data ...",en:"Loading current data ...",
+de:"Aktuelle Daten laden ...",sk:"Načítam aktuálne dáta ...",uk:"Завантаження поточних даних ...",sv:"Laddar aktuell data ..."},loadingText:{cs:"ChargeUp",en:"ChargeUp",de:"ChargeUp",sk:"ChargeUp",
+uk:"ChargeUp",sv:"ChargeUp"},gettingCurrentPosition:{cs:"Získávám aktuální pozici...",en:"Getting current location...",de:"Aktuellen Standort ermitteln...",sk:"Získavam aktuálnu polohu...",
 uk:"Отримання поточної позиції... ",sv:"Får nuvarande position..."},geolocationErrors:{PERMISSION_DENIED:{cs:"Aplikace nemá oprávnění získat polohu zařízení.",
 en:"The application does not have permission to use device location.",de:"Die Anwendung hat keine Berechtigung, den Standort des Geräts abzurufen.",
 sk:"Aplikácia nemá oprávnenie získať polohu zariadenia.",uk:"Додаток не має дозволу визначати місцезнаходження пристрою. ",sv:"Applikationen har inte behörighet att använda enhetens position."},
@@ -8935,8 +8936,8 @@ o.Common.Element.create(Jw,{loading:this._getCustomLoader("load-user-account-ano
 ;if(this._loadPortalConfigurationCache){var n=this._loadPortalConfigurationCache.identity&&this._loadPortalConfigurationCache.identity.uuIdentity,r=e&&e.uuIdentity
 ;n===r?($w.debug("uuIdentity for load-portal-configuration is the same: ".concat(n)),
 this._loadPortalConfigurationCache.staleData=!1):($w.debug("Actual and cached version of uuIdentity for load-portal-configuration differ (cached version: ".concat(n,", actual version: ").concat(r,"), setting the stale-data flag")),
-this._loadPortalConfigurationCache.staleData=!0,null===r&&o.Environment.page.getAlertBus().setAlert({content:"Updating current state ...",colorSchema:"success",closeTimer:2e3}))
-}else $w.debug("No cached data for load-portal-configuration is available");return o.Common.Element.create(o.Common.Loader,{onLoad:P.portalLoadConfiguration,data:{}},(function(n){
+this._loadPortalConfigurationCache.staleData=!0,o.Environment.page.getAlertBus().setAlert({content:o.Common.Element.create(o.Bricks.Lsi,{lsi:Qy.spa.loadingCurrentData}),colorSchema:"success",
+closeTimer:2e3}))}else $w.debug("No cached data for load-portal-configuration is available");return o.Common.Element.create(o.Common.Loader,{onLoad:P.portalLoadConfiguration,data:{}},(function(n){
 var r=n.isLoading,i=n.isError,a=n.data;if(r)return t._loadPortalConfigurationCache?($w.debug("Rendering cached data during loading for load-portal-configuration"),
 t._getUserAccount(t._loadPortalConfigurationCache.identity,t._loadPortalConfigurationCache.data)):t._getCustomLoader("load-portal-configuration");if(i){
 if("uu-app-workspace/runtimeMode/ucNotAvailableAwidRuntimeMode"===a.code)return Nw(a),t._setGlobalCss(),o.Common.Element.create(Aw,{identity:e});if(t._loadPortalConfigurationCache){
