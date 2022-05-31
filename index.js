@@ -6548,16 +6548,16 @@ for(var e=[],t=this.props.places.length,n=0;n<t;n++)for(var r=this.props.places[
 ;(s.isPublic||(null===(i=this.props.place)||void 0===i?void 0:i.chargingStation.stationCode)===s.stationCode)&&e.push(o.Common.Element.create(Uy,{key:"".concat(n,"-").concat(a,"-charging-marker"),
 station:s,place:r,isPlaceSelectable:this.props.isPlaceSelectable,selectedPlace:this.props.selectedPlace,hoveredPlace:this.props.hoveredPlace,onPlaceSelect:this.props.onPlaceSelect,
 onPlaceUnselect:this.props.onPlaceUnselect,onPlaceHover:this.props.onPlaceHover,onPlaceUnhover:this.props.onPlaceUnhover,stationStateColors:this.props.stationStateColors}))}return e},
-_onClusterClick:function(e){var t=this,n=e.getMarkerClusterer(),r=e.getBounds(),o=n.getMap().getZoom();n.getMap().fitBounds(r),setTimeout((function(){n.getMap().fitBounds(r)
-;var a=n.getMap().getZoom(),i=!o||!a||o!==a;t.props.onClusterSelect&&t.props.onClusterSelect(e,i)}),100)},render:function(){return o.Common.Element.create(wy.ZP,Wy({},this.getMainPropsToPass(),{
-averageCenter:!0,enableRetinaIcons:!0,gridSize:40,styles:this._getMarkerClusterIcons(),noRedraw:!0,zoomOnClick:!1,onClick:this._onClusterClick}),this._getMarkers())}
-}),Qy=n(65821),Xy=Ot(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{tagName:Vg.TAG+"CurrentPositionMarker",opt:{pureRender:!0}
-},propTypes:{spaContext:o.PropTypes.object,initialCurrentPosition:o.PropTypes.object},render:function(){var e=this.props.spaContext;if(e.currentPosition&&"error"!==e.currentPositionState){var t={
-scaledSize:new google.maps.Size(30,30),anchor:new google.maps.Point(30/2.05,30/2.1),url:Qy},n=e.currentPosition.coords.latitude,r=e.currentPosition.coords.longitude,a=e.currentPosition.coords.accuracy
-;return o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create(Ug.Jx,{icon:t,position:{lat:n,lng:r}}),o.Common.Element.create(Ug.Cd,{clickable:!1,center:{lat:n,lng:r},
-radius:a<300?a:300,options:{strokeWeight:0,fillColor:"#0064ff",fillOpacity:.12}}))}return null}}));function $y(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){
-var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function ev(e){
-for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?$y(Object(n),!0).forEach((function(t){tv(e,t,n[t])
+_onClusterClick:function(e){var t=this;console.debug("Onclick on cluster: ",e);var n=e.getMarkerClusterer(),r=e.getBounds(),o=n.getMap().getZoom();n.getMap().fitBounds(r,90),setTimeout((function(){
+n.getMap().fitBounds(r,90);var a=n.getMap().getZoom(),i=!o||!a||o!==a;t.props.onClusterSelect&&t.props.onClusterSelect(e,i)}),100)},render:function(){
+return o.Common.Element.create(wy.ZP,Wy({},this.getMainPropsToPass(),{averageCenter:!0,enableRetinaIcons:!0,gridSize:40,styles:this._getMarkerClusterIcons(),noRedraw:!0,zoomOnClick:!1,
+onClick:this._onClusterClick}),this._getMarkers())}}),Qy=n(65821),Xy=Ot(o.Common.VisualComponent.create({mixins:[o.Common.BaseMixin,o.Common.ElementaryMixin,o.Common.PureRenderMixin],statics:{
+tagName:Vg.TAG+"CurrentPositionMarker",opt:{pureRender:!0}},propTypes:{spaContext:o.PropTypes.object,initialCurrentPosition:o.PropTypes.object},render:function(){var e=this.props.spaContext
+;if(e.currentPosition&&"error"!==e.currentPositionState){var t={scaledSize:new google.maps.Size(30,30),anchor:new google.maps.Point(30/2.05,30/2.1),url:Qy
+},n=e.currentPosition.coords.latitude,r=e.currentPosition.coords.longitude,a=e.currentPosition.coords.accuracy;return o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create(Ug.Jx,{
+icon:t,position:{lat:n,lng:r}}),o.Common.Element.create(Ug.Cd,{clickable:!1,center:{lat:n,lng:r},radius:a<300?a:300,options:{strokeWeight:0,fillColor:"#0064ff",fillOpacity:.12}}))}return null}}))
+;function $y(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),
+n.push.apply(n,r)}return n}function ev(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?$y(Object(n),!0).forEach((function(t){tv(e,t,n[t])
 })):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):$y(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
 }))}return e}function tv(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function nv(e,t){return t||(t=e.slice(0)),
 Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var rv,ov,av,iv={displayName:Vg.TAG+"ChargingMapOverlay"},sv=function(){
