@@ -6555,12 +6555,12 @@ onClick:this._onClusterClick}),this._getMarkers())}}),Qy=n(65821),Xy=Ot(o.Common
 tagName:Vg.TAG+"CurrentPositionMarker",opt:{pureRender:!0}},propTypes:{spaContext:o.PropTypes.object,initialCurrentPosition:o.PropTypes.object},render:function(){var e=this.props.spaContext
 ;if(e.currentPosition&&"error"!==e.currentPositionState){var t={scaledSize:new google.maps.Size(30,30),anchor:new google.maps.Point(30/2.05,30/2.1),url:Qy
 },n=e.currentPosition.coords.latitude,r=e.currentPosition.coords.longitude,a=e.currentPosition.coords.accuracy;return o.Common.Element.create(o.Common.Fragment,null,o.Common.Element.create(Ug.Jx,{
-icon:t,position:{lat:n,lng:r}}),o.Common.Element.create(Ug.Cd,{clickable:!1,center:{lat:n,lng:r},radius:a<300?a:300,options:{strokeWeight:0,fillColor:"#0064ff",fillOpacity:.12}}))}return null}}))
-;function $y(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),
-n.push.apply(n,r)}return n}function ev(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?$y(Object(n),!0).forEach((function(t){tv(e,t,n[t])
-})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):$y(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))
-}))}return e}function tv(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function nv(e,t){return t||(t=e.slice(0)),
-Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var rv,ov,av,iv={displayName:Vg.TAG+"ChargingMapOverlay"},sv=function(){
+icon:t,position:{lat:n,lng:r},zIndex:-100}),o.Common.Element.create(Ug.Cd,{clickable:!1,center:{lat:n,lng:r},radius:a<300?a:300,options:{strokeWeight:0,fillColor:"#0064ff",fillOpacity:.12}}))}
+return null}}));function $y(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){
+return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function ev(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{}
+;t%2?$y(Object(n),!0).forEach((function(t){tv(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):$y(Object(n)).forEach((function(t){
+Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function tv(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}
+function nv(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var rv,ov,av,iv={displayName:Vg.TAG+"ChargingMapOverlay"},sv=function(){
 return Vg.Css.css(Vy||(Vy=nv(["\n    width: 100%;\n    height: 100%;\n    position: fixed;\n    z-index: 9;\n    top: 0;\n    display: block;\n  "])))},cv=function(){
 return Vg.Css.css(Gy||(Gy=nv(["\n    background-color: rgba(0, 51, 76, 0.4);\n  "])))},lv=function(){
 return Vg.Css.css(Zy||(Zy=nv(["\n    width: 100%;\n    border-top-left-radius: 16px;\n    border-top-right-radius: 16px;\n    height: calc(100% - 56px);\n    margin-top: 56px;\n    background-color: #fff;\n    box-shadow: 0 4px 20px 6px rgb(0 0 0 / 20%);\n    position: absolute;\n    z-index: 10;\n    padding: 1rem;\n    display: flex;\n    flex-direction: column;\n  "])))
