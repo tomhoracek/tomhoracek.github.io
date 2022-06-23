@@ -8060,9 +8060,9 @@ if(!r._loadUserAccountCache.staleData)return RT.error("Rendering cached data dur
 ;RT.error("The call load-user-account finished with error",l)}
 return l&&"charge-up-portal/userAccount/getOrCreate/uuIdentityOfLoggedInUserIsDifferent"===l.code?(RT.warn("The call load-user-account returned with the uuIdentityOfLoggedInUserIsDifferent error, so the session is expired, force logout",l),
 y.logoutAndResetState(),r._getSpaForAnonymousUser(n)):o.Common.Element.create(C_,{errorData:l,errorReason:"spa-load-user-account"})}return r._loadUserAccountCache={identity:e,data:l,awidConfig:n,
-dtoIn:i,staleData:!1},o.Common.Element.create(o.Common.Session,{session:t},o.Common.Element.create(AT,{awidConfig:n,userAccount:l,identity:e}))}))}
-return RT.debug("Clearing cached version of data for load-user-account on anonymous access"),this._loadUserAccountCache=null,this._getSpaForAnonymousUser(n)},_getSpaForAnonymousUser:function(e){
-return o.Common.Element.create(AT,{awidConfig:e,identity:null})},_getChild:function(e){var t=this;if(this._loadPortalConfigurationCache){
+dtoIn:i,staleData:!1},RT.debug("Storing loaded version of data to load-user-account cache"),o.Common.Element.create(o.Common.Session,{session:t},o.Common.Element.create(AT,{awidConfig:n,userAccount:l,
+identity:e}))}))}return RT.debug("Clearing cached version of data for load-user-account on anonymous access"),this._loadUserAccountCache=null,this._getSpaForAnonymousUser(n)},
+_getSpaForAnonymousUser:function(e){return o.Common.Element.create(AT,{awidConfig:e,identity:null})},_getChild:function(e){var t=this;if(this._loadPortalConfigurationCache){
 var n=this._loadPortalConfigurationCache.identity&&this._loadPortalConfigurationCache.identity.uuIdentity,r=e&&e.uuIdentity
 ;n===r?(RT.debug("uuIdentity for load-portal-configuration is the same: ".concat(n)),this._loadPortalConfigurationCache.staleData=!1,
 this._clearSessionReloadInProgressState("used-cache")):(RT.debug("Actual and cached version of uuIdentity for load-portal-configuration differ (cached version: ".concat(n,", actual version: ").concat(r,"), setting the stale-data flag")),
