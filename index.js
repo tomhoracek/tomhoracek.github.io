@@ -8052,17 +8052,18 @@ var s=this._loadUserAccountCache.identity&&this._loadUserAccountCache.identity.u
 ;s===c&&l.firstName===i.firstName&&l.surname===i.surname&&l.email===i.email&&l.invitationId===i.invitationId?(RT.warn("uuIdentity and dtoIn for load-user-account is the same: ".concat(s,", dtoIn: ").concat(JSON.stringify(i))),
 this._loadUserAccountCache.staleData=!1):(RT.debug("Actual and cached version of uuIdentity or dtoIn for load-user-account differ - cached uuIdentity: ".concat(s,", actual uuIdentity: ").concat(c,", actual dtoIn: ").concat(JSON.stringify(i))),
 this._loadUserAccountCache.staleData=!0)}else RT.debug("No cached data for load-user-account is available");return o.Common.Element.create(o.Common.Loader,{onLoad:T.userAccountGetOrCreate,data:i
-},(function(i){var a=i.isLoading,s=i.isError,c=i.data;if(a)return r._loadUserAccountCache?(RT.debug("Rendering cached data during loading for load-user-account"),
+},(function(a){var s=a.isLoading,c=a.isError,l=a.data;if(s)return r._loadUserAccountCache?(RT.debug("Rendering cached data during loading for load-user-account"),
 o.Common.Element.create(o.Common.Session,{session:t},o.Common.Element.create(AT,{awidConfig:r._loadUserAccountCache.awidConfig,userAccount:r._loadUserAccountCache.data,
-identity:r._loadUserAccountCache.identity}))):r._getCustomLoader("load-user-account-with-identity");if(s){if(r._loadUserAccountCache){
-if(!r._loadUserAccountCache.staleData)return RT.error("Rendering cached data during loading for load-user-account, the call finished with error",c),o.Common.Element.create(o.Common.Session,{session:t
+identity:r._loadUserAccountCache.identity}))):r._getCustomLoader("load-user-account-with-identity");if(c){if(r._loadUserAccountCache){
+if(!r._loadUserAccountCache.staleData)return RT.error("Rendering cached data during loading for load-user-account, the call finished with error",l),o.Common.Element.create(o.Common.Session,{session:t
 },o.Common.Element.create(AT,{awidConfig:r._loadUserAccountCache.awidConfig,userAccount:r._loadUserAccountCache.data,identity:r._loadUserAccountCache.identity}))
-;RT.error("The call load-user-account finished with error",c)}
-return c&&"charge-up-portal/userAccount/getOrCreate/uuIdentityOfLoggedInUserIsDifferent"===c.code?(RT.warn("The call load-user-account returned with the uuIdentityOfLoggedInUserIsDifferent error, so the session is expired, force logout",c),
-y.logoutAndResetState(),r._getSpaForAnonymousUser(n)):o.Common.Element.create(C_,{errorData:c,errorReason:"spa-load-user-account"})}return o.Common.Element.create(o.Common.Session,{session:t
-},o.Common.Element.create(AT,{awidConfig:n,userAccount:c,identity:e}))}))}return RT.debug("Clearing cached version of data for load-user-account on anonymous access"),this._loadUserAccountCache=null,
-this._getSpaForAnonymousUser(n)},_getSpaForAnonymousUser:function(e){return o.Common.Element.create(AT,{awidConfig:e,identity:null})},_getChild:function(e){var t=this
-;if(this._loadPortalConfigurationCache){var n=this._loadPortalConfigurationCache.identity&&this._loadPortalConfigurationCache.identity.uuIdentity,r=e&&e.uuIdentity
+;RT.error("The call load-user-account finished with error",l)}
+return l&&"charge-up-portal/userAccount/getOrCreate/uuIdentityOfLoggedInUserIsDifferent"===l.code?(RT.warn("The call load-user-account returned with the uuIdentityOfLoggedInUserIsDifferent error, so the session is expired, force logout",l),
+y.logoutAndResetState(),r._getSpaForAnonymousUser(n)):o.Common.Element.create(C_,{errorData:l,errorReason:"spa-load-user-account"})}return r._loadUserAccountCache={identity:e,data:l,awidConfig:n,
+dtoIn:i,staleData:!1},o.Common.Element.create(o.Common.Session,{session:t},o.Common.Element.create(AT,{awidConfig:n,userAccount:l,identity:e}))}))}
+return RT.debug("Clearing cached version of data for load-user-account on anonymous access"),this._loadUserAccountCache=null,this._getSpaForAnonymousUser(n)},_getSpaForAnonymousUser:function(e){
+return o.Common.Element.create(AT,{awidConfig:e,identity:null})},_getChild:function(e){var t=this;if(this._loadPortalConfigurationCache){
+var n=this._loadPortalConfigurationCache.identity&&this._loadPortalConfigurationCache.identity.uuIdentity,r=e&&e.uuIdentity
 ;n===r?(RT.debug("uuIdentity for load-portal-configuration is the same: ".concat(n)),this._loadPortalConfigurationCache.staleData=!1,
 this._clearSessionReloadInProgressState("used-cache")):(RT.debug("Actual and cached version of uuIdentity for load-portal-configuration differ (cached version: ".concat(n,", actual version: ").concat(r,"), setting the stale-data flag")),
 this._loadPortalConfigurationCache.staleData=!0,
